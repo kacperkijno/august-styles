@@ -40,6 +40,18 @@ body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="11"] p {
   text-transform: uppercase;
 }
 
+/* Hairline rule under eyebrow "LESSON 01 · 24 MIN" + "FURTHER READING"
+   Add a 48px terracotta line via :after pseudo on the eyebrow text widget */
+body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="16"]::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--ak-terracotta);
+  margin-top: 14px;
+  margin-bottom: 4px;
+}
+
 /* Body H1 + H2 tighter line-height */
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
   line-height: 1.04 !important;
@@ -181,22 +193,54 @@ body.ak-lesson .gmDSrH [id^="bulletlist-"] {
   padding: 0 !important;
 }
 
-/* References list — Inter font, smaller, italic emphasis */
+/* References list — Inter→NeueHaas, smaller, italic emphasis, hairline dash icon */
 body.ak-lesson [id^="bulletlist-"][font-family="Inter"] em {
   color: var(--ak-ink) !important;
   font-style: italic;
 }
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] {
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
+}
 body.ak-lesson [id^="bulletlist-"][font-family="Inter"] p {
   color: var(--ak-ink-70) !important;
   font-size: 14px !important;
-  line-height: 1.55 !important;
+  line-height: 1.6 !important;
   text-transform: none !important;
   letter-spacing: normal !important;
   margin: 0 !important;
 }
+/* References icons — replace circle-check with terracotta hairline dash */
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] i.fas.fa-check {
+  border: 0 !important;
+  background: transparent !important;
+  width: 18px !important;
+  min-width: 18px !important;
+  max-width: 18px !important;
+  height: auto !important;
+  position: relative !important;
+  color: transparent !important;
+  margin-right: 10px !important;
+  margin-left: -22px !important;
+  margin-top: 11px !important;
+}
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] i.fas.fa-check::before {
+  content: "" !important;
+  display: block !important;
+  width: 14px !important;
+  height: 1px !important;
+  background: var(--ak-terracotta) !important;
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+}
+/* No hover circle-fill on references */
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] ul li:hover > i.fas.fa-check {
+  background: transparent !important;
+  transform: none !important;
+}
 
 /* ============================================================
-   PULL QUOTE
+   PULL QUOTE — bumped to mockup size (34px desktop)
    ============================================================ */
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"] {
   position: relative;
@@ -208,11 +252,12 @@ body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"] {
   margin-right: auto !important;
   line-height: 1.3 !important;
   color: var(--ak-forest) !important;
+  font-size: clamp(24px, 3vw, 34px) !important;
 }
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"]::before {
   content: "\201C";
   display: block;
-  font-size: 5em;
+  font-size: 88px;
   line-height: 0.5;
   color: var(--ak-terracotta);
   margin-bottom: 24px;
@@ -323,11 +368,18 @@ body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"].ak-in {
 }
 
 /* ============================================================
-   SPACING RHYTHM — bring section gaps to consistent rhythm
+   SPACING RHYTHM — match mockup (sections 72px apart)
    ============================================================ */
-/* Section title margin-bottom — tighten gap between H2 and intro */
+/* Section title H2 — tighter line-height, max-width like mockup */
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="36"] {
   margin-bottom: 16px !important;
+  max-width: 26ch;
+  letter-spacing: -0.005em;
+}
+
+/* Section wrappers (iyKucP = 40px top margin) — bump to 72px like mockup */
+body.ak-lesson .iyKucP {
+  margin-top: 72px !important;
 }
 
 /* More vertical room between tip cards row groups (top + bottom row of 2x3) */
@@ -337,14 +389,49 @@ body.ak-lesson .nrqfn {
 
 /* References box — generous padding inside */
 body.ak-lesson .kOevAj {
-  padding: clamp(32px, 4vw, 48px) !important;
+  padding: clamp(36px, 5vw, 56px) !important;
+}
+
+/* References inner row — kill background since outer has it */
+body.ak-lesson .hcMeGz {
+  background: transparent !important;
 }
 
 /* Iceberg cards — equal min-height so all 3 align */
 body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
-  min-height: 180px;
+  min-height: 200px;
   display: flex !important;
   flex-direction: column;
+}
+
+/* Pull quote — generous breathing room */
+body.ak-lesson .bzXtnc {
+  margin-top: 88px !important;
+  margin-bottom: 88px !important;
+}
+
+/* Body lead paragraph (18px below H1) — better leading and color */
+body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="18"] {
+  font-size: 19px !important;
+  line-height: 1.55 !important;
+  max-width: 60ch;
+}
+
+/* Section intro (17px under H2) — better leading */
+body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="17"] {
+  line-height: 1.55 !important;
+  max-width: 60ch;
+}
+
+/* H1 (54px) — tighter + balance */
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* Deeper rest-state shadow on iceberg cards (mockup feels more present) */
+body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
+  box-shadow: 0 2px 12px rgba(26, 60, 47, 0.06), 0 1px 3px rgba(26, 60, 47, 0.04);
 }
 
 /* Respect prefers-reduced-motion */
