@@ -602,7 +602,12 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
    Targets: top header bar, course title, left sidebar, buttons.
    ============================================================ */
 
-/* Override systeme theme CSS variables — cascades to all chrome */
+/* Override systeme theme CSS variables — TARGET html ELEMENT to beat
+   the inline `style="--THEME-header-background: #789f6c"` on <html>.
+   Stylesheet !important beats inline style without !important. */
+html,
+html[white-label-theme],
+html[white-label-theme="1"],
 body.ak-lesson {
   --THEME-header-background: #1A3C2F !important;
   --THEME-header-text: #F9F7F1 !important;
@@ -614,9 +619,17 @@ body.ak-lesson {
   --THEME-background: #F9F7F1 !important;
   --THEME-block-background: #FFFFFF !important;
   --THEME-disabled: #A8A8A8 !important;
+  --color-background-header: #1A3C2F !important;
+  --color-text-primary: #1A3C2F !important;
 }
 
-/* Top header bar — Forest with cream text, taller, brand polish */
+/* Top header bar — Forest with cream text, taller, brand polish.
+   High-specificity selectors to beat Tailwind's bg-THEME-header-background!
+   class. Drop body.ak-lesson scope — these target systeme.io chrome
+   directly, which only loads on AK pages where CSS is loaded. */
+nav.SIO-header,
+html body nav.SIO-header,
+nav.SIO-header.bg-background-header,
 body.ak-lesson .SIO-header,
 body.ak-lesson nav.SIO-header {
   background: #1A3C2F !important;
