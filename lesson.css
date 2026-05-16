@@ -1,0 +1,248 @@
+/* ============================================================
+   August Kjerland — Lesson page overrides for systeme.io
+   Scope: body.ak-lesson (added via inline <script> in HTML box)
+   ----
+   Reusable utility classes (work anywhere, not just lessons):
+     .ak-pull, .ak-tip-grid, .ak-iceberg, .ak-ref-list, .ak-cta-bar
+   ============================================================ */
+
+/* ---------- TOKENS (custom props, scoped) ----------------- */
+body.ak-lesson {
+  --ak-forest:        #1A3C2F;
+  --ak-forest-10:     rgba(26, 60, 47, 0.10);
+  --ak-cream:         #F9F7F1;
+  --ak-cream-soft:    #F3F0E7;
+  --ak-terracotta:    #B46A3C;
+  --ak-terracotta-d:  #9A5832;
+  --ak-warm:          #E4B68A;
+  --ak-ink:           #2D2D2D;
+  --ak-ink-70:        rgba(45, 45, 45, 0.70);
+  --ak-ink-50:        rgba(45, 45, 45, 0.50);
+  --ak-ink-10:        rgba(45, 45, 45, 0.10);
+  --ak-ease:          cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ak-t:             180ms;
+}
+
+/* ---------- GLOBAL TYPE POLISH ---------------------------- */
+/* Caslon italic — warm tracking + descender room  */
+body.ak-lesson [font-family^="AdobeCaslonPro"] em,
+body.ak-lesson [font-family^="AdobeCaslonPro"] i {
+  font-style: italic;
+  letter-spacing: -0.005em;
+}
+
+/* Letter-spacing for "LESSON 01 · 24 min" eyebrow + "Further reading" */
+body.ak-lesson [font-family^="NeueHaasDisplay"][font-size="16"] p,
+body.ak-lesson [font-family^="NeueHaasDisplay"][font-size="11"] p {
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* Body H1 — tighter line-height + balance */
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
+  line-height: 1.04 !important;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+/* All section H2 (36px Caslon) — consistent rhythm */
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="36"] {
+  line-height: 1.1 !important;
+  text-wrap: balance;
+}
+
+/* ---------- VIDEO POLISH ---------------------------------- */
+body.ak-lesson .react-player,
+body.ak-lesson .react-player video {
+  border-radius: 4px;
+  overflow: hidden;
+}
+body.ak-lesson .react-player {
+  box-shadow: 0 10px 40px rgba(26, 60, 47, 0.18);
+}
+
+/* ---------- ICEBERG CARDS (3-col size="4" w/ top border) -- */
+/* Reusable as .ak-iceberg-card anywhere */
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-top"] {
+  transition: transform var(--ak-t) var(--ak-ease),
+              box-shadow var(--ak-t) var(--ak-ease);
+}
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-top"]:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(26, 60, 47, 0.08);
+}
+
+/* ---------- TIP CARDS (size="4" w/ full border) ----------- */
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]) {
+  transition: border-color var(--ak-t) var(--ak-ease),
+              transform var(--ak-t) var(--ak-ease),
+              box-shadow var(--ak-t) var(--ak-ease);
+  background: var(--ak-cream);
+}
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]):hover {
+  border-color: var(--ak-terracotta) !important;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 24px rgba(26, 60, 47, 0.08);
+}
+
+/* Tip card sub-heading (the 13px NeueHaas bold) — tighter caps  */
+body.ak-lesson [font-family^="NeueHaasDisplay"][font-size="13"] strong {
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--ak-forest);
+  font-weight: 500;
+}
+
+/* ---------- BULLET LIST POLISH (norms + references) ------- */
+/* Circle-outlined check instead of solid icon */
+body.ak-lesson .sc-jGKxIN i.fas.fa-check {
+  width: 20px;
+  height: 20px;
+  min-width: 20px;
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--ak-terracotta);
+  border-radius: 50%;
+  color: var(--ak-terracotta) !important;
+  font-size: 10px !important;
+  margin-right: 14px !important;
+  margin-top: 4px;
+}
+
+/* Norms list — bold heading on top of body para */
+body.ak-lesson .sc-jGKxIN ul li strong {
+  display: block;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--ak-forest);
+  letter-spacing: 0.01em;
+  margin-bottom: 4px;
+}
+
+/* Hairline divider between norms list items */
+body.ak-lesson .sc-jGKxIN ul li {
+  padding-bottom: 18px;
+  margin-bottom: 18px;
+  border-bottom: 1px solid var(--ak-ink-10);
+}
+body.ak-lesson .sc-jGKxIN ul li:last-child {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+
+/* ---------- PULL QUOTE (Caslon italic 26px centered) ------ */
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"] {
+  position: relative;
+  text-align: center !important;
+  padding-left: clamp(20px, 5vw, 80px) !important;
+  padding-right: clamp(20px, 5vw, 80px) !important;
+  max-width: 28ch;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  line-height: 1.3 !important;
+  color: var(--ak-forest) !important;
+}
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"]::before {
+  content: "\201C";
+  display: block;
+  font-size: 5em;
+  line-height: 0.5;
+  color: var(--ak-terracotta);
+  margin-bottom: 24px;
+  margin-top: 12px;
+}
+/* Cite caption right under pull quote */
+body.ak-lesson [font-family="Inter"][font-size="12"] {
+  text-align: center !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+/* ---------- REFERENCES BOX -------------------------------- */
+/* The references card already has cream-soft BG — polish text  */
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] em {
+  color: var(--ak-ink);
+  font-style: italic;
+}
+body.ak-lesson [id^="bulletlist-"][font-family="Inter"] p {
+  color: var(--ak-ink-70);
+  font-size: 14px !important;
+  line-height: 1.55;
+}
+
+/* ---------- CTA BAR (forest "Ready for next lesson") ------ */
+body.ak-lesson [style*="rgb(26, 60, 47)"][id^="row-"] {
+  padding: clamp(28px, 4vw, 40px) !important;
+}
+/* Override the default blue button → terracotta */
+body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] {
+  background: var(--ak-terracotta) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  padding: 16px 32px !important;
+  transition: background var(--ak-t) var(--ak-ease) !important;
+  box-shadow: none !important;
+}
+body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"]:hover {
+  background: var(--ak-terracotta-d) !important;
+}
+body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] small {
+  display: none; /* subtitle off — clean single CTA */
+}
+
+/* ---------- IMAGE / RICH MEDIA DEFAULTS ------------------- */
+body.ak-lesson img { border-radius: 4px; }
+
+/* ---------- MOBILE TUNING --------------------------------- */
+@media (max-width: 760px) {
+  body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
+    font-size: 32px !important;
+  }
+  body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="36"] {
+    font-size: 24px !important;
+  }
+  body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"] {
+    font-size: 20px !important;
+    padding-left: 16px !important;
+    padding-right: 16px !important;
+  }
+}
+
+/* ============================================================
+   REUSABLE UTILITY CLASSES — for future pages
+   Add a single <div class="ak-..."> wrapper via HTML box.
+   ============================================================ */
+
+/* Use on any standalone block to inherit lesson typography */
+.ak-prose h1, .ak-prose h2, .ak-prose h3 {
+  font-family: "AdobeCaslonPro42448745", "Adobe Caslon Pro", Georgia, serif;
+  text-wrap: balance;
+}
+.ak-prose p, .ak-prose li {
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif;
+  color: rgba(45, 45, 45, 0.85);
+  line-height: 1.65;
+}
+
+/* Eyebrow label  */
+.ak-eyebrow {
+  display: inline-block;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: #B46A3C;
+  margin-bottom: 14px;
+}
+
+/* Hairline rule  */
+.ak-rule {
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: #B46A3C;
+  border: 0;
+  margin: 0 0 24px;
+}
