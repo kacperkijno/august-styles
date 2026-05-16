@@ -474,10 +474,41 @@ body.ak-lesson {
   --THEME-disabled: #A8A8A8 !important;
 }
 
-/* Top header bar — Forest with cream text */
-body.ak-lesson .SIO-header {
+/* Top header bar — Forest with cream text, taller, brand polish */
+body.ak-lesson .SIO-header,
+body.ak-lesson nav.SIO-header {
   background: #1A3C2F !important;
-  border-bottom: 1px solid rgba(249, 247, 241, 0.08);
+  background-color: #1A3C2F !important;
+  border-bottom: 1px solid rgba(249, 247, 241, 0.08) !important;
+}
+body.ak-lesson .SIO-header > div {
+  height: 64px !important;
+}
+/* Header logo — keep white-on-forest, slightly smaller */
+body.ak-lesson .SIO-header__logo {
+  filter: brightness(0) invert(1) !important;
+  max-height: 28px !important;
+  transition: opacity 180ms ease;
+}
+body.ak-lesson .SIO-header__logo:hover {
+  opacity: 0.85;
+}
+/* Header nav links (Kursy, bell, avatar dropdown, PL) */
+body.ak-lesson .SIO-header a,
+body.ak-lesson .SIO-header button,
+body.ak-lesson .SIO-header span {
+  color: #F9F7F1 !important;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
+  font-weight: 400 !important;
+  font-size: 13px !important;
+  letter-spacing: 0.04em !important;
+}
+body.ak-lesson .SIO-header a:hover {
+  color: #E4B68A !important;
+}
+/* Avatar gravatar — subtle terracotta ring */
+body.ak-lesson .SIO-avatar img {
+  border: 1px solid rgba(228, 182, 138, 0.4) !important;
 }
 
 /* Course title H2 (top-left, "Cross-Cultural Communication")
@@ -499,14 +530,15 @@ body.ak-lesson .SIO-course__side-menu {
   border-radius: 4px !important;
 }
 body.ak-lesson .SIO-course__side-menu > div:first-child {
-  padding: 24px !important;
+  padding: 28px !important;
 }
 
-/* Instructor photo — subtle terracotta ring */
+/* Instructor photo — subtle terracotta ring, smaller */
 body.ak-lesson .SIO-course__instruction_photo {
-  box-shadow: 0 0 0 2px #F3F0E7, 0 0 0 3px rgba(180, 106, 60, 0.4) !important;
-  width: 64px !important;
-  height: 64px !important;
+  box-shadow: 0 0 0 2px #F3F0E7, 0 0 0 3px rgba(180, 106, 60, 0.35) !important;
+  width: 56px !important;
+  height: 56px !important;
+  margin-bottom: 0 !important;
 }
 
 /* Instructor name — sans-serif Forest, no italic */
@@ -515,9 +547,22 @@ body.ak-lesson .SIO-course__instruction_name {
   font-style: normal !important;
   font-weight: 500 !important;
   color: #1A3C2F !important;
-  font-size: 16px !important;
-  letter-spacing: 0.01em !important;
-  margin-top: 12px !important;
+  font-size: 14px !important;
+  letter-spacing: 0.04em !important;
+  text-transform: uppercase !important;
+  margin-top: 14px !important;
+  margin-bottom: 4px !important;
+}
+/* Add tiny "INSTRUCTOR" eyebrow above name */
+body.ak-lesson .SIO-course__instruction_name::before {
+  content: "Instructor";
+  display: block;
+  font-size: 10px;
+  letter-spacing: 0.18em;
+  color: #B46A3C;
+  font-weight: 400;
+  margin-bottom: 6px;
+  text-transform: uppercase;
 }
 
 /* Sidebar "Poprzedni" + "Następny" buttons */
@@ -525,7 +570,7 @@ body.ak-lesson .SIO-course__button--previous-lecture,
 body.ak-lesson button.SIO-course__button--previous-lecture {
   background: transparent !important;
   background-color: transparent !important;
-  border: 1px solid rgba(26, 60, 47, 0.3) !important;
+  border: 1px solid rgba(26, 60, 47, 0.25) !important;
   color: #1A3C2F !important;
   border-radius: 2px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
@@ -533,6 +578,8 @@ body.ak-lesson button.SIO-course__button--previous-lecture {
   font-size: 12px !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
+  min-height: 40px !important;
+  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
 }
 body.ak-lesson .SIO-course__button--previous-lecture:hover:not(:disabled),
 body.ak-lesson button.SIO-course__button--previous-lecture:hover:not(:disabled) {
@@ -540,6 +587,15 @@ body.ak-lesson button.SIO-course__button--previous-lecture:hover:not(:disabled) 
   background-color: #1A3C2F !important;
   color: #F9F7F1 !important;
   border-color: #1A3C2F !important;
+}
+/* Disabled Previous — dimmed, no bg blob */
+body.ak-lesson .SIO-course__button--previous-lecture:disabled,
+body.ak-lesson button.SIO-course__button--previous-lecture:disabled {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-color: rgba(26, 60, 47, 0.12) !important;
+  color: rgba(26, 60, 47, 0.3) !important;
+  opacity: 1 !important;
 }
 /* CRITICAL — needs higher specificity than Tailwind bg-THEME-secondary! */
 body.ak-lesson .SIO-course__button--next-lecture,
@@ -664,23 +720,36 @@ body.ak-lesson .SIO-course__app {
   background: #F9F7F1 !important;
 }
 
-/* Bottom "Oznacz jako ukończone" button */
-body.ak-lesson .SIO-course__button--mark-as-completed {
-  background: transparent !important;
-  border: 1px solid #1A3C2F !important;
-  color: #1A3C2F !important;
+/* Bottom "Oznacz jako ukończone" button — prominent terracotta filled */
+body.ak-lesson .SIO-course__button--mark-as-completed,
+body.ak-lesson button.SIO-course__button--mark-as-completed,
+body.ak-lesson button[class*="SIO-course__button--mark-as-completed"] {
+  background: #B46A3C !important;
+  background-color: #B46A3C !important;
+  border: 0 !important;
+  color: #F9F7F1 !important;
   border-radius: 2px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
-  padding: 12px 32px !important;
-  font-size: 13px !important;
+  letter-spacing: 0.06em !important;
+  padding: 14px 36px !important;
+  font-size: 12px !important;
   text-transform: uppercase !important;
+  min-height: 48px !important;
+  transition: background 180ms ease, transform 180ms ease;
 }
 body.ak-lesson .SIO-course__button--mark-as-completed:hover {
-  background: #B46A3C !important;
-  border-color: #B46A3C !important;
+  background: #9A5832 !important;
+  background-color: #9A5832 !important;
   color: #F9F7F1 !important;
+  transform: translateY(-1px);
+}
+/* Bottom complete button wrapper — give it Forest BG like CTA in mockup */
+body.ak-lesson .SIO-course-lecture__container ~ div,
+body.ak-lesson .SIO-course-lecture__container + div {
+  background: transparent !important;
+  padding: 24px !important;
+  margin-top: 16px !important;
 }
 
 /* Search input top-right */
