@@ -480,111 +480,183 @@ body.ak-lesson .SIO-header {
   border-bottom: 1px solid rgba(249, 247, 241, 0.08);
 }
 
-/* Course title H2 (top-left, "Cross-Cultural Communication") — Caslon italic */
+/* Course title H2 (top-left, "Cross-Cultural Communication")
+   Caslon ROMAN (no italic — italic reserved for accents/quotes/numbers only) */
 body.ak-lesson .SIO-course__title,
 body.ak-lesson .SIO-course__title a {
   font-family: "AdobeCaslonPro42448745", "Adobe Caslon Pro", Georgia, serif !important;
-  font-style: italic !important;
+  font-style: normal !important;
   font-weight: 400 !important;
-  font-size: 32px !important;
+  font-size: 26px !important;
   color: #1A3C2F !important;
   letter-spacing: -0.005em !important;
 }
 
-/* Left sidebar — cream-soft background, subtle border */
+/* Left sidebar — cream-soft background, subtle border, tighter padding */
 body.ak-lesson .SIO-course__side-menu {
   background: #F3F0E7 !important;
   border: 1px solid rgba(45, 45, 45, 0.06) !important;
   border-radius: 4px !important;
 }
-
-/* Instructor photo — terracotta ring */
-body.ak-lesson .SIO-course__instruction_photo {
-  box-shadow: 0 0 0 2px #F3F0E7, 0 0 0 3px #B46A3C !important;
+body.ak-lesson .SIO-course__side-menu > div:first-child {
+  padding: 24px !important;
 }
 
-/* Instructor name — Caslon italic */
+/* Instructor photo — subtle terracotta ring */
+body.ak-lesson .SIO-course__instruction_photo {
+  box-shadow: 0 0 0 2px #F3F0E7, 0 0 0 3px rgba(180, 106, 60, 0.4) !important;
+  width: 64px !important;
+  height: 64px !important;
+}
+
+/* Instructor name — sans-serif Forest, no italic */
 body.ak-lesson .SIO-course__instruction_name {
-  font-family: "AdobeCaslonPro42448745", "Adobe Caslon Pro", Georgia, serif !important;
-  font-style: italic !important;
-  font-weight: 400 !important;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
+  font-style: normal !important;
+  font-weight: 500 !important;
   color: #1A3C2F !important;
-  font-size: 22px !important;
-  letter-spacing: -0.005em !important;
+  font-size: 16px !important;
+  letter-spacing: 0.01em !important;
+  margin-top: 12px !important;
 }
 
 /* Sidebar "Poprzedni" + "Następny" buttons */
-body.ak-lesson .SIO-course__button--previous-lecture {
+body.ak-lesson .SIO-course__button--previous-lecture,
+body.ak-lesson button.SIO-course__button--previous-lecture {
   background: transparent !important;
-  border: 1px solid #1A3C2F !important;
+  background-color: transparent !important;
+  border: 1px solid rgba(26, 60, 47, 0.3) !important;
   color: #1A3C2F !important;
   border-radius: 2px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
 }
-body.ak-lesson .SIO-course__button--previous-lecture:hover:not(:disabled) {
+body.ak-lesson .SIO-course__button--previous-lecture:hover:not(:disabled),
+body.ak-lesson button.SIO-course__button--previous-lecture:hover:not(:disabled) {
   background: #1A3C2F !important;
+  background-color: #1A3C2F !important;
   color: #F9F7F1 !important;
+  border-color: #1A3C2F !important;
 }
-body.ak-lesson .SIO-course__button--next-lecture {
+/* CRITICAL — needs higher specificity than Tailwind bg-THEME-secondary! */
+body.ak-lesson .SIO-course__button--next-lecture,
+body.ak-lesson button.SIO-course__button--next-lecture,
+body.ak-lesson button[class*="SIO-course__button--next-lecture"] {
   background: #B46A3C !important;
+  background-color: #B46A3C !important;
   color: #F9F7F1 !important;
   border-radius: 2px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
+  font-size: 12px !important;
+  letter-spacing: 0.06em !important;
+  text-transform: uppercase !important;
   border: 0 !important;
 }
-body.ak-lesson .SIO-course__button--next-lecture:hover {
+body.ak-lesson .SIO-course__button--next-lecture:hover,
+body.ak-lesson button.SIO-course__button--next-lecture:hover {
   background: #9A5832 !important;
+  background-color: #9A5832 !important;
 }
 
 /* Progress bar */
 body.ak-lesson .SIO-course__progress-bar {
-  background: rgba(26, 60, 47, 0.08) !important;
+  background: rgba(26, 60, 47, 0.10) !important;
+  background-color: rgba(26, 60, 47, 0.10) !important;
   border: 0 !important;
-  height: 6px !important;
+  height: 4px !important;
   border-radius: 999px !important;
   overflow: hidden !important;
+  font-size: 0 !important; /* hide the "0%" text overlay that breaks the slim bar */
 }
 body.ak-lesson .SIO-course__progress-bar > div {
   background: #B46A3C !important;
+  background-color: #B46A3C !important;
   height: 100%;
   transition: width 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
 }
+body.ak-lesson .SIO-course__progress-bar > div > div {
+  display: none !important; /* hide inner % label */
+}
 
-/* Module title in sidebar */
+/* Module title in sidebar — small eyebrow like "IN THIS COURSE" in mockup */
 body.ak-lesson .SIO-course-modules-list__module-title button {
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
-  color: #1A3C2F !important;
-  letter-spacing: 0.01em !important;
-  font-size: 13px !important;
+  color: #B46A3C !important;
+  letter-spacing: 0.18em !important;
+  font-size: 11px !important;
   text-transform: uppercase !important;
   font-weight: 500 !important;
+  padding-bottom: 12px !important;
+  border-bottom: 1px solid rgba(45, 45, 45, 0.1) !important;
+  width: 100% !important;
+  margin-bottom: 4px !important;
+}
+/* Hide the rotated chevron — too much chrome */
+body.ak-lesson .SIO-course-modules-list__module-title button svg {
+  display: none !important;
 }
 
-/* Lesson list items */
+/* Lesson list items — sans-serif, NOT italic. Numbers are added via counter */
+body.ak-lesson .SIO-course-modules-list {
+  counter-reset: lesson;
+  padding-top: 4px !important;
+}
+body.ak-lesson .SIO-course-modules-list__lecture {
+  counter-increment: lesson;
+  position: relative;
+  padding-left: 44px !important;
+  padding-top: 14px !important;
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid rgba(45, 45, 45, 0.06) !important;
+  list-style: none !important;
+}
+body.ak-lesson .SIO-course-modules-list__lecture:last-child {
+  border-bottom: 0 !important;
+}
+/* Number prefix — Caslon italic terracotta (italic ONLY here, per spec) */
+body.ak-lesson .SIO-course-modules-list__lecture::before {
+  content: counter(lesson, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 14px;
+  font-family: "AdobeCaslonPro42448745", "Adobe Caslon Pro", Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 14px;
+  color: #B46A3C;
+  width: 32px;
+}
+/* Lesson title — sans-serif, sentence case */
 body.ak-lesson .SIO-course-modules-list__lecture a {
-  font-family: "AdobeCaslonPro42448745", "Adobe Caslon Pro", Georgia, serif !important;
-  font-style: italic !important;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
+  font-style: normal !important;
   font-weight: 400 !important;
-  font-size: 16px !important;
+  font-size: 14px !important;
+  line-height: 1.4 !important;
   color: rgba(45, 45, 45, 0.72) !important;
-  letter-spacing: -0.005em !important;
+  letter-spacing: 0.01em !important;
   transition: color 180ms ease;
+  margin-top: 0 !important;
+  padding-left: 0 !important;
 }
 body.ak-lesson .SIO-course-modules-list__lecture a:hover {
-  color: #B46A3C !important;
+  color: #1A3C2F !important;
 }
 body.ak-lesson .SIO-course-modules-list__lecture--selected a {
   color: #1A3C2F !important;
   font-weight: 500 !important;
 }
-/* Circle icon next to selected lesson — terracotta fill */
-body.ak-lesson .SIO-course-modules-list__lecture--selected svg path {
-  stroke: #B46A3C !important;
-  fill: #B46A3C !important;
+/* Hide the systeme circle SVG — replaced by counter number */
+body.ak-lesson .SIO-course-modules-list__lecture svg {
+  display: none !important;
+}
+/* Mark completed lessons with a checkmark after the number */
+body.ak-lesson .SIO-course-modules-list__lecture--done::before {
+  content: counter(lesson, decimal-leading-zero) " ✓";
 }
 
 /* Course main wrapper — cream BG */
