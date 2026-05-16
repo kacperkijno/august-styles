@@ -875,7 +875,7 @@ body.ak-lesson .SIO-course__app {
   background: #F9F7F1 !important;
 }
 
-/* Bottom "Oznacz jako ukończone" button — prominent terracotta filled */
+/* Bottom "Oznacz jako ukończone" button — prominent terracotta with shadow */
 body.ak-lesson .SIO-course__button--mark-as-completed,
 body.ak-lesson button.SIO-course__button--mark-as-completed,
 body.ak-lesson button[class*="SIO-course__button--mark-as-completed"] {
@@ -886,25 +886,34 @@ body.ak-lesson button[class*="SIO-course__button--mark-as-completed"] {
   border-radius: 2px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
-  letter-spacing: 0.06em !important;
-  padding: 14px 36px !important;
-  font-size: 12px !important;
+  letter-spacing: 0.08em !important;
+  padding: 18px 48px !important;
+  font-size: 13px !important;
   text-transform: uppercase !important;
-  min-height: 48px !important;
-  transition: background 180ms ease, transform 180ms ease;
+  min-height: 56px !important;
+  box-shadow: 0 4px 16px rgba(180, 106, 60, 0.25), 0 1px 3px rgba(180, 106, 60, 0.15) !important;
+  transition: background 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              transform 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
 }
 body.ak-lesson .SIO-course__button--mark-as-completed:hover {
   background: #9A5832 !important;
   background-color: #9A5832 !important;
   color: #F9F7F1 !important;
-  transform: translateY(-1px);
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 24px rgba(180, 106, 60, 0.35), 0 2px 6px rgba(180, 106, 60, 0.20) !important;
 }
-/* Bottom complete button wrapper — give it Forest BG like CTA in mockup */
+/* Bottom complete button wrapper — transparent (kill white card),
+   match cream BG of rest of page */
 body.ak-lesson .SIO-course-lecture__container ~ div,
-body.ak-lesson .SIO-course-lecture__container + div {
+body.ak-lesson .SIO-course-lecture__container + div,
+body.ak-lesson [class*="bg-THEME-block-background"]:has(.SIO-course__button--mark-as-completed) {
   background: transparent !important;
-  padding: 24px !important;
-  margin-top: 16px !important;
+  background-color: transparent !important;
+  padding: 32px 0 !important;
+  margin-top: 0 !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
 }
 
 /* Search input top-right */
@@ -923,9 +932,16 @@ body.ak-lesson .SIO-header__logo {
   transition: filter 180ms ease;
 }
 
-/* Iframe wrapper around lesson — kill border-radius/shadow if any */
-body.ak-lesson .SIO-course-lecture__container > div {
-  background: #FFFFFF !important;
-  border-radius: 4px !important;
-  box-shadow: 0 2px 12px rgba(26, 60, 47, 0.04);
+/* Iframe wrapper around lesson — transparent, no shadow, no card look */
+body.ak-lesson .SIO-course-lecture__container > div,
+body.ak-lesson .SIO-course-lecture__container {
+  background: transparent !important;
+  background-color: transparent !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+/* Inner div that holds the iframe — also transparent */
+body.ak-lesson .SIO-course-lecture__container > div > div {
+  background: transparent !important;
+  background-color: transparent !important;
 }
