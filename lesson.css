@@ -66,36 +66,30 @@ body.ak-lesson .react-player:hover {
 }
 
 /* ============================================================
-   ICEBERG CARDS — 3-col with topOnly border
+   CARDS — generic shadow + hover for ALL nested rows in 4-col
+   (systeme.io puts borders via emotion classes, not inline style,
+    so we can't filter by [style*="border-style"] — match all
+    nested 4-col rows and let context differentiate.)
    ============================================================ */
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-top"] {
+body.ak-lesson [size="4"] > div > [id^="row-"] {
   box-shadow: var(--ak-shadow-sm);
   transition: transform var(--ak-t) var(--ak-ease),
-              box-shadow var(--ak-t) var(--ak-ease);
+              box-shadow var(--ak-t) var(--ak-ease),
+              border-color var(--ak-t) var(--ak-ease),
+              opacity 600ms var(--ak-ease);
 }
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-top"]:hover {
+body.ak-lesson [size="4"] > div > [id^="row-"]:hover {
   transform: translateY(-4px);
   box-shadow: var(--ak-shadow-md);
 }
-/* Forest iceberg card gets a deeper shadow on hover */
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-top"][style*="rgb(26, 60, 47)"]:hover {
+/* Forest iceberg card — deeper shadow on hover */
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="background-color: rgb(26, 60, 47)"]:hover,
+body.ak-lesson [size="4"] > div > [id^="row-"][style*="rgb(26, 60, 47)"]:hover {
   box-shadow: var(--ak-shadow-forest);
 }
-
-/* ============================================================
-   TIP CARDS — 3-col with fullBorder
-   ============================================================ */
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]) {
-  background: var(--ak-cream);
-  box-shadow: var(--ak-shadow-sm);
-  transition: border-color var(--ak-t) var(--ak-ease),
-              transform var(--ak-t) var(--ak-ease),
-              box-shadow var(--ak-t) var(--ak-ease);
-}
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]):hover {
+/* Tip cards (no background color set) — terracotta border on hover */
+body.ak-lesson [size="4"] > div > [id^="row-"]:not([style*="background-color"]):hover {
   border-color: var(--ak-terracotta) !important;
-  transform: translateY(-4px);
-  box-shadow: var(--ak-shadow-md);
 }
 
 /* Tip card sub-heading (13px NeueHaas bold) — caps + tighter */
@@ -107,38 +101,47 @@ body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="13"] str
 }
 
 /* Tip card terracotta number — subtle scale animation on card hover */
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]) [font-family^="AdobeCaslonPro"][font-size="38"] {
+body.ak-lesson [size="4"] > div > [id^="row-"] [font-family^="AdobeCaslonPro"][font-size="38"] {
   transition: transform var(--ak-t) var(--ak-ease);
   transform-origin: left center;
 }
-body.ak-lesson [size="4"] > div > [id^="row-"][style*="border-style: solid"]:not([style*="border-top"]):hover [font-family^="AdobeCaslonPro"][font-size="38"] {
+body.ak-lesson [size="4"] > div > [id^="row-"]:hover [font-family^="AdobeCaslonPro"][font-size="38"] {
   transform: scale(1.06);
 }
 
 /* ============================================================
    BULLET LISTS (norms + references)
    ============================================================ */
-/* Circle-outlined check */
-body.ak-lesson .sc-jGKxIN i.fas.fa-check {
-  width: 22px !important;
-  height: 22px !important;
-  min-width: 22px !important;
+/* Circle-outlined check — stronger visibility */
+body.ak-lesson .sc-jGKxIN i.fas.fa-check,
+body.ak-lesson .sc-jGKxIN i.fas {
+  width: 24px !important;
+  height: 24px !important;
+  min-width: 24px !important;
+  max-width: 24px !important;
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
-  border: 1px solid var(--ak-terracotta) !important;
+  border: 1.5px solid var(--ak-terracotta) !important;
   border-radius: 50% !important;
   color: var(--ak-terracotta) !important;
-  font-size: 10px !important;
+  font-size: 11px !important;
+  line-height: 1 !important;
   margin-right: 14px !important;
+  margin-left: -25px !important;
   margin-top: 4px !important;
   background: transparent !important;
   flex-shrink: 0 !important;
+  box-sizing: border-box !important;
   transition: background var(--ak-t) var(--ak-ease),
               color var(--ak-t) var(--ak-ease),
               transform var(--ak-t) var(--ak-ease);
 }
-body.ak-lesson .sc-jGKxIN ul li:hover i.fas.fa-check {
+/* Make FontAwesome glyph render properly inside our circle */
+body.ak-lesson .sc-jGKxIN i.fas.fa-check::before {
+  font-size: 11px !important;
+}
+body.ak-lesson .sc-jGKxIN ul li:hover > i.fas.fa-check {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   transform: scale(1.08);
@@ -162,15 +165,20 @@ body.ak-lesson .sc-jGKxIN ul li p {
   color: var(--ak-ink-70) !important;
 }
 
-/* Hairline divider between norms list items (full norms list only — size 16) */
-body.ak-lesson [id^="bulletlist-"][font-size="16"] ul li {
-  padding-bottom: 18px !important;
-  margin-bottom: 18px !important;
+/* Hairline divider between norms — each norm is a separate BulletList widget
+   wrapped in .gmDSrH (emotion class). Border-bottom on the wrapper, not on li. */
+body.ak-lesson .gmDSrH {
+  padding-bottom: 20px !important;
+  margin-bottom: 4px !important;
   border-bottom: 1px solid var(--ak-ink-10);
 }
-body.ak-lesson [id^="bulletlist-"][font-size="16"] ul li:last-child {
-  border-bottom: 0;
-  padding-bottom: 0;
+body.ak-lesson .gmDSrH:last-child {
+  border-bottom: 0 !important;
+  padding-bottom: 0 !important;
+}
+/* Tighten the bullet list inside norms */
+body.ak-lesson .gmDSrH [id^="bulletlist-"] {
+  padding: 0 !important;
 }
 
 /* References list — Inter font, smaller, italic emphasis */
@@ -218,13 +226,16 @@ body.ak-lesson [font-family="Inter"][font-size="12"] {
 
 /* ============================================================
    CTA BAR (forest "Ready for next lesson")
+   Target by emotion class .eYYZcj (forest row with full bg)
+   plus fallback by background attribute
    ============================================================ */
-body.ak-lesson [style*="rgb(26, 60, 47)"][id^="row-"] {
+body.ak-lesson .eYYZcj,
+body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"] {
   padding: clamp(28px, 4vw, 40px) !important;
   box-shadow: var(--ak-shadow-md);
 }
-/* Override default blue button → terracotta */
-body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] {
+/* Override default button → terracotta */
+body.ak-lesson [data-test-ui="open-url-button"] {
   background: var(--ak-terracotta) !important;
   border: 0 !important;
   border-radius: 2px !important;
@@ -234,13 +245,14 @@ body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] {
               transform var(--ak-t) var(--ak-ease) !important;
   letter-spacing: 0.04em !important;
 }
-body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"]:hover {
+body.ak-lesson [data-test-ui="open-url-button"]:hover {
   background: var(--ak-terracotta-d) !important;
   transform: translateY(-2px);
 }
-/* Hide button subtitle — clean single CTA (force with !important) */
-body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] small,
-body.ak-lesson [style*="rgb(26, 60, 47)"] [data-test-ui="open-url-button"] .sc-dhKdcy {
+/* Hide button subtitle — clean single CTA */
+body.ak-lesson [data-test-ui="open-url-button"] small,
+body.ak-lesson [data-test-ui="open-url-button"] .sc-dhKdcy,
+body.ak-lesson [data-test-ui="open-url-button"] .fOiqNV {
   display: none !important;
 }
 
@@ -281,19 +293,22 @@ body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"].ak-in {
   transform: translateY(0);
 }
 
-/* References box fade-up */
+/* References box fade-up — emotion class .kOevAj is the references wrapper */
+body.ak-lesson .kOevAj,
 body.ak-lesson [id^="row-"][style*="rgb(243, 240, 231)"] {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 700ms var(--ak-ease),
               transform 700ms var(--ak-ease);
 }
+body.ak-lesson .kOevAj.ak-in,
 body.ak-lesson [id^="row-"][style*="rgb(243, 240, 231)"].ak-in {
   opacity: 1;
   transform: translateY(0);
 }
 
-/* Forest CTA bar fade-up */
+/* Forest CTA bar fade-up — .eYYZcj is the emotion class for forest BG row */
+body.ak-lesson .eYYZcj,
 body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"] {
   opacity: 0;
   transform: translateY(24px);
@@ -301,9 +316,35 @@ body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"] {
               transform 700ms var(--ak-ease),
               box-shadow var(--ak-t) var(--ak-ease);
 }
+body.ak-lesson .eYYZcj.ak-in,
 body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"].ak-in {
   opacity: 1;
   transform: translateY(0);
+}
+
+/* ============================================================
+   SPACING RHYTHM — bring section gaps to consistent rhythm
+   ============================================================ */
+/* Section title margin-bottom — tighten gap between H2 and intro */
+body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="36"] {
+  margin-bottom: 16px !important;
+}
+
+/* More vertical room between tip cards row groups (top + bottom row of 2x3) */
+body.ak-lesson .nrqfn {
+  margin-top: 24px !important;
+}
+
+/* References box — generous padding inside */
+body.ak-lesson .kOevAj {
+  padding: clamp(32px, 4vw, 48px) !important;
+}
+
+/* Iceberg cards — equal min-height so all 3 align */
+body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
+  min-height: 180px;
+  display: flex !important;
+  flex-direction: column;
 }
 
 /* Respect prefers-reduced-motion */
