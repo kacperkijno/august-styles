@@ -454,6 +454,148 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
 }
 
 /* ============================================================
+   AK BUTTONS — reusable across systeme.io, landing pages, anywhere.
+   Add to any <a> or <button>:
+     <a class="ak-btn ak-btn--primary" href="...">Get Started</a>
+     <a class="ak-btn ak-btn--ghost" href="...">Learn More</a>
+     <a class="ak-btn ak-btn--text" href="...">Read the article →</a>
+   On dark backgrounds, wrap in a parent with .ak-on-dark, or add the
+   modifier directly: .ak-btn--primary.ak-btn--on-dark
+   ============================================================ */
+.ak-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  height: 48px;
+  padding: 0 28px;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-weight: 500;
+  font-size: 14px;
+  letter-spacing: 0.04em;
+  text-decoration: none !important;
+  border-radius: 2px;
+  border: 1px solid transparent;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              color 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              border-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              transform 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
+              box-shadow 180ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  text-transform: none;
+  line-height: 1;
+}
+.ak-btn:focus-visible {
+  outline: 2px solid #B46A3C;
+  outline-offset: 3px;
+}
+
+/* PRIMARY — Forest filled, Cream text (default light context) */
+.ak-btn--primary {
+  background: #1A3C2F;
+  color: #F9F7F1 !important;
+  border-color: #1A3C2F;
+}
+.ak-btn--primary:hover {
+  background: #0F2A1F;
+  border-color: #0F2A1F;
+  color: #F9F7F1 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.18);
+}
+
+/* GHOST — outline Forest, transparent bg */
+.ak-btn--ghost {
+  background: transparent;
+  color: #1A3C2F !important;
+  border-color: #1A3C2F;
+}
+.ak-btn--ghost:hover {
+  background: #1A3C2F;
+  color: #F9F7F1 !important;
+  transform: translateY(-1px);
+}
+
+/* TEXT LINK — underlined Forest with arrow */
+.ak-btn--text {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: auto;
+  padding: 4px 0;
+  font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", "Neue Haas Grotesk Display Pro", "Helvetica Neue", Inter, system-ui, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  letter-spacing: 0.01em;
+  color: #1A3C2F !important;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px solid #1A3C2F;
+  border-radius: 0;
+  text-transform: none;
+  transition: color 180ms ease, border-color 180ms ease, gap 180ms ease;
+}
+.ak-btn--text:hover {
+  color: #B46A3C !important;
+  border-bottom-color: #B46A3C;
+  gap: 12px;
+}
+
+/* ON DARK — modifier for buttons placed on dark/Forest backgrounds */
+/* Primary on dark — terracotta filled */
+.ak-btn--primary.ak-btn--on-dark,
+.ak-on-dark .ak-btn--primary {
+  background: #B46A3C;
+  border-color: #B46A3C;
+  color: #F9F7F1 !important;
+}
+.ak-btn--primary.ak-btn--on-dark:hover,
+.ak-on-dark .ak-btn--primary:hover {
+  background: #9A5832;
+  border-color: #9A5832;
+  color: #F9F7F1 !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+/* Ghost on dark — cream outline transparent */
+.ak-btn--ghost.ak-btn--on-dark,
+.ak-on-dark .ak-btn--ghost {
+  background: transparent;
+  border-color: #F9F7F1;
+  color: #F9F7F1 !important;
+}
+.ak-btn--ghost.ak-btn--on-dark:hover,
+.ak-on-dark .ak-btn--ghost:hover {
+  background: #F9F7F1;
+  color: #1A3C2F !important;
+}
+
+/* Text link on dark — cream */
+.ak-btn--text.ak-btn--on-dark,
+.ak-on-dark .ak-btn--text {
+  color: #F9F7F1 !important;
+  border-bottom-color: rgba(249, 247, 241, 0.4);
+}
+.ak-btn--text.ak-btn--on-dark:hover,
+.ak-on-dark .ak-btn--text:hover {
+  color: #E4B68A !important;
+  border-bottom-color: #E4B68A;
+}
+
+/* Size modifiers */
+.ak-btn--sm {
+  height: 36px;
+  padding: 0 18px;
+  font-size: 12px;
+}
+.ak-btn--lg {
+  height: 56px;
+  padding: 0 36px;
+  font-size: 15px;
+}
+
+/* ============================================================
    SYSTEME.IO SHELL OVERRIDES (outer page chrome)
    Activates when snippet loaded at course-level — body.ak-lesson
    is set on the OUTER systeme.io app shell (Next.js Tailwind).
