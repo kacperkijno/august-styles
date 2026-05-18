@@ -1,0 +1,112 @@
+/* ============================================================
+   AK Logo Marquee — self-contained styles for systeme.io embed.
+   Scope: .ak-marquee  (wrap the HTML in <section class="ak-marquee">)
+   ============================================================ */
+
+.ak-marquee {
+  --cream:    #F9F7F1;
+  --ink:      #2D2D2D;
+  --ink-10:   rgba(45, 45, 45, 0.10);
+  --ink-50:   rgba(45, 45, 45, 0.50);
+  --container: 1140px;
+  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+  --sans:     "NeueHaasDisplay-Roman42448762", -apple-system, BlinkMacSystemFont,
+              "Segoe UI", Roboto, sans-serif;
+
+  padding: 64px 0 56px;
+  background: var(--cream);
+  border-bottom: 1px solid var(--ink-10);
+  overflow: hidden;
+}
+
+.ak-marquee__label {
+  text-align: center;
+  font-family: var(--sans);
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-50);
+  margin: 0 0 36px;
+}
+
+/* Marquee infrastructure */
+.ak-marquee .marquee {
+  position: relative;
+  width: 100%;
+  max-width: var(--container);
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  mask-image: linear-gradient(
+    90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+  -webkit-mask-image: linear-gradient(
+    90deg, transparent 0%, black 6%, black 94%, transparent 100%);
+}
+.ak-marquee .marquee + .marquee { margin-top: 28px; }
+
+.ak-marquee .marquee__track {
+  display: flex;
+  width: max-content;
+  animation: ak-marquee-ltr 65s linear infinite;
+  will-change: transform;
+}
+.ak-marquee .marquee__track--rtl {
+  animation-name: ak-marquee-rtl;
+}
+.ak-marquee .marquee:hover .marquee__track {
+  animation-play-state: paused;
+}
+
+.ak-marquee .marquee__group {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.ak-marquee .logo-slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 48px;
+  padding: 0 32px;
+  margin: 0 4px;
+  flex-shrink: 0;
+  opacity: 0.55;
+  transition: opacity 220ms var(--ease);
+}
+.ak-marquee .logo-slot:hover { opacity: 1; }
+
+.ak-marquee .logo-slot img {
+  height: 40px;
+  width: auto;
+  max-width: 180px;
+  display: block;
+  filter: grayscale(100%);
+  transition: filter 220ms var(--ease);
+}
+.ak-marquee .logo-slot img[src$=".svg"] {
+  height: 32px;
+}
+.ak-marquee .logo-slot:hover img {
+  filter: grayscale(0%);
+}
+
+@keyframes ak-marquee-ltr {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+@keyframes ak-marquee-rtl {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
+}
+
+@media (max-width: 640px) {
+  .ak-marquee { padding: 48px 0 40px; }
+  .ak-marquee .logo-slot { height: 40px; padding: 0 22px; }
+  .ak-marquee .logo-slot img { height: 32px; }
+  .ak-marquee .logo-slot img[src$=".svg"] { height: 26px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ak-marquee .marquee__track { animation: none; transform: none; }
+  .ak-marquee .marquee__group:nth-child(n+2) { display: none; }
+}
