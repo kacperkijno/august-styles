@@ -53,6 +53,10 @@
 .ak-marquee .marquee__track--rtl {
   animation-name: ak-marquee-rtl;
 }
+/* Per-row duration scaled to logo count so all rows scroll at
+   the same visual px/second regardless of how many logos. */
+.ak-marquee .marquee__track--11 { animation-duration: 60s; }
+.ak-marquee .marquee__track--12 { animation-duration: 65s; }
 .ak-marquee .marquee:hover .marquee__track {
   animation-play-state: paused;
 }
