@@ -73,10 +73,8 @@ body.ak-sales-page section[id="section-d43d68a1"] > * {
 }
 
 /* ============================================================
-   2. EYEBROW RULE — small terracotta line under the small uppercase
-   labels (THE PROBLEM, THE METHOD, INSIDE THE COURSE, FIT, ABOUT,
-   PRICING, WHAT PARTICIPANTS SAY, FAQ, WHAT'S INCLUDED).
-   We detect them by their inline terracotta color span.
+   2. EYEBROW — tighten typography only (no rule line below).
+   Kacper preferred eyebrows without the underline.
    ============================================================ */
 body.ak-sales-page .sc-iGgWBk[id^="text-"] p span[style*="color: rgb(180, 106, 60)"] {
   display: inline-block;
@@ -84,36 +82,6 @@ body.ak-sales-page .sc-iGgWBk[id^="text-"] p span[style*="color: rgb(180, 106, 6
   text-transform: uppercase;
   font-weight: 500;
   font-size: 12px;
-}
-/* Add the terracotta rule below — applied via the wrapper that
-   contains an eyebrow span. We use :has() (modern browsers) to
-   detect "this text block contains an eyebrow span". */
-body.ak-sales-page .sc-iGgWBk[id^="text-"]:has(p span[style*="color: rgb(180, 106, 60)"])::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 1px;
-  background: var(--ak-terracotta);
-  margin: 14px 0 0;
-}
-/* When eyebrow text is center-aligned (sections like Method, What you get,
-   Fit, About, Pricing, Testimonials, FAQ), center the rule too. */
-body.ak-sales-page .sc-iGgWBk[id^="text-"][style*="text-align: center"]:has(p span[style*="color: rgb(180, 106, 60)"])::after,
-body.ak-sales-page [class*="sc-"][id^="text-"]:has(p[dir="ltr"] span[style*="color: rgb(180, 106, 60)"]):not([id^="text-eee94d75"])::after {
-  margin-inline: auto;
-}
-/* Hero eyebrow (warmed cream tone) doesn't get the rule — its mood
-   is already set by the gradient + meta line. */
-body.ak-sales-page #text-eee94d75::after { display: none; }
-/* Pricing/Testimonial/FAQ/About/Method/What's-included are center-aligned. */
-body.ak-sales-page #text-e3a655b3::after,
-body.ak-sales-page #text-32a60fb4::after,
-body.ak-sales-page #text-0d5cec1e::after,
-body.ak-sales-page #text-887815e2::after,
-body.ak-sales-page #text-c5b31f96::after,
-body.ak-sales-page #text-41eae026::after,
-body.ak-sales-page #text-61c854d4::after {
-  margin-inline: auto;
 }
 
 /* ============================================================
