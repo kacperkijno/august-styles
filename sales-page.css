@@ -367,3 +367,280 @@ body.ak-sales-page #button-29d525d5:hover {
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
 }
+
+/* ============================================================
+   17. NAV — sticky transparent over hero, solid cream on scroll.
+   Section: section-8f394858 (the master nav block).
+   Requires updated snippet that toggles .is-scrolled class on body.
+   ============================================================ */
+html body.ak-sales-page #section-8f394858 {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  margin: 0 !important;
+  padding: 14px 40px !important;
+  background: transparent !important;
+  transition: background 180ms var(--ak-ease), backdrop-filter 180ms var(--ak-ease), padding 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  border-bottom: 1px solid transparent;
+}
+html body.ak-sales-page.is-scrolled #section-8f394858 {
+  background: rgba(249, 247, 241, 0.94) !important;
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom-color: rgba(45, 45, 45, 0.08);
+  padding: 8px 40px !important;
+}
+/* Nav text color — white over hero, ink when scrolled */
+html body.ak-sales-page #section-8f394858 a.sc-hBtRBE {
+  color: rgba(249, 247, 241, 0.92) !important;
+  transition: color 180ms var(--ak-ease);
+}
+html body.ak-sales-page.is-scrolled #section-8f394858 a.sc-hBtRBE {
+  color: var(--ak-ink) !important;
+}
+/* Logo white over hero, original when scrolled */
+html body.ak-sales-page #section-8f394858 #image-402e4457 {
+  filter: brightness(0) invert(1);
+  transition: filter 180ms var(--ak-ease);
+}
+html body.ak-sales-page.is-scrolled #section-8f394858 #image-402e4457 {
+  filter: none;
+}
+/* "Start course" CTA — terracotta brand consistency */
+html body.ak-sales-page #button-e9b03c0b {
+  background: var(--ak-terracotta) !important;
+  color: var(--ak-cream) !important;
+  padding: 12px 22px !important;
+  border-radius: 2px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+}
+html body.ak-sales-page #button-e9b03c0b:hover {
+  background: #9A5832 !important;
+}
+/* Hero needs to clear the fixed nav — bump padding-top */
+html body.ak-sales-page #section-d43d68a1 {
+  padding-top: 80px !important;
+}
+
+/* ============================================================
+   18. HERO EYEBROW — also catch the warm-cream tone used in hero
+   (rgb(228, 182, 138)). Already uppercase + tracked above for
+   terracotta, but hero uses different shade.
+   ============================================================ */
+body.ak-sales-page .sc-iGgWBk[id^="text-"] p span[style*="color: rgb(228, 182, 138)"] {
+  display: inline-block;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+
+/* ============================================================
+   19. HERO PHOTO — mirror horizontally + better focal point.
+   The section's bg-image is set inline by systeme; we override it
+   to transparent and recreate the photo via ::before with scaleX(-1),
+   keeping our existing ::after gradient on top.
+   Hero image URL: 6a0c1ebe6d52a0.47321559_3L3A3308.jpg (from systeme assets).
+   ============================================================ */
+html body.ak-sales-page #section-d43d68a1 {
+  background-image: none !important;
+  background-color: #0E2A20 !important;
+  overflow: hidden;
+}
+/* Reuse ::before for gradient (kept from rule #1), redirect to ::after */
+html body.ak-sales-page #section-d43d68a1::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+  background-image: url('https://d1yei2z3i6k35z.cloudfront.net/16369512/6a0c1ebe6d52a0.47321559_3L3A3308.jpg');
+  background-size: cover;
+  background-position: 30% 35%;
+  transform: scaleX(-1);
+  pointer-events: none;
+}
+html body.ak-sales-page #section-d43d68a1::before {
+  z-index: -1;
+}
+@media (max-width: 760px) {
+  html body.ak-sales-page #section-d43d68a1::after {
+    background-position: 65% 35%;
+  }
+}
+
+/* ============================================================
+   20. BULLET LISTS — hairline dividers + tightened typography.
+   Problem (bulletlist-86c388ec), Inside (bulletlist-e70646d8),
+   Fit-for (bulletlist-b07c307b), Fit-not (bulletlist-bd18b09a),
+   Pricing (bulletlist-f2677d28).
+   ============================================================ */
+html body.ak-sales-page [id^="bulletlist-"] ul {
+  list-style: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li {
+  padding: 14px 0 !important;
+  margin: 0 !important;
+  border-top: 1px solid var(--ak-ink-10);
+  align-items: baseline !important;
+  gap: 14px;
+  font-size: 15.5px !important;
+  line-height: 1.6 !important;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li:last-child {
+  padding-bottom: 0;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li i {
+  color: var(--ak-terracotta) !important;
+  font-size: 13px !important;
+  margin-top: 6px !important;
+  flex-shrink: 0;
+  width: 16px;
+  text-align: left;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li strong {
+  color: var(--ak-ink) !important;
+  font-weight: 500 !important;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li > div {
+  flex: 1;
+}
+/* "Not for you" list — keep X icons but tone them down to ink */
+html body.ak-sales-page #bulletlist-bd18b09a ul li i {
+  color: var(--ak-ink-50) !important;
+}
+/* Pricing list lives inside the pricing card — no top border on first
+   item, but keep dividers between others, slightly tighter. */
+html body.ak-sales-page #bulletlist-f2677d28 ul li {
+  padding: 12px 0 !important;
+  font-size: 15px !important;
+}
+
+/* ============================================================
+   21. WHAT'S INCLUDED — H3 titles uppercase eyebrow style + smaller
+   icons. Currently all icons are video-library SVG at 100px width.
+   Titles: text-fca02eb9, text-fd0d65fb, text-eb46d8c6, text-26bcdbab,
+           text-ccefb50e, text-a544af60
+   Icons: image-f10d4203, image-602c5ddb, image-277e2ae7, image-fbf62f5c,
+          image-864382f3, image-4ad0750d
+   ============================================================ */
+html body.ak-sales-page #text-fca02eb9,
+html body.ak-sales-page #text-fd0d65fb,
+html body.ak-sales-page #text-eb46d8c6,
+html body.ak-sales-page #text-26bcdbab,
+html body.ak-sales-page #text-ccefb50e,
+html body.ak-sales-page #text-a544af60 {
+  margin-top: 6px !important;
+  margin-bottom: 8px !important;
+}
+html body.ak-sales-page #text-fca02eb9 strong,
+html body.ak-sales-page #text-fd0d65fb strong,
+html body.ak-sales-page #text-eb46d8c6 strong,
+html body.ak-sales-page #text-26bcdbab strong,
+html body.ak-sales-page #text-ccefb50e strong,
+html body.ak-sales-page #text-a544af60 strong {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  color: var(--ak-ink) !important;
+  letter-spacing: -0.005em;
+}
+/* Shrink the placeholder video-library icons + tint them */
+html body.ak-sales-page #image-f10d4203 img,
+html body.ak-sales-page #image-602c5ddb img,
+html body.ak-sales-page #image-277e2ae7 img,
+html body.ak-sales-page #image-fbf62f5c img,
+html body.ak-sales-page #image-864382f3 img,
+html body.ak-sales-page #image-4ad0750d img {
+  width: 40px !important;
+  height: auto !important;
+  opacity: 0.6;
+  /* CSS filter to tint a black SVG to forest — approximation */
+  filter: invert(15%) sepia(50%) saturate(450%) hue-rotate(110deg) brightness(0.7);
+}
+html body.ak-sales-page #image-f10d4203,
+html body.ak-sales-page #image-602c5ddb,
+html body.ak-sales-page #image-277e2ae7,
+html body.ak-sales-page #image-fbf62f5c,
+html body.ak-sales-page #image-864382f3,
+html body.ak-sales-page #image-4ad0750d {
+  width: 40px !important;
+  margin-bottom: 18px !important;
+}
+
+/* ============================================================
+   22. FIT CARDS — uppercase headers + lighter "not for you" card.
+   Headers: text-e4dccc87 (for you), text-94303200 (not for you)
+   ============================================================ */
+html body.ak-sales-page #text-e4dccc87,
+html body.ak-sales-page #text-94303200 {
+  padding-bottom: 14px !important;
+  border-bottom: 1px solid var(--ak-ink-10);
+  margin-bottom: 18px !important;
+}
+html body.ak-sales-page #text-e4dccc87 strong,
+html body.ak-sales-page #text-94303200 strong {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+}
+html body.ak-sales-page #text-94303200 strong {
+  color: var(--ak-ink-50) !important;
+}
+
+/* ============================================================
+   23. PRICING HEADLINE — italic terracotta euro accent.
+   The headline currently reads "Instant access:" (h2) + "€49 (one-time)" (p).
+   Make €49 stand out in italic terracotta Caslon.
+   ============================================================ */
+html body.ak-sales-page #headline-449b4d61 p {
+  font-style: italic;
+  color: var(--ak-terracotta) !important;
+}
+
+/* ============================================================
+   24. PROBLEM "you don't need to memorize..." italic accent.
+   Already balanced in #14; bump color to forest for hierarchy.
+   ============================================================ */
+html body.ak-sales-page #text-9b9e201b p em {
+  color: var(--ak-forest) !important;
+  font-style: italic;
+}
+
+/* ============================================================
+   25. AUTHOR QUOTE italic terracotta-warm accent.
+   ============================================================ */
+html body.ak-sales-page #text-4db96d8f p em {
+  color: var(--ak-forest) !important;
+}
+
+/* ============================================================
+   26. BODY TEXT COLOR baseline — systeme's inherited gray can
+   look slightly different from #2D2D2D. Lock it to brand ink for
+   body paragraphs.
+   ============================================================ */
+html body.ak-sales-page p,
+html body.ak-sales-page span:not([style*="color"]) {
+  color: var(--ak-ink);
+}
+
+/* ============================================================
+   27. SECTIONS spacing — soften the abrupt color boundaries.
+   Add subtle hairline at top of each main section.
+   ============================================================ */
+html body.ak-sales-page #section-fd2bfd64,
+html body.ak-sales-page #section-20999059 {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+  overflow: hidden !important;
+}
