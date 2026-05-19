@@ -878,6 +878,109 @@ html body.ak-sales-page #column-5c788f3a > div {
 }
 
 /* ============================================================
+   27. MAGNET LANDING — number badges (01/02/03) in "What's inside"
+   cards. Different IDs from course landing — apply same Caslon
+   italic terracotta 36px treatment for consistency.
+   ============================================================ */
+html body.ak-sales-page #text-9951bf73,
+html body.ak-sales-page #text-9aae5176,
+html body.ak-sales-page #text-a4c483ea {
+  font-size: 36px !important;
+  line-height: 1 !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 14px !important;
+}
+html body.ak-sales-page #text-9951bf73 *,
+html body.ak-sales-page #text-9aae5176 *,
+html body.ak-sales-page #text-a4c483ea * {
+  font-size: 36px !important;
+  line-height: 1 !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* ============================================================
+   28. MAGNET LANDING — H3 labels in "What's inside" cards +
+   two-up "Who it's for / August Kjerland" cards.
+   Uppercase tracked forest, matching method3 pattern.
+   ============================================================ */
+html body.ak-sales-page #text-1e8847ac,
+html body.ak-sales-page #text-cd1c2882,
+html body.ak-sales-page #text-754b3c2c,
+html body.ak-sales-page #text-3bc00c89,
+html body.ak-sales-page #text-9c5a0305 {
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  line-height: 1.4 !important;
+}
+html body.ak-sales-page #text-1e8847ac *,
+html body.ak-sales-page #text-cd1c2882 *,
+html body.ak-sales-page #text-754b3c2c *,
+html body.ak-sales-page #text-3bc00c89 *,
+html body.ak-sales-page #text-9c5a0305 * {
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+}
+
+/* ============================================================
+   29. MAGNET LANDING — card hover lift (3-up + 2-up).
+   Cards: row-ad731254 (01), row-40f16b1e (02), row-49ef1b33 (03),
+          row-58e1a13b (Who it's for), row-7a4c9a63 (August)
+   ============================================================ */
+html body.ak-sales-page #row-ad731254,
+html body.ak-sales-page #row-40f16b1e,
+html body.ak-sales-page #row-49ef1b33,
+html body.ak-sales-page #row-58e1a13b,
+html body.ak-sales-page #row-7a4c9a63 {
+  transition: box-shadow 220ms var(--ak-ease),
+              border-color 220ms var(--ak-ease),
+              transform 220ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #row-ad731254:hover,
+html body.ak-sales-page #row-40f16b1e:hover,
+html body.ak-sales-page #row-49ef1b33:hover,
+html body.ak-sales-page #row-58e1a13b:hover,
+html body.ak-sales-page #row-7a4c9a63:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   30. MAGNET LANDING — button hovers.
+   button-1146e060  Start course (nav, forest)
+   button-a29886a8  Hero "Send me the playbook" (forest)
+   button-79e8c21d  Form submit "Send me the playbook" (forest)
+   button-b4d9f586  "View the course" CTA (terracotta)
+   ============================================================ */
+html body.ak-sales-page #button-1146e060,
+html body.ak-sales-page #button-a29886a8,
+html body.ak-sales-page #button-79e8c21d,
+html body.ak-sales-page #button-b4d9f586 {
+  transition: background 180ms var(--ak-ease),
+              transform 180ms var(--ak-ease),
+              box-shadow 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #button-1146e060:hover,
+html body.ak-sales-page #button-a29886a8:hover,
+html body.ak-sales-page #button-79e8c21d:hover {
+  background: #122e23 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
+}
+html body.ak-sales-page #button-b4d9f586:hover {
+  background: #9A5832 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+}
+
+/* ============================================================
    27. SECTIONS spacing — soften the abrupt color boundaries.
    Add subtle hairline at top of each main section.
    ============================================================ */
