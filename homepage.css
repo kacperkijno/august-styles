@@ -157,7 +157,6 @@
 .logo-marquee {
   padding: 64px 0 56px;
   background: var(--cream);
-  border-bottom: 1px solid var(--ink-10);
   overflow: hidden;
 }
 .logo-marquee__label {
