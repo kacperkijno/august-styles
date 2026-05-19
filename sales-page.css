@@ -481,19 +481,27 @@ body.ak-sales-page #button-29d525d5:hover {
 }
 
 /* ============================================================
-   17. NAV — sticky transparent over hero, solid cream on scroll.
-   Behaves like the index.html nav: white text/logo over the hero,
-   then cream + blur after scrolling past 24px.
+   17. NAV — two variants, both sticky + blur.
 
-   Funnel/lejek nav has been rebuilt in systeme.io with new IDs.
-   Current: #section-41315db6, logo #image-f14191f6, CTA #button-2c1b50c9.
-   Old IDs (#section-8f394858 etc.) kept as fallback selectors so older
-   pages still work until they're rebuilt.
+   Variant A: dark-hero nav (#section-41315db6)
+     Transparent + white text/logo over the dark hero.
+     After scroll past 24px → cream bg + blur + ink text + dark logo.
+     Used on the course/funnel landing pages where a dark hero sits
+     right under the nav.
 
-   Requires the snippet that toggles .is-scrolled on body.ak-sales-page.
+   Variant B: light-bg nav (#section-8f394858)
+     Always in "final" state from the start: cream bg + blur + ink
+     text + dark logo. Still fixed sticky + blur (just no color
+     transition because nothing sits behind it).
+     Used on light-bg funnel pages (thank-you, magnet landing, etc.)
+     where there is no dark hero.
+
+   Both require the snippet that adds body.ak-sales-page and toggles
+   .is-scrolled on scroll.
    ============================================================ */
-html body.ak-sales-page #section-41315db6,
-html body.ak-sales-page #section-8f394858 {
+
+/* ---------- Variant A: dark-hero (transparent → cream on scroll) ---------- */
+html body.ak-sales-page #section-41315db6 {
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
@@ -505,8 +513,7 @@ html body.ak-sales-page #section-8f394858 {
   transition: background 180ms var(--ak-ease), backdrop-filter 180ms var(--ak-ease), padding 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
   border-bottom: 1px solid transparent;
 }
-html body.ak-sales-page.is-scrolled #section-41315db6,
-html body.ak-sales-page.is-scrolled #section-8f394858 {
+html body.ak-sales-page.is-scrolled #section-41315db6 {
   background: rgba(249, 247, 241, 0.92) !important;
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
@@ -514,38 +521,78 @@ html body.ak-sales-page.is-scrolled #section-8f394858 {
   padding: 8px 40px !important;
   box-shadow: 0 4px 24px rgba(26, 60, 47, 0.06);
 }
-/* Nav text — white over hero, ink when scrolled */
-html body.ak-sales-page #section-41315db6 a.sc-hBtRBE,
-html body.ak-sales-page #section-8f394858 a.sc-hBtRBE {
+html body.ak-sales-page #section-41315db6 a.sc-hBtRBE {
   color: rgba(249, 247, 241, 0.92) !important;
   transition: color 180ms var(--ak-ease);
 }
-html body.ak-sales-page.is-scrolled #section-41315db6 a.sc-hBtRBE,
-html body.ak-sales-page.is-scrolled #section-8f394858 a.sc-hBtRBE {
+html body.ak-sales-page.is-scrolled #section-41315db6 a.sc-hBtRBE {
   color: var(--ak-ink) !important;
 }
-/* Burger icon color on mobile (the burger uses span backgrounds, not <a>) */
-html body.ak-sales-page #section-41315db6 .sc-gEkIjA span,
-html body.ak-sales-page #section-8f394858 .sc-gEkIjA span {
+html body.ak-sales-page #section-41315db6 .sc-gEkIjA span {
   background: rgba(249, 247, 241, 0.92) !important;
   transition: background 180ms var(--ak-ease);
 }
-html body.ak-sales-page.is-scrolled #section-41315db6 .sc-gEkIjA span,
-html body.ak-sales-page.is-scrolled #section-8f394858 .sc-gEkIjA span {
+html body.ak-sales-page.is-scrolled #section-41315db6 .sc-gEkIjA span {
   background: var(--ak-ink) !important;
 }
-/* Logo — white over hero, original when scrolled */
-html body.ak-sales-page #section-41315db6 #image-f14191f6,
-html body.ak-sales-page #section-8f394858 #image-402e4457 {
+html body.ak-sales-page #section-41315db6 #image-f14191f6 {
   filter: brightness(0) invert(1);
   transition: filter 180ms var(--ak-ease);
 }
-html body.ak-sales-page.is-scrolled #section-41315db6 #image-f14191f6,
-html body.ak-sales-page.is-scrolled #section-8f394858 #image-402e4457 {
+html body.ak-sales-page.is-scrolled #section-41315db6 #image-f14191f6 {
   filter: none;
 }
-/* "Start course" CTA — terracotta brand consistency in both states */
-html body.ak-sales-page #button-2c1b50c9,
+/* "Start course" CTA — terracotta in both states */
+html body.ak-sales-page #button-2c1b50c9 {
+  background: var(--ak-terracotta) !important;
+  color: var(--ak-cream) !important;
+  padding: 12px 22px !important;
+  border-radius: 2px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+}
+html body.ak-sales-page #button-2c1b50c9:hover {
+  background: #9A5832 !important;
+}
+/* Hero needs to clear the fixed nav */
+html body.ak-sales-page #section-d43d68a1 {
+  padding-top: 80px !important;
+}
+
+/* ---------- Variant B: light-bg (always in "final" state) ---------- */
+html body.ak-sales-page #section-8f394858 {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  margin: 0 !important;
+  padding: 8px 40px !important;
+  background: rgba(249, 247, 241, 0.92) !important;
+  backdrop-filter: saturate(1.4) blur(10px) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
+  border-bottom: 1px solid rgba(45, 45, 45, 0.08) !important;
+  transition: box-shadow 180ms var(--ak-ease) !important;
+  box-shadow: none !important;
+}
+/* Subtle shadow once scrolled, to lift it off the page */
+html body.ak-sales-page.is-scrolled #section-8f394858 {
+  box-shadow: 0 4px 24px rgba(26, 60, 47, 0.06) !important;
+}
+/* Nav links — always ink */
+html body.ak-sales-page #section-8f394858 a.sc-hBtRBE {
+  color: var(--ak-ink) !important;
+}
+/* Burger bars — always ink */
+html body.ak-sales-page #section-8f394858 .sc-gEkIjA span {
+  background: var(--ak-ink) !important;
+}
+/* Logo — always original (no invert) */
+html body.ak-sales-page #section-8f394858 #image-402e4457 {
+  filter: none !important;
+}
+/* CTA — terracotta */
 html body.ak-sales-page #button-e9b03c0b {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
@@ -555,13 +602,8 @@ html body.ak-sales-page #button-e9b03c0b {
   font-weight: 500 !important;
   letter-spacing: 0.04em !important;
 }
-html body.ak-sales-page #button-2c1b50c9:hover,
 html body.ak-sales-page #button-e9b03c0b:hover {
   background: #9A5832 !important;
-}
-/* Hero needs to clear the fixed nav — bump padding-top */
-html body.ak-sales-page #section-d43d68a1 {
-  padding-top: 80px !important;
 }
 
 /* ============================================================
