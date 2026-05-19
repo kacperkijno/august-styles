@@ -252,11 +252,29 @@ html body.ak-sales-page #row-3c3ada1d::before {
    But in the dumped HTML these rows have THREE columns inside (size 3/9
    for avatar + meta) — and the avatar column has class .glzjSf .
    ============================================================ */
+/* Testimonial avatars — circular 44px. Placeholder shown ONLY when no
+   image is uploaded (i.e., the column has no <img>). When you upload a
+   photo in the systeme editor, it renders as a circle and the green "G"
+   placeholder disappears automatically. */
 html body.ak-sales-page .sc-eBMEMD.glzjSf {
   width: 44px !important;
   min-width: 44px !important;
   height: 44px !important;
   border-radius: 50% !important;
+  flex: 0 0 44px !important;
+  position: relative;
+  overflow: hidden;
+}
+/* Real uploaded image — fit to circle */
+html body.ak-sales-page .sc-eBMEMD.glzjSf img {
+  width: 100% !important;
+  height: 100% !important;
+  object-fit: cover !important;
+  border-radius: 50% !important;
+  display: block !important;
+}
+/* Empty state (no img inside): show forest circle with "G" placeholder */
+html body.ak-sales-page .sc-eBMEMD.glzjSf:not(:has(img)) {
   background: var(--ak-forest) !important;
   color: var(--ak-cream) !important;
   display: inline-flex !important;
@@ -265,14 +283,8 @@ html body.ak-sales-page .sc-eBMEMD.glzjSf {
   font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
   font-size: 20px !important;
   font-style: italic !important;
-  flex: 0 0 44px !important;
-  position: relative;
-  overflow: hidden;
 }
-html body.ak-sales-page .sc-eBMEMD.glzjSf > * {
-  display: none !important;
-}
-html body.ak-sales-page .sc-eBMEMD.glzjSf::after {
+html body.ak-sales-page .sc-eBMEMD.glzjSf:not(:has(img))::after {
   content: "G";
   position: absolute;
   inset: 0;
