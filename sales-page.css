@@ -95,58 +95,103 @@ body.ak-sales-page .sc-iGgWBk[id^="text-"] p span[style*="color: rgb(180, 106, 6
 html body.ak-sales-page #text-c5a1bde5,
 html body.ak-sales-page #text-084bfc66,
 html body.ak-sales-page #text-2fee1f0f {
-  font-size: 40px !important;
+  font-size: 36px !important;
   line-height: 1 !important;
   letter-spacing: -0.01em !important;
+  margin-bottom: 14px !important;
 }
 html body.ak-sales-page #text-c5a1bde5 *,
 html body.ak-sales-page #text-084bfc66 *,
 html body.ak-sales-page #text-2fee1f0f * {
-  font-size: 40px !important;
+  font-size: 36px !important;
   line-height: 1 !important;
+  color: var(--ak-terracotta) !important;
 }
-/* Also bump the "Operating skill / Specific / Practical" label below the
-   number — currently 13px which is too small relative to a 40px number. */
+/* H3 labels "Operating skill / Specific / Practical" — uppercase tracked forest,
+   slightly larger than tiny eyebrow for readability inside the card. */
 html body.ak-sales-page #text-06ad408a,
 html body.ak-sales-page #text-191b2aad,
 html body.ak-sales-page #text-e82ad3f5 {
-  font-size: 11px !important;
-  letter-spacing: 0.18em !important;
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   color: var(--ak-forest) !important;
-  margin-top: 10px !important;
+  margin-top: 0 !important;
+  margin-bottom: 14px !important;
+  line-height: 1.4 !important;
 }
 html body.ak-sales-page #text-06ad408a *,
 html body.ak-sales-page #text-191b2aad *,
 html body.ak-sales-page #text-e82ad3f5 * {
-  font-size: 11px !important;
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+}
+/* Body text in method cards — readable size, ink-70 color, comfy line-height */
+html body.ak-sales-page #text-1ec6b045,
+html body.ak-sales-page #text-0fc76125,
+html body.ak-sales-page #text-35efacba {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+html body.ak-sales-page #text-1ec6b045 *,
+html body.ak-sales-page #text-0fc76125 *,
+html body.ak-sales-page #text-35efacba * {
+  font-size: 15px !important;
+  line-height: 1.6 !important;
+}
+/* Bold inside method body — proper bold weight */
+html body.ak-sales-page #text-1ec6b045 strong,
+html body.ak-sales-page #text-0fc76125 strong,
+html body.ak-sales-page #text-35efacba strong {
+  font-weight: 700 !important;
+  color: var(--ak-ink) !important;
 }
 
 /* ============================================================
    4. FAQ — terracotta chevron, hairline accordion borders.
    Target: faq-02ada463 wrapper + .sc-imwsjZ item rows.
    ============================================================ */
-body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ {
-  border-bottom: 1px solid var(--ak-ink-10);
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] {
   background: transparent !important;
+  background-color: transparent !important;
+  padding: 0 !important;
+  max-width: 760px;
+  margin-inline: auto;
+}
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ {
+  background: transparent !important;
+  background-color: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid var(--ak-ink-10) !important;
   border-radius: 0 !important;
-  margin-bottom: 0 !important;
-  padding: 4px 0;
+  margin: 0 !important;
+  padding: 8px 0 !important;
+  box-shadow: none !important;
 }
-body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ:first-child {
-  border-top: 1px solid var(--ak-ink-10);
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ:first-child {
+  border-top: 1px solid var(--ak-ink-10) !important;
 }
-body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-bkSUFJ {
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-bkSUFJ {
   color: var(--ak-terracotta) !important;
   font-size: 14px !important;
   transition: transform 180ms var(--ak-ease);
 }
-body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA {
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA {
   font-weight: 500 !important;
+  font-size: 17px !important;
+  padding: 14px 4px !important;
   transition: color 180ms var(--ak-ease);
+  color: var(--ak-ink) !important;
 }
-body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA:hover {
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA:hover {
   color: var(--ak-terracotta) !important;
+}
+html body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-deXhhY {
+  padding: 0 4px 18px !important;
 }
 
 /* ============================================================
@@ -263,14 +308,59 @@ body.ak-sales-page #row-2e2e7498:hover,
 body.ak-sales-page #row-a7eeda50:hover,
 body.ak-sales-page #row-563245f5:hover {
   box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
-  border-color: rgba(26, 60, 47, 0.30) !important;
+  border-color: var(--ak-forest) !important;
+  background-color: var(--ak-cream) !important;
   transform: translateY(-2px);
 }
-/* Tighten the placeholder video-library icons */
-body.ak-sales-page [id^="image-"][alt="bullet"] img,
-body.ak-sales-page picture img[alt="bullet"] {
-  max-width: 48px !important;
-  height: auto;
+/* Default what-you-get card BG (slightly off-white so hover→cream is visible) */
+html body.ak-sales-page #row-91624864,
+html body.ak-sales-page #row-bd18b786,
+html body.ak-sales-page #row-049130fc,
+html body.ak-sales-page #row-2e2e7498,
+html body.ak-sales-page #row-a7eeda50,
+html body.ak-sales-page #row-563245f5 {
+  background-color: var(--ak-cream-soft) !important;
+  border-color: var(--ak-ink-10) !important;
+}
+/* Icon container — wrap the picture/img wrapper as a bordered tile.
+   The wrapper has class .sc-jaXxmD and we scope via :has() on the inner icon ID. */
+html body.ak-sales-page .sc-jaXxmD:has(#image-f10d4203),
+html body.ak-sales-page .sc-jaXxmD:has(#image-602c5ddb),
+html body.ak-sales-page .sc-jaXxmD:has(#image-277e2ae7),
+html body.ak-sales-page .sc-jaXxmD:has(#image-fbf62f5c),
+html body.ak-sales-page .sc-jaXxmD:has(#image-864382f3),
+html body.ak-sales-page .sc-jaXxmD:has(#image-4ad0750d) {
+  width: 56px !important;
+  height: 56px !important;
+  background: var(--ak-cream) !important;
+  border: 1px solid var(--ak-ink-10) !important;
+  border-radius: 4px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  padding: 12px !important;
+  margin-bottom: 22px !important;
+  transition: border-color 220ms var(--ak-ease), color 220ms var(--ak-ease) !important;
+}
+/* On card hover, icon tile turns terracotta border */
+html body.ak-sales-page #row-91624864:hover .sc-jaXxmD,
+html body.ak-sales-page #row-bd18b786:hover .sc-jaXxmD,
+html body.ak-sales-page #row-049130fc:hover .sc-jaXxmD,
+html body.ak-sales-page #row-2e2e7498:hover .sc-jaXxmD,
+html body.ak-sales-page #row-a7eeda50:hover .sc-jaXxmD,
+html body.ak-sales-page #row-563245f5:hover .sc-jaXxmD {
+  border-color: var(--ak-terracotta) !important;
+}
+/* Image inside the tile — shrink + forest tint */
+html body.ak-sales-page #image-f10d4203,
+html body.ak-sales-page #image-602c5ddb,
+html body.ak-sales-page #image-277e2ae7,
+html body.ak-sales-page #image-fbf62f5c,
+html body.ak-sales-page #image-864382f3,
+html body.ak-sales-page #image-4ad0750d {
+  width: 28px !important;
+  height: 28px !important;
+  margin: 0 !important;
 }
 
 /* ============================================================
@@ -509,7 +599,10 @@ html body.ak-sales-page [id^="bulletlist-"] ul li i {
 }
 html body.ak-sales-page [id^="bulletlist-"] ul li strong {
   color: var(--ak-ink) !important;
-  font-weight: 500 !important;
+  font-weight: 700 !important;
+}
+html body.ak-sales-page [id^="bulletlist-"] ul li strong * {
+  font-weight: 700 !important;
 }
 html body.ak-sales-page [id^="bulletlist-"] ul li > div {
   flex: 1;
@@ -553,59 +646,77 @@ html body.ak-sales-page #text-a544af60 strong {
   color: var(--ak-ink) !important;
   letter-spacing: -0.005em;
 }
-/* Shrink the placeholder video-library icons + tint them */
-html body.ak-sales-page #image-f10d4203 img,
-html body.ak-sales-page #image-602c5ddb img,
-html body.ak-sales-page #image-277e2ae7 img,
-html body.ak-sales-page #image-fbf62f5c img,
-html body.ak-sales-page #image-864382f3 img,
-html body.ak-sales-page #image-4ad0750d img {
-  width: 40px !important;
-  height: auto !important;
-  opacity: 0.6;
-  /* CSS filter to tint a black SVG to forest — approximation */
-  filter: invert(15%) sepia(50%) saturate(450%) hue-rotate(110deg) brightness(0.7);
-}
-html body.ak-sales-page #image-f10d4203,
-html body.ak-sales-page #image-602c5ddb,
-html body.ak-sales-page #image-277e2ae7,
-html body.ak-sales-page #image-fbf62f5c,
-html body.ak-sales-page #image-864382f3,
-html body.ak-sales-page #image-4ad0750d {
-  width: 40px !important;
-  margin-bottom: 18px !important;
-}
+/* Note: image sizing rules moved to section 9 to coexist with the tile wrapper */
 
 /* ============================================================
-   22. FIT CARDS — uppercase headers + lighter "not for you" card.
+   22. FIT CARDS — bold headers, ink-10 borders, tighter list padding.
    Headers: text-e4dccc87 (for you), text-94303200 (not for you)
+   Boxes: row-521edb5a (for you), row-7dc91164 (not for you)
    ============================================================ */
 html body.ak-sales-page #text-e4dccc87,
 html body.ak-sales-page #text-94303200 {
-  padding-bottom: 14px !important;
+  padding-bottom: 16px !important;
   border-bottom: 1px solid var(--ak-ink-10);
-  margin-bottom: 18px !important;
+  margin-bottom: 4px !important;
 }
 html body.ak-sales-page #text-e4dccc87 strong,
 html body.ak-sales-page #text-94303200 strong {
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
-  color: var(--ak-forest) !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  color: var(--ak-ink) !important;
 }
-html body.ak-sales-page #text-94303200 strong {
-  color: var(--ak-ink-50) !important;
+/* Override box border color to brand ink-10 (matches the rest of the page) */
+html body.ak-sales-page #row-521edb5a,
+html body.ak-sales-page #row-7dc91164 {
+  border-color: var(--ak-ink-10) !important;
+  padding: 32px 32px 28px !important;
+}
+/* Bullet list inside FIT — remove the global hairline dividers (looks crowded
+   inside a tight box) and tighten padding. */
+html body.ak-sales-page #bulletlist-b07c307b ul li,
+html body.ak-sales-page #bulletlist-bd18b09a ul li {
+  border-top: 0 !important;
+  padding: 10px 0 !important;
+  font-size: 15px !important;
+}
+html body.ak-sales-page #bulletlist-b07c307b,
+html body.ak-sales-page #bulletlist-bd18b09a {
+  margin-left: 0 !important;
+  padding-left: 0 !important;
 }
 
 /* ============================================================
    23. PRICING HEADLINE — italic terracotta euro accent.
-   The headline currently reads "Instant access:" (h2) + "€49 (one-time)" (p).
-   Make €49 stand out in italic terracotta Caslon.
+   #headline-449b4d61 contains H2 "Instant access:" + p "€49 (one-time)"
    ============================================================ */
+html body.ak-sales-page #headline-449b4d61 h2 {
+  font-size: 32px !important;
+  line-height: 1.1 !important;
+  margin-bottom: 8px !important;
+  color: var(--ak-ink) !important;
+}
 html body.ak-sales-page #headline-449b4d61 p {
-  font-style: italic;
+  font-style: italic !important;
   color: var(--ak-terracotta) !important;
+  font-size: 56px !important;
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  line-height: 1 !important;
+  margin: 0 !important;
+}
+/* Pricing card — proper border, lift, terracotta top stripe (already in #5).
+   Override systeme's unset border-color which renders as default dark line. */
+html body.ak-sales-page #row-3c3ada1d {
+  border-color: var(--ak-ink-10) !important;
+  border-width: 1px !important;
+  border-style: solid !important;
+}
+html body.ak-sales-page #bulletlist-f2677d28 ul li {
+  border-top: 0 !important;
+}
+html body.ak-sales-page #bulletlist-f2677d28 ul li strong {
+  font-weight: 700 !important;
 }
 
 /* ============================================================
@@ -625,13 +736,31 @@ html body.ak-sales-page #text-4db96d8f p em {
 }
 
 /* ============================================================
-   26. BODY TEXT COLOR baseline — systeme's inherited gray can
-   look slightly different from #2D2D2D. Lock it to brand ink for
-   body paragraphs.
+   26. BODY TEXT COLOR — let systeme.io's inline color rules win
+   (their default rgba(45, 45, 45, 0.7) gives the proper soft body
+   tone). No global override here — too aggressive, fights inline.
    ============================================================ */
-html body.ak-sales-page p,
-html body.ak-sales-page span:not([style*="color"]) {
-  color: var(--ak-ink);
+
+/* ============================================================
+   26b. SECTION IMAGES — give Problem + Inside-course photos a
+   tall portrait crop so they read as vertical anchors next to text.
+   ============================================================ */
+html body.ak-sales-page #image-400e16cf,
+html body.ak-sales-page #image-179dbe57 {
+  width: 100% !important;
+  max-width: 100% !important;
+  height: auto !important;
+  min-height: 560px !important;
+  max-height: 640px !important;
+  object-fit: cover !important;
+  object-position: center 30% !important;
+  border-radius: 4px;
+}
+/* Make the picture/image wrappers fill column properly */
+html body.ak-sales-page .sc-jaXxmD:has(#image-400e16cf),
+html body.ak-sales-page .sc-jaXxmD:has(#image-179dbe57) {
+  width: 100% !important;
+  max-width: 100% !important;
 }
 
 /* ============================================================
