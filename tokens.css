@@ -1,0 +1,80 @@
+/* ============================================================
+   AK Design Tokens — single source of truth
+   Loaded on every public page (homepage, course landing, etc.)
+   ============================================================ */
+
+/* ---------- FONTS ----------------------------------------- */
+/* Paths resolve relative to where THIS file is served from.
+   On jsDelivr that means: august-styles/fonts/*.ttf */
+@font-face {
+  font-family: "Caslon";
+  src: url("fonts/AdobeCaslonPro-Regular.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas";
+  src: url("fonts/NeueHaasDisplayLight.ttf") format("truetype");
+  font-weight: 300; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas";
+  src: url("fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");
+  font-weight: 300; font-style: italic; font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas";
+  src: url("fonts/NeueHaasDisplayRoman.ttf") format("truetype");
+  font-weight: 400; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas";
+  src: url("fonts/NeueHaasDisplayMedium.ttf") format("truetype");
+  font-weight: 500; font-style: normal; font-display: swap;
+}
+@font-face {
+  font-family: "Neue Haas";
+  src: url("fonts/NeueHaasDisplayBold.ttf") format("truetype");
+  font-weight: 700; font-style: normal; font-display: swap;
+}
+
+/* ---------- TOKENS ---------------------------------------- */
+:root {
+  /* Colour palette */
+  --forest:     #1A3C2F;
+  --forest-90:  rgba(26, 60, 47, 0.92);
+  --forest-70:  rgba(26, 60, 47, 0.72);
+  --forest-30:  rgba(26, 60, 47, 0.30);
+  --forest-10:  rgba(26, 60, 47, 0.10);
+  --cream:      #F9F7F1;
+  --cream-soft: #F3F0E7;
+  --terracotta: #B46A3C;
+  --terracotta-dark: #9A5832;
+  --terracotta-warm: #E4B68A;   /* warmed accent for dark backgrounds */
+  --terracotta-deco: #D9A47A;   /* eyebrow on dark */
+  --ink:        #2D2D2D;
+  --ink-70:     rgba(45, 45, 45, 0.70);
+  --ink-50:     rgba(45, 45, 45, 0.50);
+  --ink-10:     rgba(45, 45, 45, 0.10);
+  --sage:       #D7DDD8;
+
+  /* Typography */
+  --serif: "Caslon", "Adobe Caslon Pro", "Iowan Old Style", "Apple Garamond",
+           Georgia, "Times New Roman", serif;
+  --sans:  "Neue Haas", "Neue Haas Grotesk Display Pro", "Helvetica Neue",
+           "Inter", system-ui, -apple-system, sans-serif;
+
+  /* Layout */
+  --container: 1140px;
+  --gutter: clamp(20px, 4vw, 40px);
+  --section-pad-y: clamp(72px, 11vw, 128px);
+
+  /* Surfaces */
+  --radius-card: 4px;
+  --radius-btn: 2px;
+  --shadow-card: 0 2px 16px rgba(26, 60, 47, 0.08);
+  --shadow-card-hover: 0 6px 28px rgba(26, 60, 47, 0.14);
+
+  /* Motion */
+  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --t: 180ms;
+}
