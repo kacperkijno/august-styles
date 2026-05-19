@@ -1,0 +1,362 @@
+/* ============================================================
+   AK Sales Page — systeme.io overrides for course landing pages.
+   Scope: body.ak-sales-page (set by snippet in page head).
+   Target page: /cultural-communication (and any future course landing
+   that follows the same structure).
+
+   Strategy: piggyback on systeme.io's emotion classes + element IDs.
+   IDs are stable WITHIN a single page; if you DUPLICATE the page, the
+   new IDs will differ — re-export the section IDs and swap them below.
+   ============================================================ */
+
+/* ---------- Tokens (mirror tokens.css for systeme isolation) -- */
+body.ak-sales-page {
+  --ak-forest:     #1A3C2F;
+  --ak-forest-90:  rgba(26, 60, 47, 0.92);
+  --ak-cream:      #F9F7F1;
+  --ak-cream-soft: #F3F0E7;
+  --ak-terracotta: #B46A3C;
+  --ak-terracotta-warm: #E4B68A;
+  --ak-ink:        #2D2D2D;
+  --ak-ink-10:     rgba(45, 45, 45, 0.10);
+  --ak-ink-50:     rgba(45, 45, 45, 0.50);
+  --ak-sage:       #D7DDD8;
+  --ak-ease:       cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ============================================================
+   1. HERO — dark gradient overlay over August/Japan photo.
+   The systeme section has the JPG as background-image. We add
+   a gradient via the section's first child div so the text on
+   top has consistent contrast across the photo's mid-tones.
+   Target: section[id="section-d43d68a1"] (hero on cultural-comm page)
+   ============================================================ */
+body.ak-sales-page section[id^="section-"] {
+  /* Generic: any section with a background image carries the gradient.
+     We restrict to image-background sections by checking inline style. */
+}
+
+body.ak-sales-page section[id="section-d43d68a1"] {
+  position: relative;
+  isolation: isolate;
+}
+body.ak-sales-page section[id="section-d43d68a1"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(
+      100deg,
+      rgba(13, 32, 24, 0.78) 0%,
+      rgba(13, 32, 24, 0.55) 35%,
+      rgba(13, 32, 24, 0.22) 65%,
+      rgba(13, 32, 24, 0.10) 100%
+    ),
+    linear-gradient(180deg, rgba(13, 32, 24, 0.35) 0%, transparent 35%, rgba(13, 32, 24, 0.45) 100%);
+}
+/* Lift the hero content above the gradient */
+body.ak-sales-page section[id="section-d43d68a1"] > * {
+  position: relative;
+  z-index: 1;
+}
+
+@media (max-width: 760px) {
+  body.ak-sales-page section[id="section-d43d68a1"]::before {
+    background:
+      linear-gradient(180deg,
+        rgba(13, 32, 24, 0.45) 0%,
+        rgba(13, 32, 24, 0.60) 35%,
+        rgba(13, 32, 24, 0.80) 100%);
+  }
+}
+
+/* ============================================================
+   2. EYEBROW RULE — small terracotta line under the small uppercase
+   labels (THE PROBLEM, THE METHOD, INSIDE THE COURSE, FIT, ABOUT,
+   PRICING, WHAT PARTICIPANTS SAY, FAQ, WHAT'S INCLUDED).
+   We detect them by their inline terracotta color span.
+   ============================================================ */
+body.ak-sales-page .sc-iGgWBk[id^="text-"] p span[style*="color: rgb(180, 106, 60)"] {
+  display: inline-block;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 12px;
+}
+/* Add the terracotta rule below — applied via the wrapper that
+   contains an eyebrow span. We use :has() (modern browsers) to
+   detect "this text block contains an eyebrow span". */
+body.ak-sales-page .sc-iGgWBk[id^="text-"]:has(p span[style*="color: rgb(180, 106, 60)"])::after {
+  content: "";
+  display: block;
+  width: 48px;
+  height: 1px;
+  background: var(--ak-terracotta);
+  margin: 14px 0 0;
+}
+/* When eyebrow text is center-aligned (sections like Method, What you get,
+   Fit, About, Pricing, Testimonials, FAQ), center the rule too. */
+body.ak-sales-page .sc-iGgWBk[id^="text-"][style*="text-align: center"]:has(p span[style*="color: rgb(180, 106, 60)"])::after,
+body.ak-sales-page [class*="sc-"][id^="text-"]:has(p[dir="ltr"] span[style*="color: rgb(180, 106, 60)"]):not([id^="text-eee94d75"])::after {
+  margin-inline: auto;
+}
+/* Hero eyebrow (warmed cream tone) doesn't get the rule — its mood
+   is already set by the gradient + meta line. */
+body.ak-sales-page #text-eee94d75::after { display: none; }
+/* Pricing/Testimonial/FAQ/About/Method/What's-included are center-aligned. */
+body.ak-sales-page #text-e3a655b3::after,
+body.ak-sales-page #text-32a60fb4::after,
+body.ak-sales-page #text-0d5cec1e::after,
+body.ak-sales-page #text-887815e2::after,
+body.ak-sales-page #text-c5b31f96::after,
+body.ak-sales-page #text-41eae026::after,
+body.ak-sales-page #text-61c854d4::after {
+  margin-inline: auto;
+}
+
+/* ============================================================
+   3. METHOD NUMBERS — 01 / 02 / 03 should read bigger and more
+   editorial. Italic terracotta Caslon, larger.
+   Target IDs: text-c5a1bde5 (01), text-084bfc66 (02), text-2fee1f0f (03)
+   ============================================================ */
+body.ak-sales-page #text-c5a1bde5 p,
+body.ak-sales-page #text-084bfc66 p,
+body.ak-sales-page #text-2fee1f0f p {
+  font-size: 32px !important;
+  line-height: 1 !important;
+  letter-spacing: -0.01em;
+}
+body.ak-sales-page #text-c5a1bde5 p span,
+body.ak-sales-page #text-084bfc66 p span,
+body.ak-sales-page #text-2fee1f0f p span {
+  font-size: 32px !important;
+}
+
+/* ============================================================
+   4. FAQ — terracotta chevron, hairline accordion borders.
+   Target: faq-02ada463 wrapper + .sc-imwsjZ item rows.
+   ============================================================ */
+body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ {
+  border-bottom: 1px solid var(--ak-ink-10);
+  background: transparent !important;
+  border-radius: 0 !important;
+  margin-bottom: 0 !important;
+  padding: 4px 0;
+}
+body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-imwsjZ:first-child {
+  border-top: 1px solid var(--ak-ink-10);
+}
+body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-bkSUFJ {
+  color: var(--ak-terracotta) !important;
+  font-size: 14px !important;
+  transition: transform 180ms var(--ak-ease);
+}
+body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA {
+  font-weight: 500 !important;
+  transition: color 180ms var(--ak-ease);
+}
+body.ak-sales-page .sc-fAGziq[id^="faq-"] .sc-dQEtJA:hover {
+  color: var(--ak-terracotta) !important;
+}
+
+/* ============================================================
+   5. PRICING CARD — terracotta top stripe + softer shadow.
+   Target: row-3c3ada1d (the pricing card row).
+   ============================================================ */
+body.ak-sales-page #row-3c3ada1d {
+  position: relative;
+  box-shadow: 0 8px 32px rgba(26, 60, 47, 0.09) !important;
+  border-color: rgba(26, 60, 47, 0.18) !important;
+  overflow: hidden;
+}
+body.ak-sales-page #row-3c3ada1d::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--ak-terracotta);
+  z-index: 1;
+}
+
+/* ============================================================
+   6. TESTIMONIAL AVATARS — empty circles get a forest fallback
+   with a dash glyph until real photos are uploaded.
+   Target: row-7e171a25, row-722dc200, row-4b46e298 (avatar wrappers)
+   Each has a 25% column with an empty image div.
+   ============================================================ */
+body.ak-sales-page #row-7e171a25 > div:first-child > div,
+body.ak-sales-page #row-722dc200 > div:first-child > div,
+body.ak-sales-page #row-4b46e298 > div:first-child > div {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  background: var(--ak-forest);
+  color: var(--ak-cream);
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif;
+  font-size: 20px;
+  font-style: italic;
+}
+body.ak-sales-page #row-7e171a25 > div:first-child > div::after,
+body.ak-sales-page #row-722dc200 > div:first-child > div::after,
+body.ak-sales-page #row-4b46e298 > div:first-child > div::after {
+  content: "G";
+}
+
+/* ============================================================
+   7. METHOD 3-UP CARDS — subtle hover lift & top hairline.
+   Cards: row-7caae451, row-37f23e4b, row-d68fecfe
+   ============================================================ */
+body.ak-sales-page #row-7caae451,
+body.ak-sales-page #row-37f23e4b,
+body.ak-sales-page #row-d68fecfe {
+  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease), transform 220ms var(--ak-ease);
+}
+body.ak-sales-page #row-7caae451:hover,
+body.ak-sales-page #row-37f23e4b:hover,
+body.ak-sales-page #row-d68fecfe:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.14) !important;
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  transform: translateY(-2px);
+}
+
+/* ============================================================
+   8. FIT CARDS — same hover treatment as method cards.
+   Cards: row-521edb5a (for you), row-7dc91164 (not for you)
+   ============================================================ */
+body.ak-sales-page #row-521edb5a,
+body.ak-sales-page #row-7dc91164 {
+  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease);
+}
+body.ak-sales-page #row-521edb5a:hover,
+body.ak-sales-page #row-7dc91164:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.10) !important;
+  border-color: rgba(26, 60, 47, 0.25) !important;
+}
+
+/* ============================================================
+   9. WHAT YOU GET CARDS — same treatment + tighten icon.
+   ============================================================ */
+body.ak-sales-page #row-91624864,
+body.ak-sales-page #row-bd18b786,
+body.ak-sales-page #row-049130fc,
+body.ak-sales-page #row-2e2e7498,
+body.ak-sales-page #row-a7eeda50,
+body.ak-sales-page #row-563245f5 {
+  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease), transform 220ms var(--ak-ease);
+}
+body.ak-sales-page #row-91624864:hover,
+body.ak-sales-page #row-bd18b786:hover,
+body.ak-sales-page #row-049130fc:hover,
+body.ak-sales-page #row-2e2e7498:hover,
+body.ak-sales-page #row-a7eeda50:hover,
+body.ak-sales-page #row-563245f5:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  transform: translateY(-2px);
+}
+/* Tighten the placeholder video-library icons */
+body.ak-sales-page [id^="image-"][alt="bullet"] img,
+body.ak-sales-page picture img[alt="bullet"] {
+  max-width: 48px !important;
+  height: auto;
+}
+
+/* ============================================================
+   10. NAV "Start course" button — keep brand consistency.
+   The button currently links to /pitching-home (likely a bug from
+   master block reuse). Style-wise it stays forest. We make it
+   consistent with rest of buttons.
+   ============================================================ */
+body.ak-sales-page #button-e9b03c0b {
+  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease) !important;
+}
+body.ak-sales-page #button-e9b03c0b:hover {
+  background: #122e23 !important; /* darker forest */
+  transform: translateY(-1px);
+}
+
+/* ============================================================
+   11. SECTION HAIRLINES — soften the abrupt color jumps between
+   sections by adding 1px hairlines at section boundaries.
+   ============================================================ */
+body.ak-sales-page #section-20999059,
+body.ak-sales-page #section-2c9d14e6,
+body.ak-sales-page #section-8d73d86f,
+body.ak-sales-page #section-3a4cf41a,
+body.ak-sales-page #section-6a4b99b4,
+body.ak-sales-page #section-802759d8,
+body.ak-sales-page #section-0a23378e,
+body.ak-sales-page #section-39e4621b,
+body.ak-sales-page #section-33385ffe {
+  border-top: 1px solid rgba(45, 45, 45, 0.04);
+}
+
+/* ============================================================
+   12. LOGO MARQUEE — ensure no extra margin around our embed
+   when systeme wraps it. The marquee CSS itself lives in
+   marquee.css — this just keeps the container tight.
+   ============================================================ */
+body.ak-sales-page #rawhtml-2b8de8bc {
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body.ak-sales-page #section-fd2bfd64 {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
+/* ============================================================
+   13. HERO TITLE — slight tightening of letter-spacing on the
+   big serif H1 (systeme's default 0 is too loose for Caslon at 88px).
+   ============================================================ */
+body.ak-sales-page #headline-48beb1b2 h1 {
+  letter-spacing: -0.02em !important;
+  line-height: 1.02 !important;
+}
+
+/* ============================================================
+   14. PROBLEM CLOSING LINE — italic, balanced.
+   #text-9b9e201b is the "You don't need to memorize 200 countries..."
+   ============================================================ */
+body.ak-sales-page #text-9b9e201b p em {
+  text-wrap: balance;
+  display: inline-block;
+  max-width: 32ch;
+  line-height: 1.35 !important;
+}
+
+/* ============================================================
+   15. AUTHOR QUOTE — same italic balance.
+   #text-4db96d8f is the August quote.
+   ============================================================ */
+body.ak-sales-page #text-4db96d8f p em {
+  text-wrap: balance;
+  display: inline-block;
+  max-width: 36ch;
+  line-height: 1.3 !important;
+}
+
+/* ============================================================
+   16. CTA BUTTONS — unify hover state for all "Get instant access"
+   ============================================================ */
+body.ak-sales-page #button-c9add3ad,
+body.ak-sales-page #button-84ddf280,
+body.ak-sales-page #button-29d525d5 {
+  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+}
+body.ak-sales-page #button-c9add3ad:hover,
+body.ak-sales-page #button-84ddf280:hover {
+  background: #9A5832 !important; /* darker terracotta */
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+}
+body.ak-sales-page #button-29d525d5:hover {
+  background: #122e23 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
+}
