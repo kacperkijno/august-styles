@@ -876,6 +876,16 @@ html body.ak-sales-page #column-5c788f3a > div {
   display: flex !important;
   align-items: stretch !important;
 }
+/* Sibling columns (form / full-course copy) must also stretch and
+   align content from the TOP so they don't get pushed to the bottom
+   by systeme's alignSelf:flex-end default. */
+html body.ak-sales-page #column-cb7e2eb0,
+html body.ak-sales-page #column-76ecf8d2 {
+  align-self: stretch !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
 
 /* ============================================================
    27. MAGNET LANDING — number badges (01/02/03) in "What's inside"
