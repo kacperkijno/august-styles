@@ -1136,6 +1136,11 @@ html body.ak-sales-page #row-951b3fa3,
 html body.ak-sales-page #row-5aee5a48,
 html body.ak-sales-page #row-94027038,
 html body.ak-sales-page #row-3de40dbd {
+  /* Match magnet-landing box look: cream-soft bg, hairline border, rounded */
+  background: rgb(243, 240, 231) !important;
+  border: 1px solid rgba(45, 45, 45, 0.10) !important;
+  border-radius: 4px !important;
+  padding: 28px 26px !important;
   transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
   box-shadow: 0 1px 2px rgba(26, 60, 47, 0.04) !important;
   cursor: default;
