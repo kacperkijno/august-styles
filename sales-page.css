@@ -834,58 +834,9 @@ html body.ak-sales-page .sc-jaXxmD:has(#image-179dbe57) {
   max-width: 100% !important;
 }
 
-/* ============================================================
-   26c. MAGNET LANDING (/cross-cultural-playbook) — make form-section
-   and full-course-CTA images fill the full column height so they
-   match the height of the form/text column they sit next to.
-   Form image:        #image-19ba0b34 (in column-06148134)
-   Full course image: #image-9a56ef41 (in column-5c788f3a)
-   ============================================================ */
-html body.ak-sales-page #image-19ba0b34,
-html body.ak-sales-page #image-9a56ef41 {
-  width: 100% !important;
-  height: 100% !important;
-  min-height: 380px !important;
-  max-height: none !important;
-  object-fit: cover !important;
-  object-position: center !important;
-  display: block !important;
-  border-radius: 4px;
-}
-/* Force picture + image-width wrappers to fill */
-html body.ak-sales-page .sc-ibQAlc:has(#image-19ba0b34),
-html body.ak-sales-page .sc-ibQAlc:has(#image-9a56ef41),
-html body.ak-sales-page .sc-jaXxmD:has(#image-19ba0b34),
-html body.ak-sales-page .sc-jaXxmD:has(#image-9a56ef41) {
-  width: 100% !important;
-  height: 100% !important;
-  max-width: 100% !important;
-  display: block !important;
-}
-/* Image column needs to be a flex container that stretches its child */
-html body.ak-sales-page #column-06148134,
-html body.ak-sales-page #column-5c788f3a {
-  display: flex !important;
-  align-items: stretch !important;
-}
-/* Inner sc-gsFSXt wrapper inside the column should also fill height */
-html body.ak-sales-page #column-06148134 > div,
-html body.ak-sales-page #column-5c788f3a > div {
-  width: 100% !important;
-  height: 100% !important;
-  display: flex !important;
-  align-items: stretch !important;
-}
-/* Sibling columns (form / full-course copy) must also stretch and
-   align content from the TOP so they don't get pushed to the bottom
-   by systeme's alignSelf:flex-end default. */
-html body.ak-sales-page #column-cb7e2eb0,
-html body.ak-sales-page #column-76ecf8d2 {
-  align-self: stretch !important;
-  display: flex !important;
-  flex-direction: column !important;
-  justify-content: center !important;
-}
+/* 26c. MAGNET LANDING image stretching — REVERTED in v32.
+   Causes layout issues with systeme's alignSelf defaults. Images use
+   their natural ratio; Kacper will tweak in the editor instead. */
 
 /* ============================================================
    27. MAGNET LANDING — number badges (01/02/03) in "What's inside"
@@ -985,6 +936,55 @@ html body.ak-sales-page #button-79e8c21d:hover {
   box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
 }
 html body.ak-sales-page #button-b4d9f586:hover {
+  background: #9A5832 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+}
+
+/* ============================================================
+   31. MAGNET LANDING — nav ALWAYS solid (no transparent-over-hero
+   state). The magnet hero is a sage card sitting inside cream body,
+   not a dark full-bleed photo, so the homepage-style transparent
+   nav doesn't apply here.
+   Magnet nav section: #section-6ddc3998
+   Magnet nav logo:    #image-d65d7a4f
+   ============================================================ */
+html body.ak-sales-page #section-6ddc3998 {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  margin: 0 !important;
+  padding: 8px 40px !important;
+  background: rgba(249, 247, 241, 0.94) !important;
+  backdrop-filter: saturate(1.4) blur(10px);
+  -webkit-backdrop-filter: saturate(1.4) blur(10px);
+  border-bottom: 1px solid rgba(45, 45, 45, 0.08) !important;
+}
+/* Nav links — dark ink from the start */
+html body.ak-sales-page #section-6ddc3998 a.sc-hBtRBE {
+  color: var(--ak-ink) !important;
+  transition: color 180ms var(--ak-ease);
+}
+html body.ak-sales-page #section-6ddc3998 a.sc-hBtRBE:hover {
+  color: var(--ak-terracotta) !important;
+}
+/* Logo — original (no white invert) */
+html body.ak-sales-page #section-6ddc3998 #image-d65d7a4f {
+  filter: none !important;
+}
+/* "Start course" CTA — terracotta brand */
+html body.ak-sales-page #button-1146e060 {
+  background: var(--ak-terracotta) !important;
+  color: var(--ak-cream) !important;
+  padding: 12px 22px !important;
+  border-radius: 2px !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+}
+html body.ak-sales-page #button-1146e060:hover {
   background: #9A5832 !important;
   transform: translateY(-1px);
   box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
