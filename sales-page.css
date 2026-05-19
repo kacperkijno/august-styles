@@ -835,6 +835,49 @@ html body.ak-sales-page .sc-jaXxmD:has(#image-179dbe57) {
 }
 
 /* ============================================================
+   26c. MAGNET LANDING (/cross-cultural-playbook) — make form-section
+   and full-course-CTA images fill the full column height so they
+   match the height of the form/text column they sit next to.
+   Form image:        #image-19ba0b34 (in column-06148134)
+   Full course image: #image-9a56ef41 (in column-5c788f3a)
+   ============================================================ */
+html body.ak-sales-page #image-19ba0b34,
+html body.ak-sales-page #image-9a56ef41 {
+  width: 100% !important;
+  height: 100% !important;
+  min-height: 380px !important;
+  max-height: none !important;
+  object-fit: cover !important;
+  object-position: center !important;
+  display: block !important;
+  border-radius: 4px;
+}
+/* Force picture + image-width wrappers to fill */
+html body.ak-sales-page .sc-ibQAlc:has(#image-19ba0b34),
+html body.ak-sales-page .sc-ibQAlc:has(#image-9a56ef41),
+html body.ak-sales-page .sc-jaXxmD:has(#image-19ba0b34),
+html body.ak-sales-page .sc-jaXxmD:has(#image-9a56ef41) {
+  width: 100% !important;
+  height: 100% !important;
+  max-width: 100% !important;
+  display: block !important;
+}
+/* Image column needs to be a flex container that stretches its child */
+html body.ak-sales-page #column-06148134,
+html body.ak-sales-page #column-5c788f3a {
+  display: flex !important;
+  align-items: stretch !important;
+}
+/* Inner sc-gsFSXt wrapper inside the column should also fill height */
+html body.ak-sales-page #column-06148134 > div,
+html body.ak-sales-page #column-5c788f3a > div {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: stretch !important;
+}
+
+/* ============================================================
    27. SECTIONS spacing — soften the abrupt color boundaries.
    Add subtle hairline at top of each main section.
    ============================================================ */
