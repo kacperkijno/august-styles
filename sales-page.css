@@ -1116,17 +1116,38 @@ html body.ak-sales-page #text-946dd6f9 p span {
   color: var(--ak-forest) !important;
 }
 
-/* ---- Step box wrappers (rows) — hover lift + shadow ---- */
+/* ---- Step box wrappers (rows) — hover lift + shadow ----
+   Add every box-row ID here as new pages are built. Rows targeted
+   by ID because systeme styled-components classes are unstable.
+
+   Currently registered:
+   - Thank-you steps (Open my email / Read foundations / Pick market):
+     #row-8db88b96, #row-ebb764a3, #row-94aab3be
+   - Magnet "Inside the guide" (Iceberg / Japan / U.S. playbook):
+     #row-ac3bd733, #row-951b3fa3, #row-5aee5a48
+   - Magnet "Who it's for" + "About August":
+     #row-94027038, #row-3de40dbd
+   ----------------------------------------------------- */
 html body.ak-sales-page #row-8db88b96,
 html body.ak-sales-page #row-ebb764a3,
-html body.ak-sales-page #row-94aab3be {
+html body.ak-sales-page #row-94aab3be,
+html body.ak-sales-page #row-ac3bd733,
+html body.ak-sales-page #row-951b3fa3,
+html body.ak-sales-page #row-5aee5a48,
+html body.ak-sales-page #row-94027038,
+html body.ak-sales-page #row-3de40dbd {
   transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
   box-shadow: 0 1px 2px rgba(26, 60, 47, 0.04) !important;
   cursor: default;
 }
 html body.ak-sales-page #row-8db88b96:hover,
 html body.ak-sales-page #row-ebb764a3:hover,
-html body.ak-sales-page #row-94aab3be:hover {
+html body.ak-sales-page #row-94aab3be:hover,
+html body.ak-sales-page #row-ac3bd733:hover,
+html body.ak-sales-page #row-951b3fa3:hover,
+html body.ak-sales-page #row-5aee5a48:hover,
+html body.ak-sales-page #row-94027038:hover,
+html body.ak-sales-page #row-3de40dbd:hover {
   transform: translateY(-3px);
   box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
   border-color: rgba(180, 106, 60, 0.35) !important;
