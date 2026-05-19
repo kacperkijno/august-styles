@@ -1128,6 +1128,16 @@ html body.ak-sales-page #text-946dd6f9 p span {
    - Magnet "Who it's for" + "About August":
      #row-94027038, #row-3de40dbd
    ----------------------------------------------------- */
+/* Background (cream-soft + border) only on the August bio card on magnet.
+   Other step boxes stay plain — hover lift still applies to all of them. */
+html body.ak-sales-page #row-3de40dbd {
+  background: rgb(243, 240, 231) !important;
+  border: 1px solid rgba(45, 45, 45, 0.10) !important;
+  border-radius: 4px !important;
+  padding: 28px 26px !important;
+}
+
+/* Hover lift on every registered step/box row */
 html body.ak-sales-page #row-8db88b96,
 html body.ak-sales-page #row-ebb764a3,
 html body.ak-sales-page #row-94aab3be,
@@ -1136,13 +1146,7 @@ html body.ak-sales-page #row-951b3fa3,
 html body.ak-sales-page #row-5aee5a48,
 html body.ak-sales-page #row-94027038,
 html body.ak-sales-page #row-3de40dbd {
-  /* Match magnet-landing box look: cream-soft bg, hairline border, rounded */
-  background: rgb(243, 240, 231) !important;
-  border: 1px solid rgba(45, 45, 45, 0.10) !important;
-  border-radius: 4px !important;
-  padding: 28px 26px !important;
   transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
-  box-shadow: 0 1px 2px rgba(26, 60, 47, 0.04) !important;
   cursor: default;
 }
 html body.ak-sales-page #row-8db88b96:hover,
@@ -1158,9 +1162,37 @@ html body.ak-sales-page #row-3de40dbd:hover {
   border-color: rgba(180, 106, 60, 0.35) !important;
 }
 
-/* ---- Step numbers, titles, and body: keep systeme defaults so the
-   thank-you boxes render with identical typography to the magnet
-   "Inside the guide" boxes. No font/size overrides here. */
+/* ---- Step numbers (thank-you 01/02/03) — bumped to 36px italic Caslon */
+html body.ak-sales-page #text-74c0ec93 p,
+html body.ak-sales-page #text-3661711a p,
+html body.ak-sales-page #text-d1765bce p,
+html body.ak-sales-page #text-74c0ec93 span,
+html body.ak-sales-page #text-3661711a span,
+html body.ak-sales-page #text-d1765bce span,
+html body.ak-sales-page #text-74c0ec93 em,
+html body.ak-sales-page #text-3661711a em,
+html body.ak-sales-page #text-d1765bce em {
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 36px !important;
+  line-height: 1 !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* ---- Step titles (Open my email / Read... / Pick one market) — eyebrow style */
+html body.ak-sales-page #text-ebc1a1a3 p,
+html body.ak-sales-page #text-7358761b p,
+html body.ak-sales-page #text-14ed6e08 p,
+html body.ak-sales-page #text-ebc1a1a3 strong,
+html body.ak-sales-page #text-7358761b strong,
+html body.ak-sales-page #text-14ed6e08 strong {
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+}
 
 /* ============================================================
    29. THANK-YOU HERO buttons — hovers on "Download PDF" + "Back to site"
