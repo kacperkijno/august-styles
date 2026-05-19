@@ -12,9 +12,9 @@
 /* Photo focal-point: show the wooden ceiling above August so he sits
    in the lower half of the hero with breathing room above his head.
    Lower Y% = image slides DOWN in container = more headroom above August. */
-.hero--course .hero__photo { object-position: 30% 30%; }
+.hero--course .hero__photo { object-position: 35% 35%; }
 @media (max-width: 760px) {
-  .hero--course .hero__photo { object-position: 65% 30%; }
+  .hero--course .hero__photo { object-position: 65% 35%; }
 }
 
 .hero--course .hero__title { max-width: 18ch; }
@@ -172,7 +172,7 @@
 .learn__media img {
   width: 100%; height: 100%;
   object-fit: cover;
-  object-position: 50% 30%;
+  object-position: 50% 35%;
   display: block;
 }
 .learn__head { max-width: 22ch; }
