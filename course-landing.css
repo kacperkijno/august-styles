@@ -8,6 +8,15 @@
 /* .hero is defined in homepage.css. We add a few course-specific
    modifiers so the same hero scaffolding can carry a course CTA stack
    without dragging in homepage-specific copy. */
+
+/* Photo focal-point: keep August on the right (mirrored) but pull the
+   vertical anchor DOWN so his head sits in the lower-third of the hero
+   instead of getting clipped near the top. */
+.hero--course .hero__photo { object-position: 30% 78%; }
+@media (max-width: 760px) {
+  .hero--course .hero__photo { object-position: 65% 78%; }
+}
+
 .hero--course .hero__title { max-width: 18ch; }
 .hero--course .hero__title em { font-style: italic; color: var(--terracotta-warm); }
 .hero--course .hero__meta {
