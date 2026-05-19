@@ -1158,20 +1158,9 @@ html body.ak-sales-page #row-3de40dbd:hover {
   border-color: rgba(180, 106, 60, 0.35) !important;
 }
 
-/* ---- Step numbers + titles: keep systeme defaults (match course landing).
-   Intentionally NOT overriding fonts/sizes here so the typography
-   reads identical to the "What this course does" boxes elsewhere. */
-
-/* Step body — slightly larger + better line-height for readability */
-html body.ak-sales-page #text-5469324b p,
-html body.ak-sales-page #text-bfc757fa p,
-html body.ak-sales-page #text-6647923d p,
-html body.ak-sales-page #text-5469324b span,
-html body.ak-sales-page #text-bfc757fa span,
-html body.ak-sales-page #text-6647923d span {
-  font-size: 15.5px !important;
-  line-height: 1.6 !important;
-}
+/* ---- Step numbers, titles, and body: keep systeme defaults so the
+   thank-you boxes render with identical typography to the magnet
+   "Inside the guide" boxes. No font/size overrides here. */
 
 /* ============================================================
    29. THANK-YOU HERO buttons — hovers on "Download PDF" + "Back to site"
