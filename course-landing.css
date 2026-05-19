@@ -9,12 +9,12 @@
    modifiers so the same hero scaffolding can carry a course CTA stack
    without dragging in homepage-specific copy. */
 
-/* Photo focal-point: keep August on the right (mirrored) but pull the
-   vertical anchor DOWN so his head sits in the lower-third of the hero
-   instead of getting clipped near the top. */
-.hero--course .hero__photo { object-position: 30% 78%; }
+/* Photo focal-point: show the wooden ceiling above August so he sits
+   in the lower half of the hero with breathing room above his head.
+   Lower Y% = image slides DOWN in container = more headroom above August. */
+.hero--course .hero__photo { object-position: 30% 22%; }
 @media (max-width: 760px) {
-  .hero--course .hero__photo { object-position: 65% 78%; }
+  .hero--course .hero__photo { object-position: 65% 22%; }
 }
 
 .hero--course .hero__title { max-width: 18ch; }
