@@ -682,8 +682,9 @@ html body.ak-home #field-d22e847d {
   background: var(--ak-cream) !important;
   border: 1px solid rgba(45, 45, 45, 0.18) !important;
   border-radius: 8px !important;
-  height: 56px !important;
-  padding: 0 18px !important;
+  padding: 14px 18px !important;
+  font-size: 14px !important;
+  line-height: 1.2 !important;
   color: var(--ak-ink) !important;
   box-shadow: none !important;
 }
@@ -694,14 +695,16 @@ html body.ak-home #button-aab9edaf {
   color: var(--ak-cream) !important;
   border: 0 !important;
   border-radius: 8px !important;
-  height: 56px !important;
-  min-height: 56px !important;
-  padding: 0 24px !important;
+  padding: 16px 24px !important;   /* match every other button */
+  font-size: 14px !important;
+  line-height: 1.2 !important;
+  white-space: nowrap !important;
   letter-spacing: 0.04em;
   transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease);
 }
 html body.ak-home #button-aab9edaf * {
   color: inherit !important;
+  font-size: 14px !important;
 }
 html body.ak-home #button-aab9edaf:hover {
   background: var(--ak-terracotta-dark, #9A5832) !important;
