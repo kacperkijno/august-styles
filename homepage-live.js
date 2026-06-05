@@ -63,19 +63,39 @@
     });
     if (!targets.length) return;
 
-    if (reduce || !('IntersectionObserver' in window)) {
+    if (reduce) {
       targets.forEach(function (el) { el.classList.add('ak-in'); });
       return;
     }
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (e) {
-        if (e.isIntersecting) {
-          e.target.classList.add('ak-in');
-          io.unobserve(e.target);
+
+    /* Scroll-based detection (more reliable than IntersectionObserver on
+       this systeme.io page — IO did not fire for these nodes). Reveal an
+       element once its top crosses ~88% of the viewport height. */
+    function reveal() {
+      var vh = window.innerHeight || document.documentElement.clientHeight;
+      for (var k = targets.length - 1; k >= 0; k--) {
+        var r = targets[k].getBoundingClientRect();
+        if (r.top < vh * 0.88 && r.bottom > 0) {
+          targets[k].classList.add('ak-in');
+          targets.splice(k, 1);
         }
-      });
-    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
-    targets.forEach(function (el) { io.observe(el); });
+      }
+      if (!targets.length) window.removeEventListener('scroll', onScroll);
+    }
+    var ticking = false;
+    function onScroll() {
+      if (!ticking) {
+        window.requestAnimationFrame(function () { reveal(); ticking = false; });
+        ticking = true;
+      }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    reveal(); // reveal anything already in view on load
+
+    /* Safety net: never leave content hidden, even if scroll never fires. */
+    setTimeout(function () {
+      targets.slice().forEach(function (el) { el.classList.add('ak-in'); });
+    }, 4000);
   }
 
   /* --- 3. Header scroll state ---------------------------- */
