@@ -168,14 +168,51 @@ html body.ak-home .ak-reveal.ak-in {
   color: rgba(249, 247, 241, 0.88) !important;
 }
 
-/* "Inquire about consulting" link (Ink → cream) */
+/* CTA cluster: tighten the gap between the two hero buttons.
+   systeme lays them out in a 4/8 grid with justify-content:space-between
+   → switch to a left-packed flex row with a small gap. */
+body.ak-home #row-e6badb36 {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  gap: 14px !important;
+}
+body.ak-home #row-e6badb36 > div[size] {
+  width: auto !important;
+  flex: 0 0 auto !important;
+}
+
+/* Tertiary text link "Or get the free Negotiation Playbook →"
+   styled like index .hero__tertiary (arrow + subtle underline). */
 #section-e8a2d9b7 #text-3f555439,
 #section-e8a2d9b7 #text-3f555439 * {
-  color: #F9F7F1 !important;
+  color: rgba(249, 247, 241, 0.82) !important;
 }
-#section-e8a2d9b7 #text-3f555439 a u {
-  text-decoration-color: rgba(249, 247, 241, 0.45) !important;
-  text-underline-offset: 4px;
+#section-e8a2d9b7 #text-3f555439 a {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  font-size: 14px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.01em !important;
+  text-decoration: none !important;
+  border-bottom: 1px solid rgba(249, 247, 241, 0.30) !important;
+  padding-bottom: 2px !important;
+  width: -moz-fit-content !important;
+  width: fit-content !important;
+  transition: color 180ms var(--ak-ease), border-color 180ms var(--ak-ease) !important;
+}
+#section-e8a2d9b7 #text-3f555439 a::after {
+  content: "\2192";   /* → */
+  transition: transform 180ms var(--ak-ease) !important;
+}
+#section-e8a2d9b7 #text-3f555439 a:hover {
+  color: #F9F7F1 !important;
+  border-bottom-color: #F9F7F1 !important;
+}
+#section-e8a2d9b7 #text-3f555439 a:hover::after {
+  transform: translateX(3px) !important;
 }
 
 /* Rating block (Ink → cream + softer subline) */
@@ -787,6 +824,16 @@ html body.ak-home #row-f1101f63:hover,
 html body.ak-home #row-407010f1:hover {
   box-shadow: 0 6px 28px rgba(26, 60, 47, 0.14) !important;
   border-color: rgba(26, 60, 47, 0.30) !important;
+}
+
+/* Avatars — equal-size perfect circles (source photos vary in size/ratio).
+   Section has no other images, so target every img here. */
+html body.ak-home #section-d54243f0 img {
+  width: 44px !important;
+  height: 44px !important;
+  border-radius: 50% !important;
+  object-fit: cover !important;
+  flex-shrink: 0 !important;
 }
 
 
