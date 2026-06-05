@@ -595,6 +595,56 @@ html body.ak-home #text-ae2ae713 span {
 
 
 /* ============================================================
+   LEAD MAGNET — "The Cross-Cultural Negotiation Playbook"
+   #section-22d30859 (bg cream-soft, set in systeme.io)
+   row-6ed08c45 [ size6 = PDF cover image | size6 = text + CTA ]
+     text-0654e64d(eyebrow "Free Resource")
+     headline-502539e5(h2)  text-afafbe98(desc)  button-aab9edaf(CTA)
+   ============================================================ */
+
+/* Eyebrow "Free Resource" — match OUR COURSES (terracotta, no rule) */
+html body.ak-home #text-0654e64d,
+html body.ak-home #text-0654e64d p,
+html body.ak-home #text-0654e64d span {
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* Description — muted ink */
+html body.ak-home #text-afafbe98,
+html body.ak-home #text-afafbe98 p,
+html body.ak-home #text-afafbe98 span {
+  color: var(--ak-ink-72) !important;
+  line-height: 1.6 !important;
+}
+
+/* PDF cover — floating-document shadow */
+html body.ak-home #image-19213690 {
+  border-radius: 4px !important;
+  box-shadow: 0 16px 44px rgba(26, 60, 47, 0.18),
+              0 2px 8px rgba(26, 60, 47, 0.10) !important;
+}
+
+/* CTA — terracotta primary (lead magnet = the one terracotta button) */
+html body.ak-home #button-aab9edaf {
+  background: var(--ak-terracotta) !important;
+  color: var(--ak-cream) !important;
+  border: 0 !important;
+  border-radius: 2px !important;
+  letter-spacing: 0.04em;
+  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease);
+}
+html body.ak-home #button-aab9edaf * {
+  color: inherit !important;
+}
+html body.ak-home #button-aab9edaf:hover {
+  background: var(--ak-terracotta-dark, #9A5832) !important;
+  transform: translateY(-1px);
+}
+
+
+/* ============================================================
    MOBILE (About / Framework)
    ============================================================ */
 @media (max-width: 760px) {
