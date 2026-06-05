@@ -714,6 +714,52 @@ html body.ak-home #button-aab9edaf:hover {
 
 
 /* ============================================================
+   TESTIMONIALS — #section-d54243f0  (match index .testimonial)
+   row-ddae4dd4 head [eyebrow text-b5fba013 | h2 headline-5baa8f2c]
+   row-5fab714b = 3 columns (size4); columns stack 1–2 cards each.
+   5 cards (quote type set in systeme.io — Caslon italic):
+     row-90b835d4 row-9ba983ac row-db1956fa row-f1101f63 row-407010f1
+   NOTE: cards targeted by id — if you ADD a testimonial, add its
+   row-XXXX id to both selectors below.
+   ============================================================ */
+
+/* Section surface — cream */
+html body.ak-home #section-d54243f0 {
+  background: var(--ak-cream) !important;
+}
+
+/* Eyebrow — like the rest of the site (terracotta, no rule) */
+html body.ak-home #text-b5fba013,
+html body.ak-home #text-b5fba013 p,
+html body.ak-home #text-b5fba013 span {
+  letter-spacing: 0 !important;
+  text-transform: uppercase !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* Cards — cream, hairline border, padding, hover lift */
+html body.ak-home #row-90b835d4,
+html body.ak-home #row-9ba983ac,
+html body.ak-home #row-db1956fa,
+html body.ak-home #row-f1101f63,
+html body.ak-home #row-407010f1 {
+  background: var(--ak-cream) !important;
+  border: 1px solid var(--ak-ink-10) !important;
+  border-radius: 4px !important;
+  padding: 32px 28px !important;
+  transition: box-shadow 180ms var(--ak-ease), border-color 180ms var(--ak-ease) !important;
+}
+html body.ak-home #row-90b835d4:hover,
+html body.ak-home #row-9ba983ac:hover,
+html body.ak-home #row-db1956fa:hover,
+html body.ak-home #row-f1101f63:hover,
+html body.ak-home #row-407010f1:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.14) !important;
+  border-color: rgba(26, 60, 47, 0.30) !important;
+}
+
+
+/* ============================================================
    MOBILE (About / Framework)
    ============================================================ */
 @media (max-width: 760px) {
