@@ -1,5 +1,19 @@
 /* ============================================================
-   AK Homepage — systeme.io overrides for augustkjerland.com root.
+   AK brand CSS for augustkjerland.com (systeme.io).
+   Served at the STABLE url (no version query):
+     https://kacperkijno.github.io/august-styles/homepage-live.css
+   Push changes here; they go live within ~10 min (GH Pages edge cache).
+
+   UNIVERSAL / multi-page design:
+   - Safe to load on EVERY page via one <link> (homepage-live.snippet.html).
+   - Each page's rules are namespaced by a body scope class so they only
+     apply where that class is set. HOMEPAGE = body.ak-home (added by the
+     snippet + homepage-live.js). Hero/Header/Courses/About/Framework below
+     are all scoped to body.ak-home OR to homepage-only systeme IDs, so they
+     never leak to other pages. To extend to another page: give it its own
+     body class (e.g. body.ak-about) in that page's snippet, then add a new
+     block here scoped to it.
+
    Single source of truth for ALL homepage CSS. Loaded via ONE <link>
    in Page custom code → Header (see homepage-live.snippet.html).
 
@@ -15,7 +29,7 @@
    section in systeme.io the IDs change — re-export and swap them.
 
    Map:
-     HERO       = #section-e8a2d9b7        (+ header[type="WebsiteHeader"])
+     HERO       = #section-e8a2d9b7        (+ body.ak-home header[type="WebsiteHeader"])
      COURSES    = #row-4332dc25
      ABOUT      = #section-cd54baff
      FRAMEWORK  = #section-d56a75da
@@ -165,7 +179,7 @@ body.ak-home {
    ============================================================ */
 
 /* --- 1. Fixed positioning across the page ------------------ */
-header[type="WebsiteHeader"] {
+body.ak-home header[type="WebsiteHeader"] {
   position: fixed !important;
   top: 0; left: 0; right: 0;
   z-index: 1000;
@@ -182,55 +196,55 @@ header[type="WebsiteHeader"] {
 /* --- 2. DEFAULT STATE (over the dark hero) ----------------- */
 
 /* Logo: invert PNG to white silhouette */
-header[type="WebsiteHeader"] #websitelogo-2841540c img {
+body.ak-home header[type="WebsiteHeader"] #websitelogo-2841540c img {
   filter: brightness(0) invert(1);
   transition: filter 220ms ease, height 220ms ease;
 }
 
 /* Main menu links: cream */
-header[type="WebsiteHeader"] #menu-c51d8fe2 a,
-header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a,
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
   color: #F9F7F1 !important;
   letter-spacing: 0.04em !important;
   transition: color 220ms ease, opacity 220ms ease;
   opacity: 0.92;
 }
-header[type="WebsiteHeader"] #menu-c51d8fe2 a:hover,
-header[type="WebsiteHeader"] #side-menu-c51d8fe2 a:hover {
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a:hover,
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a:hover {
   opacity: 1;
 }
 
 /* "Home page" span (sr label for logo, in case visible) */
-header[type="WebsiteHeader"] #websitelogo-2841540c span {
+body.ak-home header[type="WebsiteHeader"] #websitelogo-2841540c span {
   color: #F9F7F1 !important;
 }
 
 /* Login button: outline cream-on-dark */
-header[type="WebsiteHeader"] #loginbutton-f0aa2f20 {
+body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20 {
   background: transparent !important;
   color: #F9F7F1 !important;
   border: 1px solid rgba(249, 247, 241, 0.5) !important;
   transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
 }
-header[type="WebsiteHeader"] #loginbutton-f0aa2f20:hover {
+body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20:hover {
   background: #F9F7F1 !important;
   color: #1A3C2F !important;
   border-color: #F9F7F1 !important;
 }
 
 /* Mobile burger lines: cream */
-header[type="WebsiteHeader"] .sc-gEkIjA span {
+body.ak-home header[type="WebsiteHeader"] .sc-gEkIjA span {
   background-color: #F9F7F1 !important;
   transition: background-color 220ms ease;
 }
 
 /* Side-menu (mobile drawer): keep open-state working */
-header[type="WebsiteHeader"] #side-menu-c51d8fe2 {
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 {
   /* When opened, force a solid cream panel so links read on light bg */
   background: rgba(249, 247, 241, 0.98) !important;
   backdrop-filter: blur(10px);
 }
-header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
   color: #2D2D2D !important;   /* dark text inside the drawer */
   opacity: 1;
 }
@@ -238,7 +252,7 @@ header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
 
 /* --- 3. SCROLLED STATE (after passing the hero) ------------ */
 
-header[type="WebsiteHeader"].is-scrolled {
+body.ak-home header[type="WebsiteHeader"].is-scrolled {
   background: rgba(249, 247, 241, 0.94) !important;
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
@@ -247,49 +261,49 @@ header[type="WebsiteHeader"].is-scrolled {
 }
 
 /* Logo: back to original (dark) + slight shrink */
-header[type="WebsiteHeader"].is-scrolled #websitelogo-2841540c img {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #websitelogo-2841540c img {
   filter: none;
   height: 44px !important;
   max-height: 44px;
 }
-header[type="WebsiteHeader"].is-scrolled #websitelogo-2841540c span {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #websitelogo-2841540c span {
   color: #2D2D2D !important;
 }
 
 /* Menu links: ink */
-header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a {
   color: #2D2D2D !important;
   opacity: 1;
 }
 
 /* "Consulting" (last link, has its own class) — promote to terracotta accent */
-header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a:last-of-type {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a:last-of-type {
   color: #B46A3C !important;
 }
 
 /* Login button: solid Forest, cream text */
-header[type="WebsiteHeader"].is-scrolled #loginbutton-f0aa2f20 {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #loginbutton-f0aa2f20 {
   background: #1A3C2F !important;
   color: #F9F7F1 !important;
   border-color: #1A3C2F !important;
 }
-header[type="WebsiteHeader"].is-scrolled #loginbutton-f0aa2f20:hover {
+body.ak-home header[type="WebsiteHeader"].is-scrolled #loginbutton-f0aa2f20:hover {
   background: #122B23 !important;
   border-color: #122B23 !important;
 }
 
 /* Mobile burger lines: ink */
-header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
+body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
   background-color: #2D2D2D !important;
 }
 
 
 /* --- 4. Reduced motion: keep state, skip transitions ------- */
 @media (prefers-reduced-motion: reduce) {
-  header[type="WebsiteHeader"],
-  header[type="WebsiteHeader"] *,
-  header[type="WebsiteHeader"]::before,
-  header[type="WebsiteHeader"]::after {
+  body.ak-home header[type="WebsiteHeader"],
+  body.ak-home header[type="WebsiteHeader"] *,
+  body.ak-home header[type="WebsiteHeader"]::before,
+  body.ak-home header[type="WebsiteHeader"]::after {
     transition-duration: 0.01ms !important;
   }
 }
