@@ -705,6 +705,7 @@ html body.ak-home #button-aab9edaf {
 html body.ak-home #button-aab9edaf * {
   color: inherit !important;
   font-size: 14px !important;
+  white-space: nowrap !important;
 }
 html body.ak-home #button-aab9edaf:hover {
   background: var(--ak-terracotta-dark, #9A5832) !important;
