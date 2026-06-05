@@ -661,12 +661,33 @@ html body.ak-home #image-19213690 {
               0 2px 8px rgba(26, 60, 47, 0.10) !important;
 }
 
+/* INLINE FORM — email field + CTA in one row (#row-b29ca21b, 8/4 cols).
+   Equal height, vertically centred, brand colours. */
+html body.ak-home #row-b29ca21b {
+  align-items: center !important;
+  column-gap: 14px !important;
+}
+
+/* Email field — cream, subtle ink border, 2px radius (was blue-grey/10px) */
+html body.ak-home #field-d22e847d {
+  background: var(--ak-cream) !important;
+  border: 1px solid rgba(45, 45, 45, 0.18) !important;
+  border-radius: 2px !important;
+  height: 56px !important;
+  padding: 0 18px !important;
+  color: var(--ak-ink) !important;
+  box-shadow: none !important;
+}
+
 /* CTA — terracotta primary (lead magnet = the one terracotta button) */
 html body.ak-home #button-aab9edaf {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   border: 0 !important;
   border-radius: 2px !important;
+  height: 56px !important;
+  min-height: 56px !important;
+  padding: 0 24px !important;
   letter-spacing: 0.04em;
   transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease);
 }
