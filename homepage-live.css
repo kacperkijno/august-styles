@@ -524,12 +524,13 @@ html body.ak-home #text-ef252a6d span {
 }
 
 /* --- Pillars: row spacing + dividers (lines) are set in systeme.io.
-   Only the column alignment is forced here: top-align both columns so the
-   title (eyebrow) sits at the same height as the big number. ----------- */
-html body.ak-home #row-feedd8db,
-html body.ak-home #row-a1582001,
-html body.ak-home #row-47647d37 {
-  align-items: flex-start !important;
+   systeme puts the RIGHT column at align-self:flex-end (stuck to the
+   bottom of the grid row). Override it to flex-start so the title sits at
+   the same height as the big number. --------------------------------- */
+html body.ak-home #row-feedd8db > div[size="6"]:last-child,
+html body.ak-home #row-a1582001 > div[size="6"]:last-child,
+html body.ak-home #row-47647d37 > div[size="6"]:last-child {
+  align-self: flex-start !important;
 }
 
 /* Big serif numbers → terracotta */
