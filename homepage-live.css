@@ -619,6 +619,38 @@ html body.ak-home #text-afafbe98 span {
   line-height: 1.6 !important;
 }
 
+/* Benefits list → numbered 01–05 + hairline dividers (match index mockup).
+   systeme renders a <ul><li> with <i class="fas fa-check"> — hide the check,
+   add a CSS counter. Scoped to this section so other lists are untouched. */
+html body.ak-home #section-22d30859 ul {
+  list-style: none !important;
+  counter-reset: ak-pb !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+html body.ak-home #section-22d30859 ul li {
+  list-style: none !important;
+  counter-increment: ak-pb;
+  position: relative;
+  border-top: 1px solid var(--ak-ink-10) !important;
+  padding: 16px 0 16px 46px !important;
+  margin: 0 !important;
+}
+html body.ak-home #section-22d30859 ul li i {
+  display: none !important;   /* hide the fa-check icon */
+}
+html body.ak-home #section-22d30859 ul li::before {
+  content: counter(ak-pb, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 16px;
+  color: var(--ak-terracotta);
+  font-family: var(--ak-sans);
+  font-weight: 700;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+}
+
 /* PDF cover — floating-document shadow */
 html body.ak-home #image-19213690 {
   border-radius: 4px !important;
