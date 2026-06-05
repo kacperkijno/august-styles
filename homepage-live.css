@@ -533,12 +533,12 @@ html body.ak-home #text-70cc2123, html body.ak-home #text-70cc2123 * {
   line-height: 0.9 !important;
 }
 
-/* Pillar titles → uppercase forest label */
+/* Pillar titles → bold, widely tracked uppercase forest label */
 html body.ak-home #text-efd6b3d5, html body.ak-home #text-efd6b3d5 *,
 html body.ak-home #text-e988dc01, html body.ak-home #text-e988dc01 *,
 html body.ak-home #text-bd7b0d80, html body.ak-home #text-bd7b0d80 * {
-  font-weight: 500 !important;
-  letter-spacing: 0.18em !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   color: var(--ak-forest) !important;
 }
@@ -557,6 +557,7 @@ html body.ak-home #text-ae2ae713 {
 }
 html body.ak-home #text-ae2ae713 p,
 html body.ak-home #text-ae2ae713 span {
+  font-weight: 700 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   color: var(--ak-forest) !important;
