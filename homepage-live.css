@@ -51,6 +51,14 @@ body.ak-home {
   --ak-sans:        "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
 }
 
+/* ---------- Global button radius (design system) -------------
+   Normal buttons = 8px (--radius-btn). Tiny nav "Log in" = 4px.
+   Catches every systeme button-XXXX (hero CTAs, Enroll, Waitlist,
+   About, magnet…); loginbutton-XXXX keeps its own 4px below. */
+html body.ak-home [id^="button-"] {
+  border-radius: 8px !important;
+}
+
 
 /* ============================================================
    August Kjerland — Hero section override
@@ -224,6 +232,7 @@ body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20 {
   background: transparent !important;
   color: #F9F7F1 !important;
   border: 1px solid rgba(249, 247, 241, 0.5) !important;
+  border-radius: 4px !important;   /* tiny nav button = 4px (--radius-sm) */
   transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
 }
 body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20:hover {
@@ -486,7 +495,7 @@ html body.ak-home #button-4dceb9ce {
   background: transparent !important;
   color: var(--ak-forest) !important;
   border: 1px solid var(--ak-forest-45) !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   letter-spacing: 0.04em;
   transition: background 180ms var(--ak-ease),
               color 180ms var(--ak-ease),
@@ -672,7 +681,7 @@ html body.ak-home #row-b29ca21b {
 html body.ak-home #field-d22e847d {
   background: var(--ak-cream) !important;
   border: 1px solid rgba(45, 45, 45, 0.18) !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   height: 56px !important;
   padding: 0 18px !important;
   color: var(--ak-ink) !important;
@@ -684,7 +693,7 @@ html body.ak-home #button-aab9edaf {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   border: 0 !important;
-  border-radius: 10px !important;
+  border-radius: 8px !important;
   height: 56px !important;
   min-height: 56px !important;
   padding: 0 24px !important;
