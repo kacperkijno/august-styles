@@ -625,16 +625,20 @@ html body.ak-home #text-afafbe98 span {
 html body.ak-home #section-22d30859 ul {
   list-style: none !important;
   counter-reset: ak-pb !important;
-  margin: 0 !important;
+  margin: 0 0 8px !important;
   padding: 0 !important;
 }
 html body.ak-home #section-22d30859 ul li {
   list-style: none !important;
   counter-increment: ak-pb;
   position: relative;
-  border-top: 1px solid var(--ak-ink-10) !important;
-  padding: 16px 0 16px 46px !important;
+  border-top: 0 !important;
+  border-bottom: 1px solid var(--ak-ink-10) !important;  /* dividers BETWEEN items, none at the very top */
+  padding: 14px 0 14px 40px !important;
   margin: 0 !important;
+}
+html body.ak-home #section-22d30859 ul li:last-child {
+  border-bottom: 0 !important;
 }
 html body.ak-home #section-22d30859 ul li i {
   display: none !important;   /* hide the fa-check icon */
@@ -643,12 +647,11 @@ html body.ak-home #section-22d30859 ul li::before {
   content: counter(ak-pb, decimal-leading-zero);
   position: absolute;
   left: 0;
-  top: 16px;
+  top: 14px;
   color: var(--ak-terracotta);
-  font-family: var(--ak-sans);
-  font-weight: 700;
-  font-size: 13px;
-  letter-spacing: 0.04em;
+  font-family: var(--ak-serif);   /* Caslon, like .magnet__list .n in index */
+  font-size: 16px;
+  line-height: 1.4;
 }
 
 /* PDF cover — floating-document shadow */
