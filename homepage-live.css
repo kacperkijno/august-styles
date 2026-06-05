@@ -525,11 +525,12 @@ html body.ak-home #text-ef252a6d span {
 
 /* --- Pillars: row spacing + dividers (lines) are set in systeme.io.
    systeme puts the RIGHT column at align-self:flex-end (stuck to the
-   bottom of the grid row). Override it to flex-start so the title sits at
-   the same height as the big number. --------------------------------- */
-html body.ak-home #row-feedd8db > div[size="6"]:last-child,
-html body.ak-home #row-a1582001 > div[size="6"]:last-child,
-html body.ak-home #row-47647d37 > div[size="6"]:last-child {
+   bottom of the grid row). Top-align EVERY size=6 column so the title
+   sits at the same height as the big number. (The row also has a third
+   size=12 child, so :last-child must NOT be used here.) --------------- */
+html body.ak-home #row-feedd8db > div[size="6"],
+html body.ak-home #row-a1582001 > div[size="6"],
+html body.ak-home #row-47647d37 > div[size="6"] {
   align-self: flex-start !important;
 }
 
