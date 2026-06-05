@@ -524,14 +524,21 @@ html body.ak-home #text-ef252a6d span {
 }
 
 /* --- Pillars: row spacing + dividers (lines) are set in systeme.io.
-   systeme puts the RIGHT column at align-self:flex-end (stuck to the
-   bottom of the grid row). Top-align EVERY size=6 column so the title
-   sits at the same height as the big number. (The row also has a third
-   size=12 child, so :last-child must NOT be used here.) --------------- */
+   LEFT column (number + lead) top-aligns with the grid row. ----------- */
 html body.ak-home #row-feedd8db > div[size="6"],
 html body.ak-home #row-a1582001 > div[size="6"],
 html body.ak-home #row-47647d37 > div[size="6"] {
   align-self: flex-start !important;
+}
+
+/* RIGHT column (title + body): stretch to the full row height and push
+   the title to the TOP (level with the number) and the body to the
+   BOTTOM. systeme makes it a flex column, so space-between does it. */
+html body.ak-home #row-feedd8db > div[size="6"]:nth-child(2),
+html body.ak-home #row-a1582001 > div[size="6"]:nth-child(2),
+html body.ak-home #row-47647d37 > div[size="6"]:nth-child(2) {
+  align-self: stretch !important;
+  justify-content: space-between !important;
 }
 
 /* Big serif numbers → terracotta */
