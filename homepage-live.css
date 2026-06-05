@@ -486,7 +486,7 @@ html body.ak-home #button-4dceb9ce {
   background: transparent !important;
   color: var(--ak-forest) !important;
   border: 1px solid var(--ak-forest-45) !important;
-  border-radius: 2px !important;
+  border-radius: 10px !important;
   letter-spacing: 0.04em;
   transition: background 180ms var(--ak-ease),
               color 180ms var(--ak-ease),
@@ -672,7 +672,7 @@ html body.ak-home #row-b29ca21b {
 html body.ak-home #field-d22e847d {
   background: var(--ak-cream) !important;
   border: 1px solid rgba(45, 45, 45, 0.18) !important;
-  border-radius: 2px !important;
+  border-radius: 10px !important;
   height: 56px !important;
   padding: 0 18px !important;
   color: var(--ak-ink) !important;
@@ -684,7 +684,7 @@ html body.ak-home #button-aab9edaf {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   border: 0 !important;
-  border-radius: 2px !important;
+  border-radius: 10px !important;
   height: 56px !important;
   min-height: 56px !important;
   padding: 0 24px !important;
