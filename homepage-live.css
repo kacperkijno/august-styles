@@ -59,6 +59,38 @@ html body.ak-home [id^="button-"] {
   border-radius: 8px !important;
 }
 
+/* ---------- Global button hover (subtle lift + shadow) -------
+   Composes with each button's own colour-change hover. */
+html body.ak-home [id^="button-"] {
+  transition: transform 200ms var(--ak-ease),
+              box-shadow 200ms var(--ak-ease),
+              background-color 200ms var(--ak-ease),
+              color 200ms var(--ak-ease) !important;
+}
+html body.ak-home [id^="button-"]:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 22px rgba(26, 60, 47, 0.16) !important;
+}
+
+/* ---------- Scroll-reveal (framework pillars, testimonials) ---
+   .ak-reveal is added by homepage-live.js (so no-JS = visible);
+   .ak-in plays the rise. animation-delay set inline for stagger. */
+@keyframes ak-rise {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+html body.ak-home .ak-reveal { opacity: 0; }
+html body.ak-home .ak-reveal.ak-in {
+  animation: ak-rise 600ms cubic-bezier(0.2, 0.6, 0.2, 1) both;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body.ak-home [id^="button-"] { transition: none !important; }
+  html body.ak-home [id^="button-"]:hover { transform: none !important; box-shadow: none !important; }
+  html body.ak-home .ak-reveal { opacity: 1 !important; }
+  html body.ak-home .ak-reveal.ak-in { animation: none !important; }
+}
+
 
 /* ============================================================
    August Kjerland — Hero section override
@@ -709,7 +741,6 @@ html body.ak-home #button-aab9edaf * {
 }
 html body.ak-home #button-aab9edaf:hover {
   background: var(--ak-terracotta-dark, #9A5832) !important;
-  transform: translateY(-1px);
 }
 
 

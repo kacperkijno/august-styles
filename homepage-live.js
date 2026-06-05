@@ -42,6 +42,42 @@
     cards.forEach(function (c) { io.observe(c); });
   }
 
+  /* --- 2b. Generic scroll reveal (framework pillars, testimonials) ---
+     JS adds .ak-reveal (so without JS nothing is hidden), then the
+     observer adds .ak-in to play the rise animation. Staggered per group. */
+  function initReveal() {
+    var groups = [
+      ['#row-feedd8db', '#row-a1582001', '#row-47647d37'],                                   // Framework numbered boxes
+      ['#row-90b835d4', '#row-9ba983ac', '#row-db1956fa', '#row-f1101f63', '#row-407010f1']  // Testimonials cards
+    ];
+    var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    var targets = [];
+    groups.forEach(function (sels) {
+      sels.forEach(function (sel, i) {
+        var el = document.querySelector(sel);
+        if (!el) return;
+        el.classList.add('ak-reveal');
+        el.style.animationDelay = (i * 90) + 'ms';   // stagger within the group
+        targets.push(el);
+      });
+    });
+    if (!targets.length) return;
+
+    if (reduce || !('IntersectionObserver' in window)) {
+      targets.forEach(function (el) { el.classList.add('ak-in'); });
+      return;
+    }
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) {
+          e.target.classList.add('ak-in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+    targets.forEach(function (el) { io.observe(el); });
+  }
+
   /* --- 3. Header scroll state ---------------------------- */
   function initHeaderScroll() {
     var header = document.querySelector('header[type="WebsiteHeader"]');
@@ -66,6 +102,7 @@
   function init() {
     applyHomeClass();
     initCardReveal();
+    initReveal();
     initHeaderScroll();
   }
 
