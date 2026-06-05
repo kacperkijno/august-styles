@@ -424,26 +424,13 @@ html body.ak-home #row-80b09385 > div[size="6"]:first-child::after {
   pointer-events: none;
 }
 
-/* --- Eyebrow "About" + hairline rule ---------------------- */
+/* --- Eyebrow "About" — match OUR COURSES (16px terracotta, no rule) -- */
 html body.ak-home #text-0a285057,
 html body.ak-home #text-0a285057 p,
 html body.ak-home #text-0a285057 span {
-  font-size: 11px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.18em !important;
+  letter-spacing: 0 !important;
   text-transform: uppercase !important;
   color: var(--ak-terracotta) !important;
-}
-html body.ak-home #text-0a285057 {
-  margin-bottom: 14px !important;
-}
-html body.ak-home #text-0a285057::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 1px;
-  background: var(--ak-terracotta);
-  margin-top: 14px;
 }
 
 /* --- Body paragraphs -------------------------------------- */
@@ -515,26 +502,13 @@ html body.ak-home #section-d56a75da {
   background: var(--ak-cream) !important;
 }
 
-/* --- Eyebrow "The Framework" + hairline rule -------------- */
+/* --- Eyebrow "The Framework" — match OUR COURSES (no rule) -- */
 html body.ak-home #text-4614e520,
 html body.ak-home #text-4614e520 p,
 html body.ak-home #text-4614e520 span {
-  font-size: 11px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.18em !important;
+  letter-spacing: 0 !important;
   text-transform: uppercase !important;
   color: var(--ak-terracotta) !important;
-}
-html body.ak-home #text-4614e520 {
-  margin-bottom: 14px !important;
-}
-html body.ak-home #text-4614e520::after {
-  content: "";
-  display: block;
-  width: 48px;
-  height: 1px;
-  background: var(--ak-terracotta);
-  margin-top: 14px;
 }
 
 /* --- Head row: bottom-align the intro, add breathing room -- */
@@ -549,17 +523,7 @@ html body.ak-home #text-ef252a6d span {
   line-height: 1.6 !important;
 }
 
-/* --- Pillars: editorial hairline rows --------------------- */
-html body.ak-home #row-feedd8db,
-html body.ak-home #row-a1582001,
-html body.ak-home #row-47647d37 {
-  border-top: 1px solid var(--ak-ink-10);
-  padding-block: 48px !important;
-  align-items: start;
-}
-html body.ak-home #row-47647d37 {
-  border-bottom: 1px solid var(--ak-ink-10);
-}
+/* --- Pillars: row spacing + dividers (lines) are set in systeme.io --- */
 
 /* Big serif numbers → terracotta */
 html body.ak-home #text-8b720090, html body.ak-home #text-8b720090 *,
@@ -587,13 +551,8 @@ html body.ak-home #text-e65755ec, html body.ak-home #text-e65755ec * {
   line-height: 1.65 !important;
 }
 
-/* --- Flow strip: cream-soft pill, uppercase tracking ------ */
+/* --- Flow strip: text only (box bg/border/padding set in systeme.io) -- */
 html body.ak-home #text-ae2ae713 {
-  background: var(--ak-cream-soft);
-  border: 1px solid var(--ak-ink-10);
-  border-radius: 4px;
-  padding: 22px 28px !important;
-  margin-top: 28px;
   text-align: center;
 }
 html body.ak-home #text-ae2ae713 p,
@@ -612,11 +571,6 @@ html body.ak-home #text-ae2ae713 span {
   html body.ak-home #text-495af7cd *,
   html body.ak-home #text-70cc2123 * {
     font-size: 72px !important;
-  }
-  html body.ak-home #row-feedd8db,
-  html body.ak-home #row-a1582001,
-  html body.ak-home #row-47647d37 {
-    padding-block: 32px !important;
   }
   html body.ak-home #text-bc78e4a1 {
     padding-left: 0.5em !important;
