@@ -1639,3 +1639,125 @@ html body.ak-sales-page #text-2c00acfc * {
   font-weight: 500 !important;
   font-size: 12px !important;
 }
+
+/* ============================================================
+   33. WEBINAR THANK-YOU (/webinar-confirmed) — same treatment as
+   cc-playbook-thanks (sections 28-29), new page IDs.
+   Plus: uppercase eyebrows on BOTH thank-you pages (the generic
+   eyebrow rule misses them — different emotion classes).
+   Added 2026-06-10.
+   ============================================================ */
+
+/* ----- Eyebrows: uppercase tracked (both thank-you pages) -----
+   /webinar-confirmed: "You're in" + "While you wait"
+   /cc-playbook-thanks: "You're in" + "Going deeper" */
+html body.ak-sales-page #text-6b213f38 *,
+html body.ak-sales-page #text-b25ca5db *,
+html body.ak-sales-page #text-1cac3927 *,
+html body.ak-sales-page #text-45740cbe * {
+  display: inline-block;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+}
+
+/* ----- Hero H1: Caslon italic cream (was black roman on forest bg) ----- */
+html body.ak-sales-page #headline-976bde7f,
+html body.ak-sales-page #headline-976bde7f * {
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-style: italic !important;
+  color: var(--ak-cream) !important;
+}
+
+/* ----- Hero buttons: same hovers as cc-thanks (section 29) ----- */
+/* Add to calendar (cream, forest text) */
+html body.ak-sales-page #button-1df4e7e7 {
+  background: var(--ak-cream) !important;
+  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #button-1df4e7e7:hover {
+  background: #ffffff !important;
+  transform: translateY(-1px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+}
+/* Back to the site (transparent outline) */
+html body.ak-sales-page #button-d83f0af9 {
+  transition: background 180ms var(--ak-ease), border-color 180ms var(--ak-ease), transform 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #button-d83f0af9:hover {
+  background: rgba(249, 247, 241, 0.10) !important;
+  border-color: rgba(249, 247, 241, 0.85) !important;
+  transform: translateY(-1px);
+}
+/* Get the free playbook (terracotta) */
+html body.ak-sales-page #button-83c03eb1 {
+  background: var(--ak-terracotta) !important;
+  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #button-83c03eb1:hover {
+  background: #9A5832 !important;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+}
+
+/* ----- "What to do next" lead: same as cc-thanks text-946dd6f9 ----- */
+html body.ak-sales-page #text-0eeae616 {
+  text-align: center !important;
+  max-width: 760px !important;
+  margin: 0 auto 56px !important;
+}
+html body.ak-sales-page #text-0eeae616 p {
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-size: clamp(32px, 4vw, 48px) !important;
+  line-height: 1.12 !important;
+  letter-spacing: -0.01em !important;
+  color: var(--ak-forest) !important;
+  text-wrap: balance;
+}
+html body.ak-sales-page #text-0eeae616 p span {
+  color: var(--ak-forest) !important;
+}
+@media (max-width: 800px) {
+  html body.ak-sales-page #text-0eeae616 p {
+    font-size: 28px !important;
+  }
+}
+
+/* ----- Step rows: hover lift + terracotta border (as section 28) ----- */
+html body.ak-sales-page #row-34fad46c,
+html body.ak-sales-page #row-46af48e8,
+html body.ak-sales-page #row-80e3d619 {
+  transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
+  cursor: default;
+}
+html body.ak-sales-page #row-34fad46c:hover,
+html body.ak-sales-page #row-46af48e8:hover,
+html body.ak-sales-page #row-80e3d619:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
+  border-color: rgba(180, 106, 60, 0.35) !important;
+}
+
+/* ----- Step numbers 01/02/03: Caslon italic terracotta 36px ----- */
+html body.ak-sales-page #text-08bcf509 *,
+html body.ak-sales-page #text-d9e1a821 *,
+html body.ak-sales-page #text-076b8054 * {
+  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-style: italic !important;
+  font-size: 36px !important;
+  line-height: 1 !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* ----- Step titles: uppercase tracked forest (as section 28) ----- */
+html body.ak-sales-page #text-99e76733 *,
+html body.ak-sales-page #text-b5b38366 *,
+html body.ak-sales-page #text-4353c41d * {
+  font-size: 13px !important;
+  letter-spacing: 0.16em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+  font-weight: 500 !important;
+  line-height: 1.4 !important;
+}
