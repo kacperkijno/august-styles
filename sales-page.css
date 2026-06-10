@@ -1534,11 +1534,23 @@ html body.ak-sales-page #headline-ddc5749b * {
   color: var(--ak-ink) !important;
 }
 
-/* ----- Three cards: numerki Caslon italic terracotta (italic rule) ----- */
+/* ----- Three cards: numerki — same treatment as magnet landing
+   (section 27): Caslon italic terracotta 36px ----- */
+html body.ak-sales-page #text-b104d361,
+html body.ak-sales-page #text-188a3e0a,
+html body.ak-sales-page #text-06d265f0 {
+  font-size: 36px !important;
+  line-height: 1 !important;
+  letter-spacing: -0.01em !important;
+  margin-bottom: 14px !important;
+}
 html body.ak-sales-page #text-b104d361 *,
 html body.ak-sales-page #text-188a3e0a *,
 html body.ak-sales-page #text-06d265f0 * {
   font-style: italic !important;
+  font-size: 36px !important;
+  line-height: 1 !important;
+  color: var(--ak-terracotta) !important;
 }
 
 /* ----- Three cards: titles as uppercase tracked labels ----- */
