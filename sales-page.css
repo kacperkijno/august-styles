@@ -1546,22 +1546,33 @@ html body.ak-sales-page #text-7ba2f65e *,
 html body.ak-sales-page #text-68fc0827 *,
 html body.ak-sales-page #text-8b7a45da * {
   text-transform: uppercase !important;
-  letter-spacing: 0.12em !important;
-  font-size: 12px !important;
+  letter-spacing: 0.16em !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
-  color: var(--ak-ink) !important;
+  color: var(--ak-forest) !important;
+  line-height: 1.4 !important;
 }
 
-/* ----- Three cards: subtle hover lift ----- */
-html body.ak-sales-page #row-a9dc7d06,
+/* ----- Cards: hover lift, same values as magnet landing (section 29).
+   Cards: row-ba31b918 (01), row-0113e043 (02), row-ccda3c39 (03),
+          row-2e1200d2 (Who it's for), row-4bdb9391 (August) ----- */
+html body.ak-sales-page #row-ba31b918,
 html body.ak-sales-page #row-0113e043,
-html body.ak-sales-page #row-ccda3c39 {
-  transition: transform 220ms var(--ak-ease) !important;
+html body.ak-sales-page #row-ccda3c39,
+html body.ak-sales-page #row-2e1200d2,
+html body.ak-sales-page #row-4bdb9391 {
+  transition: box-shadow 220ms var(--ak-ease),
+              border-color 220ms var(--ak-ease),
+              transform 220ms var(--ak-ease) !important;
 }
-html body.ak-sales-page #row-a9dc7d06:hover,
+html body.ak-sales-page #row-ba31b918:hover,
 html body.ak-sales-page #row-0113e043:hover,
-html body.ak-sales-page #row-ccda3c39:hover {
-  transform: translateY(-3px);
+html body.ak-sales-page #row-ccda3c39:hover,
+html body.ak-sales-page #row-2e1200d2:hover,
+html body.ak-sales-page #row-4bdb9391:hover {
+  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  transform: translateY(-2px);
 }
 
 /* ----- Two-up (Who it's for / August Kjerland): labels as
@@ -1569,10 +1580,11 @@ html body.ak-sales-page #row-ccda3c39:hover {
 html body.ak-sales-page #text-c489e56b *,
 html body.ak-sales-page #text-30eb9712 * {
   text-transform: uppercase !important;
-  letter-spacing: 0.18em !important;
-  font-size: 11px !important;
+  letter-spacing: 0.16em !important;
+  font-size: 13px !important;
   font-weight: 500 !important;
   color: var(--ak-forest) !important;
+  line-height: 1.4 !important;
 }
 html body.ak-sales-page #text-30eb9712 p::before {
   content: "★ ";
@@ -1601,4 +1613,17 @@ html body.ak-sales-page #section-89f347ed input:focus {
 html body.ak-sales-page #text-c51f54be * {
   font-size: 12.5px !important;
   color: var(--ak-ink-50) !important;
+}
+
+/* ----- Section eyebrows ("What you'll leave with", "One session,
+   recorded once"): uppercase tracked, same treatment as the generic
+   sales-page eyebrow rule (section 2), which misses this page
+   because its emotion class is sc-bypJrU, not sc-iGgWBk ----- */
+html body.ak-sales-page #text-91860a20 *,
+html body.ak-sales-page #text-2c00acfc * {
+  display: inline-block;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
 }
