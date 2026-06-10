@@ -1441,3 +1441,164 @@ html body.ak-sales-page #section-611e31fb ~ section[id^="section-"]:not([id="sec
 html body.ak-sales-page #section-611e31fb {
   /* keep just the checkout section — no-op for now, leave nav/footer toggle to systeme settings */
 }
+
+/* ============================================================
+   32. WEBINAR PAGE (/webinar) — How to Pitch Across Cultures
+   Added 2026-06-10. IDs are page-specific to /webinar, so this
+   block is inert on magnet/course pages that share this file.
+   Source mockup: redesign/webinar-landing.html
+   ============================================================ */
+
+/* ----- Hero: H1 → Forest (systeme inlines color on spans) ----- */
+html body.ak-sales-page #headline-e5bc6f8e,
+html body.ak-sales-page #headline-e5bc6f8e * {
+  color: var(--ak-forest) !important;
+}
+
+/* ----- Hero badge pill: stronger bg + hairline + micro-label + dot ----- */
+html body.ak-sales-page #row-bef67e36 {
+  background: rgba(255, 255, 255, 0.55) !important;
+  border: 1px solid rgba(26, 60, 47, 0.15) !important;
+}
+html body.ak-sales-page #text-cee9f10f,
+html body.ak-sales-page #text-cee9f10f * {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  color: var(--ak-forest) !important;
+}
+html body.ak-sales-page #text-cee9f10f p::before {
+  content: "";
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--ak-terracotta);
+  margin-right: 8px;
+  vertical-align: 1px;
+}
+
+/* ----- Hero fine print under CTA ----- */
+html body.ak-sales-page #text-df5b324f,
+html body.ak-sales-page #text-df5b324f * {
+  font-size: 13px !important;
+  color: var(--ak-ink-50) !important;
+}
+
+/* ----- Hero photo: floating shadow (radius 4px already set in editor) ----- */
+html body.ak-sales-page #image-05ba52b8 {
+  box-shadow: 0 24px 60px rgba(26, 60, 47, 0.18) !important;
+}
+
+/* ----- Buttons: design-system radius 8px + hover lift.
+   Canon per colors_and_type.css --radius-btn: 8px (homepage uses it).
+   Nav CTA + hero CTA + form submit + final CTA. ----- */
+html body.ak-sales-page #button-432ec8bd a,
+html body.ak-sales-page #button-e14c6387 a,
+html body.ak-sales-page #button-dc8923b7 a,
+html body.ak-sales-page #button-1119cf8c a {
+  border-radius: 8px !important;
+  transition: background-color 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #button-e14c6387 a:hover,
+html body.ak-sales-page #button-dc8923b7 a:hover {
+  background: #122e23 !important;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(26, 60, 47, 0.25) !important;
+}
+html body.ak-sales-page #button-432ec8bd a:hover,
+html body.ak-sales-page #button-1119cf8c a:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 28px rgba(26, 60, 47, 0.20) !important;
+}
+
+/* ----- Facts strip (When / Length / Where / Price): labels as
+   uppercase micro-labels; values stay Caslon (already set) ----- */
+html body.ak-sales-page #text-b680a5bd *,
+html body.ak-sales-page #text-e67d8d39 *,
+html body.ak-sales-page #text-059b1c45 *,
+html body.ak-sales-page #text-d29bc4ef * {
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+  font-weight: 500 !important;
+}
+
+/* ----- Section H2s → Ink (hero H1 is the only Forest heading) ----- */
+html body.ak-sales-page #headline-8381816b,
+html body.ak-sales-page #headline-8381816b *,
+html body.ak-sales-page #headline-5a5220dc,
+html body.ak-sales-page #headline-5a5220dc *,
+html body.ak-sales-page #headline-ddc5749b,
+html body.ak-sales-page #headline-ddc5749b * {
+  color: var(--ak-ink) !important;
+}
+
+/* ----- Three cards: numerki Caslon italic terracotta (italic rule) ----- */
+html body.ak-sales-page #text-b104d361 *,
+html body.ak-sales-page #text-188a3e0a *,
+html body.ak-sales-page #text-06d265f0 * {
+  font-style: italic !important;
+}
+
+/* ----- Three cards: titles as uppercase tracked labels ----- */
+html body.ak-sales-page #text-7ba2f65e *,
+html body.ak-sales-page #text-68fc0827 *,
+html body.ak-sales-page #text-8b7a45da * {
+  text-transform: uppercase !important;
+  letter-spacing: 0.12em !important;
+  font-size: 12px !important;
+  font-weight: 500 !important;
+  color: var(--ak-ink) !important;
+}
+
+/* ----- Three cards: subtle hover lift ----- */
+html body.ak-sales-page #row-a9dc7d06,
+html body.ak-sales-page #row-0113e043,
+html body.ak-sales-page #row-ccda3c39 {
+  transition: transform 220ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #row-a9dc7d06:hover,
+html body.ak-sales-page #row-0113e043:hover,
+html body.ak-sales-page #row-ccda3c39:hover {
+  transform: translateY(-3px);
+}
+
+/* ----- Two-up (Who it's for / August Kjerland): labels as
+   uppercase Forest micro-labels, star before author ----- */
+html body.ak-sales-page #text-c489e56b *,
+html body.ak-sales-page #text-30eb9712 * {
+  text-transform: uppercase !important;
+  letter-spacing: 0.18em !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  color: var(--ak-forest) !important;
+}
+html body.ak-sales-page #text-30eb9712 p::before {
+  content: "★ ";
+  color: var(--ak-terracotta) !important;
+}
+
+/* ----- Form card: cream + hairline + soft shadow (was plain white) ----- */
+html body.ak-sales-page #row-a74c7329 {
+  background: var(--ak-cream) !important;
+  border: 1px solid var(--ak-ink-10) !important;
+  box-shadow: 0 18px 50px rgba(26, 60, 47, 0.10) !important;
+}
+
+/* ----- Form inputs: radius 8px, forest focus ----- */
+html body.ak-sales-page #section-89f347ed input {
+  border-radius: 8px !important;
+  transition: border-color 180ms var(--ak-ease), background-color 180ms var(--ak-ease) !important;
+}
+html body.ak-sales-page #section-89f347ed input:focus {
+  outline: none !important;
+  border-color: var(--ak-forest) !important;
+  background: var(--ak-cream) !important;
+}
+
+/* ----- Form consent fine print ----- */
+html body.ak-sales-page #text-c51f54be * {
+  font-size: 12.5px !important;
+  color: var(--ak-ink-50) !important;
+}
