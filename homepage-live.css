@@ -1061,3 +1061,29 @@ html body.ak-home #section-d54243f0 img {
 #row-d553c684 #text-630b4ccf * { transition: color 240ms cubic-bezier(.2,.6,.2,1); }
 #row-8943a7f1:hover #text-1e2d91b1 *,
 #row-d553c684:hover #text-630b4ccf * { color: #1A3C2F !important; }
+
+/* ==================== FOOTER (global, all pages) ==================== */
+/* Live loads homepage-live.css, NOT core.css — so footer social/title
+   styles must live here too. .footer__social markup is a raw-HTML widget. */
+
+/* Social icons → cream circles, hover terracotta + lift */
+.footer__social { display: flex !important; gap: 12px !important; }
+.footer__social a {
+  display: inline-flex !important; align-items: center; justify-content: center;
+  width: 38px !important; height: 38px !important; border-radius: 50% !important;
+  border: 1px solid rgba(249, 247, 241, .18) !important;
+  color: rgba(249, 247, 241, .7) !important;
+  transition: color .2s ease, border-color .2s ease, transform .2s ease !important;
+}
+.footer__social a:hover {
+  color: #F9F7F1 !important;
+  border-color: #B46A3C !important;
+  transform: translateY(-2px) !important;
+}
+.footer__social svg { width: 17px !important; height: 17px !important; }
+
+/* Column titles (Academy / Work with August / Connect) → uppercase + tracked */
+#text-6ba6f5db *, #text-f20a7ba7 *, #text-463758d7 * {
+  text-transform: uppercase !important;
+  letter-spacing: .18em !important;
+}
