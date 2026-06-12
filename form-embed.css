@@ -1,0 +1,41 @@
+/* ============================================================
+   AK newsletter embed — styling for the systeme optin FORM PAGE
+   (the form loaded inside the footer iframe, id "form-container-2").
+
+   This file is loaded by a <link> injected into the FORM PAGE's own
+   custom head (NOT the homepage). The page renders inside a transparent
+   iframe sitting on the dark (ink) footer, so the form is styled for a
+   dark surface: translucent cream input + terracotta button.
+
+   Served from: https://kacperkijno.github.io/august-styles/form-embed.css
+   ============================================================ */
+
+/* Let the dark footer show through the iframe */
+body { background: transparent !important; }
+
+/* Email input — translucent on dark, cream text + border (mockup on-dark) */
+input:not([type="submit"]):not([type="button"]) {
+  background: rgba(249, 247, 241, 0.08) !important;
+  border: 1px solid rgba(249, 247, 241, 0.22) !important;
+  border-radius: 8px !important;
+  height: 54px !important;
+  color: #F9F7F1 !important;
+  font-size: 15px !important;
+  padding: 0 16px !important;
+  box-shadow: none !important;
+}
+input::placeholder { color: rgba(249, 247, 241, 0.55) !important; }
+input:focus { outline: none !important; border-color: rgba(249, 247, 241, 0.5) !important; }
+
+/* Submit button — terracotta, matches the input height + brand radius */
+button, [type="submit"] {
+  background: #B46A3C !important;
+  color: #F9F7F1 !important;
+  border: none !important;
+  border-radius: 8px !important;
+  height: 54px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.04em !important;
+  transition: background .2s ease !important;
+}
+button:hover, [type="submit"]:hover { background: #9A5530 !important; }
