@@ -129,12 +129,88 @@
     check(); // run once on load (in case page restored mid-scroll)
   }
 
+  /* --- 4. Latest writing (auto from the systeme blog RSS) ----
+     Drop <div id="ak-latest-writing" data-count="3"></div> anywhere
+     (a raw-HTML widget). This fetches /blog/feed (same-origin, no CORS),
+     renders the newest N posts as fully-clickable cards, and auto-updates
+     whenever August publishes — no manual editing. */
+  function initLatestWriting() {
+    var host = document.getElementById('ak-latest-writing');
+    if (!host) return;
+    var count = parseInt(host.getAttribute('data-count'), 10) || 3;
+
+    fetch('/blog/feed', { credentials: 'omit' })
+      .then(function (r) { return r.ok ? r.text() : Promise.reject(r.status); })
+      .then(function (xml) {
+        var doc = new DOMParser().parseFromString(xml, 'application/xml');
+        var items = [].slice.call(doc.querySelectorAll('item')).slice(0, count);
+        if (!items.length) return;
+
+        host.classList.add('ak-writing-grid');
+        host.innerHTML = '';
+
+        items.forEach(function (it) {
+          var get = function (t) { var n = it.querySelector(t); return n ? n.textContent : ''; };
+          var title = get('title');
+          var link = get('link');
+          var cat = get('category');
+          var enc = it.querySelector('enclosure');
+          var imgUrl = enc ? enc.getAttribute('url') : '';
+
+          var date = '';
+          var pd = get('pubDate');
+          if (pd) {
+            var d = new Date(pd);
+            if (!isNaN(d.getTime())) {
+              date = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
+            }
+          }
+
+          var a = document.createElement('a');
+          a.className = 'ak-writing-card';
+          a.href = link;
+
+          if (imgUrl) {
+            var thumb = document.createElement('div');
+            thumb.className = 'ak-writing-thumb';
+            var img = document.createElement('img');
+            img.src = imgUrl; img.alt = title; img.loading = 'lazy';
+            thumb.appendChild(img);
+            a.appendChild(thumb);
+          }
+
+          var body = document.createElement('div');
+          body.className = 'ak-writing-body';
+          if (cat) {
+            var eb = document.createElement('span');
+            eb.className = 'ak-writing-eyebrow';
+            eb.textContent = cat;
+            body.appendChild(eb);
+          }
+          var h = document.createElement('h3');
+          h.className = 'ak-writing-title';
+          h.textContent = title;
+          body.appendChild(h);
+          if (date) {
+            var dt = document.createElement('span');
+            dt.className = 'ak-writing-date';
+            dt.textContent = date;
+            body.appendChild(dt);
+          }
+          a.appendChild(body);
+          host.appendChild(a);
+        });
+      })
+      .catch(function () { /* on failure leave whatever is in the host (static fallback) */ });
+  }
+
   /* --- Boot ---------------------------------------------- */
   function init() {
     applyHomeClass();
     initCardReveal();
     initReveal();
     initHeaderScroll();
+    initLatestWriting();
   }
 
   applyHomeClass(); // earliest possible, before paint where we can

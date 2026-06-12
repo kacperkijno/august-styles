@@ -970,3 +970,47 @@ html body.ak-home #section-d54243f0 img {
   bottom: 26px !important;
   right: 26px !important;
 }
+
+/* ============ LATEST WRITING (auto from /blog/feed) ============
+   Populated by initLatestWriting() in homepage-live.js. Drop
+   <div id="ak-latest-writing" data-count="3"></div> in a raw-HTML
+   widget; JS fetches the blog RSS and builds fully-clickable cards. */
+.ak-writing-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+}
+.ak-writing-card {
+  display: flex;
+  flex-direction: column;
+  text-decoration: none;
+  color: inherit;
+  background: #fff;
+  border: 1px solid rgba(45, 45, 45, .10);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: transform 220ms cubic-bezier(.2,.6,.2,1),
+              box-shadow 220ms cubic-bezier(.2,.6,.2,1),
+              border-color 220ms cubic-bezier(.2,.6,.2,1);
+}
+.ak-writing-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 32px rgba(26, 60, 47, .10);
+  border-color: rgba(26, 60, 47, .30);
+}
+.ak-writing-thumb { aspect-ratio: 16 / 9; overflow: hidden; }
+.ak-writing-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.ak-writing-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 9px; }
+.ak-writing-eyebrow {
+  font-family: "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
+  font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #B46A3C;
+}
+.ak-writing-title {
+  font-family: "AdobeCaslonPro42448745", Georgia, serif;
+  font-size: 20px; line-height: 1.22; color: #2D2D2D; margin: 0;
+}
+.ak-writing-date {
+  font-family: "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
+  font-size: 12px; color: rgba(45, 45, 45, .55);
+}
+@media (max-width: 860px) { .ak-writing-grid { grid-template-columns: 1fr; } }
