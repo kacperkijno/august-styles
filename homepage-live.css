@@ -1087,3 +1087,6 @@ html body.ak-home #section-d54243f0 img {
   text-transform: uppercase !important;
   letter-spacing: .18em !important;
 }
+
+/* Footer link columns equal width (systeme had them at size 3/4/5 → span 4 each) */
+#row-138b5654 > div { grid-column: span 4 !important; }
