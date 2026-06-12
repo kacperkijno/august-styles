@@ -930,8 +930,23 @@ html body.ak-home #section-d54243f0 img {
 /* Top accent bar: 4px terracotta (mockup), was 1.6px */
 #row-97217497, #row-e00bbdb4, #row-25ebc2b3 { border-top: 4px solid #B46A3C !important; }
 
-/* Gap between AK logo and the eyebrow/title block inside the green cover */
-#row-1bbd9dc5, #row-f913cc10, #row-b254da4e { margin-top: 16px !important; }
+/* Green cover layout: AK logo at top, eyebrow+title pushed to the bottom */
+#row-97217497 > div, #row-e00bbdb4 > div, #row-25ebc2b3 > div {
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+
+/* Card hover: forest border + lift + shadow (matches the courses cards) */
+#row-0f9fb35f, #row-0aea429e, #row-abcbf5de {
+  transition: transform 220ms cubic-bezier(.2,.6,.2,1),
+              box-shadow 220ms cubic-bezier(.2,.6,.2,1),
+              border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
+}
+#row-0f9fb35f:hover, #row-0aea429e:hover, #row-abcbf5de:hover {
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
+  transform: translateY(-4px) !important;
+}
 
 /* ---- PDF cards: pin "Get it here" button to bottom-right ----
    systeme wraps every element in its own position:relative box, so an
