@@ -1043,19 +1043,20 @@ html body.ak-home #section-d54243f0 img {
 #row-3131a628, #row-1ab6203c { margin-top: 14px !important; }    /* thumbnail -> text block */
 #text-1e2d91b1, #text-630b4ccf { margin-bottom: 7px !important; } /* title -> meta */
 
-/* Interview boxes: hover anywhere on a box (thumb, title, or meta) reacts.
-   Each video is its own box id (NOT the shared Watch column), so hovering
-   one never triggers the other. Lifts the thumbnail + darkens the title. */
+/* Interview boxes: hover anywhere on a box (thumb, title, or meta) lifts the
+   WHOLE box as one unit. Each video is its own box id (NOT the shared Watch
+   column), so hovering one never triggers the other. */
+#row-8943a7f1, #row-d553c684 {
+  transition: transform 240ms cubic-bezier(.2,.6,.2,1) !important;
+}
+#row-8943a7f1:hover, #row-d553c684:hover { transform: translateY(-4px) !important; }
+/* Neutralize the thumbnail's own lift so it doesn't double up — the box moves. */
+#row-8943a7f1 .material-card:hover .material-thumb,
+#row-d553c684 .material-card:hover .material-thumb { transform: none !important; }
 #row-8943a7f1 .material-thumb,
-#row-d553c684 .material-thumb {
-  transition: transform 240ms cubic-bezier(.2,.6,.2,1),
-              box-shadow 240ms cubic-bezier(.2,.6,.2,1);
-}
+#row-d553c684 .material-thumb { transition: box-shadow 240ms cubic-bezier(.2,.6,.2,1) !important; }
 #row-8943a7f1:hover .material-thumb,
-#row-d553c684:hover .material-thumb {
-  transform: translateY(-4px) !important;
-  box-shadow: 0 14px 34px rgba(26, 60, 47, .14) !important;
-}
+#row-d553c684:hover .material-thumb { box-shadow: 0 14px 34px rgba(26, 60, 47, .14) !important; }
 #row-8943a7f1 #text-1e2d91b1 *,
 #row-d553c684 #text-630b4ccf * { transition: color 240ms cubic-bezier(.2,.6,.2,1); }
 #row-8943a7f1:hover #text-1e2d91b1 *,
