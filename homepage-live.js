@@ -146,58 +146,33 @@
         var items = [].slice.call(doc.querySelectorAll('item')).slice(0, count);
         if (!items.length) return;
 
-        host.classList.add('ak-writing-grid');
+        host.classList.add('ak-writing-list');
         host.innerHTML = '';
+
+        var ARROW = '<svg class="post__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
 
         items.forEach(function (it) {
           var get = function (t) { var n = it.querySelector(t); return n ? n.textContent : ''; };
-          var title = get('title');
-          var link = get('link');
-          var cat = get('category');
-          var enc = it.querySelector('enclosure');
-          var imgUrl = enc ? enc.getAttribute('url') : '';
-
-          var date = '';
-          var pd = get('pubDate');
-          if (pd) {
-            var d = new Date(pd);
-            if (!isNaN(d.getTime())) {
-              date = d.toLocaleDateString('en-GB', { day: 'numeric', month: 'short', year: 'numeric' });
-            }
-          }
-
           var a = document.createElement('a');
-          a.className = 'ak-writing-card';
-          a.href = link;
+          a.className = 'post';
+          a.href = get('link');
 
-          if (imgUrl) {
-            var thumb = document.createElement('div');
-            thumb.className = 'ak-writing-thumb';
-            var img = document.createElement('img');
-            img.src = imgUrl; img.alt = title; img.loading = 'lazy';
-            thumb.appendChild(img);
-            a.appendChild(thumb);
-          }
-
-          var body = document.createElement('div');
-          body.className = 'ak-writing-body';
+          var main = document.createElement('span');
+          main.className = 'post__main';
+          var cat = get('category');
           if (cat) {
-            var eb = document.createElement('span');
-            eb.className = 'ak-writing-eyebrow';
-            eb.textContent = cat;
-            body.appendChild(eb);
+            var c = document.createElement('span');
+            c.className = 'post__cat';
+            c.textContent = cat;
+            main.appendChild(c);
           }
-          var h = document.createElement('h3');
-          h.className = 'ak-writing-title';
-          h.textContent = title;
-          body.appendChild(h);
-          if (date) {
-            var dt = document.createElement('span');
-            dt.className = 'ak-writing-date';
-            dt.textContent = date;
-            body.appendChild(dt);
-          }
-          a.appendChild(body);
+          var t = document.createElement('span');
+          t.className = 'post__title';
+          t.textContent = get('title');
+          main.appendChild(t);
+
+          a.appendChild(main);
+          a.insertAdjacentHTML('beforeend', ARROW);
           host.appendChild(a);
         });
       })
