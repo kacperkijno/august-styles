@@ -852,6 +852,8 @@ html body.ak-home #section-d54243f0 img {
 }
 
 /* ==================== MATERIALS PAGE ==================== */
+/* Requires homepage-live.css loaded on /materials head. Rules are ID-scoped
+   (systeme IDs unique per page) so no body class needed. */
 
 /* ---- Video thumbnails (raw-html .material-*) ---- */
 .materials-grid { display: block; width: 100%; }
@@ -883,43 +885,32 @@ html body.ak-home #section-d54243f0 img {
 .material-card:hover .material-play { background:#1A3C2F; transform: translate(-50%,-50%) scale(1.08); }
 
 /* ---- Section eyebrows (top-right labels) — uppercase, smaller, tracked ---- */
-html body.ak-home #text-4f9f3a78,
-html body.ak-home #text-1c72f0d2 { text-transform: uppercase !important; }
-html body.ak-home #text-4f9f3a78 *,
-html body.ak-home #text-1c72f0d2 * {
+#text-4f9f3a78, #text-1c72f0d2 { text-transform: uppercase !important; }
+#text-4f9f3a78 *, #text-1c72f0d2 * {
   font-size: 11px !important;
   letter-spacing: .14em !important;
   text-transform: uppercase !important;
 }
 
 /* ---- PDF cards: equalize green cover height ---- */
-html body.ak-home #row-97217497,
-html body.ak-home #row-e00bbdb4,
-html body.ak-home #row-25ebc2b3 { min-height: 193px !important; }
+#row-97217497, #row-e00bbdb4, #row-25ebc2b3 { min-height: 193px !important; }
 
 /* ---- PDF cover eyebrow ("Free guide · PDF") — uppercase + tracked ---- */
-html body.ak-home #text-93cebdcb *,
-html body.ak-home #text-a339b26e *,
-html body.ak-home #text-7ba0e3f6 * {
+#text-93cebdcb *, #text-a339b26e *, #text-7ba0e3f6 * {
   text-transform: uppercase !important;
   letter-spacing: .14em !important;
 }
 
 /* ---- PDF bottom tag ("Cross-cultural" / "Pitching") — uppercase + tracked ---- */
-html body.ak-home #text-8fe757de *,
-html body.ak-home #text-80a45cc2 *,
-html body.ak-home #text-522a5bd4 * {
+#text-8fe757de *, #text-80a45cc2 *, #text-522a5bd4 * {
   text-transform: uppercase !important;
   letter-spacing: .14em !important;
 }
 
 /* ---- Video boxes: gap below thumbnail + uppercase meta ---- */
-html body.ak-home #text-fcd73a25,
-html body.ak-home #text-bc603af7 { margin-top: 18px !important; }
-html body.ak-home #text-4cb2d43a,
-html body.ak-home #text-583aa39b { margin-top: 6px !important; }
-html body.ak-home #text-4cb2d43a *,
-html body.ak-home #text-583aa39b * {
+#text-fcd73a25, #text-bc603af7 { margin-top: 18px !important; }
+#text-4cb2d43a, #text-583aa39b { margin-top: 6px !important; }
+#text-4cb2d43a *, #text-583aa39b * {
   text-transform: uppercase !important;
   letter-spacing: .12em !important;
 }
