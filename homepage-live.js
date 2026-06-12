@@ -103,6 +103,17 @@
     var header = document.querySelector('header[type="WebsiteHeader"]');
     if (!header) return;
 
+    /* Homepage has a dark hero behind a transparent nav → reveal the solid
+       bar on scroll. Other pages (materials, etc.) have no dark hero, so the
+       transparent default is unreadable on a light page — pin the solid bar
+       from the top and skip the scroll toggle. */
+    var isHome = location.pathname === '/' ||
+                 !!document.getElementById('section-e8a2d9b7');
+    if (!isHome) {
+      header.classList.add('is-scrolled');
+      return;
+    }
+
     var threshold = 40;
     var state = false;
 
