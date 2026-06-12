@@ -860,7 +860,7 @@ html body.ak-home #section-d54243f0 img {
 .material-card { display: block; text-decoration: none; color: inherit; }
 .material-thumb {
   position: relative;
-  border-radius: 16px;
+  border-radius: 4px;
   overflow: hidden;
   box-shadow: 0 2px 16px rgba(26,60,47,.08), 0 1px 4px rgba(26,60,47,.04);
   transition: transform .35s ease, box-shadow .35s ease;
@@ -914,3 +914,17 @@ html body.ak-home #section-d54243f0 img {
   text-transform: uppercase !important;
   letter-spacing: .12em !important;
 }
+
+/* ---- PDF cards: equal full height, 4px top bar, logo→text gap ---- */
+/* Equalize the three card boxes via grid stretch + height:100% down the chain */
+#row-43e03677 { align-items: stretch !important; }
+#row-43e03677 > div[size="4"],
+#row-43e03677 > div[size="4"] > div,
+#row-43e03677 > div[size="4"] > div > div { height: 100% !important; }
+#row-0f9fb35f, #row-0aea429e, #row-abcbf5de { height: 100% !important; }
+
+/* Top accent bar: 4px terracotta (mockup), was 1.6px */
+#row-97217497, #row-e00bbdb4, #row-25ebc2b3 { border-top: 4px solid #B46A3C !important; }
+
+/* Gap between AK logo and the eyebrow/title block inside the green cover */
+#row-1bbd9dc5, #row-f913cc10, #row-b254da4e { margin-top: 16px !important; }
