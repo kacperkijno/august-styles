@@ -850,3 +850,76 @@ html body.ak-home #section-d54243f0 img {
     padding-left: 0.5em !important;
   }
 }
+
+/* ==================== MATERIALS PAGE ==================== */
+
+/* ---- Video thumbnails (raw-html .material-*) ---- */
+.materials-grid { display: block; width: 100%; }
+.material-card { display: block; text-decoration: none; color: inherit; }
+.material-thumb {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 2px 16px rgba(26,60,47,.08), 0 1px 4px rgba(26,60,47,.04);
+  transition: transform .35s ease, box-shadow .35s ease;
+}
+.material-thumb img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
+.material-play {
+  position: absolute; top: 50%; left: 50%;
+  width: 60px; height: 60px; transform: translate(-50%,-50%);
+  border-radius: 50%; background: rgba(26,60,47,.85);
+  transition: transform .35s ease, background .35s ease;
+}
+.material-play::before {
+  content: ""; position: absolute; top: 50%; left: 54%;
+  transform: translate(-50%,-50%);
+  border-left: 18px solid #F9F7F1;
+  border-top: 11px solid transparent; border-bottom: 11px solid transparent;
+}
+.material-card:hover .material-thumb {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 32px rgba(26,60,47,.12), 0 2px 8px rgba(26,60,47,.06);
+}
+.material-card:hover .material-play { background:#1A3C2F; transform: translate(-50%,-50%) scale(1.08); }
+
+/* ---- Section eyebrows (top-right labels) — uppercase, smaller, tracked ---- */
+html body.ak-home #text-4f9f3a78,
+html body.ak-home #text-1c72f0d2 { text-transform: uppercase !important; }
+html body.ak-home #text-4f9f3a78 *,
+html body.ak-home #text-1c72f0d2 * {
+  font-size: 11px !important;
+  letter-spacing: .14em !important;
+  text-transform: uppercase !important;
+}
+
+/* ---- PDF cards: equalize green cover height ---- */
+html body.ak-home #row-97217497,
+html body.ak-home #row-e00bbdb4,
+html body.ak-home #row-25ebc2b3 { min-height: 193px !important; }
+
+/* ---- PDF cover eyebrow ("Free guide · PDF") — uppercase + tracked ---- */
+html body.ak-home #text-93cebdcb *,
+html body.ak-home #text-a339b26e *,
+html body.ak-home #text-7ba0e3f6 * {
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+}
+
+/* ---- PDF bottom tag ("Cross-cultural" / "Pitching") — uppercase + tracked ---- */
+html body.ak-home #text-8fe757de *,
+html body.ak-home #text-80a45cc2 *,
+html body.ak-home #text-522a5bd4 * {
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+}
+
+/* ---- Video boxes: gap below thumbnail + uppercase meta ---- */
+html body.ak-home #text-fcd73a25,
+html body.ak-home #text-bc603af7 { margin-top: 18px !important; }
+html body.ak-home #text-4cb2d43a,
+html body.ak-home #text-583aa39b { margin-top: 6px !important; }
+html body.ak-home #text-4cb2d43a *,
+html body.ak-home #text-583aa39b * {
+  text-transform: uppercase !important;
+  letter-spacing: .12em !important;
+}
