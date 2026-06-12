@@ -150,6 +150,7 @@
         host.innerHTML = '';
 
         var ARROW = '<svg class="post__arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+        var fixedEyebrow = host.getAttribute('data-eyebrow') || '';
 
         items.forEach(function (it) {
           var get = function (t) { var n = it.querySelector(t); return n ? n.textContent : ''; };
@@ -159,7 +160,8 @@
 
           var main = document.createElement('span');
           main.className = 'post__main';
-          var cat = get('category');
+          /* systeme's RSS has no <category>; fall back to data-eyebrow if set. */
+          var cat = get('category') || fixedEyebrow;
           if (cat) {
             var c = document.createElement('span');
             c.className = 'post__cat';
