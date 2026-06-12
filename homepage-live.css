@@ -1010,3 +1010,45 @@ html body.ak-home #section-d54243f0 img {
   transition: transform 250ms cubic-bezier(.2,.6,.2,1), color 250ms cubic-bezier(.2,.6,.2,1);
 }
 #ak-latest-writing .post:hover .post__arrow { color: #B46A3C; transform: translateX(3px); }
+
+/* ==================== INSIGHTS + BEYOND THE CLASSROOM (homepage) ==================== */
+
+/* Section eyebrows → uppercase (Beyond the classroom = cream/dark, Insights = terracotta) */
+#text-ab357f86 *, #text-8a3ce360 * {
+  text-transform: uppercase !important;
+  letter-spacing: .14em !important;
+}
+
+/* Column titles "Latest writing" / "Watch" */
+#text-f22884a9 *, #text-014e5f7a * {
+  text-transform: uppercase !important;
+  letter-spacing: .18em !important;
+  font-weight: 700 !important;
+}
+
+/* "More" links (All free resources / All articles / More on YouTube) */
+#text-56dcca0a *, #text-292bc9bf *, #text-4566f4ab * { letter-spacing: .04em !important; }
+#text-56dcca0a:hover *, #text-292bc9bf:hover *, #text-4566f4ab:hover * { color: #B46A3C !important; }
+
+/* Latest-writing list: left-align (the raw-html widget wrapper centres it) */
+#ak-latest-writing { text-align: left !important; }
+
+/* Interview video meta "Interview · ..." → uppercase */
+#text-af86ba85 *, #text-1abeee34 * {
+  text-transform: uppercase !important;
+  letter-spacing: .1em !important;
+}
+
+/* Interview boxes: gaps between thumbnail / title / meta */
+#row-3131a628, #row-1ab6203c { margin-top: 14px !important; }    /* thumbnail -> text block */
+#text-1e2d91b1, #text-630b4ccf { margin-bottom: 7px !important; } /* title -> meta */
+
+/* Interview boxes: hover anywhere on the box lifts the thumbnail */
+#row-57986478 .material-thumb {
+  transition: transform 240ms cubic-bezier(.2,.6,.2,1),
+              box-shadow 240ms cubic-bezier(.2,.6,.2,1);
+}
+#row-57986478 > div:hover .material-thumb {
+  transform: translateY(-4px) !important;
+  box-shadow: 0 14px 34px rgba(26, 60, 47, .14) !important;
+}
