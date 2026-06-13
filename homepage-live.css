@@ -838,9 +838,25 @@ html body.ak-home #section-d54243f0 img {
 
 
 /* ============================================================
-   MOBILE (About / Framework)
+   MOBILE  (Hero / About / Framework / Footer)
+   systeme.io stores per-device font sizes and forces some row
+   heights on its mobile breakpoint. These rules repair what it
+   leaves broken on phones (verified at 390px).
    ============================================================ */
 @media (max-width: 760px) {
+
+  /* --- HERO --------------------------------------------------
+     systeme's mobile breakpoint shrinks the H1 to an unreadable
+     8px (an editor-slider accident), inverting the hierarchy so
+     the eyebrow/subhead dwarf the headline. Force a proper size. */
+  #section-e8a2d9b7 #headline-7f2a7e96,
+  #section-e8a2d9b7 #headline-7f2a7e96 * {
+    font-size: clamp(29px, 8.6vw, 40px) !important;
+    line-height: 1.12 !important;
+  }
+
+  /* --- FRAMEWORK ---------------------------------------------
+     Big serif numbers stay large. */
   html body.ak-home #text-8b720090 *,
   html body.ak-home #text-495af7cd *,
   html body.ak-home #text-70cc2123 * {
@@ -848,6 +864,49 @@ html body.ak-home #section-d54243f0 img {
   }
   html body.ak-home #text-bc78e4a1 {
     padding-left: 0.5em !important;
+  }
+
+  /* When the two pillar columns stack, systeme (a) forces the row to a
+     fixed ~388px height with justify:space-between, (b) reverses the
+     column order so the number lands AFTER the body, and (c) adds a 60px
+     top margin above the number and the title — stranding the big number
+     in a sea of whitespace. Fix all three: natural height, number-first
+     order, and a tight uniform rhythm. */
+  html body.ak-home #row-feedd8db,
+  html body.ak-home #row-a1582001,
+  html body.ak-home #row-47647d37 {
+    height: auto !important;
+    flex-direction: column !important;     /* was column-reverse: put the number first */
+    justify-content: flex-start !important;
+  }
+  html body.ak-home #row-feedd8db > div[size="6"],
+  html body.ak-home #row-a1582001 > div[size="6"],
+  html body.ak-home #row-47647d37 > div[size="6"],
+  html body.ak-home #row-feedd8db > div[size="6"]:nth-child(2),
+  html body.ak-home #row-a1582001 > div[size="6"]:nth-child(2),
+  html body.ak-home #row-47647d37 > div[size="6"]:nth-child(2) {
+    align-self: auto !important;
+    justify-content: flex-start !important;
+  }
+  /* Tighten the oversized 60px/20px stacking margins to a calm rhythm. */
+  html body.ak-home #row-feedd8db > div[size="6"] > div,
+  html body.ak-home #row-a1582001 > div[size="6"] > div,
+  html body.ak-home #row-47647d37 > div[size="6"] > div {
+    margin-top: 14px !important;
+  }
+  html body.ak-home #row-feedd8db > div[size="6"]:first-child > div:first-child,
+  html body.ak-home #row-a1582001 > div[size="6"]:first-child > div:first-child,
+  html body.ak-home #row-47647d37 > div[size="6"]:first-child > div:first-child {
+    margin-top: 0 !important;     /* no gap above the leading number */
+  }
+
+  /* --- FOOTER ------------------------------------------------
+     The three link groups (Academy / Work with August / Connect)
+     stack on mobile but run together as one undifferentiated list.
+     Add space above groups 2 and 3 to separate them. */
+  #text-f20a7ba7,
+  #text-463758d7 {
+    margin-top: 30px !important;
   }
 }
 
