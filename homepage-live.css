@@ -855,6 +855,15 @@ html body.ak-home #section-d54243f0 img {
     line-height: 1.12 !important;
   }
 
+  /* MATERIALS page hero H1 ("Frameworks and conversations…") has the
+     exact same 8px systeme mobile bug (desktop 54px). ID-scoped, so it
+     only touches /materials. */
+  #headline-cbb3c700,
+  #headline-cbb3c700 * {
+    font-size: clamp(29px, 8.6vw, 40px) !important;
+    line-height: 1.12 !important;
+  }
+
   /* --- FRAMEWORK ---------------------------------------------
      Big serif numbers stay large. */
   html body.ak-home #text-8b720090 *,
