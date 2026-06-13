@@ -917,6 +917,103 @@ html body.ak-home #section-d54243f0 img {
   #text-463758d7 {
     margin-top: 30px !important;
   }
+
+  /* ==========================================================
+     SECOND PASS (2026-06-13, from Kacper's phone review)
+     Hero header-clearance + full-width CTAs + visible burger,
+     bigger section H2s, framework head reorder, flow-box, etc.
+     ========================================================== */
+
+  /* --- HERO: clear the 93px fixed header so the eyebrow starts
+     below the nav (was sitting under the logo). --- */
+  #section-e8a2d9b7 > div {
+    padding-top: 104px !important;
+    padding-bottom: 44px !important;
+  }
+  /* Breathing room between eyebrow and H1. */
+  #section-e8a2d9b7 #headline-7f2a7e96 { margin-top: 20px !important; }
+
+  /* CTA buttons: full width, stacked (were ~half width). */
+  #section-e8a2d9b7 #row-e6badb36 { width: 100% !important; row-gap: 12px !important; }
+  #section-e8a2d9b7 #row-e6badb36 > div[size] {
+    width: 100% !important; flex: 1 1 100% !important; max-width: none !important;
+  }
+  #section-e8a2d9b7 #button-aab9c64d,
+  #section-e8a2d9b7 #button-2803e813 {
+    width: 100% !important; justify-content: center !important;
+  }
+  /* Secondary "Inquire" button: systeme gives it a dark-ink outline on
+     mobile → invisible on the photo. Cream outline + cream text + faint
+     scrim so it reads on the dark hero. */
+  #section-e8a2d9b7 #button-2803e813 {
+    background: rgba(13, 32, 24, 0.30) !important;
+    border: 1px solid rgba(249, 247, 241, 0.6) !important;
+    color: #F9F7F1 !important;
+    -webkit-backdrop-filter: blur(2px); backdrop-filter: blur(2px);
+  }
+  #section-e8a2d9b7 #button-2803e813 * { color: #F9F7F1 !important; }
+
+  /* Burger bars: cream + contrast shadow so they read on the bright photo.
+     NOTE: systeme's emotion class is rebuild-fragile — currently the bars
+     are spans inside .sc-fLvQuE (was .sc-gEkIjA). Re-check on rebuild. */
+  body.ak-home header[type="WebsiteHeader"] .sc-fLvQuE span {
+    background-color: #F9F7F1 !important;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5) !important;
+  }
+  body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-fLvQuE span {
+    background-color: #2D2D2D !important; box-shadow: none !important;
+  }
+
+  /* --- Section H2s too small on mobile: scale up + allow full width.
+     Courses #headline-9634a487 / About #headline-9045c554 /
+     Framework #headline-c5d254ff. --- */
+  html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
+  html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
+  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff * {
+    font-size: clamp(28px, 7.8vw, 34px) !important;
+    line-height: 1.16 !important;
+  }
+  html body.ak-home #headline-9634a487,
+  html body.ak-home #headline-9045c554,
+  html body.ak-home #headline-c5d254ff { width: 100% !important; max-width: none !important; }
+
+  /* --- COURSES: trim the 128px desktop section padding (too much dead
+     space before the eyebrow on mobile) + room under the H2. --- */
+  html body.ak-home #section-43e183ba { padding-top: 72px !important; }
+  html body.ak-home #headline-9634a487 { margin-bottom: 20px !important; }
+
+  /* --- ABOUT: room under the H2 + bigger pull quote. --- */
+  html body.ak-home #headline-9045c554 { margin-bottom: 22px !important; }
+  html body.ak-home #text-bc78e4a1 p,
+  html body.ak-home #text-bc78e4a1 span { font-size: 21px !important; line-height: 1.3 !important; }
+
+  /* --- FRAMEWORK head: eyebrow + H2 must sit ABOVE the intro paragraph
+     (systeme stacked it column-reverse → intro first). --- */
+  html body.ak-home #row-306c7c7c { flex-direction: column !important; }
+  html body.ak-home #headline-c5d254ff { margin-bottom: 18px !important; }
+  html body.ak-home #text-ef252a6d { margin-top: 0 !important; }
+
+  /* Pillar title labels: smaller + tracked so they read as a label under
+     the serif lead (fixes lead/label proportions). */
+  html body.ak-home #text-efd6b3d5 *,
+  html body.ak-home #text-e988dc01 *,
+  html body.ak-home #text-bd7b0d80 * {
+    font-size: 13px !important; letter-spacing: 0.16em !important;
+  }
+  /* Breathing room around the pillar numbers + dividers. */
+  html body.ak-home #row-feedd8db,
+  html body.ak-home #row-a1582001,
+  html body.ak-home #row-47647d37 {
+    padding-top: 26px !important; padding-bottom: 10px !important;
+  }
+
+  /* --- FLOW BOX (IDEA -> STRUCTURE -> VALIDATION -> GROWTH): was
+     cramped + wrapped awkwardly. Smaller type fits one line + top gap. --- */
+  html body.ak-home #text-ae2ae713 { margin-top: 30px !important; }
+  html body.ak-home #text-ae2ae713 p,
+  html body.ak-home #text-ae2ae713 span {
+    font-size: 12.5px !important; letter-spacing: 0.08em !important; line-height: 1.9 !important;
+  }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
