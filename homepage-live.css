@@ -972,7 +972,8 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff *,
   html body.ak-home #headline-502539e5, html body.ak-home #headline-502539e5 *,
   html body.ak-home #headline-219cddeb, html body.ak-home #headline-219cddeb *,
-  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 * {
+  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 *,
+  html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
     font-size: clamp(34px, 9.6vw, 46px) !important;
     line-height: 1.12 !important;
   }
@@ -981,13 +982,15 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-c5d254ff,
   html body.ak-home #headline-502539e5,
   html body.ak-home #headline-219cddeb,
-  html body.ak-home #headline-0ebe6c35 { width: 100% !important; max-width: none !important; }
+  html body.ak-home #headline-0ebe6c35,
+  html body.ak-home #headline-5baa8f2c { width: 100% !important; max-width: none !important; }
 
-  /* Air below the section H2s (Magnet/Beyond/Insights had H2 glued to the
-     body text — give it room). Courses/About/Framework set their own above. */
+  /* Air below the section H2s (Magnet/Beyond/Insights/Testimonials had H2 glued
+     to the body text — give it room). Courses/About/Framework set their own. */
   html body.ak-home #headline-502539e5,
   html body.ak-home #headline-219cddeb,
-  html body.ak-home #headline-0ebe6c35 { margin-bottom: 20px !important; }
+  html body.ak-home #headline-0ebe6c35,
+  html body.ak-home #headline-5baa8f2c { margin-bottom: 20px !important; }
 
   /* --- All H2 / H3 headings centered on mobile (About H2 was left-aligned;
      keep the whole site consistent). Targets the semantic tags AND the known
@@ -1002,7 +1005,8 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-ea907e42, html body.ak-home #headline-ea907e42 *,
   html body.ak-home #headline-502539e5, html body.ak-home #headline-502539e5 *,
   html body.ak-home #headline-219cddeb, html body.ak-home #headline-219cddeb *,
-  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 * {
+  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 *,
+  html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
     text-align: center !important;
   }
 
@@ -1043,7 +1047,7 @@ html body.ak-home #section-d54243f0 img {
      ABOVE the line (intro -> line) equal the gap BELOW it (line -> 01 = the
      pillar's 26px padding-top). Kill systeme's oversized top margin on the
      first pillar and let the head row's margin-bottom set the 26px rhythm. */
-  html body.ak-home #row-306c7c7c { margin-bottom: 26px !important; }
+  html body.ak-home #row-306c7c7c { margin-bottom: 26px !important; padding-bottom: 26px !important; }
   html body.ak-home #row-feedd8db { margin-top: 0 !important; }
 
   /* Pillar title labels: smaller + tracked so they read as a label under
@@ -1083,11 +1087,12 @@ html body.ak-home #section-d54243f0 img {
     font-size: 11.5px !important; letter-spacing: 0.04em !important; line-height: 1.5 !important;
   }
 
-  /* --- MAGNET / BEYOND THE CLASSROOM / INSIGHTS: trim the 128px desktop
+  /* --- MAGNET / BEYOND / INSIGHTS / TESTIMONIALS: trim the 128px desktop
      section padding to the same 28px rhythm as the rest. --- */
   html body.ak-home #section-22d30859,
   html body.ak-home #section-a0bde711,
-  html body.ak-home #section-48ee6e3c {
+  html body.ak-home #section-48ee6e3c,
+  html body.ak-home #section-d54243f0 {
     padding-top: 28px !important;
     padding-bottom: 28px !important;
   }
@@ -1099,6 +1104,45 @@ html body.ak-home #section-d54243f0 img {
 
   /* 20px gap between the two stacked video boxes (was 0). */
   html body.ak-home #row-8943a7f1 { margin-bottom: 20px !important; }
+
+  /* --- INSIGHTS head: systeme stacks the head row column-REVERSE on mobile, so
+     the description + "All free resources" rendered ABOVE the eyebrow + H2.
+     Force normal order: eyebrow, H2, then the "Short, practical…" text. --- */
+  html body.ak-home #row-05b7e25e { flex-direction: column !important; }
+
+  /* INSIGHTS eyebrow read larger than the others (16px + 0.14em tracking spreads
+     it wide). Bring it down to a calmer label size to match the rest. */
+  html body.ak-home #text-8a3ce360,
+  html body.ak-home #text-8a3ce360 * { font-size: 13px !important; line-height: 1.4 !important; }
+
+  /* --- TESTIMONIAL cards: avatar to the LEFT of name + role (systeme stacks the
+     3/9 avatar row vertically on mobile → photo sat centered above the name).
+     Force the row horizontal; avatar shrinks to its 44px, name/role take the
+     rest, left-aligned. Applies to all 5 cards' inner avatar rows. --- */
+  html body.ak-home #row-955bc165,
+  html body.ak-home #row-e5147362,
+  html body.ak-home #row-b0e70ae1,
+  html body.ak-home #row-b914ded7,
+  html body.ak-home #row-1db35d3a {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+    text-align: left !important;
+  }
+  html body.ak-home #row-955bc165 > div[size="3"],
+  html body.ak-home #row-e5147362 > div[size="3"],
+  html body.ak-home #row-b0e70ae1 > div[size="3"],
+  html body.ak-home #row-b914ded7 > div[size="3"],
+  html body.ak-home #row-1db35d3a > div[size="3"] {
+    width: auto !important; flex: 0 0 auto !important;
+  }
+  html body.ak-home #row-955bc165 > div[size="9"],
+  html body.ak-home #row-e5147362 > div[size="9"],
+  html body.ak-home #row-b0e70ae1 > div[size="9"],
+  html body.ak-home #row-b914ded7 > div[size="9"],
+  html body.ak-home #row-1db35d3a > div[size="9"] {
+    width: auto !important; flex: 1 1 auto !important; text-align: left !important;
+  }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
