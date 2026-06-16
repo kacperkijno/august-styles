@@ -977,6 +977,17 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-9045c554,
   html body.ak-home #headline-c5d254ff { width: 100% !important; max-width: none !important; }
 
+  /* --- All H2 / H3 headings centered on mobile (About H2 was left-aligned;
+     keep the whole site consistent). Targets the semantic tags AND the known
+     section-headline IDs in case systeme renders a headline as a div. --- */
+  html body.ak-home h2, html body.ak-home h2 *,
+  html body.ak-home h3, html body.ak-home h3 *,
+  html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
+  html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
+  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff * {
+    text-align: center !important;
+  }
+
   /* --- COURSES: trim the 128px desktop section padding (too much dead
      space before the eyebrow on mobile) + room under the H2. --- */
   html body.ak-home #section-43e183ba {
