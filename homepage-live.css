@@ -969,13 +969,25 @@ html body.ak-home #section-d54243f0 img {
      Framework #headline-c5d254ff. --- */
   html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
   html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
-  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff * {
+  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff *,
+  html body.ak-home #headline-502539e5, html body.ak-home #headline-502539e5 *,
+  html body.ak-home #headline-219cddeb, html body.ak-home #headline-219cddeb *,
+  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 * {
     font-size: clamp(34px, 9.6vw, 46px) !important;
     line-height: 1.12 !important;
   }
   html body.ak-home #headline-9634a487,
   html body.ak-home #headline-9045c554,
-  html body.ak-home #headline-c5d254ff { width: 100% !important; max-width: none !important; }
+  html body.ak-home #headline-c5d254ff,
+  html body.ak-home #headline-502539e5,
+  html body.ak-home #headline-219cddeb,
+  html body.ak-home #headline-0ebe6c35 { width: 100% !important; max-width: none !important; }
+
+  /* Air below the section H2s (Magnet/Beyond/Insights had H2 glued to the
+     body text — give it room). Courses/About/Framework set their own above. */
+  html body.ak-home #headline-502539e5,
+  html body.ak-home #headline-219cddeb,
+  html body.ak-home #headline-0ebe6c35 { margin-bottom: 20px !important; }
 
   /* --- All H2 / H3 headings centered on mobile (About H2 was left-aligned;
      keep the whole site consistent). Targets the semantic tags AND the known
@@ -987,7 +999,10 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff *,
   html body.ak-home #headline-c57f5913, html body.ak-home #headline-c57f5913 *,
   html body.ak-home #headline-8854eaed, html body.ak-home #headline-8854eaed *,
-  html body.ak-home #headline-ea907e42, html body.ak-home #headline-ea907e42 * {
+  html body.ak-home #headline-ea907e42, html body.ak-home #headline-ea907e42 *,
+  html body.ak-home #headline-502539e5, html body.ak-home #headline-502539e5 *,
+  html body.ak-home #headline-219cddeb, html body.ak-home #headline-219cddeb *,
+  html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 * {
     text-align: center !important;
   }
 
@@ -1038,20 +1053,52 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #text-bd7b0d80 * {
     font-size: 13px !important; letter-spacing: 0.16em !important;
   }
-  /* Breathing room around the pillar numbers + dividers. */
+  /* Space UNDER the pillar label ("STRATEGIC SAFETY" etc.) before the body. */
+  html body.ak-home #text-efd6b3d5,
+  html body.ak-home #text-e988dc01,
+  html body.ak-home #text-bd7b0d80 { margin-bottom: 26px !important; }
+
+  /* Breathing room around the pillar numbers + dividers. padding-bottom gives
+     AIR ABOVE the next divider (was 10px → line glued to the body above it). */
   html body.ak-home #row-feedd8db,
   html body.ak-home #row-a1582001,
   html body.ak-home #row-47647d37 {
-    padding-top: 26px !important; padding-bottom: 10px !important;
+    padding-top: 26px !important; padding-bottom: 26px !important;
   }
 
-  /* --- FLOW BOX (IDEA -> STRUCTURE -> VALIDATION -> GROWTH): was
-     cramped + wrapped awkwardly. Smaller type fits one line + top gap. --- */
-  html body.ak-home #text-ae2ae713 { margin-top: 30px !important; }
+  /* --- FLOW BOX (IDEA -> STRUCTURE -> VALIDATION -> GROWTH) ---
+     The cream box IS #row-c4a521c7 (bg + 1px border). It sat full-bleed (x:0,
+     390px) and the inner text carried a 30px top margin INSIDE the box →
+     lopsided padding (35px top vs 5px bottom). Fix: gap goes on the box's OWN
+     top margin (outside it), inset the sides to align with the body text above
+     (~16px), equal vertical padding, reset the inner margin, shrink type so the
+     row still fits one line at the narrower width. */
+  html body.ak-home #row-c4a521c7 {
+    margin: 24px 16px 0 !important;
+    padding: 14px 12px !important;
+  }
+  html body.ak-home #text-ae2ae713 { margin-top: 0 !important; }
   html body.ak-home #text-ae2ae713 p,
   html body.ak-home #text-ae2ae713 span {
-    font-size: 12.5px !important; letter-spacing: 0.08em !important; line-height: 1.9 !important;
+    font-size: 11.5px !important; letter-spacing: 0.04em !important; line-height: 1.5 !important;
   }
+
+  /* --- MAGNET / BEYOND THE CLASSROOM / INSIGHTS: trim the 128px desktop
+     section padding to the same 28px rhythm as the rest. --- */
+  html body.ak-home #section-22d30859,
+  html body.ak-home #section-a0bde711,
+  html body.ak-home #section-48ee6e3c {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
+
+  /* --- INSIGHTS + WATCH (#section-48ee6e3c): content (post list, video cards,
+     column labels) ran edge-to-edge (x:5). Pad the section content wrapper so
+     everything gets a left/right margin. Centered eyebrow/H2 stay centered. --- */
+  html body.ak-home #section-48ee6e3c > div { padding-left: 16px !important; padding-right: 16px !important; }
+
+  /* 20px gap between the two stacked video boxes (was 0). */
+  html body.ak-home #row-8943a7f1 { margin-bottom: 20px !important; }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
