@@ -13,6 +13,19 @@
 /* Let the dark footer show through the iframe */
 body { background: transparent !important; }
 
+/* --- Fill the iframe width + compact the layout ----------------------------
+   The optin page wraps the form in a ~300px centred container, so the field
+   ended up double-inset (300px box centred inside the iframe, on top of the
+   homepage's own 16px padding → ~50px from the screen edge). Kill every
+   max-width so the form fills the iframe, and drop top spacing / vertical
+   centring so the field sits near the top (the iframe auto-sizes to content,
+   which also shrinks the gap above it on the homepage). */
+html, body { margin: 0 !important; padding: 0 !important; width: 100% !important; }
+body div { max-width: 100% !important; }
+body > div { min-height: 0 !important; padding-top: 0 !important; justify-content: flex-start !important; }
+input:not([type="submit"]):not([type="button"]),
+button, [type="submit"] { width: 100% !important; }
+
 /* Email input — translucent on dark, cream text + border (mockup on-dark) */
 input:not([type="submit"]):not([type="button"]) {
   background: rgba(249, 247, 241, 0.08) !important;

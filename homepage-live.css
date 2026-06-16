@@ -1170,15 +1170,39 @@ html body.ak-home #section-d54243f0 img {
   #text-3b068045 { margin-top: 16px !important; margin-bottom: 16px !important; }
   /* Social icons: air above + below the row. */
   .footer__social { margin-top: 18px !important; margin-bottom: 18px !important; }
-  /* Bottom bar: kill the 50px space-between gap (forced 158px height), smaller
-     type, 16px side inset. */
+  /* Bottom bar: the 50px gap came from the two COLUMNS each being forced to
+     ~68px tall (not the row). Collapse the columns to content height; then
+     copyright + "Powered by" sit tight (gap ~4), with only ~6px above © from
+     the divider line (row padding-top). Smaller type. */
   #row-986eaa77 {
     height: auto !important; min-height: 0 !important;
-    justify-content: flex-start !important; gap: 12px !important;
+    justify-content: flex-start !important; gap: 4px !important;
+    padding-top: 6px !important; padding-bottom: 20px !important;
     padding-left: 16px !important; padding-right: 16px !important;
+  }
+  #row-986eaa77 > div {
+    height: auto !important; min-height: 0 !important;
+    padding-top: 0 !important; padding-bottom: 0 !important;
   }
   #text-3ab46b2d, #text-3ab46b2d *,
   #text-3a6abe60, #text-3a6abe60 * { font-size: 13px !important; line-height: 1.4 !important; }
+
+  /* ====== MAGNET benefits list (01–05): type was 18px, oversized vs the
+     16px body copy everywhere else. Match the body. ====== */
+  html body.ak-home #section-22d30859 ul li,
+  html body.ak-home #section-22d30859 ul li * {
+    font-size: 16px !important; line-height: 1.5 !important;
+  }
+
+  /* ====== INSIGHTS head: the desc + "All free resources" sat more indented
+     (x:37) than the article list below (x:21). Pull the head row out 16px so
+     the copy lines up with the posts; the centered eyebrow/H2 re-center in the
+     wider box. Plus more air above "LATEST WRITING". ====== */
+  html body.ak-home #row-05b7e25e { margin-left: -16px !important; margin-right: -16px !important; }
+  html body.ak-home #text-f22884a9 { margin-top: 26px !important; }
+
+  /* "More on YouTube →" was glued to the last video box — add space above. */
+  html body.ak-home #text-4566f4ab { margin-top: 22px !important; }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
