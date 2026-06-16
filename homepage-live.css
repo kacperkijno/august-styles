@@ -1143,6 +1143,42 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #row-1db35d3a > div[size="9"] {
     width: auto !important; flex: 1 1 auto !important; text-align: left !important;
   }
+
+  /* --- INSIGHTS "WATCH" column label: more air before it (off "All articles")
+     and under it (before the first video). --- */
+  html body.ak-home #text-014e5f7a { margin-top: 28px !important; margin-bottom: 16px !important; }
+
+  /* ====== NEWSLETTER "August's Brief" (global footer-area block) ======
+     Heading + desc were flush to the screen edge while the form sat inset 24px.
+     The form row had a forced 203px height + space-between, opening a big gap
+     between the copy and the email field. Give the text 16px side margins,
+     collapse the form's forced height, and trim its side padding to 16. */
+  #headline-baf4bf12, #text-c8183f61 { margin-left: 16px !important; margin-right: 16px !important; }
+  #row-fc3b0fe3 { justify-content: flex-start !important; height: auto !important; }
+  #row-dd10672f {
+    height: auto !important; min-height: 0 !important;
+    justify-content: flex-start !important;
+    padding: 6px 16px 16px !important;
+  }
+
+  /* ====== FOOTER (global component, same IDs on every page) ======
+     The whole footer ran edge-to-edge (x:5). Pad the top wrapper (logo /
+     tagline / bio / link columns / social all live inside it) and the separate
+     bottom bar. */
+  #row-a200983c { padding-left: 16px !important; padding-right: 16px !important; }
+  /* Bio paragraph: 16px air above + below. */
+  #text-3b068045 { margin-top: 16px !important; margin-bottom: 16px !important; }
+  /* Social icons: air above + below the row. */
+  .footer__social { margin-top: 18px !important; margin-bottom: 18px !important; }
+  /* Bottom bar: kill the 50px space-between gap (forced 158px height), smaller
+     type, 16px side inset. */
+  #row-986eaa77 {
+    height: auto !important; min-height: 0 !important;
+    justify-content: flex-start !important; gap: 12px !important;
+    padding-left: 16px !important; padding-right: 16px !important;
+  }
+  #text-3ab46b2d, #text-3ab46b2d *,
+  #text-3a6abe60, #text-3a6abe60 * { font-size: 13px !important; line-height: 1.4 !important; }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
