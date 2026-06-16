@@ -970,8 +970,8 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
   html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
   html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff * {
-    font-size: clamp(28px, 7.8vw, 34px) !important;
-    line-height: 1.16 !important;
+    font-size: clamp(34px, 9.6vw, 46px) !important;
+    line-height: 1.12 !important;
   }
   html body.ak-home #headline-9634a487,
   html body.ak-home #headline-9045c554,
@@ -979,19 +979,43 @@ html body.ak-home #section-d54243f0 img {
 
   /* --- COURSES: trim the 128px desktop section padding (too much dead
      space before the eyebrow on mobile) + room under the H2. --- */
-  html body.ak-home #section-43e183ba { padding-top: 72px !important; }
+  html body.ak-home #section-43e183ba {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
   html body.ak-home #headline-9634a487 { margin-bottom: 20px !important; }
 
-  /* --- ABOUT: room under the H2 + bigger pull quote. --- */
+  /* Course cards: 20px gap between the stacked cards. */
+  html body.ak-home #row-4332dc25 > div[size="4"] { margin-bottom: 20px !important; }
+  html body.ak-home #row-4332dc25 > div[size="4"]:last-child { margin-bottom: 0 !important; }
+
+  /* --- ABOUT: trim section padding (24–32) + room under the H2 + bigger pull quote. --- */
+  html body.ak-home #section-cd54baff {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
   html body.ak-home #headline-9045c554 { margin-bottom: 22px !important; }
   html body.ak-home #text-bc78e4a1 p,
   html body.ak-home #text-bc78e4a1 span { font-size: 21px !important; line-height: 1.3 !important; }
+
+  /* --- FRAMEWORK: trim section padding (24–32). --- */
+  html body.ak-home #section-d56a75da {
+    padding-top: 28px !important;
+    padding-bottom: 28px !important;
+  }
 
   /* --- FRAMEWORK head: eyebrow + H2 must sit ABOVE the intro paragraph
      (systeme stacked it column-reverse → intro first). --- */
   html body.ak-home #row-306c7c7c { flex-direction: column !important; }
   html body.ak-home #headline-c5d254ff { margin-bottom: 18px !important; }
   html body.ak-home #text-ef252a6d { margin-top: 0 !important; }
+
+  /* The line under the intro = top edge of the first pillar row. Make the gap
+     ABOVE the line (intro -> line) equal the gap BELOW it (line -> 01 = the
+     pillar's 26px padding-top). Kill systeme's oversized top margin on the
+     first pillar and let the head row's margin-bottom set the 26px rhythm. */
+  html body.ak-home #row-306c7c7c { margin-bottom: 26px !important; }
+  html body.ak-home #row-feedd8db { margin-top: 0 !important; }
 
   /* Pillar title labels: smaller + tracked so they read as a label under
      the serif lead (fixes lead/label proportions). */
