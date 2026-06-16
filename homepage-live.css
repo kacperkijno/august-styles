@@ -1110,10 +1110,13 @@ html body.ak-home #section-d54243f0 img {
      Force normal order: eyebrow, H2, then the "Short, practical…" text. --- */
   html body.ak-home #row-05b7e25e { flex-direction: column !important; }
 
-  /* INSIGHTS eyebrow read larger than the others (16px + 0.14em tracking spreads
-     it wide). Bring it down to a calmer label size to match the rest. */
+  /* INSIGHTS eyebrow → match the "What participants say" eyebrow (#text-b5fba013):
+     16px, letter-spacing 0, uppercase, terracotta. The 0.14em tracking (from the
+     shared global eyebrow rule) was what made it read larger/wider, not the size. */
   html body.ak-home #text-8a3ce360,
-  html body.ak-home #text-8a3ce360 * { font-size: 13px !important; line-height: 1.4 !important; }
+  html body.ak-home #text-8a3ce360 * {
+    font-size: 16px !important; letter-spacing: 0 !important; line-height: 1.4 !important;
+  }
 
   /* --- TESTIMONIAL cards: avatar to the LEFT of name + role (systeme stacks the
      3/9 avatar row vertically on mobile → photo sat centered above the name).
@@ -1201,7 +1204,11 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #row-05b7e25e { margin-left: -16px !important; margin-right: -16px !important; }
   html body.ak-home #text-f22884a9 { margin-top: 26px !important; }
 
-  /* "More on YouTube →" was glued to the last video box — add space above. */
+  /* The three "More" links get equal air above: "All free resources" (off the
+     desc), "All articles" (off the post list), "More on YouTube" (off the last
+     video box). */
+  html body.ak-home #text-56dcca0a,
+  html body.ak-home #text-292bc9bf,
   html body.ak-home #text-4566f4ab { margin-top: 22px !important; }
 }
 
