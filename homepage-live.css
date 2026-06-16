@@ -984,7 +984,10 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home h3, html body.ak-home h3 *,
   html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
   html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
-  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff * {
+  html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff *,
+  html body.ak-home #headline-c57f5913, html body.ak-home #headline-c57f5913 *,
+  html body.ak-home #headline-8854eaed, html body.ak-home #headline-8854eaed *,
+  html body.ak-home #headline-ea907e42, html body.ak-home #headline-ea907e42 * {
     text-align: center !important;
   }
 
