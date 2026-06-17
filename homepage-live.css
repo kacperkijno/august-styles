@@ -321,6 +321,14 @@ body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 {
   /* When opened, force a solid cream panel so links read on light bg */
   background: rgba(249, 247, 241, 0.98) !important;
   backdrop-filter: blur(10px);
+  /* Full-height drawer. CRITICAL: when scrolled, the .is-scrolled header gets
+     backdrop-filter, which makes the header a containing block for its
+     position:fixed children. systeme's drawer height:100% then resolves
+     against the 93px header instead of the viewport, collapsing the drawer
+     to the bar height. Pin it to the viewport so it stays full-height in
+     every state. dvh handles the mobile address bar; vh is the fallback. */
+  height: 100vh !important;
+  height: 100dvh !important;
 }
 body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
   color: #2D2D2D !important;   /* dark text inside the drawer */
