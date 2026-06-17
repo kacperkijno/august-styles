@@ -1218,6 +1218,50 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #text-56dcca0a,
   html body.ak-home #text-292bc9bf,
   html body.ak-home #text-4566f4ab { margin-top: 22px !important; }
+
+  /* ==========================================================
+     ACADEMY PAGE (/academy) — body.ak-home + homepage-live.css.
+     IDs are page-unique. Section 1 = custom .ak-courses block
+     (#section-ba1fb6ee), section 2 = testimonials (#section-01d96010).
+     ========================================================== */
+
+  /* Hero clearance: the .ak-courses block is the FIRST section and its own
+     @media(max-width:900px) sets padding:72px 0 — less than the 93px fixed
+     nav, so the "OUR COURSES" eyebrow hid under the bar. Push it clear. */
+  html body.ak-home #section-ba1fb6ee .ak-courses { padding-top: 104px !important; }
+
+  /* Course cards: systeme's mobile column wrapper inherits text-align:center
+     into the whole block, centering the card body and stranding the checkmark
+     list text away from its left-pinned tick. Match the desktop design and
+     left-align the card content (the .ak-btn keeps its own centering). */
+  html body.ak-home #section-ba1fb6ee .ak-card { text-align: left !important; }
+
+  /* Testimonials: the avatar sat centered ABOVE the left-aligned name/role
+     (systeme stacks the 3/9 row to a column on mobile). Force it horizontal
+     so the avatar sits left of name + role — same as the homepage cards. */
+  html body.ak-home #row-ab900a3a,
+  html body.ak-home #row-353c7191,
+  html body.ak-home #row-1898c8b6,
+  html body.ak-home #row-b0e6c0a2,
+  html body.ak-home #row-27dffb1c {
+    flex-direction: row !important;
+    align-items: center !important;
+    gap: 14px !important;
+  }
+  html body.ak-home #row-ab900a3a > div[size="3"],
+  html body.ak-home #row-353c7191 > div[size="3"],
+  html body.ak-home #row-1898c8b6 > div[size="3"],
+  html body.ak-home #row-b0e6c0a2 > div[size="3"],
+  html body.ak-home #row-27dffb1c > div[size="3"] {
+    width: auto !important; flex: 0 0 auto !important;
+  }
+  html body.ak-home #row-ab900a3a > div[size="9"],
+  html body.ak-home #row-353c7191 > div[size="9"],
+  html body.ak-home #row-1898c8b6 > div[size="9"],
+  html body.ak-home #row-b0e6c0a2 > div[size="9"],
+  html body.ak-home #row-27dffb1c > div[size="9"] {
+    width: auto !important; flex: 1 1 auto !important; text-align: left !important;
+  }
 }
 
 /* ==================== MATERIALS PAGE ==================== */
