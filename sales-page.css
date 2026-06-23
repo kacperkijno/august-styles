@@ -1744,6 +1744,17 @@ html body.ak-sales-page #text-6df26f66 * {
     padding-bottom: 44px !important;
   }
 
+  /* "Still deciding?" eyebrow → H2 → body text were touching (all 0px
+     margins, verified @390px). Add air: eyebrow off the photo above it +
+     off the H2, and the H2 off the body text below. */
+  html body.ak-sales-page #text-2c00acfc {
+    margin-top: 22px !important;
+    margin-bottom: 12px !important;
+  }
+  html body.ak-sales-page #headline-ddc5749b {
+    margin-bottom: 14px !important;
+  }
+
   /* Facts card (#row-7b9a1af6, the bordered box): bump internal padding
      from 5px so the 2×2 grid isn't cramped against the border. */
   html body.ak-sales-page #row-7b9a1af6 {
@@ -1759,11 +1770,22 @@ html body.ak-sales-page #text-6df26f66 * {
     font-size: 13px !important;
   }
 
-  /* Footer columns stack on mobile — separate the 2nd/3rd group titles
-     from the link list above them (1st title "Academy" is first, no gap). */
+  /* Footer rhythm → match the homepage footer's airier spacing (the funnel
+     footer rendered cramped vs homepage). Separate the 2nd/3rd group titles
+     from the list above; give the bio air before the columns; left-align the
+     contact email (systeme had it centred while everything else is left). */
   html body.ak-sales-page #text-57038dc5,
   html body.ak-sales-page #text-6df26f66 {
-    margin-top: 28px !important;
+    margin-top: 36px !important;
+  }
+  html body.ak-sales-page #text-5c087367 {
+    margin-top: 16px !important;
+    margin-bottom: 32px !important;
+  }
+  html body.ak-sales-page #text-98cf0915,
+  html body.ak-sales-page #text-98cf0915 * {
+    text-align: left !important;
+    margin-top: 14px !important;
   }
 
   /* Nav hamburger: it sat near centre because its column (.sc-bizigj) is
