@@ -1640,6 +1640,91 @@ html body.ak-sales-page #text-2c00acfc * {
   font-size: 12px !important;
 }
 
+/* ----- FOOTER social icons (global, all funnel pages).
+   These funnel pages load sales-page.css ONLY (not homepage-live.css),
+   so the global .footer__social rules never reach them and the raw <svg>
+   icons render at their intrinsic ~360px in browser-link-blue. Mirror the
+   homepage-live.css treatment here. Class-based, so the differing funnel
+   footer wrapper IDs don't matter; also fixes magnet/course footers. ----- */
+html body.ak-sales-page .footer__social {
+  display: flex !important;
+  gap: 12px !important;
+}
+html body.ak-sales-page .footer__social a {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(249, 247, 241, 0.18) !important;
+  color: rgba(249, 247, 241, 0.7) !important;
+  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+}
+html body.ak-sales-page .footer__social a:hover {
+  color: var(--ak-cream) !important;
+  border-color: var(--ak-terracotta) !important;
+  transform: translateY(-2px) !important;
+}
+html body.ak-sales-page .footer__social svg {
+  width: 17px !important;
+  height: 17px !important;
+}
+
+/* ----- MOBILE (≤760px). Page is desktop-first; systeme stacks most
+   sections correctly, but four spots need help (verified @390px,
+   Puppeteer): hero air + button parity, facts strip reflow, section
+   H2 scale + breathing room. ----- */
+@media (max-width: 760px) {
+
+  /* Hero: more air under the FREE LIVE WEBINAR badge (was touching H1),
+     more air before the CTA, and bring the CTA in line with the rest of
+     the page's buttons (it was 20px/5px-pad ≈ 36px tall; form is 16px,
+     final is 14px, both ~50px tall). */
+  html body.ak-sales-page #headline-e5bc6f8e {
+    margin-top: 20px !important;
+  }
+  html body.ak-sales-page #button-e14c6387 {
+    margin-top: 26px !important;
+    font-size: 16px !important;
+    padding: 16px 24px !important;
+  }
+
+  /* Facts strip (#row-7b9a1af6): 4-col row that systeme collapses to a
+     single sparse left column (right ~60% empty, ~277px tall). Force a
+     2×2 grid — When | Length / Where | Price. Cuts height to ~204px. */
+  html body.ak-sales-page #row-7b9a1af6 {
+    flex-direction: row !important;
+    flex-wrap: wrap !important;
+    column-gap: 16px !important;
+  }
+  html body.ak-sales-page #row-7b9a1af6 > div {
+    flex: 0 0 calc(50% - 8px) !important;
+    max-width: calc(50% - 8px) !important;
+    width: calc(50% - 8px) !important;
+    box-sizing: border-box !important;
+    margin-bottom: 18px !important;
+  }
+
+  /* Section H2s (Three things / Save your seat / Still deciding) were
+     24-30px — too quiet against the 12-16px eyebrow. Bump so they read as
+     the dominant line. Plus the cards section lost its padding on mobile
+     (5px) — give it real vertical breathing room. */
+  html body.ak-sales-page #headline-8381816b,
+  html body.ak-sales-page #headline-8381816b *,
+  html body.ak-sales-page #headline-5a5220dc,
+  html body.ak-sales-page #headline-5a5220dc *,
+  html body.ak-sales-page #headline-ddc5749b,
+  html body.ak-sales-page #headline-ddc5749b * {
+    font-size: clamp(30px, 8.6vw, 36px) !important;
+    line-height: 1.12 !important;
+  }
+  html body.ak-sales-page #section-c46ca844 {
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+  }
+}
+
 /* ============================================================
    33. WEBINAR THANK-YOU (/webinar-confirmed) — same treatment as
    cc-playbook-thanks (sections 28-29), new page IDs.
