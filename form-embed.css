@@ -52,3 +52,14 @@ button, [type="submit"] {
   transition: background .2s ease !important;
 }
 button:hover, [type="submit"]:hover { background: #9A5530 !important; }
+
+/* --- Collapse the void above the field -------------------------------------
+   On the funnel footer the optin page wrapped the form in a full-height,
+   vertically-distributed column, leaving a tall gap between the heading copy
+   (rendered by systeme outside the iframe) and the field. The earlier
+   `body > div` reset only caught the first wrapper; force every nested
+   container to top-align and drop any forced/min height so the form sits
+   tight to the top and the iframe auto-sizes to the actual fields. ---------- */
+html, body { height: auto !important; min-height: 0 !important; }
+body div { min-height: 0 !important; }
+body div { justify-content: flex-start !important; align-content: flex-start !important; }

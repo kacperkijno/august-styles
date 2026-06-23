@@ -1671,6 +1671,19 @@ html body.ak-sales-page .footer__social svg {
   height: 17px !important;
 }
 
+/* ----- FOOTER column titles (Academy / Work with August / Connect) →
+   uppercase + tracked, matching the homepage footer. Funnel footer uses
+   its own IDs (homepage's don't exist here). ----- */
+html body.ak-sales-page #text-d77cf72b,
+html body.ak-sales-page #text-d77cf72b *,
+html body.ak-sales-page #text-57038dc5,
+html body.ak-sales-page #text-57038dc5 *,
+html body.ak-sales-page #text-6df26f66,
+html body.ak-sales-page #text-6df26f66 * {
+  text-transform: uppercase !important;
+  letter-spacing: 0.16em !important;
+}
+
 /* ----- MOBILE (≤760px). Page is desktop-first; systeme stacks most
    sections correctly, but four spots need help (verified @390px,
    Puppeteer): hero air + button parity, facts strip reflow, section
@@ -1722,6 +1735,35 @@ html body.ak-sales-page .footer__social svg {
   html body.ak-sales-page #section-c46ca844 {
     padding-top: 44px !important;
     padding-bottom: 44px !important;
+  }
+
+  /* Final CTA "Still deciding?" lost its padding on mobile too (5px) —
+     give it the same breathing room as the cards section. */
+  html body.ak-sales-page #section-1889dbe2 {
+    padding-top: 44px !important;
+    padding-bottom: 44px !important;
+  }
+
+  /* Facts card (#row-7b9a1af6, the bordered box): bump internal padding
+     from 5px so the 2×2 grid isn't cramped against the border. */
+  html body.ak-sales-page #row-7b9a1af6 {
+    padding: 26px !important;
+  }
+
+  /* Footer bottom bar: copyright + "Powered by" were 16px — shrink to
+     13px like the homepage footer. */
+  html body.ak-sales-page #text-50877502,
+  html body.ak-sales-page #text-50877502 *,
+  html body.ak-sales-page #text-7aff70e2,
+  html body.ak-sales-page #text-7aff70e2 * {
+    font-size: 13px !important;
+  }
+
+  /* Footer columns stack on mobile — separate the 2nd/3rd group titles
+     from the link list above them (1st title "Academy" is first, no gap). */
+  html body.ak-sales-page #text-57038dc5,
+  html body.ak-sales-page #text-6df26f66 {
+    margin-top: 28px !important;
   }
 }
 
