@@ -62,10 +62,17 @@ button:hover, [type="submit"]:hover { background: #9A5530 !important; }
    file only loads inside this form, so the broad selectors are safe. -------- */
 html, body { height: auto !important; min-height: 0 !important; }
 body, body * { min-height: 0 !important; }
+/* Top-align every container so the form isn't centred/bottom-pushed. */
 body div, body form, body section {
-  margin-top: 0 !important;
-  margin-bottom: 0 !important;
   justify-content: flex-start !important;
   align-content: flex-start !important;
 }
+/* Kill the auto/large margins on the STRUCTURAL wrappers only (margin:auto is
+   what bottom-pushes the form) — NOT on the fields, whose spacing we keep. */
+body > div, body > div > div, body > div > div > div, body form {
+  margin-top: 0 !important;
+  margin-bottom: 0 !important;
+}
 body div:empty { display: none !important; }
+/* Restore the gap between the email field and the submit button. */
+button, [type="submit"] { margin-top: 12px !important; }
