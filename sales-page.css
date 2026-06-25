@@ -1640,6 +1640,37 @@ html body.ak-sales-page #text-2c00acfc * {
   font-size: 12px !important;
 }
 
+/* ----- /cultural-communication section eyebrows (rebuilt page, new IDs).
+   These 9 render plain black 16px with no transform — they never had the
+   inline terracotta the section-2 selector needs, so nothing caught them.
+   Full brand eyebrow treatment: terracotta, uppercase, tracked, 12px.
+   The problem / The method / Inside the course / What's included / FIT /
+   ABOUT / PRICING / What participants say / FAQ ----- */
+html body.ak-sales-page #text-28a7c5a0,
+html body.ak-sales-page #text-28a7c5a0 *,
+html body.ak-sales-page #text-e3a655b3,
+html body.ak-sales-page #text-e3a655b3 *,
+html body.ak-sales-page #text-141e8106,
+html body.ak-sales-page #text-141e8106 *,
+html body.ak-sales-page #text-32a60fb4,
+html body.ak-sales-page #text-32a60fb4 *,
+html body.ak-sales-page #text-0d5cec1e,
+html body.ak-sales-page #text-0d5cec1e *,
+html body.ak-sales-page #text-887815e2,
+html body.ak-sales-page #text-887815e2 *,
+html body.ak-sales-page #text-c5b31f96,
+html body.ak-sales-page #text-c5b31f96 *,
+html body.ak-sales-page #text-41eae026,
+html body.ak-sales-page #text-41eae026 *,
+html body.ak-sales-page #text-61c854d4,
+html body.ak-sales-page #text-61c854d4 * {
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-weight: 500 !important;
+  font-size: 12px !important;
+  color: var(--ak-terracotta) !important;
+}
+
 /* ----- FOOTER social icons (global, all funnel pages).
    These funnel pages load sales-page.css ONLY (not homepage-live.css),
    so the global .footer__social rules never reach them and the raw <svg>
