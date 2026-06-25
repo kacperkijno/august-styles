@@ -507,7 +507,7 @@ html body.ak-home #row-80b09385 > div[size="6"]:first-child {
   position: relative;
 }
 html body.ak-home #row-80b09385 > div[size="6"]:first-child::after {
-  content: "Kristiansand \00B7 2026";
+  content: "Bergen \00B7 2026";
   position: absolute;
   left: 18px;
   bottom: 18px;
