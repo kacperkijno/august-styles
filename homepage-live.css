@@ -302,6 +302,19 @@ body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a:hover,
 body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a:hover {
   opacity: 1;
 }
+/* Kill systeme's nav link underline (hover + active/current page link, e.g. /blog) */
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a,
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a:hover,
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a:focus,
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a,
+body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a:hover {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+  box-shadow: none !important;
+  background-image: none !important;
+}
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a::after,
+body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a::before { display: none !important; }
 
 /* "Home page" span (sr label for logo, in case visible) */
 body.ak-home header[type="WebsiteHeader"] #websitelogo-2841540c span {
@@ -1721,19 +1734,17 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   transition:transform 220ms cubic-bezier(.2,.6,.2,1),box-shadow 220ms cubic-bezier(.2,.6,.2,1),border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
 }
 .carousel-ui div:has(> a > img):hover{
-  transform:translateY(-4px) !important;
-  box-shadow:0 12px 32px rgba(26,60,47,.10) !important;
-  border-color:rgba(26,60,47,.30) !important;
+  box-shadow:0 6px 22px rgba(26,60,47,.08) !important;
+  border-color:rgba(26,60,47,.22) !important;
 }
-/* image → 16:10 cover, flush top, subtle zoom on hover */
+/* image → 16:10 cover, flush top (no zoom/lift on hover — per Kacper) */
 .carousel-ui div:has(> a > img) > a{ display:block !important; overflow:hidden !important; }
-.carousel-ui div:has(> a > img) > a > img{ display:block !important; width:100% !important; aspect-ratio:16/10 !important; object-fit:cover !important; border-radius:0 !important; transition:transform .4s ease !important; }
-.carousel-ui div:has(> a > img):hover > a > img{ transform:scale(1.04) !important; }
+.carousel-ui div:has(> a > img) > a > img{ display:block !important; width:100% !important; aspect-ratio:16/10 !important; object-fit:cover !important; border-radius:0 !important; }
 /* text block padding */
 .carousel-ui div:has(> a > img) > div{ padding:24px 26px 28px !important; }
 
-/* category (terracotta) → uppercase, tracked, smaller */
-.carousel-ui [color="rgb(180, 106, 60)"]{ font-size:11px !important; letter-spacing:.14em !important; text-transform:uppercase !important; line-height:1.4 !important; }
+/* category → match the home Insights .post__cat (NeueHaas 700, 10px, .16em, uppercase, terracotta) */
+.carousel-ui [color="rgb(180, 106, 60)"]{ font-family:"NeueHaasDisplay-Roman42448762","Helvetica Neue",sans-serif !important; font-weight:700 !important; font-size:10px !important; letter-spacing:.16em !important; text-transform:uppercase !important; line-height:1.4 !important; }
 
 /* title (Caslon forest, was 36px) → card size, tighter, hover terracotta */
 .carousel-ui [font-family="AdobeCaslonPro42448745"]{ font-size:clamp(20px,2.2vw,25px) !important; line-height:1.18 !important; margin-top:12px !important; }
@@ -1742,7 +1753,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
 /* excerpt → muted ink, 3-line clamp */
 .carousel-ui div:has(> a > img) p{
-  font-size:15px !important; line-height:1.55 !important; color:rgba(45,45,45,.7) !important; margin-top:12px !important;
+  font-size:15px !important; line-height:1.65 !important; color:rgba(45,45,45,.7) !important; margin-top:12px !important;
   display:-webkit-box !important; -webkit-line-clamp:3 !important; -webkit-box-orient:vertical !important; overflow:hidden !important;
 }
 
