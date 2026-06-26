@@ -1507,8 +1507,11 @@ html body.ak-home #section-d54243f0 img {
 }
 .footer__social svg { width: 17px !important; height: 17px !important; }
 
-/* Column titles (Academy / Work with August / Connect) → uppercase + tracked */
-#text-6ba6f5db *, #text-f20a7ba7 *, #text-463758d7 * {
+/* Column titles (Academy / Work with August / Connect) → uppercase + tracked.
+   The BLOG layout uses a separate footer instance with its own ids
+   (103c9aa7 / 02c094e3 / cee4c519) — included so /blog footer matches. */
+#text-6ba6f5db *, #text-f20a7ba7 *, #text-463758d7 *,
+#text-103c9aa7 *, #text-02c094e3 *, #text-cee4c519 * {
   text-transform: uppercase !important;
   letter-spacing: .18em !important;
 }
