@@ -1,4 +1,14 @@
 /* ============================================================
+   PER-PAGE CSS MANIFEST — @import MUST stay at the very top.
+   ONE <link> to homepage-live.css is loaded on EVERY page; it pulls
+   in each page's stylesheet below. Add a new page? Drop its file in
+   this repo and add one @import line here, then push. Never change
+   the <link> in systeme again. Imports are scoped (about.css -> .ak-about),
+   so loading them everywhere is harmless — unused rules just don't match.
+   ============================================================ */
+@import url("about.css");
+
+/* ============================================================
    AK brand CSS for augustkjerland.com (systeme.io).
    Served at the STABLE url (no version query):
      https://kacperkijno.github.io/august-styles/homepage-live.css
