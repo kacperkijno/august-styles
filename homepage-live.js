@@ -107,9 +107,14 @@
        bar on scroll. Other pages (materials, etc.) have no dark hero, so the
        transparent default is unreadable on a light page — pin the solid bar
        from the top and skip the scroll toggle. */
-    var isHome = location.pathname === '/' ||
-                 !!document.getElementById('section-e8a2d9b7');
-    if (!isHome) {
+    /* Transparent nav + scroll-reveal ONLY on pages with a DARK hero behind
+       the bar: home, plus the /about (.akb-hero) and /consulting (.akc-hero)
+       blocks. Pages without a dark hero (e.g. /academy, /materials) would lose
+       the cream nav text on a light hero, so pin the solid bar and skip toggle. */
+    var darkHero = location.pathname === '/' ||
+                 !!document.getElementById('section-e8a2d9b7') ||
+                 !!document.querySelector('.akb-hero, .akc-hero');
+    if (!darkHero) {
       header.classList.add('is-scrolled');
       return;
     }
