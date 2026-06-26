@@ -1628,6 +1628,19 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   color: var(--ak-forest) !important;
 }
 
+/* Materials + academy section headings → forest (grey systeme-native → brand standard).
+   Bare ids + literal forest (materials may lack body.ak-home + tokens).
+   cbb3c700=Materials hero "Frameworks and conversations", dac7fe56=Free guides,
+   d87b6dff=The interviews, 5aa93be6=Academy testimonials. NOTE: newsletter
+   "August's Brief" (#headline-baf4bf12) intentionally NOT here — its band colour
+   (light vs forest) must be confirmed first. */
+#headline-cbb3c700, #headline-cbb3c700 *,
+#headline-dac7fe56, #headline-dac7fe56 *,
+#headline-d87b6dff, #headline-d87b6dff *,
+#headline-5aa93be6, #headline-5aa93be6 * {
+  color: #1A3C2F !important;
+}
+
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
 #text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .14em !important; }
