@@ -1594,6 +1594,9 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-card--featured{border-color:rgba(26,60,47,.30); box-shadow:0 8px 32px rgba(26,60,47,.09);}
 #section-ba1fb6ee .ak-card--featured::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--akx-terra); z-index:2;}
 #section-ba1fb6ee .ak-card--featured:hover{border-color:rgba(26,60,47,.55); box-shadow:0 16px 44px rgba(26,60,47,.14); transform:translateY(-6px);}
+/* hover lift must out-rank the .is-visible reveal transform (which is translateY(0)) */
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card.is-visible:hover{transform:translateY(-4px);}
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card--featured.is-visible:hover{transform:translateY(-6px);}
 
 /* card text — 1:1 home: tag/name/price/meta INK + CENTER, desc/list INK + LEFT */
 #section-ba1fb6ee .ak-tag{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-terra) !important; text-align:center !important; margin:30px 0 0 !important;}
