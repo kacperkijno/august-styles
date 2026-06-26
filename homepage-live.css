@@ -1571,8 +1571,8 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-courses{
   --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-ink:#2D2D2D;
   --akx-border:rgba(45,45,45,.1); --akx-hr:rgba(68,68,68,.1);
-  --akx-serif:"adobe-caslon-pro","Adobe Caslon Pro",Georgia,"Times New Roman",serif;
-  --akx-sans:"neue-haas-grotesk-display","Neue Haas Display","Helvetica Neue",Arial,sans-serif;
+  --akx-serif:"AdobeCaslonPro42448745","adobe-caslon-pro","Adobe Caslon Pro",Georgia,serif;
+  --akx-sans:"NeueHaasDisplay-Roman42448762","neue-haas-grotesk-display","Neue Haas Display","Helvetica Neue",Arial,sans-serif;
   box-sizing:border-box; width:100%; font-family:var(--akx-sans); color:var(--akx-ink); padding:128px 0;
 }
 #section-ba1fb6ee .ak-courses *{box-sizing:border-box;}
