@@ -3,7 +3,7 @@
    ONE <link> to homepage-live.css is loaded on EVERY page; it pulls
    in each page's stylesheet below. Add a new page? Drop its file in
    this repo and add one @import line here, then push. Never change
-   the <link> in systeme again. Imports are scoped (about.css -> .ak-about),
+   the <link> in systeme again. Imports are scoped (about.css → .ak-about),
    so loading them everywhere is harmless — unused rules just don't match.
    ============================================================ */
 @import url("about.css");
@@ -1514,6 +1514,51 @@ html body.ak-home #section-d54243f0 img {
 
 /* Footer link columns equal width (systeme had them at size 3/4/5 → span 4 each) */
 #row-138b5654 > div { grid-column: span 4 !important; }
+
+
+/* ============================================================
+   UNIFIED EYEBROWS (2026-06-26) — match /about + /consulting.
+   Section eyebrows: 11px / weight 300 / .18em / uppercase / terracotta.
+   Hero eyebrow: same, but .2em + terracotta-deco (over the dark photo).
+   The doubled-id selector (#id#id) outranks the per-section
+   "match OUR COURSES" rules above WITHOUT editing them.
+   IDs: 03f4fd23=OUR COURSES, 0a285057=About, 4614e520=Framework,
+   0654e64d=Free Resource, b5fba013=Testimonials, 8a3ce360=Insights,
+   ab357f86=Beyond the classroom (type only — keep its cream colour),
+   60486913=hero eyebrow.
+   ============================================================ */
+html body.ak-home #text-03f4fd23#text-03f4fd23, html body.ak-home #text-03f4fd23#text-03f4fd23 *,
+html body.ak-home #text-0a285057#text-0a285057, html body.ak-home #text-0a285057#text-0a285057 *,
+html body.ak-home #text-4614e520#text-4614e520, html body.ak-home #text-4614e520#text-4614e520 *,
+html body.ak-home #text-0654e64d#text-0654e64d, html body.ak-home #text-0654e64d#text-0654e64d *,
+html body.ak-home #text-b5fba013#text-b5fba013, html body.ak-home #text-b5fba013#text-b5fba013 *,
+html body.ak-home #text-8a3ce360#text-8a3ce360, html body.ak-home #text-8a3ce360#text-8a3ce360 * {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.18em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  color: var(--ak-terracotta) !important;
+}
+
+/* Beyond the classroom — same type, keep its existing (cream) colour */
+html body.ak-home #text-ab357f86#text-ab357f86, html body.ak-home #text-ab357f86#text-ab357f86 * {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.18em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+}
+
+/* Hero eyebrow — lighter terracotta-deco over the dark hero photo */
+html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913#text-60486913 * {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.2em !important;
+  line-height: 1.5 !important;
+  text-transform: uppercase !important;
+  color: #D9A47A !important;
+}
 
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
