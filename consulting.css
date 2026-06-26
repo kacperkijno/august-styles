@@ -49,7 +49,7 @@
 .akc-shead .akc-h2{max-width:24ch;}
 
 /* ---------- BUTTONS ---------- */
-.akc-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;font-family:var(--sans);font-weight:400;font-size:14px;letter-spacing:.04em;white-space:nowrap;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),background var(--t) var(--ease),color var(--t) var(--ease),border-color var(--t) var(--ease);}
+.akc-btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;font-family:var(--sans);font-weight:300;font-size:14px;letter-spacing:.04em;white-space:nowrap;border-radius:8px;border:1.5px solid transparent;cursor:pointer;transition:transform var(--t) var(--ease),box-shadow var(--t) var(--ease),background var(--t) var(--ease),color var(--t) var(--ease),border-color var(--t) var(--ease);}
 .akc-btn .akc-arrow{transition:transform var(--t) var(--ease);}
 .akc-btn:hover .akc-arrow{transform:translateX(3px);}
 .akc-btn--primary{background:var(--forest);color:var(--cream);}
