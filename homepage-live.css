@@ -1584,6 +1584,10 @@ html body.ak-home #section-ba1fb6ee .ak-title {
 }
 /* Course-card buttons → site radius 8px (block hardcoded 10px) */
 html body.ak-home #section-ba1fb6ee .ak-btn { border-radius: 8px !important; }
+/* Card CONTENT left-aligned like home (systeme centers Custom HTML; the block
+   only set text-align:left in its mobile @media → desktop inherited centered).
+   Header (eyebrow + title) stays centered. Buttons keep their own centering. */
+html body.ak-home #section-ba1fb6ee .ak-card { text-align: left !important; }
 
 /* Academy testimonials eyebrow ("What participants say") → match home */
 html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6#text-318b9ac6 * {
