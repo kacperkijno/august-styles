@@ -133,7 +133,7 @@
 .akc-contact__body{font-family:var(--sans);font-weight:300;font-size:16px;line-height:1.65;color:rgba(249,247,241,.82);max-width:48ch;}
 .akc-contact__body + .akc-contact__body{margin-top:16px;}
 .akc-contact__mail{display:inline-block;margin-top:24px;font-size:15px;color:var(--terracotta-deco);border-bottom:1px solid rgba(217,164,122,.5);padding-bottom:2px;}
-.akc-formcard{background:var(--cream);border-radius:var(--radius-card);padding:clamp(14px,2vw,22px);}
+.akc-formcard{background:transparent;border-radius:0;padding:0;}
 .akc-formcard iframe{display:block;width:100%;min-height:520px;border:0;background:transparent;border-radius:2px;}
 
 /* ---------- RESPONSIVE ---------- */
