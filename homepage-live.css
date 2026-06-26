@@ -1595,6 +1595,20 @@ html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6
   color: var(--ak-terracotta) !important;
 }
 
+/* ==================== MATERIALS page eyebrows → unified site style ====================
+   /materials is ID-scoped (may not carry body.ak-home), so bare ids + literal
+   colour. 664b6c2c=FREE RESOURCES (hero), 4563619c=PDFs section, bf3803a9=Videos. */
+#text-664b6c2c, #text-664b6c2c *,
+#text-4563619c, #text-4563619c *,
+#text-bf3803a9, #text-bf3803a9 * {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.18em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  color: #B46A3C !important;
+}
+
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
 #text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .14em !important; }

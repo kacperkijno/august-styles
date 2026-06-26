@@ -122,7 +122,7 @@
 .akc-price__desc{margin:18px 0 0;color:var(--ink-70);line-height:1.55;font-size:15px;}
 .akc-price--feature .akc-price__desc{color:rgba(249,247,241,.82);}
 .akc-price__save{display:inline-block;margin:16px 0 0;font-family:var(--sans);font-weight:500;font-size:12px;letter-spacing:.04em;color:var(--terracotta-deco);background:rgba(217,164,122,.14);border:1px solid rgba(217,164,122,.4);border-radius:999px;padding:6px 14px;}
-.akc-price__cta{margin-top:auto;padding-top:28px;align-self:flex-start;}
+.akc-price__cta{margin-top:auto;align-self:flex-start;}
 
 /* ---------- GET IN TOUCH (form) ---------- */
 .akc-contact{background:var(--forest);color:var(--cream);}
