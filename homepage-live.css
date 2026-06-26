@@ -1561,33 +1561,70 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 }
 
 
-/* ==================== ACADEMY — "Our courses" block → match site ====================
-   /academy courses = standalone raw-HTML widget (.ak-courses in #section-ba1fb6ee)
-   with its own inline <style>. These id-scoped overrides align its eyebrow + heading
-   + button radius with home/about/consulting WITHOUT re-pasting the block
-   (id specificity beats the block's .ak-courses .ak-X inline rules).
+/* ==================== ACADEMY /academy — "OUR COURSES" block (FULL external styling) ====================
+   Clean HTML in systeme (#section-ba1fb6ee .ak-courses) — NO inline <style>.
+   Source block: redesign/academy-courses-block.html.
+   Card text matches HOME course cards 1:1 (computed from live home 2026-06-26):
+   tag/name/price/meta = INK + CENTER; desc + list = INK + LEFT; price NOT terracotta.
+   Fonts = systeme's Adobe kit (adobe-caslon-pro / neue-haas-grotesk-display), same as home.
    ============================================================ */
-/* Eyebrow → unified site eyebrow (11px / 300 / .18em / uppercase / terracotta) */
-html body.ak-home #section-ba1fb6ee .ak-eyebrow {
-  font-size: 11px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.18em !important;
-  line-height: 1.4 !important;
-  text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+#section-ba1fb6ee .ak-courses{
+  --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-ink:#2D2D2D;
+  --akx-border:rgba(45,45,45,.1); --akx-hr:rgba(68,68,68,.1);
+  --akx-serif:"adobe-caslon-pro","Adobe Caslon Pro",Georgia,"Times New Roman",serif;
+  --akx-sans:"neue-haas-grotesk-display","Neue Haas Display","Helvetica Neue",Arial,sans-serif;
+  box-sizing:border-box; width:100%; font-family:var(--akx-sans); color:var(--akx-ink); padding:128px 0;
 }
-/* Section title → standard h2: forest, tighter line-height, slight negative tracking */
-html body.ak-home #section-ba1fb6ee .ak-title {
-  color: var(--ak-forest) !important;
-  line-height: 1.1 !important;
-  letter-spacing: -0.005em !important;
+#section-ba1fb6ee .ak-courses *{box-sizing:border-box;}
+#section-ba1fb6ee .ak-inner{max-width:1120px; margin:0 auto; padding:0 20px;}
+
+/* header */
+#section-ba1fb6ee .ak-eyebrow{font-family:var(--akx-sans) !important; font-size:11px !important; line-height:1.4 !important; font-weight:300 !important; letter-spacing:.18em !important; text-transform:uppercase !important; color:var(--akx-terra) !important; margin:0 0 20px !important;}
+#section-ba1fb6ee .ak-title{font-family:var(--akx-serif) !important; font-size:clamp(32px,4.4vw,52px) !important; line-height:1.1 !important; letter-spacing:-.005em !important; font-weight:400 !important; color:var(--akx-forest) !important; margin:0 0 64px !important;}
+#section-ba1fb6ee .ak-title span{display:block;}
+
+/* grid + card shell */
+#section-ba1fb6ee .ak-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start;}
+#section-ba1fb6ee .ak-card{position:relative; overflow:hidden; background:var(--akx-cream); border:1px solid var(--akx-border); border-radius:4px; box-shadow:0 2px 14px rgba(26,60,47,.04); padding:30px 34px; transition:opacity 600ms cubic-bezier(.2,.6,.2,1), transform 600ms cubic-bezier(.2,.6,.2,1), box-shadow 220ms cubic-bezier(.2,.6,.2,1), border-color 220ms cubic-bezier(.2,.6,.2,1);}
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card{opacity:0; transform:translateY(24px);}
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card.is-visible{opacity:1; transform:translateY(0);}
+#section-ba1fb6ee .ak-grid > .ak-card:nth-child(2){transition-delay:120ms;}
+#section-ba1fb6ee .ak-grid > .ak-card:nth-child(3){transition-delay:240ms;}
+#section-ba1fb6ee .ak-card:hover{border-color:rgba(26,60,47,.30); box-shadow:0 12px 32px rgba(26,60,47,.10); transform:translateY(-4px);}
+#section-ba1fb6ee .ak-card--featured{border-color:rgba(26,60,47,.30); box-shadow:0 8px 32px rgba(26,60,47,.09);}
+#section-ba1fb6ee .ak-card--featured::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--akx-terra); z-index:2;}
+#section-ba1fb6ee .ak-card--featured:hover{border-color:rgba(26,60,47,.55); box-shadow:0 16px 44px rgba(26,60,47,.14); transform:translateY(-6px);}
+
+/* card text — 1:1 home: tag/name/price/meta INK + CENTER, desc/list INK + LEFT */
+#section-ba1fb6ee .ak-tag{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:0 0 15px !important;}
+#section-ba1fb6ee .ak-name{font-family:var(--akx-serif) !important; font-size:30px !important; line-height:38px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:0 0 24px !important;}
+#section-ba1fb6ee .ak-price{font-family:var(--akx-serif) !important; font-size:54px !important; line-height:54px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:0 !important;}
+#section-ba1fb6ee .ak-meta{font-family:var(--akx-sans) !important; font-size:14px !important; line-height:16px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:18px 0 32px !important;}
+#section-ba1fb6ee .ak-meta .sep{color:rgba(45,45,45,.45);}
+#section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:15px !important; line-height:20px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:left !important; margin:0 0 28px !important;}
+#section-ba1fb6ee .ak-hr{border:0; border-top:1px solid var(--akx-hr); margin:0 0 24px; height:0;}
+#section-ba1fb6ee .ak-list{list-style:none; margin:0 0 32px; padding:0; text-align:left !important;}
+#section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:15px !important; line-height:28px !important; color:var(--akx-ink) !important; text-align:left !important; margin:0 0 14px;}
+#section-ba1fb6ee .ak-list li:last-child{margin-bottom:0;}
+#section-ba1fb6ee .ak-check{flex:0 0 auto; width:14px; height:28px; margin-right:10px; display:inline-flex; align-items:center; color:var(--akx-terra);}
+#section-ba1fb6ee .ak-check svg{width:13px; height:13px; display:block;}
+
+/* buttons — site radius 8px, light weight, full width */
+#section-ba1fb6ee .ak-btn{display:block; width:100%; text-align:center !important; text-decoration:none; font-family:var(--akx-sans) !important; font-size:14px !important; font-weight:300 !important; line-height:1 !important; padding:16px 24px; border-radius:8px; color:var(--akx-cream) !important; transition:filter .15s ease, background-color .15s ease;}
+#section-ba1fb6ee .ak-btn:hover{filter:brightness(.92);}
+#section-ba1fb6ee .ak-btn--forest{background:var(--akx-forest);}
+#section-ba1fb6ee .ak-btn--terracotta{background:var(--akx-terra);}
+
+/* mobile */
+@media (max-width:900px){
+  #section-ba1fb6ee .ak-courses{padding:72px 0;}
+  #section-ba1fb6ee .ak-title{font-size:clamp(30px,7vw,40px) !important; line-height:1.12 !important; margin-bottom:48px !important;}
+  #section-ba1fb6ee .ak-grid{grid-template-columns:1fr; gap:20px;}
 }
-/* Course-card buttons → site radius 8px (block hardcoded 10px) */
-html body.ak-home #section-ba1fb6ee .ak-btn { border-radius: 8px !important; }
-/* Card CONTENT left-aligned like home (systeme centers Custom HTML; the block
-   only set text-align:left in its mobile @media → desktop inherited centered).
-   Header (eyebrow + title) stays centered. Buttons keep their own centering. */
-html body.ak-home #section-ba1fb6ee .ak-card { text-align: left !important; }
+@media (prefers-reduced-motion:reduce){
+  #section-ba1fb6ee .ak-card,#section-ba1fb6ee .ak-card:hover,#section-ba1fb6ee .ak-card--featured:hover{transform:none;}
+  #section-ba1fb6ee .ak-courses.ak-anim .ak-card{opacity:1; transform:none;}
+}
 
 /* Academy testimonials eyebrow ("What participants say") → match home */
 html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6#text-318b9ac6 * {
