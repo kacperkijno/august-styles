@@ -1609,6 +1609,21 @@ html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6
   color: #B46A3C !important;
 }
 
+/* ==================== SECTION HEADINGS → forest (brand standard) ====================
+   Home section H2s on LIGHT surfaces = forest Caslon, matching /about + /consulting
+   + /academy. EXCLUDES the hero H1 (#headline-7f2a7e96, cream over the dark photo)
+   and "Beyond the classroom" (#headline-219cddeb, cream over its dark band).
+   Courses 9634a487 / About 9045c554 / Framework c5d254ff / Magnet 502539e5 /
+   Insights 0ebe6c35 / Testimonials 5baa8f2c. */
+html body.ak-home #headline-9634a487, html body.ak-home #headline-9634a487 *,
+html body.ak-home #headline-9045c554, html body.ak-home #headline-9045c554 *,
+html body.ak-home #headline-c5d254ff, html body.ak-home #headline-c5d254ff *,
+html body.ak-home #headline-502539e5, html body.ak-home #headline-502539e5 *,
+html body.ak-home #headline-0ebe6c35, html body.ak-home #headline-0ebe6c35 *,
+html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
+  color: var(--ak-forest) !important;
+}
+
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
 #text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .14em !important; }
