@@ -1560,6 +1560,41 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
   color: #D9A47A !important;
 }
 
+
+/* ==================== ACADEMY — "Our courses" block → match site ====================
+   /academy courses = standalone raw-HTML widget (.ak-courses in #section-ba1fb6ee)
+   with its own inline <style>. These id-scoped overrides align its eyebrow + heading
+   + button radius with home/about/consulting WITHOUT re-pasting the block
+   (id specificity beats the block's .ak-courses .ak-X inline rules).
+   ============================================================ */
+/* Eyebrow → unified site eyebrow (11px / 300 / .18em / uppercase / terracotta) */
+html body.ak-home #section-ba1fb6ee .ak-eyebrow {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.18em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  color: var(--ak-terracotta) !important;
+}
+/* Section title → standard h2: forest, tighter line-height, slight negative tracking */
+html body.ak-home #section-ba1fb6ee .ak-title {
+  color: var(--ak-forest) !important;
+  line-height: 1.1 !important;
+  letter-spacing: -0.005em !important;
+}
+/* Course-card buttons → site radius 8px (block hardcoded 10px) */
+html body.ak-home #section-ba1fb6ee .ak-btn { border-radius: 8px !important; }
+
+/* Academy testimonials eyebrow ("What participants say") → match home */
+html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6#text-318b9ac6 * {
+  font-size: 11px !important;
+  font-weight: 300 !important;
+  letter-spacing: 0.18em !important;
+  line-height: 1.4 !important;
+  text-transform: uppercase !important;
+  color: var(--ak-terracotta) !important;
+}
+
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
 #text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .14em !important; }
