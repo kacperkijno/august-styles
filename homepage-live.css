@@ -10,6 +10,49 @@
 @import url("consulting.css");
 @import url("contact.css");
 
+/* ============================================================================
+   AK FONTY — jedyne zrodlo prawdy (2026-08-27)
+   ----------------------------------------------------------------------------
+   Wczesniej strony stały na krojach wgranych do systeme
+   ("AdobeCaslonPro42448745", "NeueHaasDisplay-Roman42448762"), ktore maja po
+   JEDNEJ wadze. Kazde 300/500/700 przegladarka dorabiala sama — 156 fragmentow
+   tekstu w serwisie bylo renderowanych sztucznym pogrubieniem albo scienieniem.
+   Strony po redesignie (/about, /consulting, /contact, /pitching-decoded) juz
+   uzywaly AKHaas/AKCaslon i mialy tego zero; to jest dokonczenie tej migracji.
+
+   Nazwy systeme zostaja w stosie jako DRUGI wybor — bezpiecznik na wypadek,
+   gdyby github.io nie odpowiedzial. Dopoki AKHaas sie laduje, przegladarka
+   nawet nie siegnie po plik systeme (a przy okazji przestaje probowac pobrac
+   ich zepsuty `null.woff2`, ktory zwracal 403 na kazdej stronie).
+
+   UWAGA: repo ma tylko Caslon Regular — kursywa Caslona (67 miejsc, glownie
+   hero) pozostaje syntezowana. Tak samo bylo przed zmiana; do naprawy trzeba
+   pliku Adobe Caslon Pro Italic.
+   ============================================================================ */
+@font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayMedium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayBold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}
+
+/* ---- ALIAS: nazwy systeme -> nasze pliki z PELNYM zestawem wag ----
+   Wiekszosc tekstu na stronach lejka dostaje font nie z naszych regul, tylko
+   z klas, ktore systeme generuje samo (`.bOjKUS{font-family:AdobeCaslon...}`).
+   Nie da sie w nie celowac — sa auto-generowane. Zamiast walczyc selektorami,
+   PRZEDEFINIOWUJEMY te nazwy: systeme deklaruje je z jednym plikiem i bez
+   font-weight, my dokladamy brakujace wagi wskazujace na nasze TTF-y.
+   Tekst z `font-weight: 300` dostaje wiec prawdziwy Light zamiast litery
+   sciezonej przez przegladarke — i to bez ruszania choćby jednej reguly. */
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayMedium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayBold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"AdobeCaslonPro42448745";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+
+
+
 /* ============================================================
    AK brand CSS for augustkjerland.com (systeme.io).
    Served at the STABLE url (no version query):
@@ -59,8 +102,8 @@ body.ak-home {
   --ak-ink-10:      rgba(45, 45, 45, 0.10);
   --ak-ink-72:      rgba(45, 45, 45, 0.72);
   --ak-ease:        cubic-bezier(0.2, 0.6, 0.2, 1);
-  --ak-serif:       "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
-  --ak-sans:        "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
+  --ak-serif:       "AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
+  --ak-sans:        "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
 }
 
 /* ---------- Global button radius (design system) -------------
@@ -1433,12 +1476,12 @@ html body.ak-home #section-d54243f0 img {
 #ak-latest-writing .post:hover { padding-left: 8px; }
 #ak-latest-writing .post__main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 #ak-latest-writing .post__cat {
-  font-family: "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
+  font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
   font-weight: 700;
   font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #B46A3C;
 }
 #ak-latest-writing .post__title {
-  font-family: "AdobeCaslonPro42448745", Georgia, serif;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif;
   font-size: clamp(19px, 2vw, 23px); line-height: 1.2; color: #2D2D2D; max-width: 34ch;
   transition: color 250ms cubic-bezier(.2,.6,.2,1);
 }
@@ -1588,8 +1631,8 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-courses{
   --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-ink:#2D2D2D;
   --akx-border:rgba(45,45,45,.1); --akx-hr:rgba(68,68,68,.1);
-  --akx-serif:"AdobeCaslonPro42448745","adobe-caslon-pro","Adobe Caslon Pro",Georgia,serif;
-  --akx-sans:"NeueHaasDisplay-Roman42448762","neue-haas-grotesk-display","Neue Haas Display","Helvetica Neue",Arial,sans-serif;
+  --akx-serif:"AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
+  --akx-sans:"AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
   box-sizing:border-box; width:100%; font-family:var(--akx-sans); color:var(--akx-ink); padding:128px 0;
 }
 #section-ba1fb6ee .ak-courses *{box-sizing:border-box;}
@@ -1744,7 +1787,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 .carousel-ui div:has(> a > img) > div{ padding:24px 26px 28px !important; }
 
 /* category → match the home Insights .post__cat (NeueHaas 700, 10px, .16em, uppercase, terracotta) */
-.carousel-ui [color="rgb(180, 106, 60)"]{ font-family:"NeueHaasDisplay-Roman42448762","Helvetica Neue",sans-serif !important; font-weight:700 !important; font-size:10px !important; letter-spacing:.16em !important; text-transform:uppercase !important; line-height:1.4 !important; }
+.carousel-ui [color="rgb(180, 106, 60)"]{ font-family:"AKHaas", "NeueHaasDisplay-Roman42448762","Helvetica Neue",sans-serif !important; font-weight:700 !important; font-size:10px !important; letter-spacing:.16em !important; text-transform:uppercase !important; line-height:1.4 !important; }
 
 /* title (Caslon forest, was 36px) → card size, tighter, hover terracotta */
 .carousel-ui [font-family="AdobeCaslonPro42448745"]{ font-size:clamp(20px,2.2vw,25px) !important; line-height:1.18 !important; margin-top:12px !important; }

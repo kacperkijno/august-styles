@@ -1,3 +1,45 @@
+/* ============================================================================
+   AK FONTY — jedyne zrodlo prawdy (2026-08-27)
+   ----------------------------------------------------------------------------
+   Wczesniej strony stały na krojach wgranych do systeme
+   ("AdobeCaslonPro42448745", "NeueHaasDisplay-Roman42448762"), ktore maja po
+   JEDNEJ wadze. Kazde 300/500/700 przegladarka dorabiala sama — 156 fragmentow
+   tekstu w serwisie bylo renderowanych sztucznym pogrubieniem albo scienieniem.
+   Strony po redesignie (/about, /consulting, /contact, /pitching-decoded) juz
+   uzywaly AKHaas/AKCaslon i mialy tego zero; to jest dokonczenie tej migracji.
+
+   Nazwy systeme zostaja w stosie jako DRUGI wybor — bezpiecznik na wypadek,
+   gdyby github.io nie odpowiedzial. Dopoki AKHaas sie laduje, przegladarka
+   nawet nie siegnie po plik systeme (a przy okazji przestaje probowac pobrac
+   ich zepsuty `null.woff2`, ktory zwracal 403 na kazdej stronie).
+
+   UWAGA: repo ma tylko Caslon Regular — kursywa Caslona (67 miejsc, glownie
+   hero) pozostaje syntezowana. Tak samo bylo przed zmiana; do naprawy trzeba
+   pliku Adobe Caslon Pro Italic.
+   ============================================================================ */
+@font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayMedium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayBold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}
+
+/* ---- ALIAS: nazwy systeme -> nasze pliki z PELNYM zestawem wag ----
+   Wiekszosc tekstu na stronach lejka dostaje font nie z naszych regul, tylko
+   z klas, ktore systeme generuje samo (`.bOjKUS{font-family:AdobeCaslon...}`).
+   Nie da sie w nie celowac — sa auto-generowane. Zamiast walczyc selektorami,
+   PRZEDEFINIOWUJEMY te nazwy: systeme deklaruje je z jednym plikiem i bez
+   font-weight, my dokladamy brakujace wagi wskazujace na nasze TTF-y.
+   Tekst z `font-weight: 300` dostaje wiec prawdziwy Light zamiast litery
+   sciezonej przez przegladarke — i to bez ruszania choćby jednej reguly. */
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayMedium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
+@font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayBold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}
+@font-face{font-family:"AdobeCaslonPro42448745";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+
+
 /* ============================================================
    AK Sales Page — systeme.io overrides for course landing pages.
    Scope: body.ak-sales-page (set by snippet in page head).
@@ -810,14 +852,14 @@ html body.ak-sales-page #headline-449b4d61 h2 {
   line-height: 1.1 !important;
   margin-bottom: 12px !important;
   color: var(--ak-ink) !important;
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
 }
 /* "€49" — large italic terracotta accent */
 html body.ak-sales-page #headline-449b4d61 p {
   font-style: italic !important;
   color: var(--ak-terracotta) !important;
   font-size: 72px !important;
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   line-height: 1 !important;
   margin: 0 !important;
 }
@@ -1100,7 +1142,7 @@ html body.ak-sales-page #text-946dd6f9 {
   margin: 0 auto 56px !important;
 }
 html body.ak-sales-page #text-946dd6f9 p {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-size: clamp(32px, 4vw, 48px) !important;
   line-height: 1.12 !important;
   letter-spacing: -0.01em !important;
@@ -1167,7 +1209,7 @@ html body.ak-sales-page #text-d1765bce span,
 html body.ak-sales-page #text-74c0ec93 em,
 html body.ak-sales-page #text-3661711a em,
 html body.ak-sales-page #text-d1765bce em {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-style: italic !important;
   font-size: 36px !important;
   line-height: 1 !important;
@@ -1291,7 +1333,7 @@ html body.ak-sales-page #section-611e31fb input[type="radio"] {
 /* ----- "Individual / Company" toggle: tighten + brand the labels */
 html body.ak-sales-page #section-611e31fb #customertype-993ed430 label,
 html body.ak-sales-page #section-611e31fb [data-test-id^="customer-type"] {
-  font-family: var(--ak-sans, 'NeueHaasDisplay-Roman42448762'), sans-serif !important;
+  font-family: var(--ak-sans, "AKHaas"), sans-serif !important;
   font-size: 14px !important;
   color: var(--ak-ink) !important;
 }
@@ -1316,14 +1358,14 @@ html body.ak-sales-page #section-611e31fb #horizontalline-4f13fe53 {
 
 /* ----- "Your details" eyebrow + "€49" price in card head ----- */
 html body.ak-sales-page #section-611e31fb #text-3fc65725 p {
-  font-family: var(--ak-sans, 'NeueHaasDisplay-Roman42448762'), sans-serif !important;
+  font-family: var(--ak-sans, "AKHaas"), sans-serif !important;
   font-size: 12px !important;
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
   color: var(--ak-ink-70, rgba(45, 45, 45, 0.7)) !important;
 }
 html body.ak-sales-page #section-611e31fb #text-38559b5b p {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   color: var(--ak-forest) !important;
   font-size: 26px !important;
   line-height: 1 !important;
@@ -1347,7 +1389,7 @@ html body.ak-sales-page #section-611e31fb #headline-458600a7 p {
 
 /* ----- Trust line "Lifetime access | 14-day refund | Secure checkout" */
 html body.ak-sales-page #section-611e31fb #text-5fc74eb0 p {
-  font-family: var(--ak-sans, 'NeueHaasDisplay-Roman42448762'), sans-serif !important;
+  font-family: var(--ak-sans, "AKHaas"), sans-serif !important;
   font-size: 11px !important;
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
@@ -1371,7 +1413,7 @@ html body.ak-sales-page #row-f9afb997:hover {
   border-color: rgba(180, 106, 60, 0.30) !important;
 }
 html body.ak-sales-page #text-72c395e5 p {
-  font-family: var(--ak-sans, 'NeueHaasDisplay-Roman42448762'), sans-serif !important;
+  font-family: var(--ak-sans, "AKHaas"), sans-serif !important;
   font-size: 11px !important;
   letter-spacing: 0.22em !important;
   text-transform: uppercase !important;
@@ -1386,7 +1428,7 @@ html body.ak-sales-page #text-72c395e5 p strong {
 }
 html body.ak-sales-page #text-b2684011 p,
 html body.ak-sales-page #text-b2684011 p span {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-style: italic !important;
   font-size: 16.5px !important;
   line-height: 1.5 !important;
@@ -1401,7 +1443,7 @@ html body.ak-sales-page #section-611e31fb #offerprice-698a1992 {
   padding: 14px 18px !important;
 }
 html body.ak-sales-page #section-611e31fb #offerprice-698a1992 span[data-testid$="-price"] {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   color: var(--ak-forest) !important;
   font-size: 22px !important;
   font-weight: 400 !important;
@@ -1854,7 +1896,7 @@ html body.ak-sales-page #text-45740cbe * {
 /* ----- Hero H1: Caslon italic cream (was black roman on forest bg) ----- */
 html body.ak-sales-page #headline-976bde7f,
 html body.ak-sales-page #headline-976bde7f * {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-style: italic !important;
   color: var(--ak-cream) !important;
 }
@@ -1897,7 +1939,7 @@ html body.ak-sales-page #text-0eeae616 {
   margin: 0 auto 56px !important;
 }
 html body.ak-sales-page #text-0eeae616 p {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-size: clamp(32px, 4vw, 48px) !important;
   line-height: 1.12 !important;
   letter-spacing: -0.01em !important;
@@ -1932,7 +1974,7 @@ html body.ak-sales-page #row-80e3d619:hover {
 html body.ak-sales-page #text-08bcf509 *,
 html body.ak-sales-page #text-d9e1a821 *,
 html body.ak-sales-page #text-076b8054 * {
-  font-family: 'AdobeCaslonPro42448745', Georgia, serif !important;
+  font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-style: italic !important;
   font-size: 36px !important;
   line-height: 1 !important;
