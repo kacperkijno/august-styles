@@ -837,7 +837,8 @@ html body.ak-home #field-d22e847d {
 
 /* CTA — terracotta primary (lead magnet = the one terracotta button) */
 html body.ak-home #button-aab9edaf {
-  background: var(--ak-terracotta) !important;
+  /* ciemniejsza terakota — Cream na #B46A3C to 3.87:1, ponizej AA */
+  background: var(--ak-terracotta-dark) !important;
   color: var(--ak-cream) !important;
   border: 0 !important;
   border-radius:4px !important;
@@ -2548,4 +2549,48 @@ html body #text-0df8960f, html body #text-0df8960f * {
 html body [id^="bulletlist-"],
 html body [id^="bulletlist-"] * {
   color: #2D2D2D !important;
+}
+
+/* ---------- POWIERZCHNIE TERAKOTOWE: kontrast tekstu -----------
+   Cream na #B46A3C to 3.87:1 — ponizej progu AA 4.5:1 dla tekstu.
+   Ciemniejsza terakota #9A5832 daje 5.05:1. Kolor marki zostaje
+   #B46A3C; ciemnieje tylko ta powierzchnia, na ktorej stoi tekst.
+   12 przyciskow systeme + nasze klasy. Zmierzone 27.08. */
+html body #button-aab9c64d,
+html body #button-28a2a4e1,
+html body #button-aab9edaf,
+html body #button-2d7e1ca4,
+html body #button-1ad0ffce,
+html body #button-bfcfeb26,
+html body #button-c9add3ad,
+html body #button-84ddf280,
+html body #button-29d525d5,
+html body #submit-button-955400f4,
+html body #button-1119cf8c,
+html body #button-b4d9f586,
+html body .akb-btn--terra,
+html body .akc-btn--terra,
+html body .ak-btn--terracotta,
+html body .pdk-btn,
+html body .pdk-tag {
+  background-color: #9A5832 !important;
+}
+html body #button-aab9c64d:hover,
+html body #button-28a2a4e1:hover,
+html body #button-aab9edaf:hover,
+html body #button-2d7e1ca4:hover,
+html body #button-1ad0ffce:hover,
+html body #button-bfcfeb26:hover,
+html body #button-c9add3ad:hover,
+html body #button-84ddf280:hover,
+html body #button-29d525d5:hover,
+html body #submit-button-955400f4:hover,
+html body #button-1119cf8c:hover,
+html body #button-b4d9f586:hover,
+html body .akb-btn--terra:hover,
+html body .akc-btn--terra:hover,
+html body .ak-btn--terracotta:hover,
+html body .pdk-btn:hover,
+html body .pdk-tag:hover {
+  background-color: #8B4E2C !important;
 }
