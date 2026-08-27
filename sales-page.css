@@ -611,24 +611,14 @@ html body.ak-sales-page #section-05163fa3 #image-29857721,
 html body.ak-sales-page #section-8f394858 #image-402e4457 {
   filter: none !important;
 }
-/* CTA — terracotta, with hover */
-html body.ak-sales-page #button-3ca0c6cb,
-html body.ak-sales-page #button-e9b03c0b {
-  background: var(--ak-terracotta) !important;
-  color: var(--ak-cream) !important;
-  padding: 12px 22px !important;
-  border-radius: 2px !important;
-  font-size: 13px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.04em !important;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
-}
-html body.ak-sales-page #button-3ca0c6cb:hover,
-html body.ak-sales-page #button-e9b03c0b:hover {
-  background: #9A5832 !important;
-  transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
-}
+/* CTA — USUNIETE 2026-08-27.
+   Byl to relikt niedokonczonego redesignu: terrakotowy przycisk 13px/500,
+   radius 2px, padding 12px 22px. Jako jedyny w calym serwisie mial inny
+   kolor tla niz Forest, przez co /cross-cultural-playbook wygladal jak
+   osobna marka. Nawigacja lejkow jest teraz ujednolicona z Website w bloku
+   "NAWIGACJA LEJKOW" na koncu tego pliku (Forest + Cream + radius 4px).
+   Regula celowala w ID (#button-…), wiec wygrywala specyficznoscia z nowym
+   standardem — stad usuniecie, a nie nadpisanie. */
 
 /* ============================================================
    18. HERO EYEBROW — also catch the warm-cream tone used in hero
@@ -1959,4 +1949,47 @@ html body.ak-sales-page #text-4353c41d * {
   color: var(--ak-forest) !important;
   font-weight: 500 !important;
   line-height: 1.4 !important;
+}
+
+/* ============================================================================
+   NAWIGACJA LEJKÓW — ujednolicenie z Website (2026-08-27)
+   ----------------------------------------------------------------------------
+   Wzorzec = nagłówek /academy: linki 14px/400 Ink #2D2D2D, CTA pełny Forest
+   z tekstem Cream, radius 4px, padding 8px 16px.
+
+   Stan przed: linki w lejkach i na blogu były #4A4A4A (szary systeme), CTA
+   miał trzy różne promienie (2/4/8px), tekst raz biel raz Cream, a na
+   /cross-cultural-playbook całe tło było Terracotta zamiast Forest.
+
+   HAK: `[id^="row-"]:has([id^="menu-"])` — wiersz zawierający blok menu, czyli
+   nagłówek. Celujemy w TYPY bloków systeme (row-/menu-/button-), nie w hashe
+   ani w klasy styled-components — te ostatnie przegenerowały się i 27.08
+   położyły layout /cultural-communication.
+   Zweryfikowane: selektor łapie dokładnie 1 przycisk na stronę lejka i 0 na
+   stronach Website (tam CTA to `loginbutton-` w `websiteheader-`).
+
+   Świadomie NIE ustawiamy tu width/height — tylko kolor, promień i typografia.
+   ============================================================================ */
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] a {
+  color: #2D2D2D !important;
+}
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] a:hover {
+  color: #B46A3C !important;
+}
+[id^="row-"]:has([id^="menu-"]) [id^="button-"] {
+  background-color: #1A3C2F !important;
+  border-radius: 4px !important;
+  padding: 8px 16px !important;
+  transition: background-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
+}
+[id^="row-"]:has([id^="menu-"]) [id^="button-"]:hover {
+  background-color: #142E24 !important;
+}
+[id^="row-"]:has([id^="menu-"]) [id^="button-"],
+[id^="row-"]:has([id^="menu-"]) [id^="button-"] * {
+  color: #F9F7F1 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: normal !important;
+  text-transform: none !important;
 }
