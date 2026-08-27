@@ -55,7 +55,7 @@ hr { border: 0; border-top: 1px solid var(--ink-10); margin: 0; }
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   margin-bottom: 20px;
 }
 .section--forest .eyebrow,
@@ -139,7 +139,7 @@ em, .italic { font-style: italic; }
   height: 44px;
   padding: 0 14px;
 }
-.btn--ghost:hover { color: var(--terracotta); }
+.btn--ghost:hover { color:var(--terracotta-dark); }
 .btn .arrow { transition: transform var(--t) var(--ease); }
 .btn:hover .arrow { transform: translateX(3px); }
 
@@ -302,7 +302,7 @@ em, .italic { font-style: italic; }
 }
 .footer__slogan {
   font-family: var(--serif); font-style: italic;
-  font-size: 19px; color: var(--terracotta);
+  font-size: 19px; color:var(--terracotta-dark);
   margin: 0 0 16px;
 }
 .footer__social { display: flex; gap: 12px; }
@@ -317,7 +317,7 @@ em, .italic { font-style: italic; }
 }
 .footer__social a:hover {
   color: var(--cream);
-  border-color: var(--terracotta);
+  border-color:var(--terracotta-dark);
   transform: translateY(-2px);
 }
 .footer__social svg { width: 17px; height: 17px; }
@@ -392,7 +392,7 @@ em, .italic { font-style: italic; }
 .badge::before {
   content: ""; width: 6px; height: 6px; border-radius: 50%; background: currentColor;
 }
-.badge--live { background: rgba(180, 106, 60, 0.12); color: var(--terracotta); }
+.badge--live { background: rgba(180, 106, 60, 0.12); color:var(--terracotta-dark); }
 .badge--new  { background: rgba(26, 60, 47, 0.10);  color: var(--forest); }
 .badge--soon { background: var(--ink-10);            color: var(--ink-70); }
 

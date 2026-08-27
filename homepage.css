@@ -303,7 +303,7 @@
   font-style: normal;
   font-size: 2.4em;
   line-height: 1;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   opacity: 0.5;
 }
 @media (max-width: 800px) {
@@ -344,7 +344,7 @@
   font-size: clamp(64px, 8.5vw, 112px);
   line-height: 0.9;
   letter-spacing: -0.02em;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   margin: 0 0 22px;
 }
 .pillar__title {
@@ -396,7 +396,7 @@
   color: var(--forest);
   flex-wrap: wrap;
 }
-.method__flow .arrow { color: var(--terracotta); }
+.method__flow .arrow { color:var(--terracotta-dark); }
 @media (max-width: 880px) {
   .method__head { grid-template-columns: 1fr; gap: 20px; }
 }
@@ -519,7 +519,7 @@
   width: 14px;
   height: 14px;
   margin-top: 4px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   flex-shrink: 0;
 }
 .course .btn { margin-top: auto; align-self: stretch; }
@@ -551,11 +551,11 @@
   font-family: var(--serif);
   font-style: italic;
   font-size: 26px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
 }
 .course--featured .course__outcome { font-size: 16px; line-height: 1.45; }
 .course--featured .course__list { font-size: 14.5px; }
-.course--featured .course__list .check { color: var(--terracotta); }
+.course--featured .course__list .check { color:var(--terracotta-dark); }
 .course--featured .course__note {
   font-family: var(--sans);
   font-size: 11.5px;
@@ -648,7 +648,7 @@
 .magnet__list .n {
   font-family: var(--serif);
   font-size: 16px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
 }
 .magnet__list strong { font-weight: 500; color: var(--ink); }
 .magnet__list span.body { color: var(--ink-70); font-size: 15px; }
@@ -676,7 +676,7 @@
   transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
 }
 .testimonial:hover { box-shadow: var(--shadow-card-hover); border-color: var(--forest-30); }
-.testimonial__stars { color: var(--terracotta); font-size: 14px; letter-spacing: 0.2em; }
+.testimonial__stars { color:var(--terracotta-dark); font-size: 14px; letter-spacing: 0.2em; }
 .testimonial__quote {
   font-family: var(--serif);
   font-style: italic;

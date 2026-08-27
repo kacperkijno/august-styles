@@ -87,7 +87,7 @@
 .check-list li strong { color: var(--ink); font-weight: 500; }
 .check-list .check {
   width: 16px; height: 16px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   margin-top: 2px;
 }
 .check-list--tight li { padding: 10px 0; border-top: 0; }
@@ -130,7 +130,7 @@
   font-family: var(--serif);
   font-style: italic;
   font-size: 18px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   letter-spacing: 0.02em;
   margin-bottom: 18px;
   display: inline-block;
@@ -220,8 +220,8 @@
   margin-bottom: 22px;
 }
 .benefit:hover .benefit__icon {
-  color: var(--terracotta);
-  border-color: var(--terracotta);
+  color:var(--terracotta-dark);
+  border-color:var(--terracotta-dark);
 }
 .benefit__icon svg { width: 20px; height: 20px; }
 .benefit__title {
@@ -289,7 +289,7 @@
   font-size: 15px;
   line-height: 1;
   margin-top: 4px;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
 }
 .fit__card--no .fit__mark { color: var(--ink-50); }
 @media (max-width: 800px) {
@@ -353,7 +353,7 @@
   text-align: center;
   margin: 0 0 8px;
 }
-.pricing__price em { font-style: italic; color: var(--terracotta); }
+.pricing__price em { font-style: italic; color:var(--terracotta-dark); }
 .pricing__price .price-meta {
   font-family: var(--sans);
   font-size: 14px;
@@ -385,7 +385,7 @@
   border-bottom: 1px solid var(--ink-10);
 }
 .pricing__list li:last-child { border-bottom: 0; }
-.pricing__list .check { width: 16px; height: 16px; color: var(--terracotta); margin-top: 2px; }
+.pricing__list .check { width: 16px; height: 16px; color:var(--terracotta-dark); margin-top: 2px; }
 .pricing__card .btn { width: 100%; }
 .pricing__note {
   text-align: center;
@@ -416,11 +416,11 @@
   cursor: pointer;
   transition: color var(--t) var(--ease);
 }
-.faq__q:hover { color: var(--terracotta); }
+.faq__q:hover { color:var(--terracotta-dark); }
 .faq__icon {
   width: 16px; height: 16px;
   flex-shrink: 0;
-  color: var(--terracotta);
+  color:var(--terracotta-dark);
   transition: transform var(--t) var(--ease);
 }
 .faq__item[open] .faq__icon { transform: rotate(45deg); }

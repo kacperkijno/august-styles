@@ -11,6 +11,7 @@ body.ak-lesson {
   --ak-cream:         #F9F7F1;
   --ak-cream-soft:    #F3F0E7;
   --ak-terracotta:    #B46A3C;
+  --ak-terracotta-dark: #9A5832;
   --ak-terracotta-d:  #9A5832;
   --ak-warm:          #E4B68A;
   --ak-ink:           #2D2D2D;
@@ -91,7 +92,7 @@ body.ak-lesson [size="4"] > div > [id^="row-"][style*="rgb(26, 60, 47)"]:hover {
 }
 /* Tip cards (no background color set) — terracotta border on hover */
 body.ak-lesson [size="4"] > div > [id^="row-"]:not([style*="background-color"]):hover {
-  border-color: var(--ak-terracotta) !important;
+  border-color:var(--ak-terracotta-dark) !important;
 }
 
 /* Tip card sub-heading (13px NeueHaas bold) — caps + tighter */
@@ -126,7 +127,7 @@ body.ak-lesson .sc-jGKxIN i.fas {
   justify-content: center !important;
   border: 1.5px solid var(--ak-terracotta) !important;
   border-radius: 50% !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
   font-size: 11px !important;
   line-height: 1 !important;
   margin-right: 14px !important;
@@ -249,7 +250,7 @@ body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"]::before {
   display: block;
   font-size: 88px;
   line-height: 0.5;
-  color: var(--ak-terracotta);
+  color:var(--ak-terracotta-dark);
   margin-bottom: 24px;
   margin-top: 12px;
 }
@@ -441,7 +442,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   font-size: 11px;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #B46A3C;
+  color:#9A5832;
   margin-bottom: 14px;
 }
 .ak-rule {
@@ -537,8 +538,8 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   transition: color 180ms ease, border-color 180ms ease, gap 180ms ease;
 }
 .ak-btn--text:hover {
-  color: #B46A3C !important;
-  border-bottom-color: #B46A3C;
+  color:#9A5832 !important;
+  border-bottom-color:#9A5832;
   gap: 12px;
 }
 
@@ -547,7 +548,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
 .ak-btn--primary.ak-btn--on-dark,
 .ak-on-dark .ak-btn--primary {
   background: #B46A3C;
-  border-color: #B46A3C;
+  border-color:#9A5832;
   color: #F9F7F1 !important;
 }
 .ak-btn--primary.ak-btn--on-dark:hover,
@@ -714,7 +715,7 @@ body.ak-lesson .SIO-course__instruction_name::before {
   display: block;
   font-size: 10px;
   letter-spacing: 0.18em;
-  color: #B46A3C;
+  color:#9A5832;
   font-weight: 400;
   margin-bottom: 6px;
   text-transform: uppercase;
@@ -797,7 +798,7 @@ body.ak-lesson .SIO-course__progress-bar {
 }
 body.ak-lesson .SIO-course__progress-bar > div {
   background: #B46A3C !important;
-  background-color: #B46A3C !important;
+  background-color:#9A5832 !important;
   height: 100%;
   transition: width 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
 }
@@ -808,7 +809,7 @@ body.ak-lesson .SIO-course__progress-bar > div > div {
 /* Module title in sidebar — small eyebrow like "IN THIS COURSE" in mockup */
 body.ak-lesson .SIO-course-modules-list__module-title button {
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
-  color: #B46A3C !important;
+  color:#9A5832 !important;
   letter-spacing: 0.18em !important;
   font-size: 11px !important;
   text-transform: uppercase !important;
@@ -850,7 +851,7 @@ body.ak-lesson .SIO-course-modules-list__lecture::before {
   font-style: italic;
   font-weight: 400;
   font-size: 14px;
-  color: #B46A3C;
+  color:#9A5832;
   width: 32px;
 }
 /* Lesson title — sans-serif, sentence case */
@@ -939,7 +940,7 @@ body.ak-lesson [data-testid="course-search-form"] {
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
 }
 body.ak-lesson [data-testid="course-search-form"]:focus {
-  border-color: #B46A3C !important;
+  border-color:#9A5832 !important;
 }
 
 /* Header logo — make it stand out on Forest BG */
@@ -1005,7 +1006,7 @@ body.ak-lesson .SIO-course-lecture__container > div > div {
 .ak-judgment tbody td:first-child {
   width: 42%;
   font-weight: 500;
-  color: #B46A3C;
+  color:#9A5832;
   border-right: 1px solid rgba(26, 60, 47, 0.08);
   background: rgba(243, 240, 231, 0.55);
 }
@@ -1043,7 +1044,7 @@ body.ak-lesson .SIO-course-lecture__container > div > div {
   }
   .ak-judgment tbody td:last-child::before {
     content: "→ ";
-    color: #B46A3C;
+    color:#9A5832;
     font-weight: 500;
   }
 }

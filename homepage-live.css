@@ -98,6 +98,7 @@ body.ak-home {
   --ak-cream:       #F9F7F1;
   --ak-cream-soft:  #F3F0E7;
   --ak-terracotta:  #B46A3C;
+  --ak-terracotta-dark: #9A5832;   /* tekst na jasnym: 5.05:1 zamiast 3.87:1 */
   --ak-ink:         #2D2D2D;
   --ak-ink-10:      rgba(45, 45, 45, 0.10);
   --ak-ink-72:      rgba(45, 45, 45, 0.72);
@@ -432,7 +433,7 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a {
 
 /* "Consulting" (last link, has its own class) — promote to terracotta accent */
 body.ak-home header[type="WebsiteHeader"].is-scrolled #menu-c51d8fe2 a:last-of-type {
-  color: #B46A3C !important;
+  color:#9A5832 !important;
 }
 
 /* Login button: solid Forest, cream text */
@@ -598,7 +599,7 @@ html body.ak-home #text-0a285057 p,
 html body.ak-home #text-0a285057 span {
   letter-spacing: 0 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* --- Body paragraphs -------------------------------------- */
@@ -630,7 +631,7 @@ html body.ak-home #text-bc78e4a1::before {
   font-style: normal;
   font-size: 2.4em;
   line-height: 1;
-  color: var(--ak-terracotta);
+  color:var(--ak-terracotta-dark);
   opacity: 0.5;
   pointer-events: none;
 }
@@ -676,7 +677,7 @@ html body.ak-home #text-4614e520 p,
 html body.ak-home #text-4614e520 span {
   letter-spacing: 0 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* --- Head row: bottom-align the intro, add breathing room -- */
@@ -713,7 +714,7 @@ html body.ak-home #row-47647d37 > div[size="6"]:nth-child(2) {
 html body.ak-home #text-8b720090, html body.ak-home #text-8b720090 *,
 html body.ak-home #text-495af7cd, html body.ak-home #text-495af7cd *,
 html body.ak-home #text-70cc2123, html body.ak-home #text-70cc2123 * {
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
   line-height: 0.9 !important;
 }
 
@@ -762,7 +763,7 @@ html body.ak-home #text-0654e64d p,
 html body.ak-home #text-0654e64d span {
   letter-spacing: 0 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* Description — muted ink */
@@ -802,7 +803,7 @@ html body.ak-home #section-22d30859 ul li::before {
   position: absolute;
   left: 0;
   top: 14px;
-  color: var(--ak-terracotta);
+  color:var(--ak-terracotta-dark);
   font-family: var(--ak-serif);   /* Caslon, like .magnet__list .n in index */
   font-size: 16px;
   line-height: 1.4;
@@ -878,7 +879,7 @@ html body.ak-home #text-b5fba013 p,
 html body.ak-home #text-b5fba013 span {
   letter-spacing: 0 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* Cards — cream, hairline border, padding, hover lift */
@@ -1191,7 +1192,7 @@ html body.ak-home #section-d54243f0 img {
      shared global eyebrow rule) was what made it read larger/wider, not the size. */
   html body.ak-home #text-8a3ce360,
   html body.ak-home #text-8a3ce360 * {
-    font-size: 16px !important; letter-spacing: 0 !important; line-height: 1.4 !important;
+    font-size: 11px !important; letter-spacing: .18em !important; line-height: 1.4 !important;
   }
 
   /* --- TESTIMONIAL cards: avatar to the LEFT of name + role (systeme stacks the
@@ -1369,7 +1370,7 @@ html body.ak-home #section-d54243f0 img {
 #text-4f9f3a78, #text-1c72f0d2 { text-transform: uppercase !important; }
 #text-4f9f3a78 *, #text-1c72f0d2 * {
   font-size: 11px !important;
-  letter-spacing: .14em !important;
+  letter-spacing: .18em !important;
   text-transform: uppercase !important;
 }
 
@@ -1383,13 +1384,13 @@ html body.ak-home #section-d54243f0 img {
 /* ---- PDF cover eyebrow ("Free guide · PDF") — uppercase + tracked ---- */
 #text-93cebdcb *, #text-a339b26e *, #text-7ba0e3f6 * {
   text-transform: uppercase !important;
-  letter-spacing: .14em !important;
+  letter-spacing: .18em !important;
 }
 
 /* ---- PDF bottom tag ("Cross-cultural" / "Pitching") — uppercase + tracked ---- */
 #text-8fe757de *, #text-80a45cc2 *, #text-522a5bd4 * {
   text-transform: uppercase !important;
-  letter-spacing: .14em !important;
+  letter-spacing: .18em !important;
 }
 
 /* ---- Video boxes: gap below thumbnail + uppercase meta ---- */
@@ -1478,7 +1479,7 @@ html body.ak-home #section-d54243f0 img {
 #ak-latest-writing .post__cat {
   font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
   font-weight: 700;
-  font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #B46A3C;
+  font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color:#9A5832;
 }
 #ak-latest-writing .post__title {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif;
@@ -1490,14 +1491,14 @@ html body.ak-home #section-d54243f0 img {
   flex-shrink: 0; color: rgba(45, 45, 45, .5);
   transition: transform 250ms cubic-bezier(.2,.6,.2,1), color 250ms cubic-bezier(.2,.6,.2,1);
 }
-#ak-latest-writing .post:hover .post__arrow { color: #B46A3C; transform: translateX(3px); }
+#ak-latest-writing .post:hover .post__arrow { color:#9A5832; transform: translateX(3px); }
 
 /* ==================== INSIGHTS + BEYOND THE CLASSROOM (homepage) ==================== */
 
 /* Section eyebrows → uppercase (Beyond the classroom = cream/dark, Insights = terracotta) */
 #text-ab357f86 *, #text-8a3ce360 * {
   text-transform: uppercase !important;
-  letter-spacing: .14em !important;
+  letter-spacing: .18em !important;
 }
 
 /* Column titles "Latest writing" / "Watch" */
@@ -1509,7 +1510,7 @@ html body.ak-home #section-d54243f0 img {
 
 /* "More" links (All free resources / All articles / More on YouTube) */
 #text-56dcca0a *, #text-292bc9bf *, #text-4566f4ab * { letter-spacing: .04em !important; }
-#text-56dcca0a:hover *, #text-292bc9bf:hover *, #text-4566f4ab:hover * { color: #B46A3C !important; }
+#text-56dcca0a:hover *, #text-292bc9bf:hover *, #text-4566f4ab:hover * { color:#9A5832 !important; }
 
 /* Latest-writing list: left-align (the raw-html widget wrapper centres it) */
 #ak-latest-writing { text-align: left !important; }
@@ -1558,7 +1559,7 @@ html body.ak-home #section-d54243f0 img {
 }
 .footer__social a:hover {
   color: #F9F7F1 !important;
-  border-color: #B46A3C !important;
+  border-color:#9A5832 !important;
   transform: translateY(-2px) !important;
 }
 .footer__social svg { width: 17px !important; height: 17px !important; }
@@ -1594,17 +1595,17 @@ html body.ak-home #text-0654e64d#text-0654e64d, html body.ak-home #text-0654e64d
 html body.ak-home #text-b5fba013#text-b5fba013, html body.ak-home #text-b5fba013#text-b5fba013 *,
 html body.ak-home #text-8a3ce360#text-8a3ce360, html body.ak-home #text-8a3ce360#text-8a3ce360 * {
   font-size: 11px !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.18em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* Beyond the classroom — same type, keep its existing (cream) colour */
 html body.ak-home #text-ab357f86#text-ab357f86, html body.ak-home #text-ab357f86#text-ab357f86 * {
   font-size: 11px !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.18em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
@@ -1613,8 +1614,8 @@ html body.ak-home #text-ab357f86#text-ab357f86, html body.ak-home #text-ab357f86
 /* Hero eyebrow — lighter terracotta-deco over the dark hero photo */
 html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913#text-60486913 * {
   font-size: 11px !important;
-  font-weight: 300 !important;
-  letter-spacing: 0.2em !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
   line-height: 1.5 !important;
   text-transform: uppercase !important;
   color: #D9A47A !important;
@@ -1629,7 +1630,7 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
    Fonts = systeme's Adobe kit (adobe-caslon-pro / neue-haas-grotesk-display), same as home.
    ============================================================ */
 #section-ba1fb6ee .ak-courses{
-  --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-ink:#2D2D2D;
+  --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-terra-dark:#9A5832; --akx-ink:#2D2D2D;
   --akx-border:rgba(45,45,45,.1); --akx-hr:rgba(68,68,68,.1);
   --akx-serif:"AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
   --akx-sans:"AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
@@ -1639,7 +1640,7 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-inner{max-width:1120px; margin:0 auto; padding:0 20px;}
 
 /* header */
-#section-ba1fb6ee .ak-eyebrow{font-family:var(--akx-sans) !important; font-size:11px !important; line-height:1.4 !important; font-weight:300 !important; letter-spacing:.18em !important; text-transform:uppercase !important; color:var(--akx-terra) !important; margin:0 0 20px !important;}
+#section-ba1fb6ee .ak-eyebrow{font-family:var(--akx-sans) !important; font-size:11px !important; line-height:1.4 !important; font-weight:500 !important; letter-spacing:.18em !important; text-transform:uppercase !important; color:var(--akx-terra-dark) !important; margin:0 0 20px !important;}
 #section-ba1fb6ee .ak-title{font-family:var(--akx-serif) !important; font-size:clamp(32px,4.4vw,52px) !important; line-height:1.1 !important; letter-spacing:-.005em !important; font-weight:400 !important; color:var(--akx-forest) !important; margin:0 0 64px !important;}
 #section-ba1fb6ee .ak-title span{display:block;}
 
@@ -1659,9 +1660,9 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-courses.ak-anim .ak-card--featured.is-visible:hover{transform:translateY(-6px);}
 
 /* card text — 1:1 home: tag/name/price/meta INK + CENTER, desc/list INK + LEFT */
-#section-ba1fb6ee .ak-tag{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-terra) !important; text-align:center !important; margin:30px 0 0 !important;}
+#section-ba1fb6ee .ak-tag{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:30px 0 0 !important;}
 #section-ba1fb6ee .ak-name{font-family:var(--akx-serif) !important; font-size:30px !important; line-height:38px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:15px 0 30px !important;}
-#section-ba1fb6ee .ak-price{font-family:var(--akx-serif) !important; font-size:54px !important; line-height:54px !important; font-weight:400 !important; color:var(--akx-terra) !important; text-align:center !important; margin:30px 0 -30px !important;}
+#section-ba1fb6ee .ak-price{font-family:var(--akx-serif) !important; font-size:54px !important; line-height:54px !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:30px 0 -30px !important;}
 #section-ba1fb6ee .ak-meta{font-family:var(--akx-sans) !important; font-size:14px !important; line-height:16px !important; font-weight:400 !important; color:var(--akx-forest) !important; text-align:center !important; margin:30px 0 30px !important;}
 #section-ba1fb6ee .ak-meta .sep{color:rgba(45,45,45,.5);}
 #section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:15px !important; line-height:20px !important; font-weight:400 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:30px 0 30px !important;}
@@ -1669,7 +1670,7 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-list{list-style:none; margin:30px 0 30px; padding:0; text-align:left !important;}
 #section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:15px !important; line-height:20px !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:0 0 16px;}
 #section-ba1fb6ee .ak-list li:last-child{margin-bottom:0;}
-#section-ba1fb6ee .ak-check{flex:0 0 auto; width:14px; height:20px; margin-right:10px; display:inline-flex; align-items:center; color:var(--akx-terra);}
+#section-ba1fb6ee .ak-check{flex:0 0 auto; width:14px; height:20px; margin-right:10px; display:inline-flex; align-items:center; color:var(--akx-terra-dark);}
 #section-ba1fb6ee .ak-check svg{width:13px; height:13px; display:block;}
 
 /* buttons — site radius 8px, light weight, full width */
@@ -1692,11 +1693,11 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 /* Academy testimonials eyebrow ("What participants say") → match home */
 html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6#text-318b9ac6 * {
   font-size: 11px !important;
-  font-weight: 300 !important;
+  font-weight: 500 !important;
   letter-spacing: 0.18em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
-  color: var(--ak-terracotta) !important;
+  color:var(--ak-terracotta-dark) !important;
 }
 
 /* ==================== MATERIALS page eyebrows → unified site style ====================
@@ -1710,7 +1711,7 @@ html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6
   letter-spacing: 0.18em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
-  color: #B46A3C !important;
+  color:#9A5832 !important;
 }
 
 /* ==================== SECTION HEADINGS → forest (brand standard) ====================
@@ -1743,7 +1744,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
 /* ==================== ACADEMY page — testimonials ==================== */
 /* Eyebrow "What participants say" → uppercase + tracked */
-#text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .14em !important; }
+#text-318b9ac6 * { text-transform: uppercase !important; letter-spacing: .18em !important; }
 /* Avatars → equal 44px circles */
 #section-01d96010 img { width: 44px !important; height: 44px !important; object-fit: cover !important; border-radius: 50% !important; }
 /* Testimonial cards → hover lift (forest border + shadow) */
@@ -1792,7 +1793,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 /* title (Caslon forest, was 36px) → card size, tighter, hover terracotta */
 .carousel-ui [font-family="AdobeCaslonPro42448745"]{ font-size:clamp(20px,2.2vw,25px) !important; line-height:1.18 !important; margin-top:12px !important; }
 .carousel-ui [font-family="AdobeCaslonPro42448745"] a{ color:#1A3C2F !important; transition:color .18s ease !important; }
-.carousel-ui div:has(> a > img):hover [font-family="AdobeCaslonPro42448745"] a{ color:#B46A3C !important; }
+.carousel-ui div:has(> a > img):hover [font-family="AdobeCaslonPro42448745"] a{ color:#9A5832 !important; }
 
 /* excerpt → muted ink, 3-line clamp */
 .carousel-ui div:has(> a > img) p{
@@ -1845,7 +1846,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   color: #2D2D2D !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="menu-"] a:hover {
-  color: #B46A3C !important;
+  color:#9A5832 !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="button-"] {
   /* kanon przyciskow (blok SYSTEM UI na koncu pliku) daje min-height 48;
@@ -2119,4 +2120,263 @@ html body input#field-ccb5441b, html body input#field-f1d3f0dc, html body input#
 html body #row-1a507602 form input[id^="field-"],
 html body #row-1a507602 form button[id^="submit-button-"] {
   border-radius: 4px !important;
+}
+
+/* ---------- RYTM SEKCJI: 128 / 80 / 40 ------------------------
+   Siedem sekcji mialo wartosci spoza skali (150, 20, 16, 10 px).
+   Zmierzone scratchpad/probe-rhythm-color.cjs, 2026-08-27. */
+html body #section-3a4cf41a,        /* /cultural-communication  0/150 */
+html body #section-b9fb303a {       /* /pitching-home           0/150 */
+  padding-bottom: 128px !important;
+}
+html body #section-c35bfa7c,        /* /webinar                 16/0  */
+html body #section-7ce50534 {       /* /cross-cultural-playbook 16/0  */
+  padding-top: 40px !important;
+}
+html body #section-bf8df931,        /* /blog                    20/40 */
+html body #section-39cd581b {       /* wpis blogowy             20/40 */
+  padding-top: 40px !important;
+}
+html body #section-09d8892d {       /* tresc wpisu              10/10 */
+  padding-top: 40px !important;
+  padding-bottom: 40px !important;
+}
+
+/* ---------- KONTRAST: terakota jako tekst na jasnym tle ---------
+   #B46A3C na Cream daje 3.87:1, norma WCAG AA dla tekstu to 4.5:1.
+   Ciemniejszy wariant #9A5832 daje 5.05:1 i jest praktycznie
+   nieodroznialny w odbiorze. Kolor marki zostaje #B46A3C — zmienia
+   sie tylko jego uzycie w roli tekstu.
+
+   W naszym CSS zrobione przez zmienne (--terracotta-dark).
+   Ponizsze id-ki to bloki, w ktorych kolor ustawiono recznie
+   w edytorze systeme. Zmierzone scratchpad/find-terra-ids.cjs. */
+html body #text-5f8c6011, html body #text-5f8c6011 *,
+html body #text-a59c099f, html body #text-a59c099f *,
+html body #text-7bb86b2e, html body #text-7bb86b2e *,
+html body #text-ec0d3d78, html body #text-ec0d3d78 *,
+html body #text-475f030f, html body #text-475f030f *,
+html body #text-8fe757de, html body #text-8fe757de *,
+html body #text-80a45cc2, html body #text-80a45cc2 *,
+html body #text-522a5bd4, html body #text-522a5bd4 *,
+html body #text-bcd00fd7, html body #text-bcd00fd7 *,
+html body #text-3b84d4fb, html body #text-3b84d4fb *,
+html body #text-fa45c0b6, html body #text-fa45c0b6 *,
+html body #text-a7fe37f4, html body #text-a7fe37f4 *,
+html body #text-e488278b, html body #text-e488278b *,
+html body #text-d95ea111, html body #text-d95ea111 *,
+html body #text-d7d033ce, html body #text-d7d033ce *,
+html body #text-f1527d8b, html body #text-f1527d8b *,
+html body #text-767187ea, html body #text-767187ea *,
+html body #text-d9897cad, html body #text-d9897cad *,
+html body #text-b680a5bd, html body #text-b680a5bd *,
+html body #text-e67d8d39, html body #text-e67d8d39 *,
+html body #text-059b1c45, html body #text-059b1c45 *,
+html body #text-d29bc4ef, html body #text-d29bc4ef *,
+html body #text-91860a20, html body #text-91860a20 *,
+html body #text-2c00acfc, html body #text-2c00acfc *,
+html body #text-b0af6449, html body #text-b0af6449 *,
+html body #text-539240eb, html body #text-539240eb *,
+html body #text-ccd2683c, html body #text-ccd2683c * {
+  color: #9A5832 !important;
+}
+/* UWAGA: .pdk-eyebrow na /pitching-decoded siedzi na ciemnym tle
+   (Forest) i ma jasna terakote #D69A6E — nie ruszac, ciemniejszy
+   wariant zbija tam kontrast do 2.2:1. */
+
+/* ---------- EYEBROW / OVERLINE: jeden krok skali ---------------
+   26 wariantow rozmiaru, wagi i trekkingu. Najbardziej razilo to,
+   ze eyebrow nad naglowkiem sekcji mial 11px, a ten w karcie kursu
+   16px bez trekkingu — dwa razy ten sam element, dwa wyglady.
+
+   Kanon: 11px / 500 / 0.18em / wersaliki.
+   Rozmiar 11px jest bezdyskusyjna dominanta (77 ze 150 wystapien);
+   waga 500 zamiast 300, bo przy 11px cienka waga gubi sie na Cream.
+   Koloru tu nie ruszamy — czesc eyebrow siedzi na ciemnych sekcjach.
+
+   Zmierzone scratchpad/probe-eyebrow3.cjs, 2026-08-27.
+   Poza kanonem swiadomie: .pdk-tag (plakietka na terakocie, nie
+   eyebrow) i tagi kategorii na /blog (dostepne tylko przez .sc-*). */
+html body #text-03f4fd23,
+html body #text-03f4fd23 *,
+html body #text-0a285057,
+html body #text-0a285057 *,
+html body #text-4614e520,
+html body #text-4614e520 *,
+html body #text-0654e64d,
+html body #text-0654e64d *,
+html body #text-b5fba013,
+html body #text-b5fba013 *,
+html body #text-ab357f86,
+html body #text-ab357f86 *,
+html body #text-8a3ce360,
+html body #text-8a3ce360 *,
+html body #text-318b9ac6,
+html body #text-318b9ac6 *,
+html body #text-664b6c2c,
+html body #text-664b6c2c *,
+html body #text-4563619c,
+html body #text-4563619c *,
+html body #text-bf3803a9,
+html body #text-bf3803a9 *,
+html body #text-5f8c6011,
+html body #text-5f8c6011 *,
+html body #text-7bb86b2e,
+html body #text-7bb86b2e *,
+html body #text-475f030f,
+html body #text-475f030f *,
+html body #text-fa45c0b6,
+html body #text-fa45c0b6 *,
+html body #text-e488278b,
+html body #text-e488278b *,
+html body #text-d95ea111,
+html body #text-d95ea111 *,
+html body #text-d7d033ce,
+html body #text-d7d033ce *,
+html body #text-f1527d8b,
+html body #text-f1527d8b *,
+html body #text-767187ea,
+html body #text-767187ea *,
+html body #text-d9897cad,
+html body #text-d9897cad *,
+html body #text-b0af6449,
+html body #text-b0af6449 *,
+html body #text-efd6b3d5,
+html body #text-efd6b3d5 *,
+html body #text-e988dc01,
+html body #text-e988dc01 *,
+html body #text-bd7b0d80,
+html body #text-bd7b0d80 *,
+html body #text-ae2ae713,
+html body #text-ae2ae713 *,
+html body #text-f22884a9,
+html body #text-f22884a9 *,
+html body #text-014e5f7a,
+html body #text-014e5f7a *,
+html body #text-af86ba85,
+html body #text-af86ba85 *,
+html body #text-1abeee34,
+html body #text-1abeee34 *,
+html body #text-6ba6f5db,
+html body #text-6ba6f5db *,
+html body #text-f20a7ba7,
+html body #text-f20a7ba7 *,
+html body #text-463758d7,
+html body #text-463758d7 *,
+html body #text-cee9f10f,
+html body #text-cee9f10f *,
+html body #text-b680a5bd,
+html body #text-b680a5bd *,
+html body #text-e67d8d39,
+html body #text-e67d8d39 *,
+html body #text-059b1c45,
+html body #text-059b1c45 *,
+html body #text-d29bc4ef,
+html body #text-d29bc4ef *,
+html body #text-4f9f3a78,
+html body #text-4f9f3a78 *,
+html body #text-1c72f0d2,
+html body #text-1c72f0d2 *,
+html body #text-93cebdcb,
+html body #text-93cebdcb *,
+html body #text-8fe757de,
+html body #text-8fe757de *,
+html body #text-a339b26e,
+html body #text-a339b26e *,
+html body #text-80a45cc2,
+html body #text-80a45cc2 *,
+html body #text-7ba0e3f6,
+html body #text-7ba0e3f6 *,
+html body #text-522a5bd4,
+html body #text-522a5bd4 *,
+html body #text-4cb2d43a,
+html body #text-4cb2d43a *,
+html body #text-583aa39b,
+html body #text-583aa39b *,
+html body #text-28a7c5a0,
+html body #text-28a7c5a0 *,
+html body #text-e3a655b3,
+html body #text-e3a655b3 *,
+html body #text-141e8106,
+html body #text-141e8106 *,
+html body #text-32a60fb4,
+html body #text-32a60fb4 *,
+html body #text-0d5cec1e,
+html body #text-0d5cec1e *,
+html body #text-887815e2,
+html body #text-887815e2 *,
+html body #text-c5b31f96,
+html body #text-c5b31f96 *,
+html body #text-41eae026,
+html body #text-41eae026 *,
+html body #text-61c854d4,
+html body #text-61c854d4 *,
+html body #text-91860a20,
+html body #text-91860a20 *,
+html body #text-2c00acfc,
+html body #text-2c00acfc *,
+html body #text-06ad408a,
+html body #text-06ad408a *,
+html body #text-191b2aad,
+html body #text-191b2aad *,
+html body #text-e82ad3f5,
+html body #text-e82ad3f5 *,
+html body #text-7ba2f65e,
+html body #text-7ba2f65e *,
+html body #text-68fc0827,
+html body #text-68fc0827 *,
+html body #text-8b7a45da,
+html body #text-8b7a45da *,
+html body #text-c489e56b,
+html body #text-c489e56b *,
+html body #text-30eb9712,
+html body #text-30eb9712 *,
+html body #text-1e8847ac,
+html body #text-1e8847ac *,
+html body #text-cd1c2882,
+html body #text-cd1c2882 *,
+html body #text-754b3c2c,
+html body #text-754b3c2c *,
+html body #text-3bc00c89,
+html body #text-3bc00c89 *,
+html body #text-9c5a0305,
+html body #text-9c5a0305 *,
+html body #text-e4dccc87,
+html body #text-e4dccc87 *,
+html body #text-94303200,
+html body #text-94303200 *,
+html body #text-3b84d4fb,
+html body #text-3b84d4fb *,
+html body #text-a7fe37f4,
+html body #text-a7fe37f4 *,
+html body .akb-eyebrow,
+html body .akb-eyebrow *,
+html body .akb-news__eyebrow,
+html body .akb-news__eyebrow *,
+html body .akc-eyebrow,
+html body .akc-eyebrow *,
+html body .ak-eyebrow,
+html body .ak-eyebrow *,
+html body .ak-tag,
+html body .ak-tag *,
+html body .post__cat,
+html body .post__cat *,
+html body .akb-manifesto__by,
+html body .akb-manifesto__by *,
+html body .akb-forwho__title,
+html body .akb-forwho__title *,
+html body .akb-start-card__step,
+html body .akb-start-card__step *,
+html body .akc-card__kicker,
+html body .akc-card__kicker *,
+html body .akc-price__tag,
+html body .akc-price__tag *,
+html body .akc-hero__eyebrow,
+html body .akc-hero__eyebrow *,
+html body .pdk-eyebrow,
+html body .pdk-eyebrow * {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
 }
