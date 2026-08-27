@@ -273,7 +273,7 @@ body.ak-lesson [id^="row-"][style*="rgb(26, 60, 47)"] {
 body.ak-lesson [data-test-ui="open-url-button"] {
   background: var(--ak-terracotta) !important;
   border: 0 !important;
-  border-radius: 2px !important;
+  border-radius:4px !important;
   padding: 18px 36px !important;
   box-shadow: none !important;
   transition: background var(--ak-t) var(--ak-ease),
@@ -474,7 +474,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   font-size: 14px;
   letter-spacing: 0.04em;
   text-decoration: none !important;
-  border-radius: 2px;
+  border-radius:4px;
   border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
@@ -727,7 +727,7 @@ body.ak-lesson button.SIO-course__button--previous-lecture {
   background-color: transparent !important;
   border: 1px solid rgba(26, 60, 47, 0.25) !important;
   color: #1A3C2F !important;
-  border-radius: 2px !important;
+  border-radius:4px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
   font-size: 12px !important;
@@ -765,7 +765,7 @@ html body button.SIO-course__button--next-lecture {
   background-color: #1A3C2F !important;
   color: #F9F7F1 !important;
   border: 1px solid #1A3C2F !important;
-  border-radius: 2px !important;
+  border-radius:4px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
   font-size: 12px !important;
@@ -897,7 +897,7 @@ html body button.SIO-course__button--mark-as-completed {
   background-color: #1A3C2F !important;
   border: 1px solid #1A3C2F !important;
   color: #F9F7F1 !important;
-  border-radius: 2px !important;
+  border-radius:4px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
   font-weight: 500 !important;
   letter-spacing: 0.08em !important;
@@ -935,7 +935,7 @@ body.ak-lesson [class*="bg-THEME-block-background"]:has(.SIO-course__button--mar
 /* Search input top-right */
 body.ak-lesson [data-testid="course-search-form"] {
   border-color: rgba(45, 45, 45, 0.15) !important;
-  border-radius: 2px !important;
+  border-radius:4px !important;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif !important;
 }
 body.ak-lesson [data-testid="course-search-form"]:focus {
@@ -974,7 +974,7 @@ body.ak-lesson .SIO-course-lecture__container > div > div {
   border-spacing: 0;
   background: #F9F7F1;
   border: 1px solid rgba(26, 60, 47, 0.10);
-  border-radius: 12px;
+  border-radius:4px;
   overflow: hidden;
   box-shadow: 0 6px 20px rgba(26, 60, 47, 0.06), 0 2px 6px rgba(26, 60, 47, 0.04);
   font-family: 'NeueHaasDisplay', 'Neue Haas Grotesk Display Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;

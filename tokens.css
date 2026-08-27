@@ -70,7 +70,7 @@
 
   /* Surfaces */
   --radius-card: 4px;
-  --radius-btn: 2px;
+  --radius-btn: 4px;
   --shadow-card: 0 2px 16px rgba(26, 60, 47, 0.08);
   --shadow-card-hover: 0 6px 28px rgba(26, 60, 47, 0.14);
 

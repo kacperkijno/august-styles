@@ -278,7 +278,7 @@
   color: var(--cream);
   background: rgba(26, 60, 47, 0.72);
   padding: 8px 12px;
-  border-radius: 2px;
+  border-radius:4px;
   backdrop-filter: blur(4px);
 }
 .about__body p { color: var(--ink-70); margin-bottom: 1.2em; max-width: 56ch; }

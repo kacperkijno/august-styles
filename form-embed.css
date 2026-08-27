@@ -30,7 +30,7 @@ button, [type="submit"] { width: 100% !important; }
 input:not([type="submit"]):not([type="button"]) {
   background: rgba(249, 247, 241, 0.08) !important;
   border: 1px solid rgba(249, 247, 241, 0.22) !important;
-  border-radius: 8px !important;
+  border-radius:4px !important;
   height: 54px !important;
   color: #F9F7F1 !important;
   font-size: 15px !important;
@@ -45,7 +45,7 @@ button, [type="submit"] {
   background: #B46A3C !important;
   color: #F9F7F1 !important;
   border: none !important;
-  border-radius: 8px !important;
+  border-radius:4px !important;
   height: 54px !important;
   font-weight: 500 !important;
   letter-spacing: 0.04em !important;

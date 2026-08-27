@@ -111,7 +111,7 @@ body.ak-home {
    Catches every systeme button-XXXX (hero CTAs, Enroll, Waitlist,
    About, magnet…); loginbutton-XXXX keeps its own 4px below. */
 html body.ak-home [id^="button-"] {
-  border-radius: 8px !important;
+  border-radius:4px !important;
 }
 
 /* ---------- Global button hover (subtle lift + shadow) -------
@@ -586,7 +586,7 @@ html body.ak-home #row-80b09385 > div[size="6"]:first-child::after {
   color: var(--ak-cream);
   background: var(--ak-forest-72);
   padding: 8px 12px;
-  border-radius: 2px;
+  border-radius:4px;
   -webkit-backdrop-filter: blur(4px);
   backdrop-filter: blur(4px);
   pointer-events: none;
@@ -640,7 +640,7 @@ html body.ak-home #button-4dceb9ce {
   background: transparent !important;
   color: var(--ak-forest) !important;
   border: 1px solid var(--ak-forest-45) !important;
-  border-radius: 8px !important;
+  border-radius:4px !important;
   letter-spacing: 0.04em;
   transition: background 180ms var(--ak-ease),
               color 180ms var(--ak-ease),
@@ -822,13 +822,13 @@ html body.ak-home #row-b29ca21b {
   column-gap: 14px !important;
 }
 
-/* Email field — cream, subtle ink border, 2px radius (was blue-grey/10px) */
+/* Email field — kanon pol: Cream-soft, ramka .1, 15px, r=4px (2026-08-27) */
 html body.ak-home #field-d22e847d {
-  background: var(--ak-cream) !important;
-  border: 1px solid rgba(45, 45, 45, 0.18) !important;
-  border-radius: 8px !important;
-  padding: 14px 18px !important;
-  font-size: 14px !important;
+  background: #F3F0E7 !important;
+  border: 1px solid rgba(45, 45, 45, 0.1) !important;
+  border-radius:4px !important;
+  padding: 12px 14px !important;
+  font-size: 15px !important;
   line-height: 1.2 !important;
   color: var(--ak-ink) !important;
   box-shadow: none !important;
@@ -839,8 +839,8 @@ html body.ak-home #button-aab9edaf {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   border: 0 !important;
-  border-radius: 8px !important;
-  padding: 16px 24px !important;   /* match every other button */
+  border-radius:4px !important;
+  padding: 8px 24px !important;    /* kanon: flex + min-height 48 daje reszte */
   font-size: 14px !important;
   line-height: 1.2 !important;
   white-space: nowrap !important;
@@ -1673,7 +1673,7 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-check svg{width:13px; height:13px; display:block;}
 
 /* buttons — site radius 8px, light weight, full width */
-#section-ba1fb6ee .ak-btn{display:block; width:100%; margin:30px 0 0; text-align:center !important; text-decoration:none; font-family:var(--akx-sans) !important; font-size:14px !important; font-weight:300 !important; line-height:1 !important; padding:16px 24px; border-radius:8px; color:var(--akx-cream) !important; transition:filter .15s ease, background-color .15s ease;}
+#section-ba1fb6ee .ak-btn{display:block; width:100%; margin:30px 0 0; text-align:center !important; text-decoration:none; font-family:var(--akx-sans) !important; font-size:14px !important; font-weight:400 !important; line-height:1 !important; padding:16px 24px; border-radius:4px; color:var(--akx-cream) !important; transition:filter .15s ease, background-color .15s ease;}
 #section-ba1fb6ee .ak-btn:hover{filter:brightness(.92);}
 #section-ba1fb6ee .ak-btn--forest{background:var(--akx-forest);}
 #section-ba1fb6ee .ak-btn--terracotta{background:var(--akx-terra);}
@@ -1771,7 +1771,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 .carousel-ui div:has(> a > img){
   background:#F9F7F1 !important;
   border:1px solid rgba(45,45,45,.10) !important;
-  border-radius:6px !important;
+  border-radius:4px !important;
   overflow:hidden !important;
   box-shadow:0 2px 14px rgba(26,60,47,.04) !important;
   transition:transform 220ms cubic-bezier(.2,.6,.2,1),box-shadow 220ms cubic-bezier(.2,.6,.2,1),border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
@@ -1848,6 +1848,9 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   color: #B46A3C !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="button-"] {
+  /* kanon przyciskow (blok SYSTEM UI na koncu pliku) daje min-height 48;
+     pasek ma byc niski, wiec przywracamy 34 tutaj, gdzie specyficznosc wygrywa */
+  min-height: 34px !important;
   background-color: #1A3C2F !important;
   border-radius: 4px !important;
   padding: 8px 16px !important;
@@ -1953,4 +1956,167 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 [id^="menu-"] a {
   text-decoration: none !important;
   border-bottom: 0 !important;
+}
+
+
+/* ============================================================
+   SYSTEM UI — KANON (2026-08-27)
+   Etapy 2-4 planu ujednolicenia z _REPORTS/10-UI-UX-AUDIT.html.
+
+   Decyzje Kacpra z 27.08:
+     - promien 4px wszedzie (design system mowil 8/16, tokens 2/4,
+       praktyka 4 — wygrala praktyka, tokens.css poprawiony);
+     - H1 88px na /cultural-communication i /pitching-decoded zostaje
+       jako osobny wariant produktowy (nie ruszamy go tutaj);
+     - zaokraglenia 20/30/34px na rzedach systeme = pozostalosc, do kanonu.
+
+   HAK: systeme generuje id-ki `row-XXXX`, `button-XXXX`, `field-XXXX`.
+   Te id-ki sa STABILNE (naleza do tresci), w przeciwienstwie do klas
+   `.sc-*`, ktore regeneruja sie przy kazdym upgradzie systeme.
+   Dlatego celujemy w prefiksy id, nigdy w `.sc-*`.
+
+   Listy konkretnych id ponizej pochodza z pomiaru produkcji
+   (scratchpad/probe-detail.cjs). Po dodaniu nowych sekcji w systeme
+   przepusc ten skrypt jeszcze raz i uzupelnij listy.
+   ============================================================ */
+
+/* ---------- KARTY: promien 4px --------------------------------
+   31 rzedow mialo 20 / 26 / 30 / 33 / 34 px ustawione w edytorze
+   systeme. Nie ruszamy tla ani ramek — tylko promien. */
+html body #row-9a634385, html body #row-fdbb3de1,
+html body #row-e858951a, html body #row-11cdf968, html body #row-908f8658,
+html body #row-f81262eb, html body #row-1899f9f5, html body #row-48294f27,
+html body #row-05dcaab2, html body #row-779c40e4, html body #row-89926991,
+html body #row-884e3429, html body #row-1d6782ee, html body #row-de8a31f8,
+html body #row-1ebfc1c8, html body #row-fe49f24e, html body #row-09c220ae,
+html body #row-d8abaaa6, html body #row-78c154aa, html body #row-ae04d38c,
+html body #row-6efd4a02, html body #row-87b57f6d, html body #row-403de1fe,
+html body #row-c8b5a07a, html body #row-6575f16c, html body #row-8fbbc8fd,
+html body #row-457a2b5f, html body #row-62983e26, html body #row-0094cb8b,
+html body #row-2ff1377c, html body #row-74af0acf {
+  border-radius: 4px !important;
+}
+
+/* ---------- PRZYCISKI: jedna geometria ------------------------
+   Kanon: r=4px, 14px/400, padding 16x24, wysokosc 48.
+   Kolory zostaja — one rozrozniaja typ (Forest = glowny,
+   Terracotta = akcentowy, przezroczysty + ramka = drugorzedny).
+   Pasek nawigacji ma wlasna, bardziej szczegolowa regule nizej
+   w tym pliku (padding 8x16, wysokosc 34) i wygrywa specyficznoscia. */
+html body [id^="button-"],
+html body button[id^="submit-button-"] {
+  /* flex + min-height, zeby przycisk z ramka mial te sama wysokosc
+     co bez ramki (przy box-sizing i samym paddingu ramka dokladala 2px
+     i CTA obok siebie rozjezdzaly sie na 48 vs 50) */
+  box-sizing: border-box !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  padding: 8px 24px !important;
+  min-height: 48px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+}
+html body [id^="button-"] * {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+
+/* Czysta biel -> Cream. Lista jawna, bo z samego CSS nie da sie
+   odroznic przycisku na ciemnym tle od ghosta na jasnym, a globalne
+   nadpisanie koloru zabiloby ten drugi. */
+html body #button-c2ccd51b, html body #button-c2ccd51b *,
+html body #button-c845064f, html body #button-c845064f *,
+html body #button-88c1b2e0, html body #button-88c1b2e0 *,
+html body #button-2a0d8899, html body #button-2a0d8899 *,
+html body #button-0f558a2b, html body #button-0f558a2b *,
+html body #button-ccda44e5, html body #button-ccda44e5 *,
+html body #button-e14c6387, html body #button-e14c6387 *,
+html body #button-dc8923b7, html body #button-dc8923b7 *,
+html body #button-1119cf8c, html body #button-1119cf8c *,
+html body #button-a29886a8, html body #button-a29886a8 *,
+html body #button-79e8c21d, html body #button-79e8c21d *,
+html body #button-c9add3ad, html body #button-c9add3ad *,
+html body #button-84ddf280, html body #button-84ddf280 *,
+html body #button-b4d9f586, html body #button-b4d9f586 *,
+html body #button-3ea4dcd1, html body #button-3ea4dcd1 *,
+html body #button-29d525d5, html body #button-29d525d5 *,
+html body #button-13db6dc9, html body #button-13db6dc9 *,
+html body #button-2803e813, html body #button-2803e813 * {
+  color: #F9F7F1 !important;
+}
+/* ghosty na ciemnym — ramka tez Cream, nie czysta biel */
+html body #button-2803e813,
+html body #button-3ea4dcd1 {
+  border-color: rgba(249, 247, 241, 0.55) !important;
+}
+
+/* ---------- POLA FORMULARZY: jeden wariant --------------------
+   Kanon: r=4px, 15px, wysokosc ~46, tlo Cream-soft,
+   ramka 1px rgba(45,45,45,.1). Pola na ciemnych sekcjach
+   (/pitching-decoded) zachowuja swoje tlo i ramke. */
+html body [id^="field-"] {
+  border-radius: 4px !important;
+  font-size: 15px !important;
+  min-height: 46px !important;
+}
+/* /blueprint i /pitch-diagnostic: biale tlo + szaroniebieska ramka
+   #5F7F8A z domyslnego systeme — jedyne takie na calej stronie.
+   /: pole magnetu mialo ramke .18 zamiast .1. */
+html body #field-78c5d2cb, html body #field-e3e78b39 {
+  box-sizing: border-box !important;
+  height: auto !important;
+  padding: 12px 14px !important;
+  line-height: 1.2 !important;
+  background-color: #F3F0E7 !important;
+  border: 1px solid rgba(45, 45, 45, 0.1) !important;
+  color: #2D2D2D !important;
+}
+html body #field-78c5d2cb:focus, html body #field-e3e78b39:focus {
+  border-color: rgba(26, 60, 47, 0.45) !important;
+  outline: none !important;
+}
+
+/* ---------- Domkniecie promienia: obrazy, blog, /pitching-decoded ----
+   Zostalo po pierwszym przejsciu. Zmierzone scratchpad/scan-radius.cjs. */
+
+/* zdjecia w sekcjach lejkow (mialy 30px) */
+html body #image-505e806d, html body #image-63c87504,
+html body #image-b6126b42, html body #image-f1608791 {
+  border-radius: 4px !important;
+}
+
+/* kafle wpisow na /blog (systeme rysuje je klasami .sc-*, ktore
+   regeneruja sie przy upgradzie — celujemy w kontener listy) */
+html body [id^="blogpostlisting-"] img,
+html body [id^="blogpostlisting-"] picture,
+html body [id^="blogpostlisting-"] a > div,
+html body [id^="blogpostlisting-"] li > div {
+  border-radius: 4px !important;
+}
+
+/* /pitching-decoded — strona ma wlasny CSS w <head> (prefiks .pdk-).
+   Do czasu przepiecia jej na repo nadpisujemy promien stad. */
+html body .pdk-btn,
+html body button[id^="submit-button-"] {
+  border-radius: 4px !important;
+}
+html body button[id^="submit-button-"] * {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+html body input#field-ccb5441b, html body input#field-f1d3f0dc, html body input#field-983d9bfb {
+  border-radius: 4px !important;
+  font-size: 15px !important;
+}
+
+/* Formularz na /pitching-decoded: head strony ma regule
+   `#row-1a507602 form input[type="text"]` (1,1,2), ktora bije zwykle
+   celowanie po id. Podbijamy specyficznosc; docelowo do poprawy
+   w samym head strony (redesign/pitching-decoded-DEPLOY.md). */
+html body #row-1a507602 form input[id^="field-"],
+html body #row-1a507602 form button[id^="submit-button-"] {
+  border-radius: 4px !important;
 }

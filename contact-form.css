@@ -21,7 +21,7 @@ body{ background:transparent !important; }
 #app input{
   background:rgba(249,247,241,.06) !important;
   border:1px solid rgba(249,247,241,.26) !important;
-  border-radius:8px !important;
+  border-radius:4px !important;
   color:#F9F7F1 !important;
   font-family:"NeueHaasDisplay-Roman42448762","Neue Haas Display","Helvetica Neue",Arial,sans-serif !important;
   font-size:15px !important;
@@ -45,7 +45,7 @@ body{ background:transparent !important; }
   background:#B46A3C !important;
   color:#F9F7F1 !important;
   border:none !important;
-  border-radius:8px !important;
+  border-radius:4px !important;
   height:52px !important;
   width:100% !important;
   font-family:"NeueHaasDisplay-Roman42448762","Neue Haas Display","Helvetica Neue",Arial,sans-serif !important;
