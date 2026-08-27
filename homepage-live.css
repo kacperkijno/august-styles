@@ -1759,3 +1759,22 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
 /* carousel nav arrows → forest */
 .carousel-ui i.fa-chevron-right, .carousel-ui i.fa-chevron-left{ color:#1A3C2F !important; }
+
+/* ==================== BLOG listing — MOBILE (2026-08-27) ====================
+   systeme renderuje siatke wpisow na /blog jako `grid-template-columns:
+   repeat(3, 1fr)` BEZ zadnego wariantu mobilnego. Przy 390px dawalo to trzy
+   kolumny po ~97px: naglowki lamaly sie po 1-2 slowa na wiersz, a zajawki
+   ciagnely sie na kilkaset pikseli. To strona wejsciowa z Google, wiec
+   wiekszosc tego ruchu to mobile.
+
+   Hak: `[id^="blogpostlisting-"]` — celujemy w TYP bloku systeme, nie w hash
+   ani w auto-klase styled-components (te sie przegenerowuja, patrz historia
+   sales-page.css z 27.08). `grid-template-columns` na elemencie, ktory nie
+   jest gridem, jest bezskuteczne, wiec regula jest bezpieczna dla reszty
+   drzewa wewnatrz listingu.
+   =========================================================================== */
+@media (max-width: 760px) {
+  html body [id^="blogpostlisting-"] div {
+    grid-template-columns: 1fr !important;
+  }
+}
