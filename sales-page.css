@@ -345,13 +345,18 @@ html body.ak-sales-page #row-563245f5 {
   border-color: var(--ak-ink-10) !important;
 }
 /* Icon container — wrap the picture/img wrapper as a bordered tile.
-   The wrapper has class .sc-jaXxmD and we scope via :has() on the inner icon ID. */
-html body.ak-sales-page .sc-jaXxmD:has(#image-f10d4203),
-html body.ak-sales-page .sc-jaXxmD:has(#image-602c5ddb),
-html body.ak-sales-page .sc-jaXxmD:has(#image-277e2ae7),
-html body.ak-sales-page .sc-jaXxmD:has(#image-fbf62f5c),
-html body.ak-sales-page .sc-jaXxmD:has(#image-864382f3),
-html body.ak-sales-page .sc-jaXxmD:has(#image-4ad0750d) {
+   2026-08-27: BYLO `.sc-jaXxmD:has(#image-…)`. Systeme przegenerowalo klasy
+   styled-components, przez co `.sc-jaXxmD` trafialo w DALEKIEGO przodka ikon
+   i sciskalo cala sekcje "What's included" do 56x56 px. Skutek: na <=800px
+   wiersz #row-6292fed7 rozlewal sie na 95x8750 px i ZASLANIAL srodek przyciskow
+   "Get instant access - €49" oraz "See what's inside".
+   Teraz celujemy po STRUKTURZE (bezposredni rodzic <picture>), nie po auto-klasie. */
+html body.ak-sales-page div:has(> picture > #image-f10d4203),
+html body.ak-sales-page div:has(> picture > #image-602c5ddb),
+html body.ak-sales-page div:has(> picture > #image-277e2ae7),
+html body.ak-sales-page div:has(> picture > #image-fbf62f5c),
+html body.ak-sales-page div:has(> picture > #image-864382f3),
+html body.ak-sales-page div:has(> picture > #image-4ad0750d) {
   width: 56px !important;
   height: 56px !important;
   background: var(--ak-cream) !important;
@@ -365,12 +370,12 @@ html body.ak-sales-page .sc-jaXxmD:has(#image-4ad0750d) {
   transition: border-color 220ms var(--ak-ease), color 220ms var(--ak-ease) !important;
 }
 /* On card hover, icon tile turns terracotta border */
-html body.ak-sales-page #row-91624864:hover .sc-jaXxmD,
-html body.ak-sales-page #row-bd18b786:hover .sc-jaXxmD,
-html body.ak-sales-page #row-049130fc:hover .sc-jaXxmD,
-html body.ak-sales-page #row-2e2e7498:hover .sc-jaXxmD,
-html body.ak-sales-page #row-a7eeda50:hover .sc-jaXxmD,
-html body.ak-sales-page #row-563245f5:hover .sc-jaXxmD {
+html body.ak-sales-page #row-91624864:hover div:has(> picture > img),
+html body.ak-sales-page #row-bd18b786:hover div:has(> picture > img),
+html body.ak-sales-page #row-049130fc:hover div:has(> picture > img),
+html body.ak-sales-page #row-2e2e7498:hover div:has(> picture > img),
+html body.ak-sales-page #row-a7eeda50:hover div:has(> picture > img),
+html body.ak-sales-page #row-563245f5:hover div:has(> picture > img) {
   border-color: var(--ak-terracotta) !important;
 }
 /* Image inside the tile — shrink + forest tint */
@@ -915,8 +920,8 @@ html body.ak-sales-page #image-179dbe57 {
   border-radius: 4px;
 }
 /* Make the picture/image wrappers fill column properly */
-html body.ak-sales-page .sc-jaXxmD:has(#image-400e16cf),
-html body.ak-sales-page .sc-jaXxmD:has(#image-179dbe57) {
+html body.ak-sales-page div:has(> picture > #image-400e16cf),
+html body.ak-sales-page div:has(> picture > #image-179dbe57) {
   width: 100% !important;
   max-width: 100% !important;
 }
