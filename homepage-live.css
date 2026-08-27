@@ -1821,3 +1821,49 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   letter-spacing: normal !important;
   text-transform: none !important;
 }
+
+/* ============================================================================
+   NAGŁÓWEK LEJKÓW — przyklejony, jak na Website (2026-08-27, uzupełnienie)
+   ----------------------------------------------------------------------------
+   Wzorzec = `<header>` na /academy: position fixed, cream 94%, linia 1px ink
+   10%, cień 0 1px 12px, backdrop blur. Na stronach lejków i bloga pasek był
+   `relative` — odjeżdżał przy przewijaniu, nie miał tła ani linii, więc przy
+   dłuższych stronach (a te mają 8–15 tys. px) nawigacja znikała na dobre.
+
+   Kompensacja: `position: fixed` wyjmuje wiersz z przepływu, więc sekcja
+   zawierająca menu dostaje `padding-top: 70px`. Bez tego treść podskakuje
+   o wysokość paska. Uwaga: na /pitching-home i /blueprint nagłówek siedzi
+   w TEJ SAMEJ sekcji co hero (897 i 2069 px) — dlatego kompensacja idzie na
+   sekcję z menu, a nie na kolejną.
+
+   Usuwamy też podkreślenie aktywnej pozycji — Website go nie ma, a lejki tak
+   (na /blog podkreślony "Blog", na /pitching-decoded "Book").
+   Stan aktywny sam w sobie jest dobrą praktyką; jeśli ma wrócić, to świadomie
+   i na WSZYSTKICH stronach naraz.
+
+   Zweryfikowane na 8 stronach: pasek trzyma się góry na starcie i po
+   przewinięciu 1200 px, bez poziomego przewijania i bez skoku treści.
+   ============================================================================ */
+[id^="row-"]:has([id^="menu-"]) {
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  z-index: 1000 !important;
+  background: rgba(249, 247, 241, 0.94) !important;
+  border-bottom: 1px solid rgba(45, 45, 45, 0.1) !important;
+  box-shadow: 0 1px 12px rgba(26, 60, 47, 0.04) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
+  backdrop-filter: saturate(1.4) blur(10px) !important;
+  padding: 10px 40px !important;
+  margin: 0 !important;
+  max-width: none !important;
+}
+[id^="section-"]:has([id^="menu-"]) {
+  padding-top: 70px !important;
+}
+/* Bez podkreślenia aktywnej pozycji — zgodnie z Website */
+[id^="menu-"] a {
+  text-decoration: none !important;
+  border-bottom: 0 !important;
+}
