@@ -1808,6 +1808,9 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   background-color: #1A3C2F !important;
   border-radius: 4px !important;
   padding: 8px 16px !important;
+  /* Website ma na przycisku 1 px obramowania — bez tego CTA w lejkach bylo
+     o 2 px nizsze niz "Log in". */
+  border: 1px solid transparent !important;
   transition: background-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="button-"]:hover {
@@ -1866,6 +1869,12 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
      Bez tego logo lezalo przy samej krawedzi okna, a CTA przy przeciwnej,
      przez co pasek wygladal na rozciagniety wzgledem reszty serwisu.
      `max()` pilnuje, zeby na waskich ekranach zostal normalny margines. */
+  /* Wysokosc paska rowna Website (69 px). Po wyzerowaniu paddingu sekcji
+     zostawal sam wiersz — 51 px, czyli pasek wizualnie cienszy niz na
+     /academy. Te 9 px gora i dol wyrownuja go co do piksela; pozycja menu
+     wychodzi wtedy na 24 px od gory, dokladnie jak we wzorcu. */
+  padding-top: 9px !important;
+  padding-bottom: 9px !important;
   padding-left: max(24px, calc((100% - 1120px) / 2)) !important;
   padding-right: max(24px, calc((100% - 1120px) / 2)) !important;
 }
