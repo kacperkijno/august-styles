@@ -221,6 +221,44 @@
       .catch(function () { /* on failure leave whatever is in the host (static fallback) */ });
   }
 
+
+  /* --- H1 na /blog -----------------------------------------
+     Strona listy wpisow nie ma naglowka: edytor bloga w systeme
+     sklada sie z paska, komponentu "Blog content" i stopki, a
+     dolozenie elementu wymaga przeciagniecia myszka (drag & drop,
+     ktorego nie da sie wykonac programowo). Do czasu recznego
+     dodania go w systeme wstawiamy prawdziwy <h1> tutaj.
+     Zabezpieczenie: jesli strona kiedys dostanie wlasny H1,
+     ta funkcja sama sie wycofa. --------------------------- */
+  function initBlogHeading() {
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    if (path !== '/blog') return;
+    if (document.querySelector('h1')) return;      /* strona ma juz H1 */
+    /* lista wpisow jest renderowana przez Reacta juz po DOMContentLoaded,
+       wiec probujemy przez chwile, zamiast raz */
+    var prob = 0;
+    var wstaw = function () {
+      if (document.querySelector('h1')) return true;
+      var list = document.querySelector('[id^="blogpostlisting-"]');
+      if (!list || !list.parentNode) return false;
+      var h = document.createElement('h1');
+      h.className = 'ak-blog-h1';
+      h.textContent = 'Practical notes on pitching and cross-cultural business.';
+      /* naglowek ma stac nad CALA trescia bloga, nie miedzy karuzela
+         wyroznionego wpisu a siatka pozostalych */
+      var wew = list.closest('[id^="section-"]');
+      var zew = wew && wew.parentElement ? wew.parentElement.closest('[id^="section-"]') : null;
+      var kotwica = zew ? zew.querySelector('[id^="section-"]') : null;
+      if (!kotwica || !kotwica.parentNode) kotwica = list;
+      kotwica.parentNode.insertBefore(h, kotwica);
+      return true;
+    };
+    if (wstaw()) return;
+    var timer = setInterval(function () {
+      if (wstaw() || ++prob > 40) clearInterval(timer);   /* max 8 s */
+    }, 200);
+  }
+
   /* --- Boot ---------------------------------------------- */
   function init() {
     applyHomeClass();
@@ -229,6 +267,7 @@
     initHeaderScroll();
     initFunnelNav();
     initLatestWriting();
+    initBlogHeading();
   }
 
   applyHomeClass(); // earliest possible, before paint where we can

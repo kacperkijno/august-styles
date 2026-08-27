@@ -2380,3 +2380,40 @@ html body .pdk-eyebrow * {
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
 }
+
+/* ---------- H1 STRONY: rozmiar z panelu, nie z systeme --------
+   Zamiana bloku naglowka na H1 w edytorze systeme podmienia tez
+   rozmiar na wlasny (40px) i lamie skale — panel Typography pisze
+   na kontenerze `headline-*`, a systeme stylizuje wewnetrzny h1.
+   Kazemy naglowkowi dziedziczyc to, co ustawiono w panelu.
+   Zmierzone 27.08: bez tego H1 na /webinar mial 40px zamiast 54. */
+html body [id^="headline-"] h1,
+html body [id^="headline-"] h2,
+html body [id^="headline-"] h3 {
+  font-size: inherit !important;
+  line-height: inherit !important;
+  font-weight: inherit !important;
+  letter-spacing: inherit !important;
+  margin: 0 !important;
+}
+
+/* ---------- /blog: naglowek strony ----------------------------
+   Wstawiany przez initBlogHeading() w homepage-live.js.
+   Nad lista wpisow bylo ~420px pustej przestrzeni i zaden naglowek. */
+html body .ak-blog-h1 {
+  font-family: var(--ak-serif) !important;
+  font-size: clamp(32px, 4.4vw, 54px) !important;
+  line-height: 1.2 !important;
+  font-weight: 400 !important;
+  letter-spacing: -0.005em !important;
+  color: #1A3C2F !important;
+  text-align: center !important;
+  max-width: 820px !important;
+  margin: 0 auto 56px !important;
+  /* pasek nawigacji jest przyklejony (69px) — tresc tekstowa nie moze
+     pod niego wchodzic, inaczej pierwsza linia jest scieta */
+  padding: 128px 24px 0 !important;
+}
+@media (max-width: 900px) {
+  html body .ak-blog-h1 { padding-top: 96px !important; margin-bottom: 36px !important; }
+}
