@@ -2594,3 +2594,59 @@ html body .pdk-btn:hover,
 html body .pdk-tag:hover {
   background-color: #8B4E2C !important;
 }
+
+/* ---------- SKALA NAGLOWKOW: scalenie bliskich krokow -------
+   22 warianty rozmiaru, w tym pary rozne o 1-2px (23 i 24, 26 i 25,
+   27 i 28, 32 i 34). Scalamy je do jednej skali:
+   112 dekoracja | 88 hero produktowy | 72 cena | 54 H1 | 40 H2 |
+   36 H2 mala | 30 H3 | 24 H4 | 21 podtytul.
+   Relacji H1/H2 tu nie ruszamy — sprowadzenie H2 z 54 na 40 to
+   osobna decyzja, bo zmienia charakter 10 stron.
+   Zmierzone scratchpad/gen-scale.cjs, 2026-08-27. */
+
+/* -> 54px (10 blokow) */
+html body #headline-9045c554, html body #headline-9045c554 *,
+html body #headline-c5d254ff, html body #headline-c5d254ff *,
+html body #headline-502539e5, html body #headline-502539e5 *,
+html body #headline-5baa8f2c, html body #headline-5baa8f2c *,
+html body #headline-219cddeb, html body #headline-219cddeb *,
+html body #headline-0ebe6c35, html body #headline-0ebe6c35 *,
+html body #headline-5aa93be6, html body #headline-5aa93be6 *,
+html body #headline-dac7fe56, html body #headline-dac7fe56 *,
+html body #headline-d87b6dff, html body #headline-d87b6dff *,
+html body #headline-c4be2943, html body #headline-c4be2943 * {
+  font-size: 54px !important;
+}
+
+/* -> 36px (6 blokow) */
+html body #headline-baf4bf12, html body #headline-baf4bf12 *,
+html body #headline-780dd2a4, html body #headline-780dd2a4 *,
+html body #headline-3fd0eed3, html body #headline-3fd0eed3 *,
+html body #headline-5a5220dc, html body #headline-5a5220dc *,
+html body #headline-b0f2c747, html body #headline-b0f2c747 *,
+html body #headline-cf85ad41, html body #headline-cf85ad41 * {
+  font-size: 36px !important;
+}
+
+/* -> 30px (9 blokow) */
+html body #headline-e43c982d, html body #headline-e43c982d *,
+html body #headline-57537295, html body #headline-57537295 *,
+html body #headline-9da78a16, html body #headline-9da78a16 *,
+html body #headline-7795a336, html body #headline-7795a336 *,
+html body #headline-fdb1ad1b, html body #headline-fdb1ad1b *,
+html body #headline-96e328fa, html body #headline-96e328fa *,
+html body #headline-291dd1bf, html body #headline-291dd1bf *,
+html body #headline-f269c1d2, html body #headline-f269c1d2 *,
+html body #headline-c771949a, html body #headline-c771949a * {
+  font-size: 30px !important;
+}
+
+/* -> 24px (6 blokow) */
+html body #text-bc78e4a1, html body #text-bc78e4a1 *,
+html body #text-38271ba4, html body #text-38271ba4 *,
+html body #text-ea437e32, html body #text-ea437e32 *,
+html body #text-55b9e5b4, html body #text-55b9e5b4 *,
+html body #text-9b9e201b, html body #text-9b9e201b *,
+html body #text-4db96d8f, html body #text-4db96d8f * {
+  font-size: 24px !important;
+}
