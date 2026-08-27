@@ -2002,11 +2002,11 @@ html body.ak-sales-page #text-4353c41d * {
    `relative` — odjeżdżał przy przewijaniu, nie miał tła ani linii, więc przy
    dłuższych stronach (a te mają 8–15 tys. px) nawigacja znikała na dobre.
 
-   Kompensacja: `position: fixed` wyjmuje wiersz z przepływu, więc sekcja
-   zawierająca menu dostaje `padding-top: 70px`. Bez tego treść podskakuje
-   o wysokość paska. Uwaga: na /pitching-home i /blueprint nagłówek siedzi
-   w TEJ SAMEJ sekcji co hero (897 i 2069 px) — dlatego kompensacja idzie na
-   sekcję z menu, a nie na kolejną.
+   BEZ kompensacji paddingiem — pasek ma LEŻEĆ na treści, tak jak na stronie
+   głównej, gdzie hero wchodzi pod przezroczystą nawigację. Wcześniejsza
+   wersja dokładała `padding-top: 70px` na sekcję z menu; efektem był
+   kilkunastopikselowy jasny pas między paskiem a zdjęciem i hero zepchnięte
+   w dół. Usunięte 27.08.
 
    Usuwamy też podkreślenie aktywnej pozycji — Website go nie ma, a lejki tak
    (na /blog podkreślony "Blog", na /pitching-decoded "Book").
@@ -2022,17 +2022,39 @@ html body.ak-sales-page #text-4353c41d * {
   left: 0 !important;
   right: 0 !important;
   z-index: 1000 !important;
+  margin: 0 auto !important;
+  /* DOMYSLNIE SOLIDNY — bezpieczny stan. Strona, ktora z jakiegos powodu nie
+     zaladuje homepage-live.js, dostaje czytelny pasek zamiast cream linkow
+     na jasnym tle. Przezroczystosc dokleja JS i tylko tam, gdzie pod paskiem
+     jest ciemne hero. */
   background: rgba(249, 247, 241, 0.94) !important;
   border-bottom: 1px solid rgba(45, 45, 45, 0.1) !important;
   box-shadow: 0 1px 12px rgba(26, 60, 47, 0.04) !important;
   -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
   backdrop-filter: saturate(1.4) blur(10px) !important;
-  padding: 10px 40px !important;
-  margin: 0 !important;
-  max-width: none !important;
+  transition: background 220ms ease, backdrop-filter 220ms ease,
+              border-color 220ms ease, box-shadow 220ms ease !important;
+  /* Zawartosc paska w kontenerze 1120 px, wysrodkowana — tak jak na Website.
+     Bez tego logo lezalo przy samej krawedzi okna, a CTA przy przeciwnej,
+     przez co pasek wygladal na rozciagniety wzgledem reszty serwisu.
+     `max()` pilnuje, zeby na waskich ekranach zostal normalny margines. */
+  padding-left: max(24px, calc((100% - 1120px) / 2)) !important;
+  padding-right: max(24px, calc((100% - 1120px) / 2)) !important;
 }
-[id^="section-"]:has([id^="menu-"]) {
-  padding-top: 70px !important;
+/* Nad ciemnym hero, przed przewinieciem — pasek znika, hero wchodzi pod niego
+   dokladnie jak na stronie glownej. Klase zdejmuje JS po 40 px. */
+[id^="row-"]:has([id^="menu-"]).ak-nav-over-hero {
+  background: transparent !important;
+  border-bottom-color: transparent !important;
+  box-shadow: none !important;
+  -webkit-backdrop-filter: none !important;
+  backdrop-filter: none !important;
+}
+[id^="row-"]:has([id^="menu-"]).ak-nav-over-hero [id^="menu-"] a {
+  color: #F9F7F1 !important;
+}
+[id^="row-"]:has([id^="menu-"]).ak-nav-over-hero img {
+  filter: brightness(0) invert(1);
 }
 /* Bez podkreślenia aktywnej pozycji — zgodnie z Website */
 [id^="menu-"] a {

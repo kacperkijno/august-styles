@@ -98,6 +98,41 @@
     }, 4000);
   }
 
+  /* --- 3b. Header scroll state — STRONY LEJKA I BLOGA -------
+     Website ma <header type="WebsiteHeader">; lejki i blog maja zwykly
+     wiersz systeme z blokiem menu w srodku. Ta sama logika, inny nosnik:
+     przezroczysty pasek nad ciemnym hero, solidny cream po 40 px.
+     Na stronach bez ciemnego hero solidny pasek od razu — inaczej cream
+     linki bylyby nieczytelne na jasnym tle. */
+  function initFunnelNav() {
+    var menu = document.querySelector('[id^="menu-"]');
+    if (!menu) return;
+    var bar = menu.closest('[id^="row-"]');
+    if (!bar) return;
+    /* Website ma wlasna obsluge (initHeaderScroll) — nie dublujemy. */
+    if (bar.closest('header[type="WebsiteHeader"]')) return;
+
+    /* Strony lejka z CIEMNYM hero — tam pasek ma byc przezroczysty na gorze,
+       zeby zdjecie/tlo wchodzilo pod niego jak na stronie glownej.
+       Lista jawna, tak samo jak w initHeaderScroll wyzej: prosciej ja
+       przejrzec niz zgadywac luminancje bloku, ktory systeme moze
+       przebudowac. Nowa strona z ciemnym hero → dopisz sciezke tutaj. */
+    var DARK_HERO = ['/cultural-communication', '/pitching-decoded'];
+    var path = location.pathname.replace(/\/+$/, '') || '/';
+    if (DARK_HERO.indexOf(path) === -1) return;   /* solidny pasek zostaje */
+
+    var threshold = 40, over = null;
+    function check() {
+      var atTop = window.scrollY <= threshold;
+      if (atTop !== over) {
+        bar.classList.toggle('ak-nav-over-hero', atTop);
+        over = atTop;
+      }
+    }
+    window.addEventListener('scroll', check, { passive: true });
+    check();
+  }
+
   /* --- 3. Header scroll state ---------------------------- */
   function initHeaderScroll() {
     var header = document.querySelector('header[type="WebsiteHeader"]');
@@ -192,6 +227,7 @@
     initCardReveal();
     initReveal();
     initHeaderScroll();
+    initFunnelNav();
     initLatestWriting();
   }
 
