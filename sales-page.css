@@ -2056,6 +2056,19 @@ html body.ak-sales-page #text-4353c41d * {
 [id^="row-"]:has([id^="menu-"]).ak-nav-over-hero img {
   filter: brightness(0) invert(1);
 }
+
+/* Sekcja, w ktorej siedzi pasek, nie moze zostawiac wlasnego paddingu — wiersz
+   jest `fixed`, wiec po nim zostawal pusty pas 24 px (12+12) miedzy paskiem
+   a hero. To wlasnie ten jasny prosek widoczny nad zdjeciem.
+   Na /pitching-home i /blueprint ta sama sekcja zawiera rowniez hero, wiec
+   zerujemy tylko padding — nie wysokosc — i hero po prostu zaczyna sie u gory.
+   Zweryfikowane: sekcja z samym paskiem ma teraz 0 px, sekcje z hero
+   zachowuja swoje 831 i 2003 px. */
+[id^="section-"]:has([id^="menu-"]) {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
+
 /* Bez podkreślenia aktywnej pozycji — zgodnie z Website */
 [id^="menu-"] a {
   text-decoration: none !important;
