@@ -2650,3 +2650,66 @@ html body #text-9b9e201b, html body #text-9b9e201b *,
 html body #text-4db96d8f, html body #text-4db96d8f * {
   font-size: 24px !important;
 }
+
+/* ---------- H2: naglowki sekcji schodza z 54 na 40 -----------
+   Do 28.08 naglowek sekcji mial dokladnie ten sam rozmiar co H1,
+   wiec strony nie miały zadnej hierarchii. Kanon: H1 54, H2 40.
+   Lista to bloki 52-54px, ktore NIE zawieraja <h1> — czyli sa
+   naglowkami sekcji, nie tytulem strony. Hero produktowe (88px)
+   i H1 (54px) zostaja nietkniete.
+   Zmierzone scratchpad/gen-h2.cjs, 2026-08-28. */
+html body #headline-9634a487, html body #headline-9634a487 *,
+html body #text-a59c099f, html body #text-a59c099f *,
+html body #text-ec0d3d78, html body #text-ec0d3d78 *,
+html body #headline-9045c554, html body #headline-9045c554 *,
+html body #headline-c5d254ff, html body #headline-c5d254ff *,
+html body #headline-502539e5, html body #headline-502539e5 *,
+html body #headline-5baa8f2c, html body #headline-5baa8f2c *,
+html body #headline-219cddeb, html body #headline-219cddeb *,
+html body #headline-0ebe6c35, html body #headline-0ebe6c35 *,
+html body #headline-5aa93be6, html body #headline-5aa93be6 *,
+html body #headline-dac7fe56, html body #headline-dac7fe56 *,
+html body #headline-d87b6dff, html body #headline-d87b6dff *,
+html body #headline-c4be2943, html body #headline-c4be2943 *,
+html body #headline-009aa5b4, html body #headline-009aa5b4 *,
+html body #headline-bf4b852d, html body #headline-bf4b852d *,
+html body #headline-ec5a9cb7, html body #headline-ec5a9cb7 *,
+html body #headline-05d830fa, html body #headline-05d830fa *,
+html body #headline-e65c5fff, html body #headline-e65c5fff *,
+html body #headline-6137e67d, html body #headline-6137e67d *,
+html body #headline-b5ca2ec0, html body #headline-b5ca2ec0 *,
+html body #headline-909fb46b, html body #headline-909fb46b *,
+html body #headline-288b6eeb, html body #headline-288b6eeb *,
+html body #headline-5bdf24ed, html body #headline-5bdf24ed *,
+html body #headline-a641751a, html body #headline-a641751a *,
+html body #headline-3b9a2e0d, html body #headline-3b9a2e0d *,
+html body #headline-cb335385, html body #headline-cb335385 *,
+html body #headline-2d097ef3, html body #headline-2d097ef3 *,
+html body #headline-82585c81, html body #headline-82585c81 *,
+html body #headline-a6eab37b, html body #headline-a6eab37b *,
+html body #headline-8381816b, html body #headline-8381816b *,
+html body #headline-ddc5749b, html body #headline-ddc5749b *,
+html body #headline-bc377b23, html body #headline-bc377b23 *,
+html body #headline-8abc75e9, html body #headline-8abc75e9 *,
+html body #headline-9a1bcbcb, html body #headline-9a1bcbcb * {
+  font-size: 40px !important;
+  line-height: 1.2 !important;
+}
+
+/* nasze wlasne klasy naglowkow sekcji */
+html body .akb-h2, html body .akb-h2 *,
+html body .akc-h2, html body .akc-h2 *,
+html body .ak-title, html body .ak-title * {
+  font-size: 40px !important;
+  line-height: 1.2 !important;
+}
+
+/* ---------- H1 i karty: reszta skali w naszych klasach ---------
+   H1 na /about i /consulting mial 60px, na /contact 64px — kanon to
+   54px. Tytuly kart wpisow 23px i 25px scalone do 24px.
+   Zmierzone 2026-08-28. */
+html body .post__title,
+html body .post__title * {
+  font-size: 24px !important;
+  line-height: 1.25 !important;
+}

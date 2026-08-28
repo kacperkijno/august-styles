@@ -36,7 +36,7 @@
 
 /* ---- left column ---- */
 .akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:300;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
-.akt-h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,64px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;color:var(--cream);margin:0;}
+.akt-h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,54px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;color:var(--cream);margin:0;}
 .akt-h1 em{font-style:italic;color:var(--terracotta-deco);}
 .akt-lead{font-family:var(--sans);font-weight:300;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:rgba(249,247,241,.82);max-width:46ch;margin:24px 0 0;}
 
