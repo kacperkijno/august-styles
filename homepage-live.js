@@ -619,3 +619,137 @@
     start();
   }
 })();
+
+/* ============================================================================
+   SYSTEM TYPOGRAFICZNY — nadawanie stopni (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/typography.html".
+   Reguly: blok "SYSTEM TYPOGRAFICZNY" w homepage-live.css i sales-page.css.
+
+   Po co JS: systeme wpisuje wlasne nazwy krojow w kontenery `text-*`,
+   `headline-*` i `bulletlist-*`, a w `text-*` sa ZAROWNO naglowki (Caslon),
+   jak i tekst (Haas). Z samego CSS nie da sie ich odroznic — nie ma selektora
+   "element, ktory ma teraz Caslona". Skrypt czyta wyliczony styl i dokleja
+   klase stopnia; wartosci siedza w CSS, nie tutaj.
+
+   Czego NIE rusza: przyciskow (maja wlasny system, klasa .akb), paska
+   nawigacji, oraz elementow, ktorych rozmiar odbiega od skali o wiecej niz
+   4px — to zwykle liczby i znaki firmowe, nie tekst.
+   ============================================================================ */
+(function () {
+  var SERIF = [112, 88, 54, 40, 36, 30, 24, 21];
+  var SANS  = [20, 15, 14, 12];
+  var TOL   = 4;   /* dalej niz 4px od skali = zostawiamy w spokoju */
+
+  function gcs(el) {
+    var d = el.ownerDocument, w = (d && d.defaultView) || window;
+    return w.getComputedStyle(el);
+  }
+  function najblizszy(v, skala) {
+    var best = null, dist = 1e9;
+    for (var i = 0; i < skala.length; i++) {
+      var d = Math.abs(skala[i] - v);
+      if (d < dist) { dist = d; best = skala[i]; }
+    }
+    return dist <= TOL ? best : null;
+  }
+  function pomijamy(e) {
+    if (e.closest('.akb, [id^="button-"], [id^="loginbutton-"], [id^="submit-button-"], [id^="payment-button-"]')) return true;
+    if (e.closest('header[type="WebsiteHeader"]')) return true;
+    var row = e.closest('[id^="row-"]');
+    if (row && row.querySelector('[id^="menu-"]')) return true;
+    return false;
+  }
+  function widoczny(e) {
+    var r = e.getBoundingClientRect();
+    return r.width >= 16 && r.height >= 6;
+  }
+
+  function stopnie() {
+    var el = document.querySelectorAll('p,span,li,div,a,em,strong,b,i,h1,h2,h3,h4,h5,h6,td,th,label,figcaption,small');
+    for (var i = 0; i < el.length; i++) {
+      var e = el[i];
+      if (e.children.length) continue;                 /* tylko liscie tekstowe */
+      if (!(e.textContent || '').trim()) continue;
+      if (e.getAttribute('data-akt')) continue;
+      if (pomijamy(e) || !widoczny(e)) continue;
+
+      var s = gcs(e);
+      var serif = /caslon/i.test(s.fontFamily);
+      var fs = parseFloat(s.fontSize);
+      var fw = parseInt(s.fontWeight, 10) || 400;
+      var ls = parseFloat(s.letterSpacing) || 0;
+      var caps = s.textTransform === 'uppercase';
+      var klasy = ['akt', serif ? 'akt-serif' : 'akt-sans'];
+
+      /* eyebrow rozpoznajemy po ksztalcie, nie po miejscu: wersaliki,
+         maly stopien i rozstrzelone swiatlo */
+      var eyebrow = !serif && caps && fs <= 17 && ls > 1;
+
+      if (eyebrow) {
+        klasy.push('akt-eyebrow');
+      } else {
+        var cel = najblizszy(fs, serif ? SERIF : SANS);
+        if (cel) klasy.push((serif ? 'akt-h' : 'akt-t') + cel);
+        klasy.push(fw >= 500 ? 'akt-w500' : 'akt-w400');
+      }
+
+      /* kolory — tylko scalanie bliskich wariantow tego samego zamiaru */
+      var c = (s.color || '').replace(/\s/g, '');
+      if (/^rgba?\(45,45,45,0?\.7\d*\)$/.test(c) || c === 'rgb(90,90,90)') klasy.push('akt-ink72');
+      else if (/^rgba\(45,45,45,0?\.[45]\d*\)$/.test(c)) klasy.push('akt-ink62');
+
+      e.classList.add.apply(e.classList, klasy);
+      e.setAttribute('data-akt', '1');
+    }
+  }
+
+  function listy() {
+    var ul = document.querySelectorAll('ul,ol');
+    for (var i = 0; i < ul.length; i++) {
+      var l = ul[i];
+      if (l.getAttribute('data-akt-list')) continue;
+      if (pomijamy(l)) continue;
+      var li = l.querySelector('li');
+      if (!li || !(li.textContent || '').trim()) continue;
+      /* lista numerowana 01-05 na / ma wlasny licznik — nie dotykamy */
+      if (l.closest('#section-22d30859')) continue;
+
+      var typ = 'dot';
+      if (l.tagName === 'OL') typ = 'num';
+      else if (l.querySelector('i.fa-check, svg')) typ = 'check';
+
+      l.classList.add('akt-list', 'akt-list--' + typ);
+      /* jasnosc tla decyduje o kolorze pozycji */
+      var p = l.parentElement, bg = null;
+      while (p && !bg) {
+        var b = gcs(p).backgroundColor;
+        if (b && b !== 'rgba(0, 0, 0, 0)' && !/,\s*0\)$/.test(b)) bg = b;
+        p = p.parentElement;
+      }
+      if (bg) {
+        var m = bg.match(/[\d.]+/g);
+        if (m) {
+          var f = function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); };
+          var lum = 0.2126 * f(+m[0]) + 0.7152 * f(+m[1]) + 0.0722 * f(+m[2]);
+          if (lum < 0.35) l.classList.add('akt-list--dark');
+        }
+      }
+      l.setAttribute('data-akt-list', typ);
+    }
+  }
+
+  function przebieg() { try { stopnie(); listy(); } catch (e) {} }
+
+  function start() {
+    przebieg();
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', function () { setTimeout(przebieg, 200); });
+    }
+    setTimeout(przebieg, 900);
+    setTimeout(przebieg, 2500);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

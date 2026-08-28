@@ -6,6 +6,7 @@
    the <link> in systeme again. Imports are scoped (about.css → .ak-about),
    so loading them everywhere is harmless — unused rules just don't match.
    ============================================================ */
+@import url("https://use.typekit.net/luy3mna.css");
 @import url("about.css");
 @import url("consulting.css");
 @import url("contact.css");
@@ -252,7 +253,7 @@ body.ak-home #row-e6badb36 > div[size] {
   align-items: center !important;
   gap: 8px !important;
   font-size: 14px !important;
-  font-weight: 300 !important;
+  font-weight:400 !important;
   letter-spacing: 0.01em !important;
   text-decoration: none !important;
   border-bottom: 1px solid rgba(249, 247, 241, 0.30) !important;
@@ -724,7 +725,7 @@ html body.ak-home #text-70cc2123, html body.ak-home #text-70cc2123 * {
 html body.ak-home #text-efd6b3d5, html body.ak-home #text-efd6b3d5 *,
 html body.ak-home #text-e988dc01, html body.ak-home #text-e988dc01 *,
 html body.ak-home #text-bd7b0d80, html body.ak-home #text-bd7b0d80 * {
-  font-weight: 700 !important;
+  font-weight:500 !important;
   letter-spacing: 0.2em !important;
   text-transform: uppercase !important;
   color: var(--ak-forest) !important;
@@ -744,7 +745,7 @@ html body.ak-home #text-ae2ae713 {
 }
 html body.ak-home #text-ae2ae713 p,
 html body.ak-home #text-ae2ae713 span {
-  font-weight: 700 !important;
+  font-weight:500 !important;
   letter-spacing: 0.16em !important;
   text-transform: uppercase !important;
   color: var(--ak-forest) !important;
@@ -1481,7 +1482,7 @@ html body.ak-home #section-d54243f0 img {
 #ak-latest-writing .post__main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 #ak-latest-writing .post__cat {
   font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
-  font-weight: 700;
+  font-weight:500;
   font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color:#9A5832;
 }
 #ak-latest-writing .post__title {
@@ -1508,7 +1509,7 @@ html body.ak-home #section-d54243f0 img {
 #text-f22884a9 *, #text-014e5f7a * {
   text-transform: uppercase !important;
   letter-spacing: .18em !important;
-  font-weight: 700 !important;
+  font-weight:500 !important;
 }
 
 /* "More" links (All free resources / All articles / More on YouTube) */
@@ -1710,7 +1711,7 @@ html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6
 #text-4563619c, #text-4563619c *,
 #text-bf3803a9, #text-bf3803a9 * {
   font-size: 11px !important;
-  font-weight: 300 !important;
+  font-weight:400 !important;
   letter-spacing: 0.18em !important;
   line-height: 1.4 !important;
   text-transform: uppercase !important;
@@ -1791,7 +1792,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 .carousel-ui div:has(> a > img) > div{ padding:24px 26px 28px !important; }
 
 /* category → match the home Insights .post__cat (NeueHaas 700, 10px, .16em, uppercase, terracotta) */
-.carousel-ui [color="rgb(180, 106, 60)"]{ font-family:"AKHaas", "NeueHaasDisplay-Roman42448762","Helvetica Neue",sans-serif !important; font-weight:700 !important; font-size:10px !important; letter-spacing:.16em !important; text-transform:uppercase !important; line-height:1.4 !important; }
+.carousel-ui [color="rgb(180, 106, 60)"]{ font-family:"AKHaas", "NeueHaasDisplay-Roman42448762","Helvetica Neue",sans-serif !important; font-weight:500 !important; font-size:10px !important; letter-spacing:.16em !important; text-transform:uppercase !important; line-height:1.4 !important; }
 
 /* title (Caslon forest, was 36px) → card size, tighter, hover terracotta */
 .carousel-ui [font-family="AdobeCaslonPro42448745"]{ font-size:clamp(20px,2.2vw,25px) !important; line-height:1.18 !important; margin-top:12px !important; }
@@ -3088,3 +3089,131 @@ html body .akb.akb--ghost-light { background-color: transparent !important; colo
 
 html body .akb-btn .akb-arrow,
 html body .akc-btn .akc-arrow { display: none !important; }
+
+/* ============================================================================
+   SYSTEM TYPOGRAFICZNY (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/typography.html".
+   Pomiar przed: 1554 fragmenty tekstu na 18 stronach — 51 wariantow naglowka,
+   66 wariantow tekstu, 29 eyebrow, 14 ukladow listy, 7 wag.
+
+   Najwiekszy balagan siedzial w INTERLINII, nie w rozmiarach: sam 16px
+   wystepowal z dziewiecioma roznymi (1.50, 1.55, 1.31, 1.60, 1.88, 2.25...).
+   Dlatego interlinia jest tu funkcja stopnia i nie ustawia sie jej osobno.
+
+   KROJE. Od teraz z Adobe Fonts (kit luy3mna, @import na gorze pliku):
+   `adobe-caslon-pro` i `neue-haas-grotesk-display`. Nasze pliki w fonts/
+   zostaja jako zapas na czas ladowania kitu — to te same kroje, wiec
+   podmiana jest wizualnie niewidoczna.
+
+   ROZDZIELENIE RODZIN. systeme wpisuje swoje nazwy krojow w kontenery
+   `text-*`, `headline-*` i `bulletlist-*`, przy czym w `text-*` sa ZAROWNO
+   naglowki (Caslon), jak i tekst (Haas). Sama regula CSS nie odroznia jednych
+   od drugich, wiec rodzine i stopien nadaje JS (homepage-live.js, sekcja
+   "SYSTEM TYPOGRAFICZNY"), a tutaj sa tylko definicje klas.
+   ============================================================================ */
+
+/* --- rodziny ------------------------------------------------------------- */
+html body .akt.akt-serif, html body .akt.akt-serif * {
+  font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
+}
+html body .akt.akt-sans, html body .akt.akt-sans * {
+  font-family: "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif !important;
+}
+
+/* --- skala naglowkow: im wiekszy stopien, tym ciasniej -------------------- */
+html body .akt.akt-h112 { font-size:112px !important; line-height:0.95 !important; }
+html body .akt.akt-h88  { font-size:88px  !important; line-height:1.05 !important; }
+html body .akt.akt-h54  { font-size:54px  !important; line-height:1.15 !important; }
+html body .akt.akt-h40  { font-size:40px  !important; line-height:1.20 !important; }
+html body .akt.akt-h36  { font-size:36px  !important; line-height:1.05 !important; }
+html body .akt.akt-h30  { font-size:30px  !important; line-height:1.25 !important; }
+html body .akt.akt-h24  { font-size:24px  !important; line-height:1.30 !important; }
+html body .akt.akt-h21  { font-size:21px  !important; line-height:1.35 !important; }
+html body .akt[class*="akt-h"] { font-weight:400 !important; }
+
+/* --- skala tekstu --------------------------------------------------------- */
+html body .akt.akt-t20 { font-size:20px !important; line-height:1.50 !important; }
+html body .akt.akt-t15 { font-size:15px !important; line-height:1.55 !important; }
+html body .akt.akt-t14 { font-size:14px !important; line-height:1.45 !important; }
+html body .akt.akt-t12 { font-size:12px !important; line-height:1.40 !important; }
+html body .akt.akt-t20 *, html body .akt.akt-t15 *, html body .akt.akt-t14 *, html body .akt.akt-t12 * {
+  font-size: inherit !important; line-height: inherit !important;
+}
+
+/* --- wagi: 400 tekst, 500 wyroznienie ------------------------------------- */
+/* Bylo piec wag sans (300/400/500/600/700) plus serif 300. Light w 74%
+   przypadkow siedzial w tekscie 11-16px, czesto na przygaszonym kolorze —
+   cienki kroj, maly stopien i wyblakly kolor naraz. Zostaja dwie. */
+html body .akt.akt-w400, html body .akt.akt-w400 * { font-weight:400 !important; }
+html body .akt.akt-w500, html body .akt.akt-w500 * { font-weight:500 !important; }
+
+/* --- eyebrow: jeden kanon zamiast 29 wariantow ---------------------------- */
+html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * {
+  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  line-height: 1.40 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+  font-style: normal !important;
+}
+
+/* --- kolory tekstu: 70% i 72% -> 72%, 50% -> 62% (WCAG) ------------------- */
+html body .akt.akt-ink72, html body .akt.akt-ink72 * { color: rgba(45,45,45,.72) !important; }
+html body .akt.akt-ink62, html body .akt.akt-ink62 * { color: rgba(45,45,45,.62) !important; }
+html body .akt.akt-cream80, html body .akt.akt-cream80 * { color: rgba(249,247,241,.80) !important; }
+
+/* --- listy: jeden rytm, punktor niesie znaczenie -------------------------- */
+/* Bylo 14 ukladow na 36 list: rozmiary 15/16/17, interlinie od 1.33 do 2.25,
+   odstepy raz marginesem raz paddingiem, wciecia od 0 do 56px. */
+html body .akt-list.akt-list { padding-left:0 !important; margin-top:0 !important; list-style:none !important; }
+html body .akt-list.akt-list > li {
+  position: relative !important;
+  padding-left: 28px !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+  margin-bottom: 12px !important;
+  font-size: 15px !important;
+  line-height: 1.55 !important;
+  color: rgba(45,45,45,.72) !important;
+  border: 0 !important;
+  list-style: none !important;
+}
+html body .akt-list.akt-list > li:last-child { margin-bottom:0 !important; }
+html body .akt-list.akt-list > li strong, html body .akt-list.akt-list > li b {
+  color: var(--ak-ink, #2D2D2D) !important; font-weight:500 !important;
+}
+/* na ciemnym tle */
+html body .akt-list.akt-list--dark > li { color: rgba(249,247,241,.80) !important; }
+html body .akt-list.akt-list--dark > li strong { color:#F9F7F1 !important; }
+/* ptaszek — korzysc */
+html body .akt-list.akt-list--check > li::before {
+  content:"" !important; position:absolute !important; left:2px !important; top:8px !important;
+  width:9px !important; height:5px !important;
+  border-left:1.5px solid var(--ak-terracotta-dark,#9A5832) !important;
+  border-bottom:1.5px solid var(--ak-terracotta-dark,#9A5832) !important;
+  transform:rotate(-45deg) !important; background:none !important;
+}
+/* kropka — wyliczenie */
+html body .akt-list.akt-list--dot > li::before {
+  content:"" !important; position:absolute !important; left:4px !important; top:10px !important;
+  width:5px !important; height:5px !important; border-radius:50% !important;
+  background: var(--ak-terracotta-dark,#9A5832) !important; border:0 !important;
+}
+/* cyfra — kolejnosc */
+html body .akt-list.akt-list--num { counter-reset: akt-n !important; }
+html body .akt-list.akt-list--num > li { counter-increment: akt-n !important; }
+html body .akt-list.akt-list--num > li::before {
+  content: counter(akt-n, decimal-leading-zero) !important;
+  position:absolute !important; left:0 !important; top:2px !important;
+  font-family:"adobe-caslon-pro","AKCaslon",Georgia,serif !important;
+  font-size:14px !important; color: var(--ak-terracotta-dark,#9A5832) !important;
+  background:none !important; border:0 !important; width:auto !important; height:auto !important;
+}
+/* ikona ptaszka wstawiona przez systeme — chowamy, punktor idzie z CSS */
+html body .akt-list.akt-list > li > i.fa-check { display:none !important; }
+
+/* --- szerokosc kolumny ---------------------------------------------------- */
+/* Najszersze akapity mialy 1045px — ok. 130 znakow w wierszu. */
+html body .akt.akt-mw { max-width: 680px !important; }

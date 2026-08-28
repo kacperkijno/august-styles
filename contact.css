@@ -23,7 +23,7 @@
   --sans:"AKHaas","Neue Haas Grotesk Display Pro","Helvetica Neue",Inter,system-ui,sans-serif;
   --container:1140px; --gutter:clamp(20px,4vw,40px);
   --ease:cubic-bezier(.2,.6,.2,1); --t:180ms;
-  font-family:var(--sans); font-weight:300; color:var(--cream); line-height:1.6;
+  font-family:var(--sans); font-weight:400; color:var(--cream); line-height:1.6;
   text-align:left; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   background:var(--forest); width:100%;
 }
@@ -36,17 +36,17 @@
 .akt-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,96px);align-items:start;}
 
 /* ---- left column ---- */
-.akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:300;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
+.akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
 .akt-h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,54px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;color:var(--cream);margin:0;}
 .akt-h1 em{font-style:italic;color:var(--terracotta-deco);}
-.akt-lead{font-family:var(--sans);font-weight:300;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:rgba(249,247,241,.82);max-width:46ch;margin:24px 0 0;}
+.akt-lead{font-family:var(--sans);font-weight:400;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:rgba(249,247,241,.82);max-width:46ch;margin:24px 0 0;}
 
 .akt-details{margin:48px 0 0;display:flex;flex-direction:column;gap:28px;}
 .akt-detail__label{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(249,247,241,.5);margin:0 0 8px;}
 .akt-detail__value{font-family:var(--serif);font-size:22px;color:var(--cream);}
 .akt-detail__value a{border-bottom:1px solid rgba(217,164,122,.45);padding-bottom:2px;color:var(--terracotta-deco);transition:border-color var(--t) var(--ease);}
 .akt-detail__value a:hover{border-color:var(--terracotta-deco);}
-.akt-detail__value--plain{font-size:18px;font-family:var(--sans);font-weight:300;color:rgba(249,247,241,.85);}
+.akt-detail__value--plain{font-size:18px;font-family:var(--sans);font-weight:400;color:rgba(249,247,241,.85);}
 
 .akt-social{display:flex;gap:12px;margin-top:4px;}
 .akt-social a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(249,247,241,.2);color:rgba(249,247,241,.72);transition:color var(--t) var(--ease),border-color var(--t) var(--ease),transform var(--t) var(--ease);}
