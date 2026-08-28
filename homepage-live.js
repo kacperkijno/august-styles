@@ -1233,7 +1233,13 @@
      cala te konstrukcje MIERZYMY rzeczywisty odstep i dokladamy roznice.
      Poprawka jest zbiezna: w kolejnym przebiegu odstep jest juz docelowy,
      roznica wynosi zero i nic sie nie dzieje. */
-  var RYTM = { eyebrow: 16, tresc: 24, siatka: 48 };
+  var RYTM = {
+    eyebrow: 16,     /* pod eyebrow — do naglowka */
+    tresc: 24,       /* pod naglowkiem — do tekstu; takze H1 -> lead w hero */
+    siatka: 48,      /* pod naglowkiem — do rzedu kart */
+    nadBlok: 64,     /* nad eyebrow albo naglowkiem, gdy zaczyna kolejny blok W SEKCJI */
+    leadCta: 32      /* od akapitu wprowadzajacego do przycisku */
+  };
 
   function blokPo(e) {
     var w = e, i = 0;
@@ -1257,6 +1263,19 @@
     }
     return w;
   }
+  function blokPrzed(e) {
+    var w = e, i = 0;
+    while (w && i++ < 6) {
+      var n = w.previousElementSibling;
+      while (n) {
+        var r = n.getBoundingClientRect();
+        if (r.height > 4 && gcs(n).display !== 'none') return n;
+        n = n.previousElementSibling;
+      }
+      w = w.parentElement;
+    }
+    return null;
+  }
   function ustawOdstep(od, docelowy) {
     var nast = blokPo(od); if (!nast) return;
     var a = od.getBoundingClientRect(), b = nast.getBoundingClientRect();
@@ -1269,6 +1288,20 @@
     nosnik.style.setProperty('margin-bottom', Math.max(0, Math.round(maja + roznica)) + 'px', 'important');
   }
 
+  /* Odstep NAD elementem ustawiamy przez margines elementu POPRZEDNIEGO —
+     ten sam mechanizm, tylko zaczepiony z drugiej strony. Dotyczy wylacznie
+     poczatku kolejnego bloku wewnatrz sekcji: gdy eyebrow albo naglowek
+     otwiera sekcje, odstep nad nim daje padding sekcji (128 px) i nie ma
+     tam czego poprawiac. */
+  function ustawOdstepNad(el, docelowy) {
+    var p = blokPrzed(el); if (!p) return;
+    if (p.classList && p.classList.contains('akt-eyebrow')) return;   /* para eyebrow+naglowek ma wlasne 16 */
+    if (p.querySelector && p.querySelector('.akt-eyebrow')) return;
+    var sek = el.closest('[id^="section-"], section');
+    if (!sek || !sek.contains(p)) return;                             /* poprzednik poza sekcja = padding sekcji */
+    ustawOdstep(p, docelowy);
+  }
+
   function rytm(root) {
     var l = root.querySelectorAll('.akt-eyebrow'), i;
     for (i = 0; i < l.length; i++) {
@@ -1277,15 +1310,26 @@
       /* kolor: terakota na jasnym, jasniejszy odcien na ciemnym — dwa, nie czternascie */
       var pod = tloPod(e.parentElement || e);
       e.classList.add(pod && lum(pod) < 0.35 ? 'akt-eyebrow--dark' : 'akt-eyebrow--light');
+      ustawOdstepNad(e, RYTM.nadBlok);
       ustawOdstep(e, RYTM.eyebrow);
     }
     l = root.querySelectorAll('[class*="akt-h"]');
     for (i = 0; i < l.length; i++) {
       var h = l[i];
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
+      ustawOdstepNad(h, RYTM.nadBlok);
       var nast = blokPo(h); if (!nast) continue;
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
       ustawOdstep(h, kart >= 2 ? RYTM.siatka : RYTM.tresc);
+    }
+    /* akapit wprowadzajacy -> przycisk: w hero mierzylo sie od 30 do 1036 px */
+    l = root.querySelectorAll('.akt.akt-t20');
+    for (i = 0; i < l.length; i++) {
+      var t = l[i];
+      if (pomijamy(t) || t.getBoundingClientRect().height < 10) continue;
+      var n2 = blokPo(t); if (!n2) continue;
+      if (!(n2.classList && n2.classList.contains('akb')) && !(n2.querySelector && n2.querySelector('.akb'))) continue;
+      ustawOdstep(t, RYTM.leadCta);
     }
   }
 
