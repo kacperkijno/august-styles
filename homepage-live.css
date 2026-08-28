@@ -3554,3 +3554,64 @@ html body [id^="faq-"] > div {
 }
 html body [id^="faq-"] > div:first-child { border-top: 1px solid rgba(45,45,45,.10) !important; }
 html body [id^="faq-"] { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; }
+
+/* --- FAQ: jeden wzorzec, wziety z /cultural-communication ------------------
+   Tam pytanie jest bezszeryfowe 16/500 w Ink, znak to szewron w terakocie po
+   prawej, a eyebrow i naglowek stoja na srodku. Na /pitching-decoded to samo
+   FAQ bylo szeryfowe 19/300, ze znakiem „+" i wszystkim do lewej — dwa
+   rozne komponenty na jedna role. Blok siedzi w inline <style> z edytora,
+   ale tamte reguly nie maja `!important`, wiec wystarczy je przebic stad. */
+html body .ak-book .pdk-faq > details,
+html body .ak-book .pdk-faq > div {
+  border-bottom: 1px solid rgba(45,45,45,.10) !important;
+  border-top: 0 !important;
+}
+html body .ak-book .pdk-faq > details:first-child,
+html body .ak-book .pdk-faq > div:first-child { border-top: 1px solid rgba(45,45,45,.10) !important; }
+
+html body .ak-book .pdk-faq summary {
+  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
+  line-height: 1.45 !important;
+  color: #2D2D2D !important;
+  padding: 20px 4px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+  gap: 16px !important;
+  cursor: pointer !important;
+  list-style: none !important;
+  transition: color var(--ak-t-color) var(--ak-ease) !important;
+}
+html body .ak-book .pdk-faq summary::-webkit-details-marker { display: none !important; }
+html body .ak-book .pdk-faq summary:hover { color: #9A5832 !important; }
+
+/* szewron rysowany dwiema krawedziami — bez zaleznosci od zestawu ikon */
+html body .ak-book .pdk-faq summary::after {
+  content: "" !important;
+  width: 8px; height: 8px;
+  border-right: 1.5px solid #9A5832;
+  border-bottom: 1.5px solid #9A5832;
+  transform: rotate(-135deg);
+  margin-bottom: -4px;
+  flex: 0 0 auto;
+  transition: transform var(--ak-t-move) var(--ak-ease);
+}
+html body .ak-book .pdk-faq details[open] summary::after {
+  transform: rotate(45deg);
+  margin-bottom: 4px;
+}
+html body .ak-book .pdk-faq details > *:not(summary) {
+  padding: 0 4px 22px !important;
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+}
+/* eyebrow i naglowek nad FAQ — na srodku, jak we wzorcu */
+html body .ak-book .pdk-section:has(.pdk-faq) .pdk-h2,
+html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { text-align: center !important; }
+/* `text-align:center` centruje tekst w pudelku elementu — eyebrow bywa
+   `inline-block` i wtedy pudelko stoi przy lewej krawedzi. Ten sam blad
+   co przy etykiecie nad marquee na /about. */
+html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { display: block !important; width: 100% !important; }
+html body .ak-book .pdk-faq { max-width: 760px !important; margin-inline: auto !important; }

@@ -1066,13 +1066,17 @@
     var dane = new Array(kand.length);
     for (i = 0; i < kand.length; i++) dane[i] = pomiar(kand[i]);     /* jeden wymuszony przeliczek */
 
-    /* wrapper i karta o niemal tych samych wymiarach: liczy sie wewnetrzna */
+    /* Karta, ktora zawiera inna karte, jest opakowaniem — nie karta. Inaczej
+       na stronie glownej wychodzila ramka w ramce: kolumna systeme dostawala
+       swoja, a karta kursu w srodku swoja. Warunek jest teraz o zawieraniu,
+       nie o proporcji wymiarow: wczesniej wymagalismy, zeby wewnetrzna miala
+       85% wysokosci zewnetrznej, a karta kursu ma 70%, miniatura 52%. */
     var pomin = new Array(kand.length);
     for (i = 0; i < kand.length; i++) {
       if (!dane[i].jest) { pomin[i] = 1; continue; }
       for (var j = 0; j < kand.length; j++) {
         if (i === j || !dane[j].jest) continue;
-        if (kand[i].contains(kand[j]) && dane[j].w >= dane[i].w * 0.92 && dane[j].h >= dane[i].h * 0.85) { pomin[i] = 1; break; }
+        if (kand[i].contains(kand[j]) && dane[j].w >= dane[i].w * 0.85) { pomin[i] = 1; break; }
       }
     }
 
@@ -1249,6 +1253,11 @@
     nadBlok: 64,     /* nad eyebrow albo naglowkiem, gdy zaczyna kolejny blok W SEKCJI */
     leadCta: 32      /* od akapitu wprowadzajacego do przycisku */
   };
+  /* W KARCIE ten sam rytm jest za duzy: 48 pod tytulem i 64 nad podpisem
+     rozrywaja mala kompozycje, ktora ma sie czytac jako jedna calosc.
+     Skala jest ta sama, tylko o dwa stopnie nizej. */
+  var RYTM_KARTA = { eyebrow: 8, tresc: 12, siatka: 24, nadBlok: 24, leadCta: 16 };
+  function skala(el) { return el.closest('.aks-card') ? RYTM_KARTA : RYTM; }
 
   function blokPo(e) {
     var w = e, i = 0;
@@ -1391,21 +1400,31 @@
       if (e.getBoundingClientRect().height < 4) continue;
       if (pomijamy(e) && !e.closest('.ak-marquee, .marquee, [class*="mq__"], [class*="marquee"]')) continue;
       /* kolor: terakota na jasnym, jasniejszy odcien na ciemnym — dwa, nie czternascie */
-      var pod = tloPod(e.parentElement || e);
+      /* ⚠️ Tlo liczymy od SAMEGO elementu, nie od rodzica: eyebrow bywa
+         plakietka z wlasnym tlem. Etykieta „A5 · 142 PAGES" na
+         /pitching-decoded siedzi na terakotowej plakietce i po pomiarze
+         tla rodzica dostawala terakote na terakocie — czyli znikala. */
+      var wlasne = gcs(e).backgroundColor;
+      var pod = przezr(wlasne) ? tloPod(e.parentElement || e) : wlasne;
+      var m = (pod || '').match(/\d+/g);
+      var terakotowe = m && +m[0] > +m[1] && +m[1] > +m[2] && (+m[0] - +m[2]) > 40;
       var ciemno = pod && lum(pod) < 0.35;
+      var kolor = terakotowe ? '#F9F7F1' : (ciemno ? '#D9A47A' : '#9A5832');
       e.classList.add(ciemno ? 'akt-eyebrow--dark' : 'akt-eyebrow--light');
       /* Kolor idzie inline: 19 eyebrow na czterech stronach malowala regula
          z ID (Forest), a ID przebija dowolna liczbe klas takze przy
          `!important`. Styl inline z priorytetem wygrywa z jednym i drugim. */
-      try { e.style.setProperty('color', ciemno ? '#D9A47A' : '#9A5832', 'important'); } catch (err) { }
-      ustawOdstepNad(e, RYTM.nadBlok);
-      ustawOdstep(e, RYTM.eyebrow);
+      try { e.style.setProperty('color', kolor, 'important'); } catch (err) { }
+      var R = skala(e);
+      ustawOdstepNad(e, R.nadBlok);
+      ustawOdstep(e, R.eyebrow);
     }
     l = root.querySelectorAll('[class*="akt-h"]');
     for (i = 0; i < l.length; i++) {
       var h = l[i];
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
-      ustawOdstepNad(h, RYTM.nadBlok);
+      var Rh = skala(h);
+      ustawOdstepNad(h, Rh.nadBlok);
       var nast = blokPo(h); if (!nast) continue;
       /* Naglowek wysrodkowany nad akapitem do lewej czyta sie jak dwa
          osobne bloki — na /cultural-communication „About August Kjerland."
@@ -1415,8 +1434,13 @@
          z zupelnie innego powodu. Bez tego warunku „Who it's for / not for"
          na /pitching-home zjechalo do lewej, podczas gdy sasiednie sekcje
          tej samej strony zostaly na srodku. */
+      /* FAQ, tak samo jak rzad kart, jest komponentem — nie akapitem tego
+         naglowka. Bez tego wyjatku odpowiedz z FAQ przeciagala naglowek
+         „Before you ask." do lewej, mimo ze wzorzec ma go na srodku. */
+      var komponent = (nast.matches && nast.matches('[id^="faq-"], .pdk-faq'))
+        || (nast.querySelector && !!nast.querySelector('[id^="faq-"], .pdk-faq'));
       var kartPod = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
-      var tresc = kartPod >= 1 ? null
+      var tresc = (kartPod >= 1 || komponent) ? null
         : ((nast.matches && nast.matches('[class*="akt-t"]')) ? nast : (nast.querySelector && nast.querySelector('[class*="akt-t"]')));
       if (tresc) {
         var at = gcs(tresc).textAlign, ah = gcs(h).textAlign;
@@ -1432,7 +1456,7 @@
       if (nast.classList && nast.classList.contains('akt-eyebrow')) continue;
       if (nast.querySelector && nast.querySelector('.akt-eyebrow')) continue;
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
-      ustawOdstep(h, kart >= 2 ? RYTM.siatka : RYTM.tresc);
+      ustawOdstep(h, kart >= 2 ? Rh.siatka : Rh.tresc);
     }
     /* Eyebrow dziedziczy wyrownanie po naglowku, ktory zapowiada — przebieg
        osobny i na koncu, bo naglowki dostaja swoje wyrownanie dopiero w petli
@@ -1457,7 +1481,7 @@
       if (pomijamy(t) || t.getBoundingClientRect().height < 10) continue;
       var n2 = blokPo(t); if (!n2) continue;
       if (!(n2.classList && n2.classList.contains('akb')) && !(n2.querySelector && n2.querySelector('.akb'))) continue;
-      ustawOdstep(t, RYTM.leadCta);
+      ustawOdstep(t, skala(t).leadCta);
     }
   }
 
