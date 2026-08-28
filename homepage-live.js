@@ -1085,6 +1085,21 @@
     }
   }
 
+  /* --- 3b. tlo: dwa jasne, nie trzy ---------------------------------------- */
+  function tla(root) {
+    var l = root.querySelectorAll('div,section,article,aside,main,form,figure'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i], r = e.getBoundingClientRect();
+      if (r.width < 100 || r.height < 60) continue;
+      if (e.closest('.akb, button, [id^="button-"], header[type="WebsiteHeader"], nav, .ak-marquee, .marquee')) continue;
+      e.classList.remove('aks-bg-cream', 'aks-bg-soft');          /* nie mierzymy siebie */
+      var s = gcs(e);
+      if (!bielSzarosc(s.backgroundColor)) continue;
+      var pod = e.parentElement ? tloPod(e.parentElement) : null;
+      e.classList.add('aks', pod === CREAM ? 'aks-bg-soft' : 'aks-bg-cream');
+    }
+  }
+
   /* --- 4. rzedy: rowne wysokosci, odstep 32, CTA do dolu -------------------- */
   function rzedy(root) {
     var l = root.querySelectorAll('*');
@@ -1223,7 +1238,7 @@
   function przebieg() {
     try {
       var docs = dokumenty();
-      for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
+      for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
       sekcje();
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');

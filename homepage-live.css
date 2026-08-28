@@ -3436,8 +3436,8 @@ html body .aks.aks-panel.aks-sh { box-shadow: var(--ak-sh-sm) !important; }
    /pitching-buy i `.pdk-section--alt`), przez co karta na bieli obok karty
    na kremie czytala sie jak dwa rozne systemy. Klase nadaje JS, bo o tym,
    ktory z dwoch kremow wybrac, decyduje tlo LEZACE POD spodem. */
-html body .aks.aks-bg-cream { background-color: #F9F7F1 !important; }
-html body .aks.aks-bg-soft  { background-color: #F3F0E7 !important; }
+html body .aks-bg-cream { background-color: #F9F7F1 !important; }
+html body .aks-bg-soft  { background-color: #F3F0E7 !important; }
 
 
 /* --- rowne wysokosci w rzedzie -------------------------------------------
