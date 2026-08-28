@@ -969,8 +969,10 @@
   function snap(v) {
     if (v <= 4) return v;                       /* wlosowe kreski zostaja */
     if (v > 64) return 64;
+    /* remis rozstrzygamy w GORE: rynna 20 px idzie na 24, nie na 16 —
+       miedzy kolumnami lepiej czyta sie wiecej powietrza niz mniej */
     var b = SKALA[0], d = 1e9;
-    for (var i = 0; i < SKALA.length; i++) { var dd = Math.abs(SKALA[i] - v); if (dd < d) { d = dd; b = SKALA[i]; } }
+    for (var i = 0; i < SKALA.length; i++) { var dd = Math.abs(SKALA[i] - v); if (dd <= d) { d = dd; b = SKALA[i]; } }
     return b;
   }
   function tloPod(e) {                           /* pierwsze nieprzezroczyste tlo nad elementem */
@@ -1156,12 +1158,15 @@
           dz.classList.add('aks-bottom');
         }
       } else if (s.display === 'grid') {
-        var g = s.gap || ''; if (!g || g === 'normal') continue;
-        var czesci = g.split(' ').map(function (x) { return parseFloat(x); });
-        if (czesci.some(isNaN)) continue;
-        var nowy = czesci.map(function (v) { return snap(v) + 'px'; }).join(' ');
-        if (nowy !== czesci.map(function (v) { return v + 'px'; }).join(' '))
-          e.style.setProperty('gap', nowy, 'important');
+        /* systeme zapisuje rynne jako `normal 20px` (wiersz normal, kolumna 20).
+           Poprzednia wersja odrzucala caly zapis i dlatego 20 px zostawalo
+           na wszystkich 17 stronach — najczestsze naruszenie skali w serwisie. */
+        var g = s.gap || ''; if (!g) continue;
+        var czesci = g.split(' ');
+        var nowy = czesci.map(function (x) {
+          var v = parseFloat(x); return isNaN(v) ? x : snap(v) + 'px';
+        }).join(' ');
+        if (nowy !== czesci.join(' ')) e.style.setProperty('gap', nowy, 'important');
       }
     }
   }
@@ -1284,6 +1289,34 @@
     }
   }
 
+  /* --- 6c. kolory tekstu spoza palety --------------------------------------
+     Kontrola zgodnosci znalazla 188 wystapien w kolorach, ktorych paleta nie
+     zna: dwa odcienie Cream w stopce, jasna terakota #B46A3C, czysta biel,
+     dwie „ciepłe terakoty" na ciemnym, Ink 50% i szary #6E6C68 z motywu
+     systeme. Mapa jest jawna, nie liczona — kazdy z tych kolorow ma jeden
+     oczywisty odpowiednik w palecie i lepiej to zapisac wprost. */
+  var MAPA_KOLOROW = {
+    'rgba(249, 247, 241, 0.7)': 'cream80', 'rgba(249, 247, 241, 0.72)': 'cream80',
+    'rgba(249, 247, 241, 0.82)': 'cream80', 'rgba(243, 240, 231, 0.8)': 'cream80',
+    'rgb(255, 255, 255)': 'cream', 'rgb(243, 240, 231)': 'cream',
+    'rgb(180, 106, 60)': 'terra', 'rgb(228, 182, 138)': 'terra-jasna',
+    'rgb(214, 154, 110)': 'terra-jasna',
+    'rgba(45, 45, 45, 0.5)': 'ink62', 'rgb(110, 108, 104)': 'ink72', 'rgb(90, 90, 90)': 'ink72'
+  };
+  function kolory(root) {
+    var l = root.querySelectorAll('.akt'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (e.children.length || !(e.textContent || '').trim()) continue;
+      if (e.getAttribute('data-aks-kolor')) continue;
+      if (pomijamy(e)) continue;
+      var cel = MAPA_KOLOROW[gcs(e).color];
+      if (!cel) continue;
+      e.classList.add('aks-kolor-' + cel);
+      e.setAttribute('data-aks-kolor', cel);
+    }
+  }
+
   /* --- 7. wejscie przy przewijaniu -----------------------------------------
      Detekcja przez scroll, nie IntersectionObserver: IO nie odpalal dla
      wezlow systeme przy poprzednim podejsciu (patrz initReveal wyzej). */
@@ -1322,7 +1355,7 @@
     try {
       var docs = dokumenty();
       for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
-      for (i = 0; i < docs.length; i++) rytm(docs[i]);   /* na koncu: potrzebuje ulozonego ukladu */
+      for (i = 0; i < docs.length; i++) { kolory(docs[i]); rytm(docs[i]); }   /* na koncu: rytm potrzebuje ulozonego ukladu */
       sekcje();
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');

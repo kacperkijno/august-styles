@@ -3494,6 +3494,18 @@ html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * { letter-spacing: .18em
 html body .akt.akt-eyebrow.akt-eyebrow--light, html body .akt.akt-eyebrow.akt-eyebrow--light * { color: #9A5832 !important; }
 html body .akt.akt-eyebrow.akt-eyebrow--dark,  html body .akt.akt-eyebrow.akt-eyebrow--dark  * { color: #D9A47A !important; }
 
+/* --- kolory tekstu: powrot do palety --------------------------------------
+   188 wystapien w kolorach spoza palety (dwa Cream w stopce, jasna terakota,
+   czysta biel, dwie ciepłe terakoty na ciemnym, Ink 50%, szary systeme).
+   Klase nadaje JS z jawnej mapy — patrz MAPA_KOLOROW w homepage-live.js. */
+html body .akt.aks-kolor-cream,       html body .akt.aks-kolor-cream *       { color: #F9F7F1 !important; }
+html body .akt.aks-kolor-cream80,     html body .akt.aks-kolor-cream80 *     { color: rgba(249,247,241,.80) !important; }
+html body .akt.aks-kolor-terra,       html body .akt.aks-kolor-terra *       { color: #9A5832 !important; }
+html body .akt.aks-kolor-terra-jasna, html body .akt.aks-kolor-terra-jasna * { color: #D9A47A !important; }
+html body .akt.aks-kolor-ink72,       html body .akt.aks-kolor-ink72 *       { color: rgba(45,45,45,.72) !important; }
+html body .akt.aks-kolor-ink62,       html body .akt.aks-kolor-ink62 *       { color: rgba(45,45,45,.62) !important; }
+
+
 
 /* ============================================================================
    SYSTEM POWIERZCHNI — boksy, cienie, hover, wejscie, odstepy (2026-08-28)
