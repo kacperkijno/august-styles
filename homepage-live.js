@@ -1419,42 +1419,47 @@
       ustawOdstepNad(e, R.nadBlok);
       ustawOdstep(e, R.eyebrow);
     }
-    l = root.querySelectorAll('[class*="akt-h"]');
+    /* ⚠️ Takze gole `h1`/`h2`: klasyfikator typograficzny tyka tylko liscie
+       tekstowe, wiec naglowek, ktory ma w srodku `<span>`, zostaje bez klasy
+       `akt-h*`. Tak jest z „About August Kjerland." na /cultural-communication
+       — i wlasnie dlatego rytm oraz wyrownanie go omijaly. */
+    l = root.querySelectorAll('[class*="akt-h"], h1, h2, h3');
     for (i = 0; i < l.length; i++) {
       var h = l[i];
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
       var Rh = skala(h);
       ustawOdstepNad(h, Rh.nadBlok);
-      var nast = blokPo(h); if (!nast) continue;
-      /* Naglowek wysrodkowany nad akapitem do lewej czyta sie jak dwa
-         osobne bloki — na /cultural-communication „About August Kjerland."
-         stalo na srodku, a biografia pod nim przy lewej krawedzi. */
-      /* Tylko gdy pod naglowkiem stoi akapit ciagly. Rzad kart to nie jest
-         „tekst tego naglowka" — tam tekst siedzi w kartach i jest do lewej
-         z zupelnie innego powodu. Bez tego warunku „Who it's for / not for"
-         na /pitching-home zjechalo do lewej, podczas gdy sasiednie sekcje
-         tej samej strony zostaly na srodku. */
-      /* FAQ, tak samo jak rzad kart, jest komponentem — nie akapitem tego
-         naglowka. Bez tego wyjatku odpowiedz z FAQ przeciagala naglowek
-         „Before you ask." do lewej, mimo ze wzorzec ma go na srodku. */
-      var komponent = (nast.matches && nast.matches('[id^="faq-"], .pdk-faq'))
-        || (nast.querySelector && !!nast.querySelector('[id^="faq-"], .pdk-faq'));
-      var kartPod = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
-      var tresc = (kartPod >= 1 || komponent) ? null
-        : ((nast.matches && nast.matches('[class*="akt-t"]')) ? nast : (nast.querySelector && nast.querySelector('[class*="akt-t"]')));
-      if (tresc) {
-        var at = gcs(tresc).textAlign, ah = gcs(h).textAlign;
-        if (at !== ah && (at === 'left' || at === 'start') && !pomijamy(tresc))
-          try { h.style.setProperty('text-align', 'left', 'important'); } catch (err) { }
+      /* WYROWNANIE. Eyebrow i naglowek to jedna para — musza stac na tej samej
+         osi. Na /cultural-communication „ABOUT" zaczynalo sie na 732 px, a
+         „About August Kjerland." na 815, bo naglowek byl wysrodkowany w swojej
+         kolumnie, a eyebrow nie.
+         ⚠️ Nie da sie tego rozstrzygnac po `text-align`: eyebrow „ABOUT" ma
+         `center`, ale jego pudelko ma 46 px szerokosci, wiec wyglada na
+         dosuniety do lewej. Rozstrzyga GEOMETRIA zakresu tekstu: jesli srodki
+         sie zgadzaja — obie rzeczy sa wysrodkowane i nie ma co poprawiac;
+         jesli zgadzaja sie lewe krawedzie — obie sa do lewej; jesli zadne,
+         naglowek idzie za eyebrowem. */
+      var zakres = function (el) {
+        try { var rg = el.ownerDocument.createRange(); rg.selectNodeContents(el); return rg.getBoundingClientRect(); }
+        catch (err) { return el.getBoundingClientRect(); }
+      };
+      var rh2 = h.getBoundingClientRect();
+      var ebNad = null, ebs = (h.closest('[id^="section-"], section') || document).querySelectorAll('.akt-eyebrow');
+      for (var q = 0; q < ebs.length; q++) {
+        var rb = ebs[q].getBoundingClientRect();
+        if (rb.bottom <= rh2.top + 4 && rh2.top - rb.bottom < 120 && rb.height > 4) ebNad = ebs[q];
       }
-      /* Gdy zaraz po naglowku zaczyna sie NOWY blok (czyli nastepny element to
-         eyebrow), ten sam odstep opisuja dwie reguly naraz: „pod naglowkiem 48"
-         i „nad blokiem 64". Pierwszenstwo ma „nad blokiem" — naglowek domknal
-         juz swoj blok, a to co widac to przerwa miedzy blokami. Bez tego
-         warunku obie reguly pisaly po tym samym marginesie i wynik zalezal
-         od kolejnosci petli. */
-      if (nast.classList && nast.classList.contains('akt-eyebrow')) continue;
-      if (nast.querySelector && nast.querySelector('.akt-eyebrow')) continue;
+      if (ebNad) {
+        var ze = zakres(ebNad), zh = zakres(h);
+        var srodkiZgodne = Math.abs((ze.left + ze.width / 2) - (zh.left + zh.width / 2)) <= 8;
+        var lewaZgodna = Math.abs(ze.left - zh.left) <= 8;
+        if (!srodkiZgodne && !lewaZgodna) {
+          var pudloE = ebNad.getBoundingClientRect();
+          var doLewej = Math.abs(ze.left - pudloE.left) <= 8;
+          try { h.style.setProperty('text-align', doLewej ? 'left' : 'center', 'important'); } catch (err) { }
+        }
+      }
+      var nast = blokPo(h); if (!nast) continue;
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
       ustawOdstep(h, kart >= 2 ? Rh.siatka : Rh.tresc);
     }
@@ -1467,7 +1472,7 @@
       var eb = l[i];
       if (eb.getBoundingClientRect().height < 4) continue;
       var po = blokPo(eb); if (!po) continue;
-      var nag = (po.matches && po.matches('[class*="akt-h"]')) ? po : (po.querySelector && po.querySelector('[class*="akt-h"]'));
+      var nag = (po.matches && po.matches('[class*="akt-h"], h1, h2, h3')) ? po : (po.querySelector && po.querySelector('[class*="akt-h"], h1, h2, h3'));
       if (!nag) continue;
       var an = gcs(nag).textAlign;
       if (gcs(eb).textAlign !== an)
