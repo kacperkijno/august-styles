@@ -259,6 +259,72 @@
     }, 200);
   }
 
+
+  /* --- alt dla logotypow klientow -------------------------------
+     35 logotypow w marquee nie ma atrybutu alt — dla czytnika ekranu
+     to 35 pustych obrazkow, a Google nie wie, co przedstawiaja.
+     HTML marquee jest wklejony jako Raw HTML na kilku stronach, wiec
+     zamiast poprawiac go w kazdej z osobna nadajemy alt tutaj.
+     Nazwy wlasne z mapy; reszta z nazwy pliku. ------------------- */
+  var LOGO_ALT = {
+    'bi-norwegian': 'BI Norwegian Business School',
+    'uia': 'University of Agder',
+    'palantir': 'Palantir',
+    'grieg-seafood': 'Grieg Seafood',
+    'ncc': 'NCC',
+    'friele': 'Friele',
+    'dale-of-norway': 'Dale of Norway',
+    'synnove-finden': 'Synnove Finden',
+    'hansa-borg': 'Hansa Borg Bryggerier',
+    'bergen-naringsrad': 'Bergen Naringsrad',
+    'bergens-rederiforening': 'Bergens Rederiforening',
+    'maritimt-forum': 'Maritimt Forum',
+    'stromberg-gruppen': 'Stromberg Gruppen',
+    'olden': 'Olden',
+    'necon': 'Necon',
+    'moderne-transport': 'Moderne Transport',
+    'samarbeidsradet-sunnhordland': 'Samarbeidsradet for Sunnhordland',
+    'frydeno-sabb-motor': 'Frydenbo Sabb Motor',
+    'bjarne-johnsen': 'Bjarne Johnsen',
+    'forinnova': 'Forinnova',
+    'havstad-tinn': 'Havstad Tinn',
+    'mecmar': 'Mecmar',
+    'metasystems': 'MetaSystems',
+    'nera-networks': 'Nera Networks',
+    'bygge-kompaniet': 'Bygge Kompaniet',
+    'byggservice': 'Byggservice',
+    'energi-teknikk': 'Energi Teknikk',
+    'fitjar-mekaniske': 'Fitjar Mekaniske Verksted',
+    'hmr-elektro': 'HMR Elektro',
+    'kvinnherad-elektro': 'Kvinnherad Elektro',
+    'risnes-sonner': 'Risnes & Sonner',
+    'smv': 'SMV',
+    'trucknor': 'Trucknor',
+    'boardbrain': 'Boardbrain',
+    'sirius-act': 'Sirius ACT'
+  };
+
+  function initLogoAlt() {
+    var loga = document.querySelectorAll(
+      '.marquee__track img, .logo-slot img,' +      /* home, kursy */
+      '.akb-mq__group img, .akb-slot img,' +        /* /about */
+      '.akc-mq__group img, .akc-slot img'           /* /consulting */
+    );
+    if (!loga.length) return;
+    for (var i = 0; i < loga.length; i++) {
+      var img = loga[i];
+      if ((img.getAttribute('alt') || '').trim()) continue;
+      var src = (img.currentSrc || img.src || '');
+      var plik = src.split('/').pop().replace(/\.(png|svg|jpe?g|webp)$/i, '').toLowerCase();
+      var nazwa = LOGO_ALT[plik];
+      if (!nazwa) {
+        /* z nazwy pliku: "bygge-kompaniet" -> "Bygge Kompaniet" */
+        nazwa = plik.replace(/[-_]+/g, ' ').replace(/\b\w/g, function (c) { return c.toUpperCase(); });
+      }
+      img.setAttribute('alt', nazwa + ' logo');
+    }
+  }
+
   /* --- Boot ---------------------------------------------- */
   function init() {
     applyHomeClass();
@@ -268,6 +334,7 @@
     initFunnelNav();
     initLatestWriting();
     initBlogHeading();
+    initLogoAlt();
   }
 
   applyHomeClass(); // earliest possible, before paint where we can
