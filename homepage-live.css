@@ -2713,3 +2713,38 @@ html body .post__title * {
   font-size: 24px !important;
   line-height: 1.25 !important;
 }
+
+/* ---------- /pitching-decoded: dociagniecie do kanonu ---------
+   Tresc tej strony to blok Raw HTML (pitching-decoded-block-
+   standalone.html) z wlasnym <style>. Nie ma tam nic zlego, po
+   prostu powstala przed kanonem. Nadpisujemy stad, bo strona i tak
+   laduje homepage-live.css, a tak zmiana jest wersjonowana.
+   Zmierzone 2026-08-28. */
+
+/* naglowki sekcji: 54 -> 40, jak wszedzie indziej */
+html body .ak-book .pdk-h2, html body .ak-book .pdk-h2 * {
+  font-size: 40px !important;
+  line-height: 1.2 !important;
+}
+/* liczby w kartach 44 -> 40, podtytuly 26/27/22 -> 24, spec 38 -> 36 */
+html body .ak-book .pdk-numcard b, html body .ak-book .pdk-wrap blockquote {
+  font-size: 40px !important;
+}
+html body .ak-book .pdk-spec b {
+  font-size: 36px !important;
+}
+html body .ak-book .pdk-numcard h3,
+html body .ak-book .pdk-case h3,
+html body .ak-book .pdk-incitem h3 {
+  font-size: 24px !important;
+}
+/* przycisk: waga 300 -> 400, wysokosc 44 -> 48 */
+html body .ak-book .pdk-btn {
+  font-weight: 400 !important;
+  min-height: 48px !important;
+  height: auto !important;
+}
+/* promien 2/3px -> 4px */
+html body .ak-book .pdk-numcard, html body .ak-book .pdk-case, html body .ak-book .pdk-tag {
+  border-radius: 4px !important;
+}
