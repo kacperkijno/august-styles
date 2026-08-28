@@ -3065,3 +3065,24 @@ html body #row-1a507602 form button[id^="submit-button-"] {
 html body #row-1a507602 form button[id^="submit-button-"]:hover {
   background-color: #84492A !important;
 }
+
+/* --- 10. domkniecie systemu (2026-08-28, po przegladzie na produkcji) ------
+   a) height:auto — formularze systeme siedza w <iframe> i maja tam wpisane
+      `height: 52px/54px`. min-height samo tego nie przycina.
+   b) wartosci literalne zamiast var() — w ramce formularza kontaktowego
+      `--ak-terracotta-dark` rozwiazywalo sie do jasnej terakoty, przez co
+      "Send message" zostawal na #B46A3C (Cream na nim to 3,87:1).
+   c) strzalki — `.akb-arrow` / `.akc-arrow` w przyciskach na /about
+      i /consulting to pozostalosc po tamtym redesignie; system ich nie ma.
+      W kartach `.akb-start-card` strzalka zostaje, bo to nie przycisk. */
+html body .akb { height: auto !important; }
+
+html body .akb.akb--forest      { background-color: #1A3C2F !important; color: #F9F7F1 !important; }
+html body .akb.akb--forest:hover{ background-color: #234A3A !important; }
+html body .akb.akb--terra       { background-color: #9A5832 !important; color: #F9F7F1 !important; }
+html body .akb.akb--terra:hover { background-color: #84492A !important; }
+html body .akb.akb--ghost       { background-color: transparent !important; color: #1A3C2F !important; }
+html body .akb.akb--ghost-light { background-color: transparent !important; color: #F9F7F1 !important; }
+
+html body .akb-btn .akb-arrow,
+html body .akc-btn .akc-arrow { display: none !important; }

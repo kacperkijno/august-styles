@@ -440,6 +440,10 @@
     if (!m || m.length < 3) return null;
     return { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] };
   }
+  function gcs(el) {
+    var d = el.ownerDocument, w = (d && d.defaultView) || window;
+    return w.getComputedStyle(el);
+  }
   function przezroczyste(c) {
     var v = rgb(c);
     return !v || v.a < 0.05;
@@ -454,12 +458,26 @@
   function tloPod(el) {
     var p = el.parentElement;
     while (p) {
-      var c = getComputedStyle(p).backgroundColor;
+      var c = gcs(p).backgroundColor;
       if (!przezroczyste(c)) return c;
       p = p.parentElement;
     }
     return 'rgb(249, 247, 241)';   /* domyslnie Cream */
   }
+  /* Reczne bloki Raw HTML deklaruja wariant wprost: .pdk-btn--ghost na
+     /pitching-decoded, .ak-btn--forest i .ak-btn--terracotta na /academy.
+     Ta deklaracja jest wiazaca — na stronie ksiazki regula .pdk-btn maluje
+     WSZYSTKIE przyciski terakota, wiec zgadywanie z wyliczonego tla
+     zrobiloby z ghosta akcent i oba CTA w hero wygladalyby identycznie. */
+  function zadeklarowany(el) {
+    var c = ' ' + (el.className || '') + ' ';
+    if (/--ghost/.test(c))       return ciemnoPod(el) ? 'ghost-light' : 'ghost';
+    if (/--terracotta/.test(c))  return 'terra';
+    if (/--forest/.test(c))      return 'forest';
+    return null;
+  }
+  function ciemnoPod(el) { return lum(tloPod(el)) < 0.35; }
+
   function wNawigacji(el) {
     if (el.closest('header')) return true;
     var row = el.closest('[id^="row-"]');
@@ -475,56 +493,114 @@
     var t = (e.textContent || '').trim();
     if (!t || t.length > 60) return false;
     if (e.querySelector('h1,h2,h3,h4,img,picture')) return false;
-    var s2 = getComputedStyle(e);
+    var s2 = gcs(e);
     var maTlo = !przezroczyste(s2.backgroundColor);
     var maRamke = parseFloat(s2.borderTopWidth) > 0 && s2.borderTopStyle !== 'none'
                   && !przezroczyste(s2.borderTopColor);
     return maTlo || maRamke;
   }
 
-  function kandydaci() {
+  function kandydaci(root) {
     var out = [], widziane = [];
     var dodaj = function (e) { if (widziane.indexOf(e) === -1) { widziane.push(e); out.push(e); } };
-    var a = document.querySelectorAll(SEL);
+    var a = root.querySelectorAll(SEL);
     for (var i = 0; i < a.length; i++) dodaj(a[i]);
-    var b = document.querySelectorAll('a,button,input[type="submit"]');
+    var b = root.querySelectorAll('a,button,input[type="submit"]');
     for (var j = 0; j < b.length; j++) if (wygladaJakPrzycisk(b[j])) dodaj(b[j]);
     return out;
   }
 
-  function oznacz() {
-    var lista = kandydaci();
+  var WARIANTY = ['akb--forest', 'akb--terra', 'akb--ghost', 'akb--ghost-light'];
+
+  /* Wariant liczymy przy CHWILOWO ZDJETYCH wlasnych klasach. Inaczej przy
+     drugim przebiegu odczytalibysmy kolor, ktory sami przed chwila nalozylismy,
+     i pierwszy — czesto bledny — strzal utrwalilby sie na zawsze.
+     Tak bylo z "Log in": przy pierwszym pomiarze, zanim arkusz ulozyl pasek,
+     przycisk mial tlo terakotowe i dostawal .akb--terra. Widac to bylo jako
+     migniecie terakota przed ustabilizowaniem sie strony. */
+  function wariantDla(e) {
+    var zdjete = [];
+    for (var i = 0; i < WARIANTY.length; i++) {
+      if (e.classList.contains(WARIANTY[i])) { zdjete.push(WARIANTY[i]); e.classList.remove(WARIANTY[i]); }
+    }
+    var w = zadeklarowany(e);
+    if (!w) {
+      var bg = gcs(e).backgroundColor;
+      if (przezroczyste(bg)) {
+        w = ciemnoPod(e) ? 'ghost-light' : 'ghost';
+      } else {
+        var v = rgb(bg);                       /* terakota ma przewage czerwieni */
+        w = (v && v.r > v.g) ? 'terra' : 'forest';
+      }
+    }
+    for (var j = 0; j < zdjete.length; j++) e.classList.add(zdjete[j]);
+    return w;
+  }
+
+  function oznacz(root) {
+    root = root || document;
+    var lista = kandydaci(root);
     for (var i = 0; i < lista.length; i++) {
       var e = lista[i];
-      if (e.getAttribute('data-akb')) continue;
 
-      var bg = getComputedStyle(e).backgroundColor;
-      var wariant;
-
-      if (przezroczyste(bg)) {
-        /* ghost — o wariancie decyduje tlo pod przyciskiem, nie sam przycisk */
-        wariant = lum(tloPod(e)) < 0.35 ? 'ghost-light' : 'ghost';
-      } else {
-        /* wypelniony — terakota ma przewage czerwieni, Forest zieleni */
-        var v = rgb(bg);
-        wariant = (v && v.r > v.g) ? 'terra' : 'forest';
-      }
-
+      var wariant = wariantDla(e);
+      var poprzedni = e.getAttribute('data-akb');
+      if (poprzedni && poprzedni !== wariant) e.classList.remove('akb--' + poprzedni);
       e.classList.add('akb', 'akb--' + wariant);
-      /* maly: pasek nawigacji oraz przyciski, ktore juz sa niskie i pelnia
-         role elementu interfejsu, nie wezwania — np. "Apply" przy kuponie */
-      if (wNawigacji(e) || e.getBoundingClientRect().height < 40) {
-        e.classList.add('akb--sm');
-      }
+      /* maly rozmiar wylacznie w pasku nawigacji. Wczesniej bylo tu takze
+         "albo przycisk jest nizszy niz 40px" — i to zmniejszalo przyciski
+         w hero /pitching-decoded, ktore w chwili pomiaru nie mialy jeszcze
+         docelowej wysokosci. Wysokosc nie moze decydowac o wariancie,
+         skoro to wariant ustala wysokosc. */
+      if (wNawigacji(e)) e.classList.add('akb--sm');
       e.setAttribute('data-akb', wariant);
     }
   }
 
+  /* Formularze systeme (newsletter w stopce, formularz kontaktowy) siedza
+     w <iframe>. Ramka ma wlasny dokument, wiec nasz arkusz do niej nie
+     dociera — przyciski w srodku zostawaly poza systemem: "Send message"
+     mial 52px, font 18 i jasna terakote, i nie reagowal na hover.
+     Ramki sa same-origin, wiec doklejamy im ten sam arkusz i klasyfikujemy
+     ich przyciski tak samo jak na stronie. */
+  var ARKUSZ = 'https://kacperkijno.github.io/august-styles/homepage-live.css';
+
+  function ramki() {
+    var lista = document.querySelectorAll('iframe');
+    for (var i = 0; i < lista.length; i++) {
+      (function (f) {
+        var doc;
+        try { doc = f.contentDocument; } catch (e) { return; }   /* cross-origin */
+        if (!doc || !doc.head) return;
+        if (!doc.getElementById('ak-buttons')) {
+          var l = doc.createElement('link');
+          l.id = 'ak-buttons'; l.rel = 'stylesheet'; l.href = ARKUSZ;
+          doc.head.appendChild(l);
+        }
+        oznacz(doc);
+        if (!f.getAttribute('data-ak-hook')) {
+          f.setAttribute('data-ak-hook', '1');
+          f.addEventListener('load', function () { setTimeout(function () { ramki(); }, 60); });
+        }
+      })(lista[i]);
+    }
+  }
+
+  function przebieg() { oznacz(); ramki(); }
+
   function start() {
-    oznacz();
+    przebieg();
+    /* styled-components i arkusze systeme ustawiaja sie po pierwszym paincie,
+       wiec przeliczamy jeszcze raz, gdy kolory sa juz finalne */
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', function () { przebieg(); setTimeout(przebieg, 250); });
+    }
+    setTimeout(przebieg, 600);
+    setTimeout(przebieg, 1600);
+    setTimeout(przebieg, 3500);
     /* systeme dorenderowuje sekcje (lejki, checkout) po pierwszym paincie */
     if (window.MutationObserver && document.body) {
-      var mo = new MutationObserver(oznacz);
+      var mo = new MutationObserver(function () { oznacz(); ramki(); });
       mo.observe(document.body, { childList: true, subtree: true });
       setTimeout(function () { mo.disconnect(); }, 10000);
     }

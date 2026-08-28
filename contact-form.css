@@ -40,21 +40,31 @@ body{ background:transparent !important; }
 /* Message field → taller, textarea-like, content starts at top */
 #field-1f7bfccd{ height:auto !important; min-height:122px !important; padding:14px 16px !important; line-height:1.5 !important; }
 
-/* ---- submit button (already forest) → brand radius + height, full width ---- */
+/* ---- submit button → system przyciskow: terakota-dark, 48px, 14/400 -------
+   Ten arkusz laduje sie WEWNATRZ ramki formularza, a selektor zawiera #app,
+   wiec bije klasy systemu (.akb--terra) nadawane przez homepage-live.js.
+   Dlatego wartosci kanonu sa tu wpisane wprost.
+   Bylo: #B46A3C, wysokosc 52, etykieta 15px — Cream na jasnej terakocie daje
+   3,87:1, ponizej progu WCAG AA. ---- */
 #app button[data-test-id="send-form-button"]{
-  background:#B46A3C !important;
+  background:#9A5832 !important;
   color:#F9F7F1 !important;
   border:none !important;
   border-radius:4px !important;
-  height:52px !important;
+  min-height:48px !important;
+  height:auto !important;
+  padding:8px 24px !important;
+  font-size:14px !important;
+  font-weight:400 !important;
+  line-height:1.15 !important;
   width:100% !important;
   font-family:"NeueHaasDisplay-Roman42448762","Neue Haas Display","Helvetica Neue",Arial,sans-serif !important;
-  letter-spacing:.04em !important;
+  letter-spacing:0 !important;
   box-shadow:none !important;
   transition:background .2s ease, transform .2s ease !important;
 }
-#app button[data-test-id="send-form-button"]:hover{ background:#9A5530 !important; transform:translateY(-1px) !important; }
-#app button[data-test-id="send-form-button"] > div{ font-size:15px !important; line-height:1 !important; }
+#app button[data-test-id="send-form-button"]:hover{ background:#84492A !important; transform:translateY(-2px) !important; }
+#app button[data-test-id="send-form-button"] > div{ font-size:14px !important; font-weight:400 !important; line-height:1.15 !important; }
 
 /* ---- validation error text → terracotta-deco (readable on forest), small ---- */
 #app p{ color:#D9A47A !important; font-size:12px !important; letter-spacing:.01em !important; margin-top:6px !important; }
