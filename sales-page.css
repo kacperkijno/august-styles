@@ -3013,3 +3013,175 @@ html body.ak-sales-page li:has(i.fa-check) span,
 html body.ak-sales-page li:has(i.fa-check) strong {
   color: rgba(45, 45, 45, .72) !important;
 }
+
+/* ============================================================================
+   SYSTEM PRZYCISKOW — 4 warianty x 2 rozmiary (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/buttons.html".
+
+   Pomiar przed zmiana: 64 przyciski na 18 podstronach, 19 kombinacji tla,
+   koloru, wysokosci, ramki i kroju. Kanon pokrywal 85%; reszta to pojedyncze
+   sztuki, ktore powstaly przez klikniecie w edytorze systeme.
+
+   WARIANTY   forest (glowny) - terra (akcent) - ghost (na jasnym) -
+              ghost-light (na ciemnym)
+   ROZMIARY   standardowy min-height 48 / padding 8x24
+              maly        min-height 34 / padding 8x16  (pasek nawigacji)
+
+   DLACZEGO KLASY, A NIE ID. systeme nie daje przyciskom klas — tlo siedzi
+   w styled-components (`sc-dUYLmI epEwHm`), a te nazwy zmieniaja sie przy
+   kazdym rebuildzie platformy. Zostaje ID `#button-28a2a4e1`, ktore znika,
+   gdy ktos skasuje i doda blok w edytorze. Dlatego wariant nadaje JS
+   (`homepage-live.js`, sekcja "system przyciskow"): czyta wyliczone tlo
+   przycisku i jasnosc tla pod nim, po czym dokleja `.akb--*`. Nowy przycisk
+   zalapie wariant sam, bez dopisywania go tutaj.
+
+   BEZ JS strona nadal wyglada poprawnie: geometria (1) idzie po prefiksach
+   ID i nie zalezy od skryptu. JS doklada wylacznie warstwe kolorystyczna.
+   ============================================================================ */
+
+/* --- 1. geometria: jedna dla wszystkich, dziala bez JS --------------------- */
+html body [id^="button-"],
+html body [id^="loginbutton-"],
+html body button[id^="submit-button-"],
+html body [id^="payment-button-"] {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  min-height: 48px !important;
+  padding: 8px 24px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+  /* ramka zawsze obecna, przezroczysta gdy niepotrzebna — inaczej przycisk
+     z ramka jest o 2px wyzszy od sasiada bez niej */
+  border: 1px solid transparent !important;
+}
+html body [id^="button-"] *,
+html body [id^="loginbutton-"] *,
+html body button[id^="submit-button-"] *,
+html body [id^="payment-button-"] * {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  color: inherit !important;
+}
+
+/* --- 2. rozmiar maly ------------------------------------------------------- */
+html body .akb.akb--sm {
+  min-height: 34px !important;
+  padding: 8px 16px !important;
+}
+
+/* --- 3. warianty kolorystyczne (klasy od JS) ------------------------------- */
+html body .akb.akb--forest {
+  background-color: var(--ak-forest, #1A3C2F) !important;
+  color: var(--ak-cream, #F9F7F1) !important;
+  border-color: transparent !important;
+}
+html body .akb.akb--forest:hover { background-color: #234A3A !important; }
+
+html body .akb.akb--terra {
+  background-color: var(--ak-terracotta-dark, #9A5832) !important;
+  color: var(--ak-cream, #F9F7F1) !important;
+  border-color: transparent !important;
+}
+html body .akb.akb--terra:hover { background-color: #84492A !important; }
+
+html body .akb.akb--ghost {
+  background-color: transparent !important;
+  color: var(--ak-forest, #1A3C2F) !important;
+  border-color: rgba(26, 60, 47, .45) !important;
+}
+html body .akb.akb--ghost:hover {
+  background-color: rgba(26, 60, 47, .06) !important;
+  border-color: var(--ak-forest, #1A3C2F) !important;
+}
+
+html body .akb.akb--ghost-light {
+  background-color: transparent !important;
+  color: var(--ak-cream, #F9F7F1) !important;
+  border-color: rgba(249, 247, 241, .55) !important;
+}
+html body .akb.akb--ghost-light:hover {
+  background-color: rgba(249, 247, 241, .10) !important;
+  border-color: var(--ak-cream, #F9F7F1) !important;
+}
+
+/* --- 4. focus: wymog WCAG 2.4.7, wczesniej nie bylo zadnego --------------- */
+html body [id^="button-"]:focus-visible,
+html body [id^="loginbutton-"]:focus-visible,
+html body button[id^="submit-button-"]:focus-visible,
+html body [id^="payment-button-"]:focus-visible {
+  outline: 2px solid currentColor !important;
+  outline-offset: 2px !important;
+}
+
+/* --- 5. nieaktywny --------------------------------------------------------- */
+html body [id^="button-"][aria-disabled="true"],
+html body button[id^="submit-button-"]:disabled {
+  opacity: .45 !important;
+  pointer-events: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html body [id^="button-"],
+  html body [id^="loginbutton-"] { transition: none !important; }
+}
+
+/* --- 8. geometria takze dla klasy .akb ------------------------------------
+   Przyciski bez ID `button-*` (np. "Apply" przy kuponie na checkoucie maja
+   wylacznie nazwy styled-components) nie lapia sie na regule (1). JS oznacza
+   je klasa `.akb`, wiec ta sama geometria idzie rowniez po niej. */
+html body .akb {
+  box-sizing: border-box !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 4px !important;
+  min-height: 48px !important;
+  padding: 8px 24px !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.15 !important;
+  letter-spacing: 0 !important;
+  text-transform: none !important;
+}
+html body .akb * {
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.15 !important;
+  color: inherit !important;
+}
+html body .akb.akb--sm,
+html body .akb.akb--sm * { font-size: 14px !important; }
+
+/* --- 9. formularz zapisu na /pitching-decoded ------------------------------
+   Strona ma wlasny <style> wklejony w bloku Raw HTML w edytorze systeme
+   (poza tym repo). Siedzi w nim `#row-1a507602 form button` (1,0,3), ktore
+   bilo kanon: jasna terakota #B46A3C, waga 300, wysokosc 52.
+   Cream na #B46A3C to 3,87:1 — ponizej progu WCAG AA.
+   Tej wklejki nie da sie zmienic z repozytorium, wiec przebijamy ja
+   specyficznoscia (1,1,4). */
+html body #row-1a507602 form button[id^="submit-button-"],
+html body #row-1a507602 form button[id^="submit-button-"] * {
+  background-color: var(--ak-terracotta-dark, #9A5832) !important;
+  color: var(--ak-cream, #F9F7F1) !important;
+  font-weight: 400 !important;
+  font-size: 14px !important;
+  line-height: 1.15 !important;
+}
+html body #row-1a507602 form button[id^="submit-button-"] {
+  min-height: 48px !important;
+  height: auto !important;
+  padding: 8px 24px !important;
+  border: 1px solid transparent !important;
+}
+html body #row-1a507602 form button[id^="submit-button-"]:hover {
+  background-color: #84492A !important;
+}

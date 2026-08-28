@@ -408,3 +408,131 @@
     else document.addEventListener('DOMContentLoaded', pin);
   }
 })();
+
+/* ============================================================================
+   SYSTEM PRZYCISKOW — nadawanie wariantu (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja i uzasadnienie: "August Kjerland Design System/buttons.html",
+   reguly: blok "SYSTEM PRZYCISKOW" w homepage-live.css i sales-page.css.
+
+   systeme nie daje przyciskom klas. Tlo trzyma w styled-components
+   (`sc-dUYLmI epEwHm`), a te nazwy zmieniaja sie przy kazdym rebuildzie
+   platformy — nie da sie na nich oprzec. Zostaje ID, ale ono ginie, gdy ktos
+   skasuje i doda blok w edytorze; wczesniejsza wersja CSS miala z tego powodu
+   wpisana na sztywno liste 18 ID-kow tylko po to, zeby ustawic kolor tekstu.
+
+   Ten skrypt patrzy na to, co widac: wyliczone tlo przycisku i jasnosc tla pod
+   nim. Na tej podstawie doklada `.akb--forest|terra|ghost|ghost-light`, a w
+   pasku nawigacji rowniez `.akb--sm`. Nowy przycisk dodany w edytorze zalapie
+   wariant sam.
+   ============================================================================ */
+(function () {
+  /* Celujemy najpierw w prefiksy ID (systeme), potem w recznie budowane
+     przyciski w blokach Raw HTML (.ak-btn na /academy, .pdk-btn na
+     /pitching-decoded). Na koncu heurystyka lapie te, ktore nie maja ani
+     ID, ani wlasnej klasy — jak "Apply" na checkoucie, ktory ma wylacznie
+     nazwy styled-components. */
+  var SEL = '[id^="button-"],[id^="loginbutton-"],[id^="submit-button-"],'
+          + '[id^="payment-button-"],.ak-btn,.pdk-btn';
+
+  function rgb(c) {
+    var m = (c || '').match(/[\d.]+/g);
+    if (!m || m.length < 3) return null;
+    return { r: +m[0], g: +m[1], b: +m[2], a: m[3] === undefined ? 1 : +m[3] };
+  }
+  function przezroczyste(c) {
+    var v = rgb(c);
+    return !v || v.a < 0.05;
+  }
+  /* luminancja wg WCAG — decyduje, czy ghost stoi na ciemnym czy na jasnym */
+  function lum(c) {
+    var v = rgb(c); if (!v) return 1;
+    var f = function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(v.r) + 0.7152 * f(v.g) + 0.0722 * f(v.b);
+  }
+  /* pierwsze nieprzezroczyste tlo w gore drzewa */
+  function tloPod(el) {
+    var p = el.parentElement;
+    while (p) {
+      var c = getComputedStyle(p).backgroundColor;
+      if (!przezroczyste(c)) return c;
+      p = p.parentElement;
+    }
+    return 'rgb(249, 247, 241)';   /* domyslnie Cream */
+  }
+  function wNawigacji(el) {
+    if (el.closest('header')) return true;
+    var row = el.closest('[id^="row-"]');
+    return !!(row && row.querySelector('[id^="menu-"]'));
+  }
+
+  /* wyglada jak przycisk: <a>/<button> o rozmiarze przycisku, z tlem albo
+     ramka, z krotka etykieta i bez zagniezdzonego naglowka (to odsiewa
+     karty-linki, ktore tez maja tlo) */
+  function wygladaJakPrzycisk(e) {
+    var r = e.getBoundingClientRect();
+    if (r.height < 24 || r.height > 80 || r.width < 50 || r.width > 560) return false;
+    var t = (e.textContent || '').trim();
+    if (!t || t.length > 60) return false;
+    if (e.querySelector('h1,h2,h3,h4,img,picture')) return false;
+    var s2 = getComputedStyle(e);
+    var maTlo = !przezroczyste(s2.backgroundColor);
+    var maRamke = parseFloat(s2.borderTopWidth) > 0 && s2.borderTopStyle !== 'none'
+                  && !przezroczyste(s2.borderTopColor);
+    return maTlo || maRamke;
+  }
+
+  function kandydaci() {
+    var out = [], widziane = [];
+    var dodaj = function (e) { if (widziane.indexOf(e) === -1) { widziane.push(e); out.push(e); } };
+    var a = document.querySelectorAll(SEL);
+    for (var i = 0; i < a.length; i++) dodaj(a[i]);
+    var b = document.querySelectorAll('a,button,input[type="submit"]');
+    for (var j = 0; j < b.length; j++) if (wygladaJakPrzycisk(b[j])) dodaj(b[j]);
+    return out;
+  }
+
+  function oznacz() {
+    var lista = kandydaci();
+    for (var i = 0; i < lista.length; i++) {
+      var e = lista[i];
+      if (e.getAttribute('data-akb')) continue;
+
+      var bg = getComputedStyle(e).backgroundColor;
+      var wariant;
+
+      if (przezroczyste(bg)) {
+        /* ghost — o wariancie decyduje tlo pod przyciskiem, nie sam przycisk */
+        wariant = lum(tloPod(e)) < 0.35 ? 'ghost-light' : 'ghost';
+      } else {
+        /* wypelniony — terakota ma przewage czerwieni, Forest zieleni */
+        var v = rgb(bg);
+        wariant = (v && v.r > v.g) ? 'terra' : 'forest';
+      }
+
+      e.classList.add('akb', 'akb--' + wariant);
+      /* maly: pasek nawigacji oraz przyciski, ktore juz sa niskie i pelnia
+         role elementu interfejsu, nie wezwania — np. "Apply" przy kuponie */
+      if (wNawigacji(e) || e.getBoundingClientRect().height < 40) {
+        e.classList.add('akb--sm');
+      }
+      e.setAttribute('data-akb', wariant);
+    }
+  }
+
+  function start() {
+    oznacz();
+    /* systeme dorenderowuje sekcje (lejki, checkout) po pierwszym paincie */
+    if (window.MutationObserver && document.body) {
+      var mo = new MutationObserver(oznacz);
+      mo.observe(document.body, { childList: true, subtree: true });
+      setTimeout(function () { mo.disconnect(); }, 10000);
+    }
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', start);
+  } else {
+    start();
+  }
+})();
