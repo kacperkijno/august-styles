@@ -3400,6 +3400,21 @@ html body .aks-dark .akt.akt-quote * { color: #F9F7F1 !important; }
    access - €49" schodzil do drugiej linii i mial 50 px obok sasiada o 48. */
 html body .akb { white-space: nowrap !important; }
 
+/* --- cyfra porzadkowa ------------------------------------------------------
+   Znak, nie tekst: Caslon kursywa w terakocie, tak jak na /consulting
+   i /cross-cultural-playbook. Trzy strony lejka mialy w tym miejscu
+   bezszeryfowe 49 px wagi 500 — stopien spoza skali. */
+html body .akt.akt-numeral, html body .akt.akt-numeral * {
+  font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
+  font-size: 40px !important;
+  line-height: 1.20 !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: #9A5832 !important;
+  letter-spacing: 0 !important;
+}
+
+
 
 
 
@@ -3527,3 +3542,15 @@ html body .ak-book .pdk-section { padding-top: clamp(72px,9vw,128px) !important;
   html body .aks.aks-card.aks-rise.aks-in:hover,
   html body .aks.aks-card.aks-done:hover { transform: none !important; }
 }
+
+/* Kazdy widget FAQ systeme, nie tylko ten jeden: pytania rozdziela kreska,
+   nie ramka. Wzorzec pochodzi z `.pdk-faq` na /pitching-decoded. */
+html body [id^="faq-"] > div {
+  background: transparent !important;
+  border: 0 !important;
+  border-bottom: 1px solid rgba(45,45,45,.10) !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+}
+html body [id^="faq-"] > div:first-child { border-top: 1px solid rgba(45,45,45,.10) !important; }
+html body [id^="faq-"] { border: 0 !important; border-radius: 0 !important; box-shadow: none !important; background: transparent !important; }

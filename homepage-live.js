@@ -1357,9 +1357,32 @@
     }
   }
 
+  /* Ozdobna cyfra porzadkowa (01, 02, 03) wystepowala w dwoch swiatach:
+     na /consulting i /cross-cultural-playbook jako kursywa Caslona w terakocie,
+     a na /pitching-home, /blueprint i /pitch-diagnostic jako bezszeryfowa 49 px
+     waga 500 — stopien, ktorego skala w ogole nie zna. Kanon idzie za tym
+     pierwszym: to znak, nie tekst, wiec Caslon. */
+  function cyfry(root) {
+    var l = root.querySelectorAll('.akt.akt-sans'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (e.children.length || e.classList.contains('akt-numeral')) continue;
+      if (pomijamy(e)) continue;
+      var t = (e.textContent || '').trim();
+      if (!/^\d{1,2}$/.test(t)) continue;
+      var fs = parseFloat(gcs(e).fontSize);
+      if (fs < 30 || fs > 60) continue;
+      var k = e.className.split(/\s+/);
+      for (var j = 0; j < k.length; j++) if (/^akt-(t|h|w)\d/.test(k[j])) e.classList.remove(k[j]);
+      e.classList.remove('akt-sans');
+      e.classList.add('akt-serif', 'akt-numeral');
+    }
+  }
+
   function rytm(root) {
     eyebrowPoRoli(root);
     cytaty(root);
+    cyfry(root);
     var l = root.querySelectorAll('.akt-eyebrow'), i;
     for (i = 0; i < l.length; i++) {
       var e = l[i];
@@ -1387,7 +1410,14 @@
       /* Naglowek wysrodkowany nad akapitem do lewej czyta sie jak dwa
          osobne bloki — na /cultural-communication „About August Kjerland."
          stalo na srodku, a biografia pod nim przy lewej krawedzi. */
-      var tresc = (nast.matches && nast.matches('[class*="akt-t"]')) ? nast : (nast.querySelector && nast.querySelector('[class*="akt-t"]'));
+      /* Tylko gdy pod naglowkiem stoi akapit ciagly. Rzad kart to nie jest
+         „tekst tego naglowka" — tam tekst siedzi w kartach i jest do lewej
+         z zupelnie innego powodu. Bez tego warunku „Who it's for / not for"
+         na /pitching-home zjechalo do lewej, podczas gdy sasiednie sekcje
+         tej samej strony zostaly na srodku. */
+      var kartPod = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
+      var tresc = kartPod >= 1 ? null
+        : ((nast.matches && nast.matches('[class*="akt-t"]')) ? nast : (nast.querySelector && nast.querySelector('[class*="akt-t"]')));
       if (tresc) {
         var at = gcs(tresc).textAlign, ah = gcs(h).textAlign;
         if (at !== ah && (at === 'left' || at === 'start') && !pomijamy(tresc))
