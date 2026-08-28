@@ -3337,3 +3337,116 @@ html body .akt-list.akt-list > li > i.fa-check { display:none !important; }
 /* --- szerokosc kolumny ---------------------------------------------------- */
 /* Najszersze akapity mialy 1045px — ok. 130 znakow w wierszu. */
 html body .akt.akt-mw { max-width: 680px !important; }
+
+/* ============================================================================
+   SYSTEM FORMULARZY (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/forms.html".
+   Pomiar przed: 31 pol na 17 stronach — promien 4px i tekst 15px byly juz
+   jednolite (naprawa z 27.08), ale wysokosci bylo szesc (30/46/50/52/54/122),
+   pol na ciemnym tle trzy warianty, a placeholderow piec kolorow.
+
+   Pole ma **wysokosc przycisku** (48px) i **rozmiar tekstu podstawowego**
+   (15px) — wtedy opt-in "pole + przycisk" stoi rowno bez wyjatkow.
+
+   Klase `.akf` nadaje JS (homepage-live.js, sekcja "SYSTEM FORMULARZY"),
+   bo o wariancie decyduje jasnosc tla pod polem, a tego nie da sie
+   sprawdzic selektorem CSS. Geometria idzie tez po prefiksach ID, wiec
+   bez JS pole nadal ma wlasciwy ksztalt.
+   ============================================================================ */
+
+/* --- geometria: dziala bez JS -------------------------------------------- */
+html body [id^="field-"],
+html body [id^="form-input-"] input,
+html body input[type="text"], html body input[type="email"],
+html body input[type="tel"],  html body input[type="number"],
+html body textarea, html body select {
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+  height: auto !important;
+  padding: 0 16px !important;
+  border-radius: 4px !important;
+  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  transition: border-color 180ms cubic-bezier(.2,.6,.2,1),
+              box-shadow  180ms cubic-bezier(.2,.6,.2,1),
+              background-color 180ms cubic-bezier(.2,.6,.2,1) !important;
+}
+html body textarea {
+  min-height: 120px !important;
+  padding: 12px 16px !important;
+  resize: vertical !important;
+}
+
+/* --- wariant na jasnym tle ------------------------------------------------ */
+html body .akf.akf-light {
+  background-color: #F3F0E7 !important;
+  border: 1px solid rgba(45,45,45,.14) !important;
+  color: var(--ak-ink, #2D2D2D) !important;
+}
+html body .akf.akf-light::placeholder { color: rgba(45,45,45,.62) !important; opacity: 1 !important; }
+html body .akf.akf-light:hover { border-color: rgba(45,45,45,.24) !important; }
+html body .akf.akf-light:focus {
+  border-color: var(--ak-forest, #1A3C2F) !important;
+  box-shadow: 0 0 0 3px rgba(26,60,47,.12) !important;
+  background-color: #FFFFFF !important;
+  outline: none !important;
+}
+
+/* --- wariant na ciemnym tle ----------------------------------------------- */
+html body .akf.akf-dark {
+  background-color: rgba(249,247,241,.07) !important;
+  border: 1px solid rgba(249,247,241,.28) !important;
+  color: #F9F7F1 !important;
+}
+html body .akf.akf-dark::placeholder { color: rgba(249,247,241,.55) !important; opacity: 1 !important; }
+html body .akf.akf-dark:hover { border-color: rgba(249,247,241,.42) !important; }
+html body .akf.akf-dark:focus {
+  border-color: #F9F7F1 !important;
+  box-shadow: 0 0 0 3px rgba(249,247,241,.14) !important;
+  background-color: rgba(249,247,241,.10) !important;
+  outline: none !important;
+}
+
+/* --- checkbox i radio ------------------------------------------------------ */
+html body input[type="checkbox"], html body input[type="radio"] {
+  width: 16px !important; height: 16px !important;
+  min-height: 0 !important; padding: 0 !important;
+  accent-color: var(--ak-forest, #1A3C2F) !important;
+  appearance: auto !important; -webkit-appearance: auto !important;
+}
+
+/* --- etykiety --------------------------------------------------------------- */
+html body label {
+  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.45 !important;
+  font-weight: 400 !important;
+}
+
+/* --- domkniecie: geometria takze po klasie od JS --------------------------
+   Kupon na checkoucie nie ma ani ID `field-*`, ani typu, ktory lapie regula
+   wyzej — ma wylacznie nazwy styled-components. Klase `.akf` dostaje od JS,
+   wiec wiazemy geometrie takze z nia. */
+html body .akf {
+  box-sizing: border-box !important;
+  min-height: 48px !important;
+  height: auto !important;
+  padding: 0 16px !important;
+  border-radius: 4px !important;
+  font-size: 15px !important;
+  font-weight: 400 !important;
+  line-height: 1.55 !important;
+}
+html body textarea.akf { min-height: 120px !important; padding: 12px 16px !important; }
+
+/* /pitching-decoded ma wlasny scope `.ak-book` z wyzsza specyficznoscia —
+   trzy pola zapisu zostawaly na wadze 300. */
+html body .ak-book .akf, html body .ak-book input.akf {
+  font-weight: 400 !important;
+  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+}

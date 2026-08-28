@@ -753,3 +753,151 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* ============================================================================
+   SYSTEM FORMULARZY — nadawanie wariantu (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/forms.html".
+   Reguly: blok "SYSTEM FORMULARZY" w homepage-live.css i sales-page.css.
+
+   O wariancie decyduje jasnosc tla POD polem, a tego nie da sie sprawdzic
+   selektorem CSS — stad JS. Obejmuje takze pola w ramkach systeme
+   (newsletter w stopce, formularz kontaktowy), bo tam siedzi polowa
+   wszystkich pol w serwisie.
+
+   Czego NIE rusza: pol Stripe. Numer karty, data i CVC renderuja sie w ramce
+   z js.stripe.com — inna domena, nasz CSS tam nie siega i nie powinien.
+   ============================================================================ */
+(function () {
+  var SEL = 'input[type="text"],input[type="email"],input[type="tel"],input[type="number"],'
+          + 'input[type="search"],input:not([type]),textarea,select,[id^="field-"]';
+
+  function gcs(el) {
+    var d = el.ownerDocument, w = (d && d.defaultView) || window;
+    return w.getComputedStyle(el);
+  }
+  function lum(c) {
+    var m = (c || '').match(/[\d.]+/g); if (!m) return 1;
+    var f = function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(+m[0]) + 0.7152 * f(+m[1]) + 0.0722 * f(+m[2]);
+  }
+  function tloWokol(start) {
+    var p = start;
+    while (p) {
+      var c = gcs(p).backgroundColor;
+      if (c && c !== 'rgba(0, 0, 0, 0)' && !/,\s*0\)$/.test(c)) return c;
+      p = p.parentElement;
+    }
+    return null;
+  }
+  /* Pole w ramce systeme ma nad soba wylacznie przezroczyste tla — o tym,
+     czy jest na ciemnym, decyduje to, co lezy pod SAMA RAMKA w dokumencie
+     nadrzednym. Bez tego newsletter w ciemnej stopce dostawal jasny wariant. */
+  function ciemnoPod(el) {
+    var c = tloWokol(el.parentElement);
+    if (!c) {
+      var d = el.ownerDocument, w = d && d.defaultView;
+      var ramka = w && w.frameElement;
+      if (ramka) { try { c = tloWokol(ramka.parentElement); } catch (e) {} }
+    }
+    return c ? lum(c) < 0.35 : false;
+  }
+
+  function oznacz(root) {
+    var l = root.querySelectorAll(SEL);
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i];
+      var t = (e.getAttribute('type') || '').toLowerCase();
+      if (t === 'hidden' || t === 'checkbox' || t === 'radio' || t === 'submit' || t === 'button') continue;
+      if (e.getBoundingClientRect().height < 10) continue;
+      var ciemno = ciemnoPod(e);
+      var chce = ciemno ? 'akf-dark' : 'akf-light';
+      if (e.getAttribute('data-akf') === chce) continue;
+      e.classList.remove('akf-dark', 'akf-light');
+      e.classList.add('akf', chce);
+      e.setAttribute('data-akf', chce);
+
+      /* Pola newslettera w ramce systeme trzymaja `height:54px` z arkusza,
+         ktorego nie da sie odczytac ani przebic selektorem — nawet regula
+         z !important przegrywa, bo tamta ma ID. Inline z priorytetem
+         "important" jest jedynym, co nad tym wygrywa. Robimy to tylko dla
+         pol jednolinijkowych, ktore faktycznie odstaja: textarea i pole
+         wiadomosci maja zostac wysokie — stad gorna granica 80px. Pole
+         "Message" na /contact to <input>, nie <textarea>, wiec sam tag by
+         go nie ochronil: przy pierwszym podejsciu inline sciagnal je
+         ze 122px na 49px. */
+      var wys = e.getBoundingClientRect().height;
+      if (e.tagName !== 'TEXTAREA' && wys > 50 && wys < 80) {
+        try {
+          e.style.setProperty('height', 'auto', 'important');
+          e.style.setProperty('min-height', '48px', 'important');
+        } catch (err) {}
+      }
+    }
+  }
+
+  function ramki() {
+    var l = document.querySelectorAll('iframe');
+    for (var i = 0; i < l.length; i++) {
+      try {
+        var d = l[i].contentDocument;
+        if (d && d.body) oznacz(d);
+      } catch (e) { /* cross-origin, np. Stripe */ }
+    }
+  }
+
+  function przebieg() { try { oznacz(document); ramki(); } catch (e) {} }
+
+  /* Czesc formularzy w lejkach wstawia sie na strone dopiero po zaladowaniu —
+     kilka setTimeout by ich nie zlapalo. Obserwujemy wiec drzewo i reagujemy
+     na dodane wezly, z krotkim zdlawieniem, zeby nie liczyc przy kazdej
+     najmniejszej zmianie. Obserwator zostaje na cale zycie strony:
+     formularz moze pojawic sie tez po interakcji (krok lejka, popup). */
+  var czeka = null;
+  function zaplanuj() {
+    if (czeka) return;
+    czeka = setTimeout(function () { czeka = null; przebieg(); }, 150);
+  }
+
+  function pilnuj(doc) {
+    if (!doc || !doc.body || doc.__akfObs) return;
+    try {
+      var mo = new MutationObserver(function (zm) {
+        for (var i = 0; i < zm.length; i++) {
+          if (zm[i].addedNodes && zm[i].addedNodes.length) { zaplanuj(); return; }
+        }
+      });
+      mo.observe(doc.body, { childList: true, subtree: true });
+      doc.__akfObs = 1;
+    } catch (e) {}
+  }
+
+  function pilnujRamek() {
+    var l = document.querySelectorAll('iframe');
+    for (var i = 0; i < l.length; i++) {
+      (function (f) {
+        try { if (f.contentDocument) pilnuj(f.contentDocument); } catch (e) {}
+        if (!f.getAttribute('data-akf-hook')) {
+          f.setAttribute('data-akf-hook', '1');
+          f.addEventListener('load', function () {
+            setTimeout(function () { przebieg(); pilnujRamek(); }, 80);
+          });
+        }
+      })(l[i]);
+    }
+  }
+
+  function start() {
+    przebieg();
+    pilnuj(document);
+    pilnujRamek();
+    if (document.readyState !== 'complete') {
+      window.addEventListener('load', function () { setTimeout(function () { przebieg(); pilnujRamek(); }, 200); });
+    }
+    setTimeout(function () { przebieg(); pilnujRamek(); }, 900);
+    setTimeout(function () { przebieg(); pilnujRamek(); }, 2600);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
