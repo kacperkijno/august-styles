@@ -1028,7 +1028,13 @@
     var wlasneTlo = maTlo && tlo !== podSpodem;
     return {
       tlo: maTlo ? tlo : null, podSpodem: podSpodem,
-      jest: wlasneTlo || maRamke || maCien,
+      /* Powierzchnia = element, ktory JUZ byl pudelkiem (pelna ramka albo cien),
+         albo taki, ktory udawal pudelko bielą — bo po zamianie bieli na krem
+         zniknalby z tla i przestal byc widoczny. Samo tlo z palety (krem na
+         kremie, szalwia, Forest) NIE robi pudelka: tak wygladaja pasy sekcji,
+         obudowy miniatur i pojemnik FAQ, ktore maja zostac bez ramki. */
+      jest: maRamke || maCien || (wlasneTlo && bielSzarosc(tlo)),
+      wlasneTlo: wlasneTlo,
       ciemno: lum(maTlo ? tlo : (podSpodem || 'rgb(249,247,241)')) < 0.35,
       maRamke: maRamke, maCien: maCien, w: r.width, h: r.height,
       wyroz: maCien && /0\.0[6-9]|0\.1/.test(s.boxShadow),           /* juz byl wyrozniony */
