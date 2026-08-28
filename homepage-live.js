@@ -478,8 +478,14 @@
   }
   function ciemnoPod(el) { return lum(tloPod(el)) < 0.35; }
 
+  /* Pasek nawigacji, a nie dowolny <header>. Sekcje hero na /about,
+     /consulting i /pitching-decoded to <header class="akb-hero|akc-hero|
+     pdk-hero"> — semantyczny naglowek sekcji, nie nawigacja. Samo
+     closest('header') robilo z tamtejszych CTA male przyciski.
+     Pasek poznajemy po tym, ze zawiera menu. */
   function wNawigacji(el) {
-    if (el.closest('header')) return true;
+    var h = el.closest('header');
+    if (h && (h.getAttribute('type') === 'WebsiteHeader' || h.querySelector('[id^="menu-"]'))) return true;
     var row = el.closest('[id^="row-"]');
     return !!(row && row.querySelector('[id^="menu-"]'));
   }
@@ -553,6 +559,7 @@
          docelowej wysokosci. Wysokosc nie moze decydowac o wariancie,
          skoro to wariant ustala wysokosc. */
       if (wNawigacji(e)) e.classList.add('akb--sm');
+      else e.classList.remove('akb--sm');
       e.setAttribute('data-akb', wariant);
     }
   }
