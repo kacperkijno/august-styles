@@ -1235,8 +1235,9 @@
      roznica wynosi zero i nic sie nie dzieje. */
   var RYTM = {
     eyebrow: 16,     /* pod eyebrow — do naglowka */
-    tresc: 24,       /* pod naglowkiem — do tekstu; takze H1 -> lead w hero */
-    siatka: 48,      /* pod naglowkiem — do rzedu kart */
+    tresc: 48,       /* pod naglowkiem — do tekstu; takze H1 -> lead w hero */
+    siatka: 48,      /* pod naglowkiem — do rzedu kart (ta sama wartosc: naglowek
+                        oddziela sie tak samo od akapitu jak od kart) */
     nadBlok: 64,     /* nad eyebrow albo naglowkiem, gdy zaczyna kolejny blok W SEKCJI */
     leadCta: 32      /* od akapitu wprowadzajacego do przycisku */
   };
@@ -1319,6 +1320,14 @@
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
       ustawOdstepNad(h, RYTM.nadBlok);
       var nast = blokPo(h); if (!nast) continue;
+      /* Gdy zaraz po naglowku zaczyna sie NOWY blok (czyli nastepny element to
+         eyebrow), ten sam odstep opisuja dwie reguly naraz: „pod naglowkiem 48"
+         i „nad blokiem 64". Pierwszenstwo ma „nad blokiem" — naglowek domknal
+         juz swoj blok, a to co widac to przerwa miedzy blokami. Bez tego
+         warunku obie reguly pisaly po tym samym marginesie i wynik zalezal
+         od kolejnosci petli. */
+      if (nast.classList && nast.classList.contains('akt-eyebrow')) continue;
+      if (nast.querySelector && nast.querySelector('.akt-eyebrow')) continue;
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
       ustawOdstep(h, kart >= 2 ? RYTM.siatka : RYTM.tresc);
     }
