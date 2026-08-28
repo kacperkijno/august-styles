@@ -343,7 +343,8 @@
     '3L3A3811': 'August Kjerland during a workshop',
     '3L3A3308': 'August Kjerland presenting the pitching webinar',
     'TheCross-CulturalNegotiationPlaybook': 'Cover of The Cross-Cultural Negotiation Playbook',
-    'presentation-room-podium': 'A presentation room with a podium'
+    'presentation-room-podium': 'A presentation room with a podium',
+    'klarna': 'Klarna'
   };
 
   function initImageAlt() {
@@ -363,11 +364,14 @@
       }
       return brakuje;
     };
-    /* czesc obrazow systeme laduje sie leniwie, juz po DOMContentLoaded */
+    /* Czesc obrazow systeme pojawia sie w DOM dopiero po chwili.
+       NIE wolno konczyc, gdy akurat nie ma nic do zrobienia — obraz
+       moze sie jeszcze nie wyrenderowac. Chodzimy przez pelne 10 s. */
     przejscie();
     var prob = 0;
     var timer = setInterval(function () {
-      if (przejscie() === 0 || ++prob > 20) clearInterval(timer);   /* max 4 s */
+      przejscie();
+      if (++prob > 50) clearInterval(timer);   /* 50 x 200 ms = 10 s */
     }, 200);
   }
 
