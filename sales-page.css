@@ -18,6 +18,7 @@
    pliku Adobe Caslon Pro Italic.
    ============================================================================ */
 @font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap;}
 @font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
 @font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLightItalic.ttf") format("truetype");font-weight:300;font-style:italic;font-display:swap;}
 @font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
@@ -38,6 +39,7 @@
 @font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayMedium.ttf") format("truetype");font-weight:500;font-style:normal;font-display:swap;}
 @font-face{font-family:"NeueHaasDisplay-Roman42448762";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayBold.ttf") format("truetype");font-weight:700;font-style:normal;font-display:swap;}
 @font-face{font-family:"AdobeCaslonPro42448745";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AdobeCaslonPro42448745";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap;}
 
 
 /* ============================================================
