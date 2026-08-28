@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK consulting CONTACT FORM — styling for the systeme FORM PAGE.
    Loaded INSIDE the form iframe via a <link> in the FORM's own custom
@@ -34,7 +49,7 @@ body{ background:transparent !important; }
   min-height:48px !important;
   height:auto !important;
   padding:0 16px !important;
-  box-shadow:none !important;
+  box-shadow: var(--ak-sh-md);
 }
 #app input::placeholder{ color:rgba(249,247,241,.55) !important; opacity:1 !important; }
 #app input:hover{ border-color:rgba(249,247,241,.42) !important; }
@@ -70,8 +85,8 @@ body{ background:transparent !important; }
   width:100% !important;
   font-family:"NeueHaasDisplay-Roman42448762","Neue Haas Display","Helvetica Neue",Arial,sans-serif !important;
   letter-spacing:0 !important;
-  box-shadow:none !important;
-  transition:background .2s ease, transform .2s ease !important;
+  box-shadow: var(--ak-sh-md);
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 #app button[data-test-id="send-form-button"]:hover{ background:#84492A !important; transform:translateY(-2px) !important; }
 #app button[data-test-id="send-form-button"] > div{ font-size:14px !important; font-weight:400 !important; line-height:1.15 !important; }

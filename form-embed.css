@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK newsletter embed — styling for the systeme optin FORM PAGE
    (the form loaded inside the footer iframe, id "form-container-2").
@@ -35,7 +50,7 @@ input:not([type="submit"]):not([type="button"]) {
   color: #F9F7F1 !important;
   font-size: 15px !important;
   padding: 0 16px !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
 }
 input::placeholder { color: rgba(249, 247, 241, 0.55) !important; }
 input:focus { outline: none !important; border-color: rgba(249, 247, 241, 0.5) !important; }
@@ -49,6 +64,6 @@ button, [type="submit"] {
   height: 54px !important;
   font-weight: 500 !important;
   letter-spacing: 0.04em !important;
-  transition: background .2s ease !important;
+  transition: background var(--ak-t-color) var(--ak-ease) !important;
 }
 button:hover, [type="submit"]:hover { background: #9A5530 !important; }

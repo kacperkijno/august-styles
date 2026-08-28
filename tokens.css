@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK Design Tokens — single source of truth
    Loaded on every public page (homepage, course landing, etc.)
@@ -69,17 +84,17 @@
            "Inter", system-ui, -apple-system, sans-serif;
 
   /* Layout */
-  --container: 1140px;
+  --container: 1120px;
   --gutter: clamp(20px, 4vw, 40px);
   --section-pad-y: clamp(72px, 11vw, 128px);
 
   /* Surfaces */
   --radius-card: 4px;
   --radius-btn: 4px;
-  --shadow-card: 0 2px 16px rgba(26, 60, 47, 0.08);
-  --shadow-card-hover: 0 6px 28px rgba(26, 60, 47, 0.14);
+  --shadow-card: var(--ak-sh-md);
+  --shadow-card-hover: var(--ak-sh-lg);
 
   /* Motion */
-  --ease: cubic-bezier(0.2, 0.6, 0.2, 1);
+  --ease: cubic-bezier(.2,.6,.2,1);
   --t: 180ms;
 }

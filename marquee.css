@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK Logo Marquee — self-contained styles for systeme.io embed.
    Scope: .ak-marquee  (wrap the HTML in <section class="ak-marquee">)
@@ -8,8 +23,8 @@
   --ink:      #2D2D2D;
   --ink-10:   rgba(45, 45, 45, 0.10);
   --ink-50:   rgba(45, 45, 45, 0.50);
-  --container: 1140px;
-  --ease:     cubic-bezier(0.22, 1, 0.36, 1);
+  --container: 1120px;
+  --ease: cubic-bezier(.2,.6,.2,1);
   --sans:     "NeueHaasDisplay-Roman42448762", -apple-system, BlinkMacSystemFont,
               "Segoe UI", Roboto, sans-serif;
 
@@ -54,7 +69,7 @@
 }
 /* Per-row duration scaled to logo count so all rows scroll at
    the same visual px/second regardless of how many logos. */
-.ak-marquee .marquee__track--11 { animation-duration: 60s; }
+.ak-marquee .marquee__track--11 { animation-duration: 65s; }
 .ak-marquee .marquee__track--12 { animation-duration: 65s; }
 .ak-marquee .marquee:hover .marquee__track {
   animation-play-state: paused;
@@ -74,7 +89,7 @@
   margin: 0 4px;
   flex-shrink: 0;
   opacity: 0.55;
-  transition: opacity 220ms var(--ease);
+  transition: opacity var(--ak-t-color) var(--ak-ease);
 }
 .ak-marquee .logo-slot:hover { opacity: 1; }
 
@@ -84,7 +99,7 @@
   max-width: 220px;
   display: block;
   filter: grayscale(100%);
-  transition: filter 220ms var(--ease);
+  transition: filter var(--ak-t-move) var(--ak-ease);
 }
 .ak-marquee .logo-slot img[src$=".svg"] {
   height: 44px;

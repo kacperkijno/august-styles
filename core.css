@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK Core — reset, primitives, buttons, nav, footer, forms
    Depends on: tokens.css
@@ -20,7 +35,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 img { max-width: 100%; height: auto; display: block; }
-a { color: inherit; text-decoration: none; transition: color var(--t) var(--ease); }
+a { color: inherit; text-decoration: none; transition: color var(--ak-t-color) var(--ak-ease); }
 button { font: inherit; cursor: pointer; border: 0; background: none; color: inherit; }
 input { font: inherit; color: inherit; }
 h1, h2, h3, h4 { margin: 0; font-weight: 400; line-height: 1.1; letter-spacing: -0.005em; }
@@ -101,7 +116,7 @@ em, .italic { font-style: italic; }
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 10px;
+  gap: 8px;
   height: 52px;
   padding: 0 26px;
   border-radius: var(--radius-btn);
@@ -111,8 +126,7 @@ em, .italic { font-style: italic; }
   letter-spacing: 0.04em;
   text-transform: none;
   white-space: nowrap;
-  transition: background var(--t) var(--ease), color var(--t) var(--ease),
-              border-color var(--t) var(--ease), transform var(--t) var(--ease);
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
   cursor: pointer;
 }
 .btn--primary { background: var(--terracotta); color: var(--cream); }
@@ -140,7 +154,7 @@ em, .italic { font-style: italic; }
   padding: 0 14px;
 }
 .btn--ghost:hover { color:var(--terracotta-dark); }
-.btn .arrow { transition: transform var(--t) var(--ease); }
+.btn .arrow { transition: transform var(--ak-t-move) var(--ak-ease); }
 .btn:hover .arrow { transform: translateX(3px); }
 
 /* ---------- NAV ------------------------------------------- */
@@ -150,10 +164,7 @@ em, .italic { font-style: italic; }
   z-index: 100;
   padding: 18px 0;
   background: transparent;
-  transition: background var(--t) var(--ease),
-              backdrop-filter var(--t) var(--ease),
-              border-color var(--t) var(--ease),
-              padding var(--t) var(--ease);
+  transition: background var(--ak-t-color) var(--ak-ease), backdrop-filter var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), padding var(--ak-t-move) var(--ak-ease);
   border-bottom: 1px solid transparent;
 }
 .nav.is-scrolled {
@@ -175,7 +186,7 @@ em, .italic { font-style: italic; }
   display: block;
   /* white on dark hero by default */
   filter: brightness(0) invert(1);
-  transition: filter var(--t) var(--ease), height var(--t) var(--ease);
+  transition: filter var(--ak-t-move) var(--ak-ease), height var(--ak-t-move) var(--ak-ease);
 }
 .nav.is-scrolled .nav__brand img { filter: none; height: 32px; }
 
@@ -186,7 +197,7 @@ em, .italic { font-style: italic; }
 
 .nav__links {
   display: flex;
-  gap: 28px;
+  gap: 24px;
   list-style: none;
   padding: 0; margin: 0;
 }
@@ -197,7 +208,7 @@ em, .italic { font-style: italic; }
   letter-spacing: 0.06em;
   color: var(--cream);
   opacity: 0.92;
-  transition: opacity var(--t) var(--ease), color var(--t) var(--ease);
+  transition: opacity var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease);
 }
 .nav__link:hover { opacity: 1; }
 .nav.is-scrolled .nav__link { color: var(--ink); }
@@ -211,7 +222,7 @@ em, .italic { font-style: italic; }
   font-weight: 500;
   font-size: 13px;
   letter-spacing: 0.04em;
-  transition: background var(--t) var(--ease);
+  transition: background var(--ak-t-color) var(--ak-ease);
 }
 .nav__cta:hover { background: var(--terracotta-dark); }
 
@@ -239,7 +250,7 @@ em, .italic { font-style: italic; }
 .footer__news {
   display: grid;
   grid-template-columns: 1.1fr 1fr;
-  gap: 28px 56px;
+  gap: 24px 48px;
   align-items: center;
   padding-bottom: 48px;
   margin-bottom: 48px;
@@ -255,13 +266,13 @@ em, .italic { font-style: italic; }
 .footer__news-sub { max-width: 44ch; margin: 0; line-height: 1.55; }
 .footer__news .inline-form { max-width: 100%; }
 @media (max-width: 800px) {
-  .footer__news { grid-template-columns: 1fr; gap: 18px; }
+  .footer__news { grid-template-columns: 1fr; gap: 16px; }
 }
 
 .footer__grid {
   display: grid;
   grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 40px;
+  gap: 32px;
   margin-bottom: 56px;
 }
 .footer__brand {
@@ -311,9 +322,7 @@ em, .italic { font-style: italic; }
   width: 38px; height: 38px; border-radius: 50%;
   border: 1px solid rgba(249, 247, 241, 0.18);
   color: rgba(249, 247, 241, 0.7);
-  transition: color var(--t) var(--ease),
-              border-color var(--t) var(--ease),
-              transform var(--t) var(--ease);
+  transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 .footer__social a:hover {
   color: var(--cream);
@@ -324,7 +333,7 @@ em, .italic { font-style: italic; }
 .footer__email {
   display: inline-block; margin-top: 18px;
   color: rgba(249, 247, 241, 0.7);
-  transition: color var(--t) var(--ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 .footer__email:hover { color: var(--cream); }
 
@@ -344,7 +353,7 @@ em, .italic { font-style: italic; }
   border: 1px solid var(--ink-10);
   border-radius: var(--radius-btn);
   padding: 6px;
-  transition: border-color var(--t) var(--ease);
+  transition: border-color var(--ak-t-color) var(--ak-ease);
 }
 .inline-form:focus-within { border-color: var(--forest); }
 .inline-form input {
@@ -399,7 +408,7 @@ em, .italic { font-style: italic; }
 /* ---------- REDUCED MOTION -------------------------------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
-    transition-duration: 0.01ms !important;
+    transition-duration: var(--ak-t-move);
     animation-duration: 0.01ms !important;
   }
   html { scroll-behavior: auto; }

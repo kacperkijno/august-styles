@@ -11,6 +11,21 @@
 @import url("consulting.css");
 @import url("contact.css");
 
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
+
+
 /* ============================================================================
    AK FONTY — jedyne zrodlo prawdy (2026-08-27)
    ----------------------------------------------------------------------------
@@ -107,7 +122,7 @@ body.ak-home {
   --ak-ink-72:      rgba(45, 45, 45, 0.72);
   --ak-ease:        cubic-bezier(0.2, 0.6, 0.2, 1);
   --ak-serif:       "AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
-  --ak-sans:        "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
+  --ak-sans:        "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
 }
 
 /* ---------- Global button radius (design system) -------------
@@ -121,14 +136,11 @@ html body.ak-home [id^="button-"] {
 /* ---------- Global button hover (subtle lift + shadow) -------
    Composes with each button's own colour-change hover. */
 html body.ak-home [id^="button-"] {
-  transition: transform 200ms var(--ak-ease),
-              box-shadow 200ms var(--ak-ease),
-              background-color 200ms var(--ak-ease),
-              color 200ms var(--ak-ease) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), background-color var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease) !important;
 }
 html body.ak-home [id^="button-"]:hover {
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 22px rgba(26, 60, 47, 0.16) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ---------- Scroll-reveal (framework pillars, testimonials) ---
@@ -145,7 +157,7 @@ html body.ak-home .ak-reveal.ak-in {
 
 @media (prefers-reduced-motion: reduce) {
   html body.ak-home [id^="button-"] { transition: none !important; }
-  html body.ak-home [id^="button-"]:hover { transform: none !important; box-shadow: none !important; }
+  html body.ak-home [id^="button-"]:hover { transform: none !important; box-shadow: var(--ak-sh-lg); }
   html body.ak-home .ak-reveal { opacity: 1 !important; }
   html body.ak-home .ak-reveal.ak-in { animation: none !important; }
 }
@@ -235,7 +247,7 @@ body.ak-home #row-e6badb36 {
   flex-wrap: wrap !important;
   align-items: center !important;
   justify-content: flex-start !important;
-  gap: 14px !important;
+  gap: 12px !important;
 }
 body.ak-home #row-e6badb36 > div[size] {
   width: auto !important;
@@ -260,11 +272,11 @@ body.ak-home #row-e6badb36 > div[size] {
   padding-bottom: 2px !important;
   width: -moz-fit-content !important;
   width: fit-content !important;
-  transition: color 180ms var(--ak-ease), border-color 180ms var(--ak-ease) !important;
+  transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
 }
 #section-e8a2d9b7 #text-3f555439 a::after {
   content: "\2192";   /* → */
-  transition: transform 180ms var(--ak-ease) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease) !important;
 }
 #section-e8a2d9b7 #text-3f555439 a:hover {
   color: #F9F7F1 !important;
@@ -321,12 +333,7 @@ body.ak-home header[type="WebsiteHeader"] {
   z-index: 1000;
   background: transparent !important;
   border-bottom: 1px solid transparent;
-  transition:
-    background 220ms ease,
-    backdrop-filter 220ms ease,
-    border-color 220ms ease,
-    padding 220ms ease,
-    box-shadow 220ms ease;
+  transition: background var(--ak-t-color) var(--ak-ease), backdrop-filter var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), padding var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease);
 }
 
 /* --- 2. DEFAULT STATE (over the dark hero) ----------------- */
@@ -334,7 +341,7 @@ body.ak-home header[type="WebsiteHeader"] {
 /* Logo: invert PNG to white silhouette */
 body.ak-home header[type="WebsiteHeader"] #websitelogo-2841540c img {
   filter: brightness(0) invert(1);
-  transition: filter 220ms ease, height 220ms ease;
+  transition: filter var(--ak-t-move) var(--ak-ease), height var(--ak-t-move) var(--ak-ease);
 }
 
 /* Main menu links: cream */
@@ -342,7 +349,7 @@ body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a,
 body.ak-home header[type="WebsiteHeader"] #side-menu-c51d8fe2 a {
   color: #F9F7F1 !important;
   letter-spacing: 0.04em !important;
-  transition: color 220ms ease, opacity 220ms ease;
+  transition: color var(--ak-t-color) var(--ak-ease), opacity var(--ak-t-color) var(--ak-ease);
   opacity: 0.92;
 }
 body.ak-home header[type="WebsiteHeader"] #menu-c51d8fe2 a:hover,
@@ -374,7 +381,7 @@ body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20 {
   color: #F9F7F1 !important;
   border: 1px solid rgba(249, 247, 241, 0.55) !important;
   border-radius: 4px !important;   /* tiny nav button = 4px (--radius-sm) */
-  transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20:hover {
   background: #F9F7F1 !important;
@@ -385,7 +392,7 @@ body.ak-home header[type="WebsiteHeader"] #loginbutton-f0aa2f20:hover {
 /* Mobile burger lines: cream */
 body.ak-home header[type="WebsiteHeader"] .sc-gEkIjA span {
   background-color: #F9F7F1 !important;
-  transition: background-color 220ms ease;
+  transition: background-color var(--ak-t-color) var(--ak-ease);
 }
 
 /* Side-menu (mobile drawer): keep open-state working */
@@ -415,7 +422,7 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled {
   backdrop-filter: saturate(1.4) blur(10px);
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom-color: rgba(45, 45, 45, 0.10);
-  box-shadow: 0 1px 12px rgba(26, 60, 47, 0.04);
+  box-shadow: var(--ak-sh-sm);
 }
 
 /* Logo: back to original (dark) + slight shrink */
@@ -462,7 +469,7 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
   body.ak-home header[type="WebsiteHeader"] *,
   body.ak-home header[type="WebsiteHeader"]::before,
   body.ak-home header[type="WebsiteHeader"]::after {
-    transition-duration: 0.01ms !important;
+    transition-duration: var(--ak-t-move);
   }
 }
 
@@ -482,18 +489,14 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
   height: 100%;
   position: relative;
   overflow: hidden;
-  box-shadow: 0 2px 14px rgba(26, 60, 47, 0.04);
+  box-shadow: var(--ak-sh-sm);
 
   /* Entrance state — invisible until revealed */
   opacity: 0;
   transform: translateY(24px);
 
   /* Combined transitions: enter + hover */
-  transition:
-    opacity 600ms cubic-bezier(0.2, 0.6, 0.2, 1),
-    transform 600ms cubic-bezier(0.2, 0.6, 0.2, 1),
-    box-shadow 220ms cubic-bezier(0.2, 0.6, 0.2, 1),
-    border-color 220ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: opacity var(--ak-t-in) var(--ak-ease), transform var(--ak-t-in) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 
 /* Stagger entrance — only opacity + transform get a delay */
@@ -516,14 +519,14 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
 /* === Hover (only after revealed) =========================== */
 #row-4332dc25 > div[size="4"] > div.is-visible:hover {
   border-color: rgba(26, 60, 47, 0.30);
-  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10);
+  box-shadow: var(--ak-sh-lg);
   transform: translateY(-4px);
 }
 
 /* === Featured: How to Pitch (middle column) ================ */
 #row-4332dc25 > div[size="4"]:nth-child(2) > div {
   border-color: rgba(26, 60, 47, 0.30);
-  box-shadow: 0 8px 32px rgba(26, 60, 47, 0.09);
+  box-shadow: var(--ak-sh-md);
 }
 
 /* Terracotta hairline at top */
@@ -538,7 +541,7 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
 
 #row-4332dc25 > div[size="4"]:nth-child(2) > div.is-visible:hover {
   border-color: rgba(26, 60, 47, 0.55);
-  box-shadow: 0 16px 44px rgba(26, 60, 47, 0.14);
+  box-shadow: var(--ak-sh-lg);
   transform: translateY(-6px);   /* lifts slightly higher than siblings */
 }
 
@@ -547,7 +550,7 @@ body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-gEkIjA span {
   #row-4332dc25 > div[size="4"] > div {
     opacity: 1;
     transform: none;
-    transition: box-shadow 220ms ease, border-color 220ms ease;
+    transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
   }
   #row-4332dc25 > div[size="4"] > div.is-visible:hover {
     transform: none;
@@ -571,7 +574,7 @@ html body.ak-home #section-cd54baff {
 /* --- Portrait: rounded + soft shadow + location badge ------ */
 html body.ak-home #image-8fa6b86d {
   border-radius: 4px !important;
-  box-shadow: 0 2px 16px rgba(26, 60, 47, 0.10);
+  box-shadow: var(--ak-sh-md);
   display: block;
 }
 /* Badge anchored to the media column (verify alignment; remove if it drifts) */
@@ -646,9 +649,7 @@ html body.ak-home #button-4dceb9ce {
   border: 1px solid var(--ak-forest-45) !important;
   border-radius:4px !important;
   letter-spacing: 0.04em;
-  transition: background 180ms var(--ak-ease),
-              color 180ms var(--ak-ease),
-              border-color 180ms var(--ak-ease);
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 html body.ak-home #button-4dceb9ce * {
   color: inherit !important;
@@ -815,8 +816,7 @@ html body.ak-home #section-22d30859 ul li::before {
 /* PDF cover — floating-document shadow */
 html body.ak-home #image-19213690 {
   border-radius: 4px !important;
-  box-shadow: 0 16px 44px rgba(26, 60, 47, 0.18),
-              0 2px 8px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* INLINE FORM — email field + CTA in one row (#row-b29ca21b, 8/4 cols).
@@ -835,7 +835,7 @@ html body.ak-home #field-d22e847d {
   font-size: 15px !important;
   line-height: 1.2 !important;
   color: var(--ak-ink) !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
 }
 
 /* CTA — terracotta primary (lead magnet = the one terracotta button) */
@@ -850,7 +850,7 @@ html body.ak-home #button-aab9edaf {
   line-height: 1.2 !important;
   white-space: nowrap !important;
   letter-spacing: 0.04em;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease);
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 html body.ak-home #button-aab9edaf * {
   color: inherit !important;
@@ -896,14 +896,14 @@ html body.ak-home #row-407010f1 {
   border: 1px solid var(--ak-ink-10) !important;
   border-radius: 4px !important;
   padding: 32px 28px !important;
-  transition: box-shadow 180ms var(--ak-ease), border-color 180ms var(--ak-ease) !important;
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
 }
 html body.ak-home #row-90b835d4:hover,
 html body.ak-home #row-9ba983ac:hover,
 html body.ak-home #row-db1956fa:hover,
 html body.ak-home #row-f1101f63:hover,
 html body.ak-home #row-407010f1:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.14) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(26, 60, 47, 0.30) !important;
 }
 
@@ -1039,10 +1039,10 @@ html body.ak-home #section-d54243f0 img {
      are spans inside .sc-fLvQuE (was .sc-gEkIjA). Re-check on rebuild. */
   body.ak-home header[type="WebsiteHeader"] .sc-fLvQuE span {
     background-color: #F9F7F1 !important;
-    box-shadow: 0 0 4px rgba(0, 0, 0, 0.5) !important;
+    box-shadow: var(--ak-sh-lg);
   }
   body.ak-home header[type="WebsiteHeader"].is-scrolled .sc-fLvQuE span {
-    background-color: #2D2D2D !important; box-shadow: none !important;
+    background-color: #2D2D2D !important; box-shadow: var(--ak-sh-md);
   }
 
   /* --- Section H2s too small on mobile: scale up + allow full width.
@@ -1210,7 +1210,7 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #row-1db35d3a {
     flex-direction: row !important;
     align-items: center !important;
-    gap: 14px !important;
+    gap: 12px !important;
     text-align: left !important;
   }
   html body.ak-home #row-955bc165 > div[size="3"],
@@ -1319,7 +1319,7 @@ html body.ak-home #section-d54243f0 img {
   html body.ak-home #row-27dffb1c {
     flex-direction: row !important;
     align-items: center !important;
-    gap: 14px !important;
+    gap: 12px !important;
   }
   html body.ak-home #row-ab900a3a > div[size="3"],
   html body.ak-home #row-353c7191 > div[size="3"],
@@ -1348,15 +1348,15 @@ html body.ak-home #section-d54243f0 img {
   position: relative;
   border-radius: 4px;
   overflow: hidden;
-  box-shadow: 0 2px 16px rgba(26,60,47,.08), 0 1px 4px rgba(26,60,47,.04);
-  transition: transform .35s ease, box-shadow .35s ease;
+  box-shadow: var(--ak-sh-md);
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease);
 }
 .material-thumb img { display: block; width: 100%; aspect-ratio: 16/9; object-fit: cover; }
 .material-play {
   position: absolute; top: 50%; left: 50%;
   width: 60px; height: 60px; transform: translate(-50%,-50%);
   border-radius: 50%; background: rgba(26,60,47,.85);
-  transition: transform .35s ease, background .35s ease;
+  transition: transform var(--ak-t-move) var(--ak-ease), background var(--ak-t-color) var(--ak-ease);
 }
 .material-play::before {
   content: ""; position: absolute; top: 50%; left: 54%;
@@ -1366,7 +1366,7 @@ html body.ak-home #section-d54243f0 img {
 }
 .material-card:hover .material-thumb {
   transform: translateY(-4px);
-  box-shadow: 0 8px 32px rgba(26,60,47,.12), 0 2px 8px rgba(26,60,47,.06);
+  box-shadow: var(--ak-sh-lg);
 }
 .material-card:hover .material-play { background:#1A3C2F; transform: translate(-50%,-50%) scale(1.08); }
 
@@ -1424,13 +1424,11 @@ html body.ak-home #section-d54243f0 img {
 
 /* Card hover: forest border + lift + shadow (matches the courses cards) */
 #row-0f9fb35f, #row-0aea429e, #row-abcbf5de {
-  transition: transform 220ms cubic-bezier(.2,.6,.2,1),
-              box-shadow 220ms cubic-bezier(.2,.6,.2,1),
-              border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
 }
 #row-0f9fb35f:hover, #row-0aea429e:hover, #row-abcbf5de:hover {
   border-color: rgba(26, 60, 47, 0.30) !important;
-  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-lg);
   transform: translateY(-4px) !important;
 }
 
@@ -1476,24 +1474,24 @@ html body.ak-home #section-d54243f0 img {
   border-bottom: 1px solid rgba(45, 45, 45, .10);
   text-decoration: none;
   color: inherit;
-  transition: padding-left 250ms cubic-bezier(.2,.6,.2,1);
+  transition: padding-left var(--ak-t-color) var(--ak-ease);
 }
 #ak-latest-writing .post:hover { padding-left: 8px; }
 #ak-latest-writing .post__main { display: flex; flex-direction: column; gap: 8px; min-width: 0; }
 #ak-latest-writing .post__cat {
-  font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
+  font-family: "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
   font-weight:500;
   font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color:#9A5832;
 }
 #ak-latest-writing .post__title {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif;
   font-size: clamp(19px, 2vw, 23px); line-height: 1.2; color: #2D2D2D; max-width: 34ch;
-  transition: color 250ms cubic-bezier(.2,.6,.2,1);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 #ak-latest-writing .post:hover .post__title { color: #1A3C2F; }
 #ak-latest-writing .post__arrow {
   flex-shrink: 0; color: rgba(45, 45, 45, .5);
-  transition: transform 250ms cubic-bezier(.2,.6,.2,1), color 250ms cubic-bezier(.2,.6,.2,1);
+  transition: transform var(--ak-t-move) var(--ak-ease), color var(--ak-t-color) var(--ak-ease);
 }
 #ak-latest-writing .post:hover .post__arrow { color:#9A5832; transform: translateX(3px); }
 
@@ -1533,18 +1531,18 @@ html body.ak-home #section-d54243f0 img {
    WHOLE box as one unit. Each video is its own box id (NOT the shared Watch
    column), so hovering one never triggers the other. */
 #row-8943a7f1, #row-d553c684 {
-  transition: transform 240ms cubic-bezier(.2,.6,.2,1) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease) !important;
 }
 #row-8943a7f1:hover, #row-d553c684:hover { transform: translateY(-4px) !important; }
 /* Neutralize the thumbnail's own lift so it doesn't double up — the box moves. */
 #row-8943a7f1 .material-card:hover .material-thumb,
 #row-d553c684 .material-card:hover .material-thumb { transform: none !important; }
 #row-8943a7f1 .material-thumb,
-#row-d553c684 .material-thumb { transition: box-shadow 240ms cubic-bezier(.2,.6,.2,1) !important; }
+#row-d553c684 .material-thumb { transition: box-shadow var(--ak-t-move) var(--ak-ease) !important; }
 #row-8943a7f1:hover .material-thumb,
-#row-d553c684:hover .material-thumb { box-shadow: 0 14px 34px rgba(26, 60, 47, .14) !important; }
+#row-d553c684:hover .material-thumb { box-shadow: var(--ak-sh-lg); }
 #row-8943a7f1 #text-1e2d91b1 *,
-#row-d553c684 #text-630b4ccf * { transition: color 240ms cubic-bezier(.2,.6,.2,1); }
+#row-d553c684 #text-630b4ccf * { transition: color var(--ak-t-color) var(--ak-ease); }
 #row-8943a7f1:hover #text-1e2d91b1 *,
 #row-d553c684:hover #text-630b4ccf * { color: #1A3C2F !important; }
 
@@ -1559,7 +1557,7 @@ html body.ak-home #section-d54243f0 img {
   width: 38px !important; height: 38px !important; border-radius: 50% !important;
   border: 1px solid rgba(249, 247, 241, .18) !important;
   color: rgba(249, 247, 241, .7) !important;
-  transition: color .2s ease, border-color .2s ease, transform .2s ease !important;
+  transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 .footer__social a:hover {
   color: #F9F7F1 !important;
@@ -1637,48 +1635,51 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
   --akx-forest:#1A3C2F; --akx-cream:#F9F7F1; --akx-terra:#B46A3C; --akx-terra-dark:#9A5832; --akx-ink:#2D2D2D;
   --akx-border:rgba(45,45,45,.1); --akx-hr:rgba(68,68,68,.1);
   --akx-serif:"AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
-  --akx-sans:"AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
+  --akx-sans:"neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;
+  /* eyebrow idzie starym krojem (decyzja Kacpra 28.08); reszta bloku zostaje
+     na Adobe Display, ktory jako jedyny potrzebuje doklejonego .022em */
+  --akx-eyebrow:"AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", sans-serif;
   box-sizing:border-box; width:100%; font-family:var(--akx-sans); color:var(--akx-ink); padding:128px 0;
 }
 #section-ba1fb6ee .ak-courses *{box-sizing:border-box;}
 #section-ba1fb6ee .ak-inner{max-width:1120px; margin:0 auto; padding:0 20px;}
 
 /* header */
-#section-ba1fb6ee .ak-eyebrow{font-family:var(--akx-sans) !important; font-size:11px !important; line-height:1.4 !important; font-weight:500 !important; letter-spacing:.18em !important; text-transform:uppercase !important; color:var(--akx-terra-dark) !important; margin:0 0 20px !important;}
+#section-ba1fb6ee .ak-eyebrow{font-family:var(--akx-eyebrow) !important; font-size:11px !important; line-height:1.4 !important; font-weight:500 !important; letter-spacing:.18em !important; text-transform:uppercase !important; color:var(--akx-terra-dark) !important; margin:0 0 20px !important;}
 #section-ba1fb6ee .ak-title{font-family:var(--akx-serif) !important; font-size:clamp(32px,4.4vw,52px) !important; line-height:1.1 !important; letter-spacing:-.005em !important; font-weight:400 !important; color:var(--akx-forest) !important; margin:0 0 64px !important;}
 #section-ba1fb6ee .ak-title span{display:block;}
 
 /* grid + card shell */
-#section-ba1fb6ee .ak-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:20px; align-items:start;}
-#section-ba1fb6ee .ak-card{position:relative; overflow:hidden; background:var(--akx-cream); border:1px solid var(--akx-border); border-radius:4px; box-shadow:0 2px 14px rgba(26,60,47,.04); padding:30px 34px; transition:opacity 600ms cubic-bezier(.2,.6,.2,1), transform 600ms cubic-bezier(.2,.6,.2,1), box-shadow 220ms cubic-bezier(.2,.6,.2,1), border-color 220ms cubic-bezier(.2,.6,.2,1);}
+#section-ba1fb6ee .ak-grid{display:grid; grid-template-columns:repeat(3,1fr); gap: 32px; align-items:stretch;}
+#section-ba1fb6ee .ak-card{position:relative; overflow:hidden; display:flex; flex-direction:column; background:var(--akx-cream); border:1px solid var(--akx-border); border-radius:4px; box-shadow: var(--ak-sh-sm); padding:30px 34px; transition: opacity var(--ak-t-in) var(--ak-ease), transform var(--ak-t-in) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);}
 #section-ba1fb6ee .ak-courses.ak-anim .ak-card{opacity:0; transform:translateY(24px);}
 #section-ba1fb6ee .ak-courses.ak-anim .ak-card.is-visible{opacity:1; transform:translateY(0);}
 #section-ba1fb6ee .ak-grid > .ak-card:nth-child(2){transition-delay:120ms;}
 #section-ba1fb6ee .ak-grid > .ak-card:nth-child(3){transition-delay:240ms;}
-#section-ba1fb6ee .ak-card:hover{border-color:rgba(26,60,47,.30); box-shadow:0 12px 32px rgba(26,60,47,.10); transform:translateY(-4px);}
-#section-ba1fb6ee .ak-card--featured{border-color:rgba(26,60,47,.30); box-shadow:0 8px 32px rgba(26,60,47,.09);}
+#section-ba1fb6ee .ak-card:hover{border-color:var(--ak-bd-hi); box-shadow: var(--ak-sh-lg); transform:translateY(-2px);}
+#section-ba1fb6ee .ak-card--featured{border-color:var(--ak-bd); box-shadow: var(--ak-sh-md);}
 #section-ba1fb6ee .ak-card--featured::before{content:""; position:absolute; top:0; left:0; right:0; height:3px; background:var(--akx-terra); z-index:2;}
-#section-ba1fb6ee .ak-card--featured:hover{border-color:rgba(26,60,47,.55); box-shadow:0 16px 44px rgba(26,60,47,.14); transform:translateY(-6px);}
+#section-ba1fb6ee .ak-card--featured:hover{border-color:var(--ak-bd-hi); box-shadow: var(--ak-sh-lg); transform:translateY(-2px);}
 /* hover lift must out-rank the .is-visible reveal transform (which is translateY(0)) */
-#section-ba1fb6ee .ak-courses.ak-anim .ak-card.is-visible:hover{transform:translateY(-4px);}
-#section-ba1fb6ee .ak-courses.ak-anim .ak-card--featured.is-visible:hover{transform:translateY(-6px);}
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card.is-visible:hover{transform:translateY(-2px);}
+#section-ba1fb6ee .ak-courses.ak-anim .ak-card--featured.is-visible:hover{transform:translateY(-2px);}
 
 /* card text — 1:1 home: tag/name/price/meta INK + CENTER, desc/list INK + LEFT */
-#section-ba1fb6ee .ak-tag{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:30px 0 0 !important;}
+#section-ba1fb6ee .ak-tag{font-family:var(--akx-eyebrow) !important; font-size:16px !important; line-height:24px !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:30px 0 0 !important;}
 #section-ba1fb6ee .ak-name{font-family:var(--akx-serif) !important; font-size:30px !important; line-height:38px !important; font-weight:400 !important; color:var(--akx-ink) !important; text-align:center !important; margin:15px 0 30px !important;}
 #section-ba1fb6ee .ak-price{font-family:var(--akx-serif) !important; font-size:54px !important; line-height:54px !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:30px 0 -30px !important;}
 #section-ba1fb6ee .ak-meta{font-family:var(--akx-sans) !important; font-size:14px !important; line-height:16px !important; font-weight:400 !important; color:var(--akx-forest) !important; text-align:center !important; margin:30px 0 30px !important;}
 #section-ba1fb6ee .ak-meta .sep{color:rgba(45,45,45,.5);}
-#section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:15px !important; line-height:20px !important; font-weight:400 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:30px 0 30px !important;}
+#section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; font-weight:400 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:30px 0 30px !important;}
 #section-ba1fb6ee .ak-hr{border:0; border-top:1px solid var(--akx-hr); margin:0; height:0;}
 #section-ba1fb6ee .ak-list{list-style:none; margin:30px 0 30px; padding:0; text-align:left !important;}
-#section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:15px !important; line-height:20px !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:0 0 16px;}
+#section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:0 0 16px;}
 #section-ba1fb6ee .ak-list li:last-child{margin-bottom:0;}
 #section-ba1fb6ee .ak-check{flex:0 0 auto; width:14px; height:20px; margin-right:10px; display:inline-flex; align-items:center; color:var(--akx-terra-dark);}
 #section-ba1fb6ee .ak-check svg{width:13px; height:13px; display:block;}
 
 /* buttons — site radius 8px, light weight, full width */
-#section-ba1fb6ee .ak-btn{display:flex; align-items:center; justify-content:center; box-sizing:border-box; width:100%; margin:30px 0 0; text-align:center !important; text-decoration:none; font-family:var(--akx-sans) !important; font-size:14px !important; font-weight:400 !important; line-height:1.15 !important; min-height:48px; padding:8px 24px; border-radius:4px; color:var(--akx-cream) !important; transition:filter .15s ease, background-color .15s ease;}
+#section-ba1fb6ee .ak-btn{display:flex; align-items:center; justify-content:center; box-sizing:border-box; width:100%; margin:32px 0 0; margin-top:auto; text-align:center !important; text-decoration:none; font-family:var(--akx-sans) !important; font-size:14px !important; font-weight:400 !important; line-height:1.15 !important; min-height:48px; padding:8px 24px; border-radius:4px; color:var(--akx-cream) !important; transition: filter var(--ak-t-move) var(--ak-ease), background-color var(--ak-t-color) var(--ak-ease);}
 #section-ba1fb6ee .ak-btn:hover{filter:brightness(.92);}
 #section-ba1fb6ee .ak-btn--forest{background:var(--akx-forest);}
 #section-ba1fb6ee .ak-btn--terracotta{background:var(--akx-terra);}
@@ -1687,7 +1688,7 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 @media (max-width:900px){
   #section-ba1fb6ee .ak-courses{padding:72px 0;}
   #section-ba1fb6ee .ak-title{font-size:clamp(30px,7vw,40px) !important; line-height:1.12 !important; margin-bottom:48px !important;}
-  #section-ba1fb6ee .ak-grid{grid-template-columns:1fr; gap:20px;}
+  #section-ba1fb6ee .ak-grid{grid-template-columns:1fr; gap: 16px;}
 }
 @media (prefers-reduced-motion:reduce){
   #section-ba1fb6ee .ak-card,#section-ba1fb6ee .ak-card:hover,#section-ba1fb6ee .ak-card--featured:hover{transform:none;}
@@ -1753,13 +1754,11 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 #section-01d96010 img { width: 44px !important; height: 44px !important; object-fit: cover !important; border-radius: 50% !important; }
 /* Testimonial cards → hover lift (forest border + shadow) */
 #row-f015e511, #row-8087231e, #row-8a076fe6, #row-e72d55f3, #row-e916a9ca {
-  transition: transform 220ms cubic-bezier(.2,.6,.2,1),
-              box-shadow 220ms cubic-bezier(.2,.6,.2,1),
-              border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
 }
 #row-f015e511:hover, #row-8087231e:hover, #row-8a076fe6:hover, #row-e72d55f3:hover, #row-e916a9ca:hover {
   border-color: rgba(26, 60, 47, .30) !important;
-  box-shadow: 0 12px 32px rgba(26, 60, 47, .10) !important;
+  box-shadow: var(--ak-sh-lg);
   transform: translateY(-4px) !important;
 }
 
@@ -1778,11 +1777,11 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   border:1px solid rgba(45,45,45,.10) !important;
   border-radius:4px !important;
   overflow:hidden !important;
-  box-shadow:0 2px 14px rgba(26,60,47,.04) !important;
-  transition:transform 220ms cubic-bezier(.2,.6,.2,1),box-shadow 220ms cubic-bezier(.2,.6,.2,1),border-color 220ms cubic-bezier(.2,.6,.2,1) !important;
+  box-shadow: var(--ak-sh-sm);
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
 }
 .carousel-ui div:has(> a > img):hover{
-  box-shadow:0 6px 22px rgba(26,60,47,.08) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color:rgba(26,60,47,.22) !important;
 }
 /* image → 16:10 cover, flush top (no zoom/lift on hover — per Kacper) */
@@ -1796,12 +1795,12 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
 /* title (Caslon forest, was 36px) → card size, tighter, hover terracotta */
 .carousel-ui [font-family="AdobeCaslonPro42448745"]{ font-size:clamp(20px,2.2vw,25px) !important; line-height:1.18 !important; margin-top:12px !important; }
-.carousel-ui [font-family="AdobeCaslonPro42448745"] a{ color:#1A3C2F !important; transition:color .18s ease !important; }
+.carousel-ui [font-family="AdobeCaslonPro42448745"] a{ color:#1A3C2F !important; transition: color var(--ak-t-color) var(--ak-ease) !important; }
 .carousel-ui div:has(> a > img):hover [font-family="AdobeCaslonPro42448745"] a{ color:#9A5832 !important; }
 
 /* excerpt → muted ink, 3-line clamp */
 .carousel-ui div:has(> a > img) p{
-  font-size:15px !important; line-height:1.65 !important; color:rgba(45,45,45,.7) !important; margin-top:12px !important;
+  font-size:16px !important; line-height:1.65 !important; color:rgba(45,45,45,.7) !important; margin-top:12px !important;
   display:-webkit-box !important; -webkit-line-clamp:3 !important; -webkit-box-orient:vertical !important; overflow:hidden !important;
 }
 
@@ -1862,7 +1861,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
   /* Website ma na przycisku 1 px obramowania — bez tego CTA w lejkach bylo
      o 2 px nizsze niz "Log in". */
   border: 1px solid transparent !important;
-  transition: background-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
+  transition: background-color var(--ak-t-color) var(--ak-ease) !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="button-"]:hover {
   background-color: #142E24 !important;
@@ -1911,11 +1910,10 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
      jest ciemne hero. */
   background: rgba(249, 247, 241, 0.94) !important;
   border-bottom: 1px solid rgba(45, 45, 45, 0.1) !important;
-  box-shadow: 0 1px 12px rgba(26, 60, 47, 0.04) !important;
+  box-shadow: var(--ak-sh-sm);
   -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
   backdrop-filter: saturate(1.4) blur(10px) !important;
-  transition: background 220ms ease, backdrop-filter 220ms ease,
-              border-color 220ms ease, box-shadow 220ms ease !important;
+  transition: background var(--ak-t-color) var(--ak-ease), backdrop-filter var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
   /* Zawartosc paska w kontenerze 1120 px, wysrodkowana — tak jak na Website.
      Bez tego logo lezalo przy samej krawedzi okna, a CTA przy przeciwnej,
      przez co pasek wygladal na rozciagniety wzgledem reszty serwisu.
@@ -1934,7 +1932,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 [id^="row-"]:has([id^="menu-"]).ak-nav-over-hero {
   background: transparent !important;
   border-bottom-color: transparent !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
@@ -3140,10 +3138,10 @@ html body .akt[class*="akt-h"] { font-weight:400 !important; }
 
 /* --- skala tekstu --------------------------------------------------------- */
 html body .akt.akt-t20 { font-size:20px !important; line-height:1.50 !important; }
-html body .akt.akt-t15 { font-size:15px !important; line-height:1.55 !important; }
+html body .akt.akt-t16 { font-size:16px !important; line-height:1.55 !important; }
 html body .akt.akt-t14 { font-size:14px !important; line-height:1.45 !important; }
 html body .akt.akt-t12 { font-size:12px !important; line-height:1.40 !important; }
-html body .akt.akt-t20 *, html body .akt.akt-t15 *, html body .akt.akt-t14 *, html body .akt.akt-t12 * {
+html body .akt.akt-t20 *, html body .akt.akt-t16 *, html body .akt.akt-t14 *, html body .akt.akt-t12 * {
   font-size: inherit !important; line-height: inherit !important;
 }
 
@@ -3156,7 +3154,7 @@ html body .akt.akt-w500, html body .akt.akt-w500 * { font-weight:500 !important;
 
 /* --- eyebrow: jeden kanon zamiast 29 wariantow ---------------------------- */
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * {
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "neue-haas-grotesk-display", "Helvetica Neue", sans-serif !important;
   font-size: 11px !important;
   font-weight: 500 !important;
   line-height: 1.40 !important;
@@ -3180,7 +3178,7 @@ html body .akt-list.akt-list > li {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   margin-bottom: 12px !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.55 !important;
   color: rgba(45,45,45,.72) !important;
   border: 0 !important;
@@ -3258,9 +3256,7 @@ html body textarea, html body select {
   line-height: 1.55 !important;
   -webkit-appearance: none !important;
   appearance: none !important;
-  transition: border-color 180ms cubic-bezier(.2,.6,.2,1),
-              box-shadow  180ms cubic-bezier(.2,.6,.2,1),
-              background-color 180ms cubic-bezier(.2,.6,.2,1) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), background-color var(--ak-t-color) var(--ak-ease) !important;
 }
 html body textarea {
   min-height: 120px !important;
@@ -3351,3 +3347,119 @@ html body button[id^="submit-button-"], html body [id^="payment-button-"],
 html body .akb, html body .akb * { letter-spacing: .022em !important; }
 html body .akf, html body [id^="field-"], html body textarea { letter-spacing: .022em !important; }
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * { letter-spacing: .18em !important; }
+
+/* ============================================================================
+   SYSTEM POWIERZCHNI — boksy, cienie, hover, wejscie, odstepy (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/surfaces.html".
+   Klasy nadaje JS (homepage-live.js, sekcja "SYSTEM POWIERZCHNI"), tutaj sa
+   tylko definicje — tak samo jak w systemie przyciskow, typografii i formularzy.
+
+   Po co JS: systeme nie daje boksom klas. Tlo, ramka i cien siedza w
+   styled-components (`sc-dUYLmI epEwHm`), a te nazwy zmieniaja sie przy
+   kazdym rebuildzie platformy; ID `#section-xxx` ginie, gdy blok zostanie
+   skasowany i dodany w edytorze. Skrypt czyta wyliczony styl i dokleja klase.
+
+   Wzorzec = karta ze strony glownej (`.ak-card`), zmierzona na / i /academy:
+   Cream, ramka 1px rgba(45,45,45,.10) rowna na czterech bokach, promien 4px,
+   cien przygaszonego Forestu, przejscie na jednej krzywej.
+
+   ⚠️ Hover jest TAKZE na kartach nieklikalnych — swiadoma decyzja Kacpra
+   z 28.08, wbrew rekomendacji w surfaces.html. Nie zmieniac bez niego.
+   ============================================================================ */
+
+/* --- wejscie przy przewijaniu ---------------------------------------------
+   `ak-rise` bylo dotad na osmiu elementach strony glownej; teraz dostaje je
+   kazda karta. Animacja, nie przejscie: przejscie na .aks-in przejmowaloby
+   czas z reguly docelowej (220 ms zamiast 600). Po zakonczeniu JS zdejmuje
+   klase i dokleja .aks-done, zeby wypelnienie `both` nie zamrozilo transformu
+   i nie zablokowalo uniesienia pod kursorem. */
+@keyframes ak-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+html body .aks-rise { opacity: 0; }
+html body .aks-rise.aks-in { animation: ak-rise var(--ak-t-in) var(--ak-ease) both; }
+html body .aks-done { opacity: 1; animation: none; }
+
+/* --- karta ---------------------------------------------------------------- */
+html body .aks.aks-card {
+  box-sizing: border-box !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--ak-bd) !important;
+  box-shadow: var(--ak-sh-sm) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease),
+              box-shadow var(--ak-t-move) var(--ak-ease),
+              border-color var(--ak-t-color) var(--ak-ease),
+              background-color var(--ak-t-color) var(--ak-ease) !important;
+}
+html body .aks.aks-card.aks-dark { border-color: var(--ak-bd-dark) !important; }
+html body .aks.aks-card.aks-md   { box-shadow: var(--ak-sh-md) !important; }
+
+/* hover: uniesienie o 2 px, cien poziomu 3, ramka ciemniejsza o kilka procent.
+   Selektory z .aks-in / .aks-done musza byc wymienione osobno — inaczej
+   przegrywaja specyficznoscia z regula wejscia, ktora ustawia transform. */
+html body .aks.aks-card:hover,
+html body .aks.aks-card.aks-rise.aks-in:hover,
+html body .aks.aks-card.aks-done:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--ak-sh-lg) !important;
+  border-color: var(--ak-bd-hi) !important;
+}
+html body .aks.aks-card.aks-dark:hover,
+html body .aks.aks-card.aks-dark.aks-done:hover { border-color: var(--ak-bd-dark-hi) !important; }
+
+/* --- panel: powierzchnia na pelna szerokosc kontenera ---------------------
+   Pas, banda, sekcja z wlasnym tlem. Dostaje ten sam promien i te sama ramke,
+   ale nie unosi sie — uniesienie pasa przez cala szerokosc ekranu nie mowi
+   nic o klikalnosci, tylko szarpie. Promien 0 dla powierzchni pelnoekranowych. */
+html body .aks.aks-panel { border-radius: 4px !important; }
+html body .aks.aks-panel.aks-bleed { border-radius: 0 !important; }
+html body .aks.aks-panel.aks-bd { border-color: var(--ak-bd) !important; }
+html body .aks.aks-panel.aks-bd.aks-dark { border-color: var(--ak-bd-dark) !important; }
+html body .aks.aks-panel.aks-sh { box-shadow: var(--ak-sh-sm) !important; }
+
+/* --- rowne wysokosci w rzedzie -------------------------------------------
+   `align-items: start` na kontenerach dawal karty roznej wysokosci w 9 z 10
+   sekcji (na /academy 809 / 870 / 595 px). Stretch wyrownuje ramki, a
+   `margin-top:auto` na elemencie z CTA dosuwa przycisk do dolu, zeby rzad
+   konczyl sie rowno takze wewnatrz. */
+html body .aks-row { align-items: stretch !important; }
+html body .aks.aks-card.aks-col { display: flex !important; flex-direction: column !important; }
+html body .aks-bottom { margin-top: auto !important; }
+
+/* karta bywa o poziom glebiej niz dziecko siatki — wysokosc musi zejsc az do niej */
+html body .aks-fill { height: 100% !important; }
+html body .aks-fill.aks-card { height: auto !important; min-height: 100% !important; }
+
+/* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
+   Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>
+   z edytora systeme, ktorego nie da sie edytowac z repo. Tamte reguly nie
+   maja `!important`, wiec wystarczy je przebic stad. Odstawaly trzy rzeczy:
+   kontener 1140 zamiast 1120, rytm sekcji 120 zamiast 128 i wlasna krzywa
+   `--ease: cubic-bezier(.22,.61,.36,1)` na 146 przejsciach.
+   ⚠️ Blok musi byc TU, nie tylko w sales-page.css: /pitching-decoded laduje
+   homepage-live.css (jak /academy i /), a nie arkusz stron sprzedazowych. */
+html body .ak-book { --ease: cubic-bezier(.2,.6,.2,1) !important; }
+html body .ak-book .pdk-wrap { max-width: 1120px !important; }
+html body .ak-book .pdk-section { padding-top: clamp(72px,9vw,128px) !important; padding-bottom: clamp(72px,9vw,128px) !important; }
+
+
+
+/* --- ustawienia systemu ---------------------------------------------------
+   Przy prefers-reduced-motion znika ruch, nie tresc: uniesienia, przejscia,
+   wejscia i marquee. Regula jest szeroka celowo — obejmuje takze `pdkPulse`
+   na /pitching-decoded, ktora siedzi w inline <style> z edytora
+   (`.ak-book.pdk-on .pdk-dot`) i pulsowala bez konca niezaleznie od ustawien.
+   Wygrywa nie specyficznoscia, tylko `!important`: tamta regula go nie ma. */
+@media (prefers-reduced-motion: reduce) {
+  html body *, html body *::before, html body *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  html body .aks-rise, html body .aks-rise.aks-in { opacity: 1 !important; animation: none !important; }
+  html body .aks.aks-card:hover,
+  html body .aks.aks-card.aks-rise.aks-in:hover,
+  html body .aks.aks-card.aks-done:hover { transform: none !important; }
+}

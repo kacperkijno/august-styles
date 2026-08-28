@@ -1,3 +1,18 @@
+
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
 /* ============================================================
    AK Course Landing — sections used on every course sales page
    (Cultural Communication, How to Pitch, BMC, ...)
@@ -22,7 +37,7 @@
 .hero--course .hero__meta {
   display: flex;
   flex-wrap: wrap;
-  gap: 22px;
+  gap: 24px;
   margin-top: 22px;
   font-family: var(--sans);
   font-size: 13px;
@@ -40,7 +55,7 @@
 .problem__grid {
   display: grid;
   grid-template-columns: 5fr 6fr;
-  gap: clamp(40px, 6vw, 88px);
+  gap: clamp(32px, 6vw, 64px);
   align-items: center;
 }
 .problem__head { max-width: 22ch; }
@@ -57,7 +72,7 @@
   background: var(--ink);
   border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--ak-sh-md);
 }
 .problem__media img {
   width: 100%; height: 100%;
@@ -75,7 +90,7 @@
 .check-list li {
   display: grid;
   grid-template-columns: 22px 1fr;
-  gap: 14px;
+  gap: 12px;
   align-items: baseline;
   padding: 16px 0;
   border-top: 1px solid var(--ink-10);
@@ -105,7 +120,7 @@
 }
 
 @media (max-width: 880px) {
-  .problem__grid { grid-template-columns: 1fr; gap: 40px; }
+  .problem__grid { grid-template-columns: 1fr; gap: 32px; }
   .problem__media { aspect-ratio: 4 / 3; order: -1; }
 }
 
@@ -113,17 +128,17 @@
 .method3 {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 .method3__card {
   background: var(--cream);
   border: 1px solid var(--ink-10);
   border-radius: var(--radius-card);
   padding: 36px 30px 32px;
-  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 .method3__card:hover {
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--ak-sh-lg);
   border-color: var(--forest-30);
 }
 .method3__num {
@@ -158,7 +173,7 @@
 .learn__grid {
   display: grid;
   grid-template-columns: 6fr 5fr;
-  gap: clamp(40px, 6vw, 80px);
+  gap: clamp(32px, 6vw, 64px);
   align-items: center;
 }
 .learn__media {
@@ -167,7 +182,7 @@
   background: var(--ink);
   border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--ak-sh-md);
 }
 .learn__media img {
   width: 100%; height: 100%;
@@ -186,7 +201,7 @@
 .learn .btn { margin-top: 28px; }
 
 @media (max-width: 880px) {
-  .learn__grid { grid-template-columns: 1fr; gap: 40px; }
+  .learn__grid { grid-template-columns: 1fr; gap: 32px; }
   .learn__media { aspect-ratio: 4 / 3; }
 }
 
@@ -194,18 +209,18 @@
 .benefits {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 18px;
+  gap: 16px;
 }
 .benefit {
   background: var(--cream-soft);
   border: 1px solid var(--ink-10);
   border-radius: var(--radius-card);
   padding: 32px 28px 28px;
-  transition: box-shadow var(--t) var(--ease), border-color var(--t) var(--ease), background var(--t) var(--ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), background var(--ak-t-color) var(--ak-ease);
 }
 .benefit:hover {
   background: var(--cream);
-  box-shadow: var(--shadow-card-hover);
+  box-shadow: var(--ak-sh-lg);
   border-color: var(--forest-30);
 }
 .benefit__icon {
@@ -249,7 +264,7 @@
 .fit {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 20px;
+  gap: 16px;
 }
 .fit__card {
   background: var(--cream);
@@ -274,7 +289,7 @@
 .fit__list li {
   display: grid;
   grid-template-columns: 22px 1fr;
-  gap: 14px;
+  gap: 12px;
   align-items: baseline;
   padding: 14px 0;
   font-size: 15px;
@@ -293,14 +308,14 @@
 }
 .fit__card--no .fit__mark { color: var(--ink-50); }
 @media (max-width: 800px) {
-  .fit { grid-template-columns: 1fr; gap: 14px; }
+  .fit { grid-template-columns: 1fr; gap: 12px; }
 }
 
 /* ---------- AUTHOR (about August) ------------------------- */
 .author__grid {
   display: grid;
   grid-template-columns: 5fr 7fr;
-  gap: clamp(40px, 6vw, 80px);
+  gap: clamp(32px, 6vw, 64px);
   align-items: center;
 }
 .author__media {
@@ -309,7 +324,7 @@
   background: var(--ink);
   border-radius: var(--radius-card);
   overflow: hidden;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--ak-sh-md);
 }
 .author__media img {
   width: 100%; height: 100%;
@@ -336,7 +351,7 @@
   text-wrap: balance;
 }
 @media (max-width: 800px) {
-  .author__grid { grid-template-columns: 1fr; gap: 40px; }
+  .author__grid { grid-template-columns: 1fr; gap: 32px; }
   .author__media { aspect-ratio: 4 / 3; }
 }
 
@@ -371,13 +386,13 @@
   border: 1px solid var(--ink-10);
   border-radius: var(--radius-card);
   padding: 40px 36px;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--ak-sh-md);
 }
 .pricing__list { list-style: none; padding: 0; margin: 0 0 28px; }
 .pricing__list li {
   display: grid;
   grid-template-columns: 22px 1fr;
-  gap: 14px;
+  gap: 12px;
   align-items: baseline;
   padding: 14px 0;
   font-size: 15px;
@@ -414,14 +429,14 @@
   font-size: 16px;
   color: var(--ink);
   cursor: pointer;
-  transition: color var(--t) var(--ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 .faq__q:hover { color:var(--terracotta-dark); }
 .faq__icon {
   width: 16px; height: 16px;
   flex-shrink: 0;
   color:var(--terracotta-dark);
-  transition: transform var(--t) var(--ease);
+  transition: transform var(--ak-t-move) var(--ak-ease);
 }
 .faq__item[open] .faq__icon { transform: rotate(45deg); }
 .faq__a {
@@ -446,7 +461,7 @@
 .capture__grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: clamp(32px, 6vw, 72px);
+  gap: clamp(32px, 6vw, 64px);
   align-items: center;
 }
 .capture__title {

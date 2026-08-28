@@ -1,3 +1,19 @@
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
+
+
 /* ============================================================
    August Kjerland — Lesson page overrides for systeme.io
    Scope: body.ak-lesson (added via inline <script> in HTML box)
@@ -20,10 +36,10 @@ body.ak-lesson {
   --ak-ink-10:        rgba(45, 45, 45, 0.10);
   --ak-ease:          cubic-bezier(0.2, 0.6, 0.2, 1);
   --ak-t:             220ms;
-  --ak-shadow-sm:     0 2px 8px rgba(26, 60, 47, 0.04), 0 1px 2px rgba(26, 60, 47, 0.04);
-  --ak-shadow-md:     0 6px 20px rgba(26, 60, 47, 0.06), 0 2px 6px rgba(26, 60, 47, 0.04);
-  --ak-shadow-lg:     0 14px 36px rgba(26, 60, 47, 0.10), 0 4px 12px rgba(26, 60, 47, 0.06);
-  --ak-shadow-forest: 0 14px 36px rgba(26, 60, 47, 0.22), 0 4px 12px rgba(26, 60, 47, 0.14);
+  --ak-shadow-sm: var(--ak-sh-sm);
+  --ak-shadow-md: var(--ak-sh-md);
+  --ak-shadow-lg: var(--ak-sh-lg);
+  --ak-shadow-forest: var(--ak-sh-lg);
 }
 
 /* ---------- GLOBAL TYPE POLISH ---------------------------- */
@@ -62,10 +78,10 @@ body.ak-lesson .react-player video {
 }
 body.ak-lesson .react-player {
   box-shadow: var(--ak-shadow-lg);
-  transition: box-shadow var(--ak-t) var(--ak-ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease);
 }
 body.ak-lesson .react-player:hover {
-  box-shadow: 0 20px 50px rgba(26, 60, 47, 0.18), 0 6px 16px rgba(26, 60, 47, 0.10);
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ============================================================
@@ -76,10 +92,7 @@ body.ak-lesson .react-player:hover {
    ============================================================ */
 body.ak-lesson [size="4"] > div > [id^="row-"] {
   box-shadow: var(--ak-shadow-sm);
-  transition: transform var(--ak-t) var(--ak-ease),
-              box-shadow var(--ak-t) var(--ak-ease),
-              border-color var(--ak-t) var(--ak-ease),
-              opacity 600ms var(--ak-ease);
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), opacity var(--ak-t-in) var(--ak-ease);
 }
 body.ak-lesson [size="4"] > div > [id^="row-"]:hover {
   transform: translateY(-4px);
@@ -105,7 +118,7 @@ body.ak-lesson [id^="text-"][font-family^="NeueHaasDisplay"][font-size="13"] str
 
 /* Tip card terracotta number — subtle scale animation on card hover */
 body.ak-lesson [size="4"] > div > [id^="row-"] [font-family^="AdobeCaslonPro"][font-size="38"] {
-  transition: transform var(--ak-t) var(--ak-ease);
+  transition: transform var(--ak-t-move) var(--ak-ease);
   transform-origin: left center;
 }
 body.ak-lesson [size="4"] > div > [id^="row-"]:hover [font-family^="AdobeCaslonPro"][font-size="38"] {
@@ -136,9 +149,7 @@ body.ak-lesson .sc-jGKxIN i.fas {
   background: transparent !important;
   flex-shrink: 0 !important;
   box-sizing: border-box !important;
-  transition: background var(--ak-t) var(--ak-ease),
-              color var(--ak-t) var(--ak-ease),
-              transform var(--ak-t) var(--ak-ease);
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 /* Make FontAwesome glyph render properly inside our circle */
 body.ak-lesson .sc-jGKxIN i.fas.fa-check::before {
@@ -276,9 +287,8 @@ body.ak-lesson [data-test-ui="open-url-button"] {
   border: 0 !important;
   border-radius:4px !important;
   padding: 18px 36px !important;
-  box-shadow: none !important;
-  transition: background var(--ak-t) var(--ak-ease),
-              transform var(--ak-t) var(--ak-ease) !important;
+  box-shadow: var(--ak-sh-md);
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
   letter-spacing: 0.04em !important;
 }
 body.ak-lesson [data-test-ui="open-url-button"]:hover {
@@ -302,10 +312,7 @@ body.ak-lesson img { border-radius: 4px; }
 body.ak-lesson [size="4"] > div > [id^="row-"] {
   opacity: 0;
   transform: translateY(24px);
-  transition: opacity 600ms var(--ak-ease),
-              transform 600ms var(--ak-ease),
-              box-shadow var(--ak-t) var(--ak-ease),
-              border-color var(--ak-t) var(--ak-ease);
+  transition: opacity var(--ak-t-in) var(--ak-ease), transform var(--ak-t-in) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 body.ak-lesson [size="4"] > div > [id^="row-"].ak-in {
   opacity: 1;
@@ -321,8 +328,7 @@ body.ak-lesson [size="4"]:nth-child(3) > div > [id^="row-"].ak-in { transition-d
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"] {
   opacity: 0;
   transform: translateY(16px);
-  transition: opacity 700ms var(--ak-ease),
-              transform 700ms var(--ak-ease);
+  transition: opacity var(--ak-t-in) var(--ak-ease), transform var(--ak-t-in) var(--ak-ease);
 }
 body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="26"].ak-in {
   opacity: 1;
@@ -396,7 +402,7 @@ body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
 
 /* Deeper rest-state shadow on iceberg cards */
 body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
-  box-shadow: 0 2px 12px rgba(26, 60, 47, 0.06), 0 1px 3px rgba(26, 60, 47, 0.04) !important;
+  box-shadow: var(--ak-sh-sm);
 }
 
 /* Respect prefers-reduced-motion */
@@ -479,11 +485,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   border: 1px solid transparent;
   cursor: pointer;
   white-space: nowrap;
-  transition: background 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              color 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              border-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              transform 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              box-shadow 180ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease);
   text-transform: none;
   line-height: 1;
 }
@@ -503,7 +505,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   border-color: #0F2A1F;
   color: #F9F7F1 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.18);
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* GHOST — outline Forest, transparent bg */
@@ -535,7 +537,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   border-bottom: 1px solid #1A3C2F;
   border-radius: 0;
   text-transform: none;
-  transition: color 180ms ease, border-color 180ms ease, gap 180ms ease;
+  transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), gap var(--ak-t-move) var(--ak-ease);
 }
 .ak-btn--text:hover {
   color:#9A5832 !important;
@@ -556,7 +558,7 @@ body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
   background: #9A5832;
   border-color: #9A5832;
   color: #F9F7F1 !important;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* Ghost on dark — cream outline transparent */
@@ -644,7 +646,7 @@ body.ak-lesson .SIO-header > div {
 body.ak-lesson .SIO-header__logo {
   filter: brightness(0) invert(1) !important;
   max-height: 28px !important;
-  transition: opacity 180ms ease;
+  transition: opacity var(--ak-t-color) var(--ak-ease);
 }
 body.ak-lesson .SIO-header__logo:hover {
   opacity: 0.85;
@@ -735,7 +737,7 @@ body.ak-lesson button.SIO-course__button--previous-lecture {
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
   min-height: 40px !important;
-  transition: background 180ms ease, color 180ms ease, border-color 180ms ease;
+  transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 body.ak-lesson .SIO-course__button--previous-lecture:hover:not(:disabled),
 body.ak-lesson button.SIO-course__button--previous-lecture:hover:not(:disabled) {
@@ -772,9 +774,7 @@ html body button.SIO-course__button--next-lecture {
   font-size: 12px !important;
   letter-spacing: 0.06em !important;
   text-transform: uppercase !important;
-  transition: background 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              transform 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              box-shadow 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 body.ak-lesson .SIO-course__button--next-lecture:hover,
 body.ak-lesson button.SIO-course__button--next-lecture:hover,
@@ -783,7 +783,7 @@ html body button.SIO-course__button--next-lecture:hover {
   background-color: #0F2A1F !important;
   border-color: #0F2A1F !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.18) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* Progress bar */
@@ -800,7 +800,7 @@ body.ak-lesson .SIO-course__progress-bar > div {
   background: #B46A3C !important;
   background-color:#9A5832 !important;
   height: 100%;
-  transition: width 600ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: width var(--ak-t-in) var(--ak-ease);
 }
 body.ak-lesson .SIO-course__progress-bar > div > div {
   display: none !important; /* hide inner % label */
@@ -863,7 +863,7 @@ body.ak-lesson .SIO-course-modules-list__lecture a {
   line-height: 1.4 !important;
   color: rgba(45, 45, 45, 0.72) !important;
   letter-spacing: 0.01em !important;
-  transition: color 180ms ease;
+  transition: color var(--ak-t-color) var(--ak-ease);
   margin-top: 0 !important;
   padding-left: 0 !important;
 }
@@ -906,10 +906,8 @@ html body button.SIO-course__button--mark-as-completed {
   font-size: 13px !important;
   text-transform: uppercase !important;
   min-height: 56px !important;
-  box-shadow: 0 4px 16px rgba(26, 60, 47, 0.18), 0 1px 3px rgba(26, 60, 47, 0.10) !important;
-  transition: background 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              transform 180ms cubic-bezier(0.2, 0.6, 0.2, 1),
-              box-shadow 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
+  box-shadow: var(--ak-sh-lg);
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 body.ak-lesson .SIO-course__button--mark-as-completed:hover,
 html body button.SIO-course__button--mark-as-completed:hover {
@@ -918,7 +916,7 @@ html body button.SIO-course__button--mark-as-completed:hover {
   border-color: #0F2A1F !important;
   color: #F9F7F1 !important;
   transform: translateY(-2px) !important;
-  box-shadow: 0 8px 24px rgba(26, 60, 47, 0.28), 0 2px 6px rgba(26, 60, 47, 0.14) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 /* Bottom complete button wrapper — transparent (kill white card),
    match cream BG of rest of page */
@@ -929,7 +927,7 @@ body.ak-lesson [class*="bg-THEME-block-background"]:has(.SIO-course__button--mar
   background-color: transparent !important;
   padding: 32px 0 !important;
   margin-top: 0 !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
   border-radius: 0 !important;
 }
 
@@ -946,7 +944,7 @@ body.ak-lesson [data-testid="course-search-form"]:focus {
 /* Header logo — make it stand out on Forest BG */
 body.ak-lesson .SIO-header__logo {
   filter: brightness(0) invert(1) !important;
-  transition: filter 180ms ease;
+  transition: filter var(--ak-t-move) var(--ak-ease);
 }
 
 /* Iframe wrapper around lesson — transparent, no shadow, no card look */
@@ -955,7 +953,7 @@ body.ak-lesson .SIO-course-lecture__container {
   background: transparent !important;
   background-color: transparent !important;
   border-radius: 0 !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
 }
 /* Inner div that holds the iframe — also transparent */
 body.ak-lesson .SIO-course-lecture__container > div > div {
@@ -977,7 +975,7 @@ body.ak-lesson .SIO-course-lecture__container > div > div {
   border: 1px solid rgba(26, 60, 47, 0.10);
   border-radius:4px;
   overflow: hidden;
-  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.06), 0 2px 6px rgba(26, 60, 47, 0.04);
+  box-shadow: var(--ak-sh-sm);
   font-family: 'NeueHaasDisplay', 'Neue Haas Grotesk Display Pro', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   color: #2D2D2D;
   font-size: 16px;
@@ -1001,7 +999,7 @@ body.ak-lesson .SIO-course-lecture__container > div > div {
   padding: 18px 24px;
   vertical-align: top;
   border-top: 1px solid rgba(26, 60, 47, 0.08);
-  transition: background 220ms cubic-bezier(0.2, 0.6, 0.2, 1);
+  transition: background var(--ak-t-color) var(--ak-ease);
 }
 .ak-judgment tbody td:first-child {
   width: 42%;

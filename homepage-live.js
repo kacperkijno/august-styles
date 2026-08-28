@@ -638,7 +638,7 @@
    ============================================================================ */
 (function () {
   var SERIF = [112, 88, 54, 40, 36, 30, 24, 21];
-  var SANS  = [20, 15, 14, 12];
+  var SANS  = [20, 16, 14, 12];   /* 16px tekst podstawowy — decyzja Kacpra 28.08 (15 bylo za male) */
   var TOL   = 4;   /* dalej niz 4px od skali = zostawiamy w spokoju */
 
   function gcs(el) {
@@ -896,6 +896,331 @@
     }
     setTimeout(function () { przebieg(); pilnujRamek(); }, 900);
     setTimeout(function () { przebieg(); pilnujRamek(); }, 2600);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
+
+/* ============================================================================
+   SYSTEM POWIERZCHNI — nadawanie klas boksom (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/surfaces.html".
+   Reguly: blok "SYSTEM POWIERZCHNI" w homepage-live.css i sales-page.css.
+
+   Po co JS: systeme nie daje boksom klas. Tlo, ramka i cien siedza w
+   styled-components (`sc-dUYLmI epEwHm`), a te nazwy zmieniaja sie przy
+   kazdym rebuildzie platformy; ID `#section-xxx` ginie przy skasowaniu i
+   dodaniu bloku w edytorze. Skrypt czyta wyliczony styl i dokleja klase,
+   wartosci siedza w CSS — tak samo jak w przyciskach, typografii i polach.
+
+   Co robi:
+     1. dzieli powierzchnie na KARTY (wezsze niz kontener, unosza sie pod
+        kursorem) i PANELE (pas na pelna szerokosc, bez uniesienia),
+     2. dokleja wejscie `ak-rise` tam, gdzie element nie ma juz wlasnego,
+     3. rownia rzedy kart (`align-items: stretch`) i dosuwa CTA do dolu,
+     4. sciaga odstepy w siatkach do skali 8/12/16/24/32/48/64,
+        a odstep miedzy kartami do 32 px,
+     5. dociaga rytm sekcji 120 -> 128 px,
+     6. sprowadza czasy i krzywe przejsc systeme do dwoch czasow i jednej
+        krzywej (nasze wlasne elementy maja to juz w arkuszu).
+
+   ⚠️ Pulapki, ktore juz raz kosztowaly rundy poprawek przy przyciskach:
+     • Nie mierzymy wartosci, ktora sami nalozylismy — przed kazdym pomiarem
+       klasy `aks-*` schodza, a caly przebieg (zdjecie, pomiar, nadanie) jest
+       synchroniczny, wiec przegladarka nie zdazy odmalowac posredniego stanu.
+     • Klasyfikacja za wczesnie = migniecie. Zanim arkusze systeme sie uloza,
+       tla sa inne — stad przebiegi na `load` oraz po 900 i 2600 ms.
+     • Ramki systeme sa same-origin; arkusz jest im juz doklejany przez system
+       przyciskow, wiec wystarczy klasyfikowac ich zawartosc.
+     • Pola Stripe zostaja nietkniete (cross-origin, js.stripe.com).
+   ============================================================================ */
+(function () {
+  var SKALA = [8, 12, 16, 24, 32, 48, 64];
+  var RUCH = /^(transform|box-shadow|filter|height|max-height|min-height|width|max-width|translate|scale|rotate|all|backdrop-filter|padding|margin|gap)$/;
+  var KRZYWA = 'cubic-bezier(.2,.6,.2,1)';
+  var KRZYWA_LICZONA = 'cubic-bezier(0.2, 0.6, 0.2, 1)';
+  var MOJE = ['aks', 'aks-card', 'aks-panel', 'aks-dark', 'aks-md', 'aks-bd', 'aks-sh', 'aks-bleed', 'aks-col'];
+
+  function gcs(el) { var d = el.ownerDocument, w = (d && d.defaultView) || window; return w.getComputedStyle(el); }
+  function przezr(c) { return !c || c === 'transparent' || c === 'rgba(0, 0, 0, 0)' || /,\s*0\)\s*$/.test(c); }
+  function lum(c) {
+    var m = (c || '').match(/[\d.]+/g); if (!m) return 1;
+    var f = function (x) { x /= 255; return x <= 0.03928 ? x / 12.92 : Math.pow((x + 0.055) / 1.055, 2.4); };
+    return 0.2126 * f(+m[0]) + 0.7152 * f(+m[1]) + 0.0722 * f(+m[2]);
+  }
+  function snap(v) {
+    if (v <= 4) return v;                       /* wlosowe kreski zostaja */
+    if (v > 64) return 64;
+    var b = SKALA[0], d = 1e9;
+    for (var i = 0; i < SKALA.length; i++) { var dd = Math.abs(SKALA[i] - v); if (dd < d) { d = dd; b = SKALA[i]; } }
+    return b;
+  }
+  function tloPod(e) {                           /* pierwsze nieprzezroczyste tlo nad elementem */
+    var p = e;
+    while (p) { var c = gcs(p).backgroundColor; if (!przezr(c)) return c; p = p.parentElement; }
+    return null;
+  }
+
+  /* --- 1. kandydaci na powierzchnie ---------------------------------------- */
+  function pomijamy(e) {
+    if (e.closest('.akb, button, [id^="button-"], [id^="loginbutton-"], [id^="submit-button-"], [id^="payment-button-"]')) return true;
+    if (e.closest('header[type="WebsiteHeader"], nav')) return true;
+    var row = e.closest('[id^="row-"]');
+    if (row && row.querySelector('[id^="menu-"]')) return true;      /* pasek nawigacji lejka */
+    if (e.closest('.ak-marquee, .marquee, [class*="mq__"]')) return true;
+    if (e.matches('[id^="section-"]')) return true;                  /* sekcja to nosnik, nie powierzchnia */
+    /* Siatka z wlosowa kreska (odstep <= 4 px) to jedna tablica z liniami
+       podzialu, a nie rzad kart: /consulting "What you get" ma piec komorek
+       rozdzielonych kreska 1 px. Doklejenie kazdej wlasnej ramki i odstepu
+       32 px rozbilo tablice na piec pudelek z pasem tla pomiedzy. */
+    var rodzic = e.parentElement;
+    if (rodzic && rodzic.children.length >= 2) {
+      var sr = gcs(rodzic);
+      if (sr.display === 'grid' || sr.display === 'flex') {
+        var g = parseFloat(sr.gap);
+        if (!isNaN(g) && g > 0 && g <= 4) return true;   /* kreska, nie brak odstepu */
+      }
+    }
+    return false;
+  }
+  function zbierz(root) {
+    var l = root.querySelectorAll('div,article,aside,li,form,figure'), out = [];
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i], r = e.getBoundingClientRect();
+      if (r.width < 100 || r.width > 1600) continue;
+      if (r.height < 60 || r.height > 1600) continue;                /* powyzej = kontener strony, nie powierzchnia */
+      if (pomijamy(e)) continue;
+      out.push(e);
+    }
+    return out;
+  }
+
+  /* --- 2. pomiar (po zdjeciu wlasnych klas) --------------------------------- */
+  function pomiar(e) {
+    var s = gcs(e), r = e.getBoundingClientRect();
+    var tlo = s.backgroundColor;
+    var maTlo = !przezr(tlo);
+    var maRamke = parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' && !przezr(s.borderTopColor);
+    var maCien = s.boxShadow !== 'none';
+    var podSpodem = e.parentElement ? tloPod(e.parentElement) : null;
+    var wlasneTlo = maTlo && tlo !== podSpodem;
+    return {
+      jest: wlasneTlo || maRamke || maCien,
+      ciemno: lum(maTlo ? tlo : (podSpodem || 'rgb(249,247,241)')) < 0.35,
+      maRamke: maRamke, maCien: maCien, w: r.width, h: r.height,
+      wyroz: maCien && /0\.0[6-9]|0\.1/.test(s.boxShadow),           /* juz byl wyrozniony */
+      wlasneWejscie: s.animationName !== 'none'
+        || (/opacity/.test(s.transitionProperty) && parseFloat(s.transitionDuration) >= 0.4)
+    };
+  }
+
+  /* --- 3. nadanie klas ------------------------------------------------------ */
+  function zdejmij(e) { for (var i = 0; i < MOJE.length; i++) e.classList.remove(MOJE[i]); }
+
+  function maWlasneWejscie(e, d) {
+    if (d.wlasneWejscie) return true;
+    if (e.closest('.ak-anim, .ak-reveal, .ak-book, [class*="pdk-"]')) return true;
+    var c = e.className.toString();
+    return /\b(rv-in|rv-up|is-in|is-visible|ak-reveal|ak-in)\b/.test(c);
+  }
+
+  function klasyfikuj(root) {
+    var kand = zbierz(root);
+    for (var i = 0; i < kand.length; i++) zdejmij(kand[i]);          /* nie mierzymy siebie */
+    var dane = new Array(kand.length);
+    for (i = 0; i < kand.length; i++) dane[i] = pomiar(kand[i]);     /* jeden wymuszony przeliczek */
+
+    /* wrapper i karta o niemal tych samych wymiarach: liczy sie wewnetrzna */
+    var pomin = new Array(kand.length);
+    for (i = 0; i < kand.length; i++) {
+      if (!dane[i].jest) { pomin[i] = 1; continue; }
+      for (var j = 0; j < kand.length; j++) {
+        if (i === j || !dane[j].jest) continue;
+        if (kand[i].contains(kand[j]) && dane[j].w >= dane[i].w * 0.92 && dane[j].h >= dane[i].h * 0.85) { pomin[i] = 1; break; }
+      }
+    }
+
+    for (i = 0; i < kand.length; i++) {
+      if (pomin[i]) continue;
+      var e = kand[i], d = dane[i], kl = ['aks'];
+      if (d.w >= 1000) {                                             /* pas / banda */
+        kl.push('aks-panel');
+        if (d.w >= 1300) kl.push('aks-bleed');
+        if (d.maRamke) kl.push('aks-bd');
+        if (d.maCien) kl.push('aks-sh');
+      } else {
+        kl.push('aks-card');
+        if (d.wyroz) kl.push('aks-md');
+      }
+      if (d.ciemno) kl.push('aks-dark');
+      e.classList.add.apply(e.classList, kl);
+      if (!e.getAttribute('data-aks-rise') && kl.indexOf('aks-card') > -1 && !maWlasneWejscie(e, d)) {
+        e.classList.add('aks-rise');
+        e.setAttribute('data-aks-rise', '1');
+      }
+      e.setAttribute('data-aks', kl.indexOf('aks-card') > -1 ? 'card' : 'panel');
+    }
+  }
+
+  /* --- 4. rzedy: rowne wysokosci, odstep 32, CTA do dolu -------------------- */
+  function rzedy(root) {
+    var l = root.querySelectorAll('*');
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i], s = gcs(e);
+      if (s.display !== 'grid' && s.display !== 'flex') continue;
+      var r = e.getBoundingClientRect(); if (r.width < 200) continue;
+      if (e.closest('header[type="WebsiteHeader"], nav, .akb')) continue;
+
+      /* karta bywa o poziom (lub dwa) glebiej: systeme wklada miedzy siatke a
+         karte wlasna kolumne. Szukamy wiec w kazdym dziecku pojedynczej karty
+         o niemal jego szerokosci i zapamietujemy droge, zeby dala sie rozciagnac. */
+      var karty = [], drogi = [];
+      for (var k = 0; k < e.children.length; k++) {
+        var ch = e.children[k], kt = null;
+        if (ch.classList.contains('aks-card')) kt = ch;
+        else {
+          var w = ch.querySelectorAll('.aks-card');
+          if (w.length === 1 && w[0].getBoundingClientRect().width >= ch.getBoundingClientRect().width * 0.9) kt = w[0];
+        }
+        if (kt) { karty.push(kt); drogi.push(ch); }
+      }
+
+      if (karty.length >= 2) {
+        e.classList.add('aks-row');
+        /* 32 px tylko tam, gdzie odstep juz byl — wlosowa kreska zostaje kreska */
+        var stary = parseFloat(s.gap);
+        if (isNaN(stary) || stary >= 8) e.style.setProperty('gap', '32px', 'important');
+        for (k = 0; k < karty.length; k++) {
+          var kt = karty[k];
+          /* rozciagniete dziecko siatki musi przekazac wysokosc az do karty */
+          for (var w2 = kt; w2 && w2 !== e; w2 = w2.parentElement) w2.classList.add('aks-fill');
+          if (kt.classList.contains('aks-rise')) kt.style.animationDelay = (k * 90) + 'ms';
+          var cta = kt.querySelector('.akb, [id^="button-"], [id^="payment-button-"]');
+          if (!cta) continue;
+          var dz = cta;
+          while (dz.parentElement && dz.parentElement !== kt) dz = dz.parentElement;
+          if (dz.parentElement !== kt) continue;
+          kt.classList.add('aks-col');
+          dz.classList.add('aks-bottom');
+        }
+      } else if (s.display === 'grid') {
+        var g = s.gap || ''; if (!g || g === 'normal') continue;
+        var czesci = g.split(' ').map(function (x) { return parseFloat(x); });
+        if (czesci.some(isNaN)) continue;
+        var nowy = czesci.map(function (v) { return snap(v) + 'px'; }).join(' ');
+        if (nowy !== czesci.map(function (v) { return v + 'px'; }).join(' '))
+          e.style.setProperty('gap', nowy, 'important');
+      }
+    }
+  }
+
+  /* --- 5. rytm sekcji: 120 -> 128 ------------------------------------------ */
+  function sekcje() {
+    var szeroko = (window.innerWidth || 1440) >= 900;
+    var l = document.querySelectorAll('[id^="section-"], section');
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (!szeroko) {
+        if (e.getAttribute('data-aks-pad')) { e.style.removeProperty('padding-top'); e.style.removeProperty('padding-bottom'); e.removeAttribute('data-aks-pad'); }
+        continue;
+      }
+      var s = gcs(e);
+      if (parseInt(s.paddingTop, 10) === 120) { e.style.setProperty('padding-top', '128px', 'important'); e.setAttribute('data-aks-pad', '1'); }
+      if (parseInt(s.paddingBottom, 10) === 120) { e.style.setProperty('padding-bottom', '128px', 'important'); e.setAttribute('data-aks-pad', '1'); }
+    }
+  }
+
+  /* --- 6. ruch: dwa czasy, jedna krzywa ------------------------------------
+     Dotyczy wylacznie elementow systeme — nasze maja kanon w arkuszu.
+     Dominanta w pomiarze to 0.1 s na 671 elementach (sam box-shadow): tak
+     krotko, ze zmiany nie widac, wiec przejscie nie spelnia swojej roli. */
+  function ruch(root) {
+    var l = root.querySelectorAll('*');
+    for (var i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (e.getAttribute('data-aks-ruch')) continue;
+      var s = gcs(e);
+      if (!s.transitionDuration || s.transitionDuration === '0s') continue;
+      var props = s.transitionProperty.split(',');
+      var dur = s.transitionDuration.split(',');
+      var eas = s.transitionTimingFunction.split(/,(?![^(]*\))/);
+      var czasy = [], krzywe = [], trzeba = false;
+      for (var k = 0; k < props.length; k++) {
+        var prop = (props[k] || props[0] || '').trim();
+        var stare = parseFloat(dur[k] !== undefined ? dur[k] : dur[0]) || 0;   /* w sekundach */
+        /* dluzsze niz 400 ms to wejscie, a nie reakcja — zostaje 600 ms */
+        var cel = stare >= 0.4 ? '600ms' : (RUCH.test(prop) ? '220ms' : '180ms');
+        czasy.push(cel); krzywe.push(KRZYWA);
+        if (Math.abs(stare - parseFloat(cel) / 1000) > 0.001) trzeba = true;
+        if ((eas[k] !== undefined ? eas[k] : eas[0] || '').trim() !== KRZYWA_LICZONA) trzeba = true;
+      }
+      if (!trzeba) { e.setAttribute('data-aks-ruch', '1'); continue; }
+      try {
+        e.style.setProperty('transition-duration', czasy.join(', '), 'important');
+        e.style.setProperty('transition-timing-function', krzywe.join(', '), 'important');
+        e.setAttribute('data-aks-ruch', '1');
+      } catch (err) { }
+    }
+  }
+
+  /* --- 7. wejscie przy przewijaniu -----------------------------------------
+     Detekcja przez scroll, nie IntersectionObserver: IO nie odpalal dla
+     wezlow systeme przy poprzednim podejsciu (patrz initReveal wyzej). */
+  var czekaja = [];
+  function odsloniec(el) {
+    el.classList.add('aks-in');
+    var op = parseFloat((el.style.animationDelay || '0').replace(/[^\d.]/g, '')) || 0;
+    setTimeout(function () { el.classList.remove('aks-rise', 'aks-in'); el.classList.add('aks-done'); }, 700 + op);
+  }
+  function zbierzWejscia(root) {
+    var l = root.querySelectorAll('.aks-rise:not(.aks-in)');
+    for (var i = 0; i < l.length; i++) if (czekaja.indexOf(l[i]) < 0) czekaja.push(l[i]);
+  }
+  function odsloniecWidoczne() {
+    var vh = window.innerHeight || document.documentElement.clientHeight;
+    for (var k = czekaja.length - 1; k >= 0; k--) {
+      var r = czekaja[k].getBoundingClientRect();
+      if (r.top < vh * 0.92 && r.bottom > 0) { odsloniec(czekaja[k]); czekaja.splice(k, 1); }
+    }
+  }
+  var tyka = false;
+  function naScroll() {
+    if (tyka) return; tyka = true;
+    window.requestAnimationFrame(function () { odsloniecWidoczne(); tyka = false; });
+  }
+
+  /* --- przebieg ------------------------------------------------------------- */
+  var reduce = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function dokumenty() {
+    var d = [document], l = document.querySelectorAll('iframe');
+    for (var i = 0; i < l.length; i++) { try { if (l[i].contentDocument && l[i].contentDocument.body) d.push(l[i].contentDocument); } catch (e) { } }
+    return d;
+  }
+  function przebieg() {
+    try {
+      var docs = dokumenty();
+      for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
+      sekcje();
+      if (reduce) {
+        var l = document.querySelectorAll('.aks-rise');
+        for (i = 0; i < l.length; i++) { l[i].classList.remove('aks-rise'); l[i].classList.add('aks-done'); }
+      } else {
+        for (i = 0; i < docs.length; i++) zbierzWejscia(docs[i]);
+        odsloniecWidoczne();
+      }
+    } catch (e) { }
+  }
+
+  function start() {
+    przebieg();
+    if (!reduce) window.addEventListener('scroll', naScroll, { passive: true });
+    if (document.readyState !== 'complete') window.addEventListener('load', function () { setTimeout(przebieg, 200); });
+    setTimeout(przebieg, 900);
+    setTimeout(przebieg, 2600);
+    /* siatka bezpieczenstwa: nic nie zostaje niewidoczne, nawet gdy scroll nie padnie */
+    setTimeout(function () { while (czekaja.length) odsloniec(czekaja.pop()); }, 5000);
   }
 
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);

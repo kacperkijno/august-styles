@@ -9,7 +9,22 @@
    contact-form.css (loaded inside the form iframe).
    ============================================================ */
 
-@font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
+@font-face{font-family:"AKCaslon";
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
+src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regular.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
 @font-face{font-family:"AKCaslon";src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Italic.woff") format("woff");font-weight:400;font-style:italic;font-display:swap;}
 @font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayLight.ttf") format("truetype");font-weight:300;font-style:normal;font-display:swap;}
 @font-face{font-family:"AKHaas";src:url("https://kacperkijno.github.io/august-styles/fonts/NeueHaasDisplayRoman.ttf") format("truetype");font-weight:400;font-style:normal;font-display:swap;}
@@ -20,9 +35,9 @@
   --terracotta:#B46A3C; --terracotta-dark:#9A5832; --terracotta-deco:#D9A47A;
   --ink:#2D2D2D; --sage:#D7DDD8;
   --serif:"AKCaslon","Adobe Caslon Pro",Georgia,"Times New Roman",serif;
-  --sans:"AKHaas","Neue Haas Grotesk Display Pro","Helvetica Neue",Inter,system-ui,sans-serif;
-  --container:1140px; --gutter:clamp(20px,4vw,40px);
-  --ease:cubic-bezier(.2,.6,.2,1); --t:180ms;
+  --sans:"neue-haas-grotesk-display","AKHaas","Neue Haas Grotesk Display Pro","Helvetica Neue",system-ui,sans-serif;
+  --container:1120px; --gutter:clamp(20px,4vw,40px);
+  --ease: cubic-bezier(.2,.6,.2,1); --t:180ms;
   font-family:var(--sans); font-weight:400; color:var(--cream); line-height:1.6;
   text-align:left; -webkit-font-smoothing:antialiased; -moz-osx-font-smoothing:grayscale;
   background:var(--forest); width:100%;
@@ -33,7 +48,7 @@
 .akt-wrap{width:100%;max-width:var(--container);margin-inline:auto;padding-inline:var(--gutter);}
 .akt-sec{padding-top:clamp(120px,16vh,168px);padding-bottom:clamp(72px,11vw,120px);}
 
-.akt-grid{display:grid;grid-template-columns:5fr 6fr;gap:clamp(40px,7vw,96px);align-items:start;}
+.akt-grid{display:grid;grid-template-columns:5fr 6fr;gap: clamp(32px,7vw,64px);align-items:start;}
 
 /* ---- left column ---- */
 .akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
@@ -41,15 +56,15 @@
 .akt-h1 em{font-style:italic;color:var(--terracotta-deco);}
 .akt-lead{font-family:var(--sans);font-weight:400;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:rgba(249,247,241,.82);max-width:46ch;margin:24px 0 0;}
 
-.akt-details{margin:48px 0 0;display:flex;flex-direction:column;gap:28px;}
+.akt-details{margin:48px 0 0;display:flex;flex-direction:column;gap: 24px;}
 .akt-detail__label{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:rgba(249,247,241,.5);margin:0 0 8px;}
 .akt-detail__value{font-family:var(--serif);font-size:22px;color:var(--cream);}
-.akt-detail__value a{border-bottom:1px solid rgba(217,164,122,.45);padding-bottom:2px;color:var(--terracotta-deco);transition:border-color var(--t) var(--ease);}
+.akt-detail__value a{border-bottom:1px solid rgba(217,164,122,.45);padding-bottom:2px;color:var(--terracotta-deco);transition: border-color var(--ak-t-color) var(--ak-ease);}
 .akt-detail__value a:hover{border-color:var(--terracotta-deco);}
 .akt-detail__value--plain{font-size:18px;font-family:var(--sans);font-weight:400;color:rgba(249,247,241,.85);}
 
-.akt-social{display:flex;gap:12px;margin-top:4px;}
-.akt-social a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(249,247,241,.2);color:rgba(249,247,241,.72);transition:color var(--t) var(--ease),border-color var(--t) var(--ease),transform var(--t) var(--ease);}
+.akt-social{display:flex;gap: 12px;margin-top:4px;}
+.akt-social a{display:inline-flex;align-items:center;justify-content:center;width:42px;height:42px;border-radius:50%;border:1px solid rgba(249,247,241,.22);color:rgba(249,247,241,.72);transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);}
 .akt-social a:hover{color:var(--cream);border-color:var(--terracotta-dark);transform:translateY(-2px);}
 .akt-social svg{width:18px;height:18px;}
 
@@ -60,5 +75,5 @@
 .akt-formwrap{width:100%;}
 
 @media (max-width:880px){
-  .akt-grid{grid-template-columns:1fr;gap:48px;}
+  .akt-grid{grid-template-columns:1fr;gap: 48px;}
 }

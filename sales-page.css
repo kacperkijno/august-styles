@@ -1,4 +1,19 @@
 @import url("https://use.typekit.net/luy3mna.css");
+
+/* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
+   Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
+   Forestem, nigdy czernia ani szaroscia. Tokeny powtarzaja sie w kazdym
+   arkuszu, bo nie kazda strona laduje tokens.css. */
+:root{
+  --ak-sh-sm:0 1px 12px rgba(26,60,47,.04);
+  --ak-sh-md:0 2px 16px rgba(26,60,47,.06);
+  --ak-sh-lg:0 8px 32px rgba(26,60,47,.09);
+  --ak-ease:cubic-bezier(.2,.6,.2,1);
+  --ak-t-color:180ms; --ak-t-move:220ms; --ak-t-in:600ms;
+  --ak-bd:rgba(45,45,45,.10);      --ak-bd-hi:rgba(45,45,45,.18);
+  --ak-bd-dark:rgba(249,247,241,.22); --ak-bd-dark-hi:rgba(249,247,241,.34);
+}
+
 /* ============================================================================
    AK FONTY — jedyne zrodlo prawdy (2026-08-27)
    ----------------------------------------------------------------------------
@@ -181,13 +196,13 @@ html body.ak-sales-page #text-e82ad3f5 * {
 html body.ak-sales-page #text-1ec6b045,
 html body.ak-sales-page #text-0fc76125,
 html body.ak-sales-page #text-35efacba {
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.6 !important;
 }
 html body.ak-sales-page #text-1ec6b045 *,
 html body.ak-sales-page #text-0fc76125 *,
 html body.ak-sales-page #text-35efacba * {
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.6 !important;
 }
 /* Bold inside method body — proper bold weight */
@@ -213,7 +228,7 @@ html body.ak-sales-page #faq-02ada463 {
   padding: 0 !important;
   max-width: 760px !important;
   margin-inline: auto !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
 }
 html body.ak-sales-page #faq-02ada463 > div {
   background: transparent !important;
@@ -223,7 +238,7 @@ html body.ak-sales-page #faq-02ada463 > div {
   border-radius: 0 !important;
   margin: 0 !important;
   padding: 0 !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
 }
 html body.ak-sales-page #faq-02ada463 > div:first-child {
   border-top: 1px solid var(--ak-ink-10) !important;
@@ -234,7 +249,7 @@ html body.ak-sales-page #faq-02ada463 > div > div:first-child {
   font-size: 17px !important;
   padding: 20px 4px !important;
   color: var(--ak-ink) !important;
-  transition: color 180ms var(--ak-ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
   display: flex !important;
   align-items: center !important;
   justify-content: space-between !important;
@@ -250,7 +265,7 @@ html body.ak-sales-page #faq-02ada463 > div > div:first-child > i {
   font-size: 14px !important;
   margin-left: 12px !important;
   flex-shrink: 0;
-  transition: transform 180ms var(--ak-ease);
+  transition: transform var(--ak-t-move) var(--ak-ease);
 }
 /* Answer wrapper — second div */
 html body.ak-sales-page #faq-02ada463 > div > div:nth-child(2) {
@@ -258,7 +273,7 @@ html body.ak-sales-page #faq-02ada463 > div > div:nth-child(2) {
   background: transparent !important;
 }
 html body.ak-sales-page #faq-02ada463 > div > div:nth-child(2) p {
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.65 !important;
   margin: 0 !important;
 }
@@ -271,7 +286,7 @@ html body.ak-sales-page #faq-02ada463 > div > div:nth-child(2) p {
    ============================================================ */
 html body.ak-sales-page #row-3c3ada1d {
   position: relative !important;
-  box-shadow: 0 8px 32px rgba(26, 60, 47, 0.09) !important;
+  box-shadow: var(--ak-sh-md);
   border-color: rgba(26, 60, 47, 0.20) !important;
   overflow: hidden !important;
   border-radius:4px !important;
@@ -320,12 +335,12 @@ html body.ak-sales-page #row-3c3ada1d::before {
 body.ak-sales-page #row-7caae451,
 body.ak-sales-page #row-37f23e4b,
 body.ak-sales-page #row-d68fecfe {
-  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease), transform 220ms var(--ak-ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 body.ak-sales-page #row-7caae451:hover,
 body.ak-sales-page #row-37f23e4b:hover,
 body.ak-sales-page #row-d68fecfe:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.14) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(26, 60, 47, 0.30) !important;
   transform: translateY(-2px);
 }
@@ -336,11 +351,11 @@ body.ak-sales-page #row-d68fecfe:hover {
    ============================================================ */
 body.ak-sales-page #row-521edb5a,
 body.ak-sales-page #row-7dc91164 {
-  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease);
 }
 body.ak-sales-page #row-521edb5a:hover,
 body.ak-sales-page #row-7dc91164:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(26, 60, 47, 0.25) !important;
 }
 
@@ -353,7 +368,7 @@ body.ak-sales-page #row-049130fc,
 body.ak-sales-page #row-2e2e7498,
 body.ak-sales-page #row-a7eeda50,
 body.ak-sales-page #row-563245f5 {
-  transition: box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease), transform 220ms var(--ak-ease);
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 body.ak-sales-page #row-91624864:hover,
 body.ak-sales-page #row-bd18b786:hover,
@@ -361,7 +376,7 @@ body.ak-sales-page #row-049130fc:hover,
 body.ak-sales-page #row-2e2e7498:hover,
 body.ak-sales-page #row-a7eeda50:hover,
 body.ak-sales-page #row-563245f5:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: var(--ak-forest) !important;
   background-color: var(--ak-cream) !important;
   transform: translateY(-2px);
@@ -399,7 +414,7 @@ html body.ak-sales-page div:has(> picture > #image-4ad0750d) {
   justify-content: center !important;
   padding: 12px !important;
   margin-bottom: 22px !important;
-  transition: border-color 220ms var(--ak-ease), color 220ms var(--ak-ease) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease) !important;
 }
 /* On card hover, icon tile turns terracotta border */
 html body.ak-sales-page #row-91624864:hover div:has(> picture > img),
@@ -429,7 +444,7 @@ html body.ak-sales-page #image-4ad0750d {
    consistent with rest of buttons.
    ============================================================ */
 body.ak-sales-page #button-e9b03c0b {
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 body.ak-sales-page #button-e9b03c0b:hover {
   background: #122e23 !important; /* darker forest */
@@ -449,7 +464,7 @@ body.ak-sales-page #section-802759d8,
 body.ak-sales-page #section-0a23378e,
 body.ak-sales-page #section-39e4621b,
 body.ak-sales-page #section-33385ffe {
-  border-top: 1px solid rgba(45, 45, 45, 0.04);
+  border-top: 1px solid rgba(45,45,45,.10);
 }
 
 /* ============================================================
@@ -503,18 +518,18 @@ body.ak-sales-page #text-4db96d8f p em {
 body.ak-sales-page #button-c9add3ad,
 body.ak-sales-page #button-84ddf280,
 body.ak-sales-page #button-29d525d5 {
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 body.ak-sales-page #button-c9add3ad:hover,
 body.ak-sales-page #button-84ddf280:hover {
   background: #9A5832 !important; /* darker terracotta */
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 body.ak-sales-page #button-29d525d5:hover {
   background: #122e23 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ============================================================
@@ -547,7 +562,7 @@ html body.ak-sales-page #section-41315db6 {
   margin: 0 !important;
   padding: 14px 40px !important;
   background: transparent !important;
-  transition: background 180ms var(--ak-ease), backdrop-filter 180ms var(--ak-ease), padding 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), backdrop-filter var(--ak-t-move) var(--ak-ease), padding var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
   border-bottom: 1px solid transparent;
 }
 html body.ak-sales-page.is-scrolled #section-41315db6 {
@@ -556,25 +571,25 @@ html body.ak-sales-page.is-scrolled #section-41315db6 {
   -webkit-backdrop-filter: saturate(1.4) blur(10px);
   border-bottom-color: rgba(45, 45, 45, 0.08);
   padding: 8px 40px !important;
-  box-shadow: 0 4px 24px rgba(26, 60, 47, 0.06);
+  box-shadow: var(--ak-sh-sm);
 }
 html body.ak-sales-page #section-41315db6 a.sc-hBtRBE {
   color: rgba(249, 247, 241, 0.92) !important;
-  transition: color 180ms var(--ak-ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 html body.ak-sales-page.is-scrolled #section-41315db6 a.sc-hBtRBE {
   color: var(--ak-ink) !important;
 }
 html body.ak-sales-page #section-41315db6 .sc-gEkIjA span {
   background: rgba(249, 247, 241, 0.92) !important;
-  transition: background 180ms var(--ak-ease);
+  transition: background var(--ak-t-color) var(--ak-ease);
 }
 html body.ak-sales-page.is-scrolled #section-41315db6 .sc-gEkIjA span {
   background: var(--ak-ink) !important;
 }
 html body.ak-sales-page #section-41315db6 #image-f14191f6 {
   filter: brightness(0) invert(1);
-  transition: filter 180ms var(--ak-ease);
+  transition: filter var(--ak-t-move) var(--ak-ease);
 }
 html body.ak-sales-page.is-scrolled #section-41315db6 #image-f14191f6 {
   filter: none;
@@ -616,18 +631,18 @@ html body.ak-sales-page #section-8f394858 {
   backdrop-filter: saturate(1.4) blur(10px) !important;
   -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
   border-bottom: 1px solid rgba(45, 45, 45, 0.08) !important;
-  transition: box-shadow 180ms var(--ak-ease) !important;
-  box-shadow: none !important;
+  transition: box-shadow var(--ak-t-move) var(--ak-ease) !important;
+  box-shadow: var(--ak-sh-md);
 }
 html body.ak-sales-page.is-scrolled #section-05163fa3,
 html body.ak-sales-page.is-scrolled #section-8f394858 {
-  box-shadow: 0 4px 24px rgba(26, 60, 47, 0.06) !important;
+  box-shadow: var(--ak-sh-sm);
 }
 /* Nav links — always ink */
 html body.ak-sales-page #section-05163fa3 a.sc-hBtRBE,
 html body.ak-sales-page #section-8f394858 a.sc-hBtRBE {
   color: var(--ak-ink) !important;
-  transition: color 160ms var(--ak-ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 html body.ak-sales-page #section-05163fa3 a.sc-hBtRBE:hover,
 html body.ak-sales-page #section-8f394858 a.sc-hBtRBE:hover {
@@ -714,7 +729,7 @@ html body.ak-sales-page [id^="bulletlist-"] ul li {
   margin: 0 !important;
   border-top: 1px solid var(--ak-ink-10);
   align-items: baseline !important;
-  gap: 14px;
+  gap: 12px;
   font-size: 15.5px !important;
   line-height: 1.6 !important;
 }
@@ -751,7 +766,7 @@ html body.ak-sales-page #bulletlist-bd18b09a ul li i {
    item, but keep dividers between others, slightly tighter. */
 html body.ak-sales-page #bulletlist-f2677d28 ul li {
   padding: 12px 0 !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
 }
 
 /* ============================================================
@@ -823,7 +838,7 @@ html body.ak-sales-page #bulletlist-b07c307b ul li,
 html body.ak-sales-page #bulletlist-bd18b09a ul li {
   border-top: 0 !important;
   padding: 10px 0 !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   margin: 0 !important;
 }
 html body.ak-sales-page #bulletlist-b07c307b,
@@ -1013,16 +1028,14 @@ html body.ak-sales-page #row-40f16b1e,
 html body.ak-sales-page #row-49ef1b33,
 html body.ak-sales-page #row-58e1a13b,
 html body.ak-sales-page #row-7a4c9a63 {
-  transition: box-shadow 220ms var(--ak-ease),
-              border-color 220ms var(--ak-ease),
-              transform 220ms var(--ak-ease) !important;
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #row-ad731254:hover,
 html body.ak-sales-page #row-40f16b1e:hover,
 html body.ak-sales-page #row-49ef1b33:hover,
 html body.ak-sales-page #row-58e1a13b:hover,
 html body.ak-sales-page #row-7a4c9a63:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(26, 60, 47, 0.30) !important;
   transform: translateY(-2px);
 }
@@ -1038,21 +1051,19 @@ html body.ak-sales-page #button-1146e060,
 html body.ak-sales-page #button-a29886a8,
 html body.ak-sales-page #button-79e8c21d,
 html body.ak-sales-page #button-b4d9f586 {
-  transition: background 180ms var(--ak-ease),
-              transform 180ms var(--ak-ease),
-              box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-1146e060:hover,
 html body.ak-sales-page #button-a29886a8:hover,
 html body.ak-sales-page #button-79e8c21d:hover {
   background: #122e23 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(26, 60, 47, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 html body.ak-sales-page #button-b4d9f586:hover {
   background: #9A5832 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ============================================================
@@ -1079,7 +1090,7 @@ html body.ak-sales-page #section-6ddc3998 {
 /* Nav links — dark ink from the start */
 html body.ak-sales-page #section-6ddc3998 a.sc-hBtRBE {
   color: var(--ak-ink) !important;
-  transition: color 180ms var(--ak-ease);
+  transition: color var(--ak-t-color) var(--ak-ease);
 }
 html body.ak-sales-page #section-6ddc3998 a.sc-hBtRBE:hover {
   color:var(--ak-terracotta-dark) !important;
@@ -1101,7 +1112,7 @@ html body.ak-sales-page #button-1146e060 {
 html body.ak-sales-page #button-1146e060:hover {
   background: #9A5832 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ============================================================
@@ -1173,7 +1184,7 @@ html body.ak-sales-page #row-951b3fa3,
 html body.ak-sales-page #row-5aee5a48,
 html body.ak-sales-page #row-94027038,
 html body.ak-sales-page #row-3de40dbd {
-  transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
   cursor: default;
 }
 html body.ak-sales-page #row-8db88b96:hover,
@@ -1185,7 +1196,7 @@ html body.ak-sales-page #row-5aee5a48:hover,
 html body.ak-sales-page #row-94027038:hover,
 html body.ak-sales-page #row-3de40dbd:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(180, 106, 60, 0.35) !important;
 }
 
@@ -1228,17 +1239,17 @@ html body.ak-sales-page #text-14ed6e08 strong {
 
 /* Download PDF (cream, forest text) */
 html body.ak-sales-page #button-c0cba054 {
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-c0cba054:hover {
   background: #ffffff !important;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* Back to site (transparent outline) */
 html body.ak-sales-page #button-4bb97849 {
-  transition: background 180ms var(--ak-ease), border-color 180ms var(--ak-ease), transform 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-4bb97849:hover {
   background: rgba(249, 247, 241, 0.10) !important;
@@ -1249,12 +1260,12 @@ html body.ak-sales-page #button-4bb97849:hover {
 /* See the course (terracotta) — already terracotta by default systeme styling */
 html body.ak-sales-page #button-da2b6df3 {
   background: var(--ak-terracotta) !important;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-da2b6df3:hover {
   background: #9A5832 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* "Going deeper" eyebrow + headline tightening in soft-pitch section */
@@ -1299,7 +1310,7 @@ html body.ak-sales-page #section-611e31fb select {
   background-color: var(--ak-cream) !important;
   border: 1px solid rgba(45, 45, 45, 0.10) !important;
   border-radius: 4px !important;
-  transition: border-color 160ms var(--ak-ease), box-shadow 160ms var(--ak-ease), background 160ms var(--ak-ease) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), background var(--ak-t-color) var(--ak-ease) !important;
 }
 html body.ak-sales-page #section-611e31fb input[type="text"]:hover,
 html body.ak-sales-page #section-611e31fb input[type="email"]:hover,
@@ -1334,7 +1345,7 @@ html body.ak-sales-page #section-611e31fb [data-test-id^="payment-method"] {
   border-radius:4px !important;
   padding: 14px 16px !important;
   background: var(--ak-cream) !important;
-  transition: border-color 160ms var(--ak-ease), background 160ms var(--ak-ease) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), background var(--ak-t-color) var(--ak-ease) !important;
   margin-bottom: 8px !important;
 }
 html body.ak-sales-page #section-611e31fb [data-test-id^="payment-method"]:hover {
@@ -1394,12 +1405,12 @@ html body.ak-sales-page #row-f9afb997 {
   background: var(--ak-cream-soft, rgb(243, 240, 231)) !important;
   border: 1px solid rgba(45, 45, 45, 0.10) !important;
   border-radius: 4px !important;
-  transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
-  box-shadow: 0 1px 2px rgba(26, 60, 47, 0.04) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
+  box-shadow: var(--ak-sh-sm);
 }
 html body.ak-sales-page #row-f9afb997:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.08) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(180, 106, 60, 0.30) !important;
 }
 html body.ak-sales-page #text-72c395e5 p {
@@ -1444,12 +1455,12 @@ html body.ak-sales-page #paymentbutton-c8aeb783 {
   border-radius: 4px !important;
   font-weight: 500 !important;
   letter-spacing: 0.04em !important;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #paymentbutton-c8aeb783:hover {
   background: #122e23 !important;
   transform: translateY(-1px);
-  box-shadow: 0 10px 28px rgba(26, 60, 47, 0.25) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ----- Terms / Contact fine print ----- */
@@ -1515,7 +1526,7 @@ html body.ak-sales-page #text-df5b324f * {
 
 /* ----- Hero photo: floating shadow (radius 4px already set in editor) ----- */
 html body.ak-sales-page #image-05ba52b8 {
-  box-shadow: 0 24px 60px rgba(26, 60, 47, 0.18) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ----- Buttons: design-system radius 8px + hover lift.
@@ -1526,18 +1537,18 @@ html body.ak-sales-page #button-e14c6387,
 html body.ak-sales-page #button-dc8923b7,
 html body.ak-sales-page #button-1119cf8c {
   border-radius:4px !important;
-  transition: background-color 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-e14c6387:hover,
 html body.ak-sales-page #button-dc8923b7:hover {
   background: #122e23 !important;
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(26, 60, 47, 0.25) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 html body.ak-sales-page #button-432ec8bd:hover,
 html body.ak-sales-page #button-1119cf8c:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(26, 60, 47, 0.20) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ----- Facts strip (When / Length / Where / Price): labels as
@@ -1600,16 +1611,14 @@ html body.ak-sales-page #row-0113e043,
 html body.ak-sales-page #row-ccda3c39,
 html body.ak-sales-page #row-2e1200d2,
 html body.ak-sales-page #row-4bdb9391 {
-  transition: box-shadow 220ms var(--ak-ease),
-              border-color 220ms var(--ak-ease),
-              transform 220ms var(--ak-ease) !important;
+  transition: box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #row-ba31b918:hover,
 html body.ak-sales-page #row-0113e043:hover,
 html body.ak-sales-page #row-ccda3c39:hover,
 html body.ak-sales-page #row-2e1200d2:hover,
 html body.ak-sales-page #row-4bdb9391:hover {
-  box-shadow: 0 6px 28px rgba(26, 60, 47, 0.12) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(26, 60, 47, 0.30) !important;
   transform: translateY(-2px);
 }
@@ -1634,13 +1643,13 @@ html body.ak-sales-page #text-30eb9712 p::before {
 html body.ak-sales-page #row-a74c7329 {
   background: var(--ak-cream) !important;
   border: 1px solid var(--ak-ink-10) !important;
-  box-shadow: 0 18px 50px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-md);
 }
 
 /* ----- Form inputs: radius 8px, forest focus ----- */
 html body.ak-sales-page #section-89f347ed input {
   border-radius:4px !important;
-  transition: border-color 180ms var(--ak-ease), background-color 180ms var(--ak-ease) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), background-color var(--ak-t-color) var(--ak-ease) !important;
 }
 html body.ak-sales-page #section-89f347ed input:focus {
   outline: none !important;
@@ -1717,7 +1726,7 @@ html body.ak-sales-page .footer__social a {
   border-radius: 50% !important;
   border: 1px solid rgba(249, 247, 241, 0.18) !important;
   color: rgba(249, 247, 241, 0.7) !important;
-  transition: color 0.2s ease, border-color 0.2s ease, transform 0.2s ease !important;
+  transition: color var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page .footer__social a:hover {
   color: var(--ak-cream) !important;
@@ -1887,16 +1896,16 @@ html body.ak-sales-page #headline-976bde7f * {
 /* Add to calendar (cream, forest text) */
 html body.ak-sales-page #button-1df4e7e7 {
   background: var(--ak-cream) !important;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-1df4e7e7:hover {
   background: #ffffff !important;
   transform: translateY(-1px);
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.18) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 /* Back to the site (transparent outline) */
 html body.ak-sales-page #button-d83f0af9 {
-  transition: background 180ms var(--ak-ease), border-color 180ms var(--ak-ease), transform 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-d83f0af9:hover {
   background: rgba(249, 247, 241, 0.10) !important;
@@ -1906,12 +1915,12 @@ html body.ak-sales-page #button-d83f0af9:hover {
 /* Get the free playbook (terracotta) */
 html body.ak-sales-page #button-83c03eb1 {
   background: var(--ak-terracotta) !important;
-  transition: background 180ms var(--ak-ease), transform 180ms var(--ak-ease), box-shadow 180ms var(--ak-ease) !important;
+  transition: background var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
 }
 html body.ak-sales-page #button-83c03eb1:hover {
   background: #9A5832 !important;
   transform: translateY(-1px);
-  box-shadow: 0 6px 20px rgba(180, 106, 60, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
 }
 
 /* ----- "What to do next" lead: same as cc-thanks text-946dd6f9 ----- */
@@ -1941,14 +1950,14 @@ html body.ak-sales-page #text-0eeae616 p span {
 html body.ak-sales-page #row-34fad46c,
 html body.ak-sales-page #row-46af48e8,
 html body.ak-sales-page #row-80e3d619 {
-  transition: transform 220ms var(--ak-ease), box-shadow 220ms var(--ak-ease), border-color 220ms var(--ak-ease) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
   cursor: default;
 }
 html body.ak-sales-page #row-34fad46c:hover,
 html body.ak-sales-page #row-46af48e8:hover,
 html body.ak-sales-page #row-80e3d619:hover {
   transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(26, 60, 47, 0.10) !important;
+  box-shadow: var(--ak-sh-lg);
   border-color: rgba(180, 106, 60, 0.35) !important;
 }
 
@@ -2010,7 +2019,7 @@ html body.ak-sales-page #text-4353c41d * {
   /* Website ma na przycisku 1 px obramowania — bez tego CTA w lejkach bylo
      o 2 px nizsze niz "Log in". */
   border: 1px solid transparent !important;
-  transition: background-color 180ms cubic-bezier(0.2, 0.6, 0.2, 1) !important;
+  transition: background-color var(--ak-t-color) var(--ak-ease) !important;
 }
 [id^="row-"]:has([id^="menu-"]) [id^="button-"]:hover {
   background-color: #142E24 !important;
@@ -2059,11 +2068,10 @@ html body.ak-sales-page #text-4353c41d * {
      jest ciemne hero. */
   background: rgba(249, 247, 241, 0.94) !important;
   border-bottom: 1px solid rgba(45, 45, 45, 0.1) !important;
-  box-shadow: 0 1px 12px rgba(26, 60, 47, 0.04) !important;
+  box-shadow: var(--ak-sh-sm);
   -webkit-backdrop-filter: saturate(1.4) blur(10px) !important;
   backdrop-filter: saturate(1.4) blur(10px) !important;
-  transition: background 220ms ease, backdrop-filter 220ms ease,
-              border-color 220ms ease, box-shadow 220ms ease !important;
+  transition: background var(--ak-t-color) var(--ak-ease), backdrop-filter var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease) !important;
   /* Zawartosc paska w kontenerze 1120 px, wysrodkowana — tak jak na Website.
      Bez tego logo lezalo przy samej krawedzi okna, a CTA przy przeciwnej,
      przez co pasek wygladal na rozciagniety wzgledem reszty serwisu.
@@ -2082,7 +2090,7 @@ html body.ak-sales-page #text-4353c41d * {
 [id^="row-"]:has([id^="menu-"]).ak-nav-over-hero {
   background: transparent !important;
   border-bottom-color: transparent !important;
-  box-shadow: none !important;
+  box-shadow: var(--ak-sh-md);
   -webkit-backdrop-filter: none !important;
   backdrop-filter: none !important;
 }
@@ -3236,6 +3244,7 @@ html body .akc-btn .akc-arrow { display: none !important; }
 /* --- rodziny ------------------------------------------------------------- */
 html body .akt.akt-serif, html body .akt.akt-serif * {
   font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
+
 }
 html body .akt.akt-sans, html body .akt.akt-sans * {
   font-family: "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif !important;
@@ -3254,10 +3263,10 @@ html body .akt[class*="akt-h"] { font-weight:400 !important; }
 
 /* --- skala tekstu --------------------------------------------------------- */
 html body .akt.akt-t20 { font-size:20px !important; line-height:1.50 !important; }
-html body .akt.akt-t15 { font-size:15px !important; line-height:1.55 !important; }
+html body .akt.akt-t16 { font-size:16px !important; line-height:1.55 !important; }
 html body .akt.akt-t14 { font-size:14px !important; line-height:1.45 !important; }
 html body .akt.akt-t12 { font-size:12px !important; line-height:1.40 !important; }
-html body .akt.akt-t20 *, html body .akt.akt-t15 *, html body .akt.akt-t14 *, html body .akt.akt-t12 * {
+html body .akt.akt-t20 *, html body .akt.akt-t16 *, html body .akt.akt-t14 *, html body .akt.akt-t12 * {
   font-size: inherit !important; line-height: inherit !important;
 }
 
@@ -3270,7 +3279,7 @@ html body .akt.akt-w500, html body .akt.akt-w500 * { font-weight:500 !important;
 
 /* --- eyebrow: jeden kanon zamiast 29 wariantow ---------------------------- */
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * {
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "AKHaas", "NeueHaasDisplay-Roman42448762", "neue-haas-grotesk-display", "Helvetica Neue", sans-serif !important;
   font-size: 11px !important;
   font-weight: 500 !important;
   line-height: 1.40 !important;
@@ -3294,7 +3303,7 @@ html body .akt-list.akt-list > li {
   padding-top: 0 !important;
   padding-bottom: 0 !important;
   margin-bottom: 12px !important;
-  font-size: 15px !important;
+  font-size: 16px !important;
   line-height: 1.55 !important;
   color: rgba(45,45,45,.72) !important;
   border: 0 !important;
@@ -3372,9 +3381,7 @@ html body textarea, html body select {
   line-height: 1.55 !important;
   -webkit-appearance: none !important;
   appearance: none !important;
-  transition: border-color 180ms cubic-bezier(.2,.6,.2,1),
-              box-shadow  180ms cubic-bezier(.2,.6,.2,1),
-              background-color 180ms cubic-bezier(.2,.6,.2,1) !important;
+  transition: border-color var(--ak-t-color) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), background-color var(--ak-t-color) var(--ak-ease) !important;
 }
 html body textarea {
   min-height: 120px !important;
@@ -3465,3 +3472,117 @@ html body button[id^="submit-button-"], html body [id^="payment-button-"],
 html body .akb, html body .akb * { letter-spacing: .022em !important; }
 html body .akf, html body [id^="field-"], html body textarea { letter-spacing: .022em !important; }
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * { letter-spacing: .18em !important; }
+
+/* ============================================================================
+   SYSTEM POWIERZCHNI — boksy, cienie, hover, wejscie, odstepy (2026-08-28)
+   ----------------------------------------------------------------------------
+   Specyfikacja: "August Kjerland Design System/surfaces.html".
+   Klasy nadaje JS (homepage-live.js, sekcja "SYSTEM POWIERZCHNI"), tutaj sa
+   tylko definicje — tak samo jak w systemie przyciskow, typografii i formularzy.
+
+   Po co JS: systeme nie daje boksom klas. Tlo, ramka i cien siedza w
+   styled-components (`sc-dUYLmI epEwHm`), a te nazwy zmieniaja sie przy
+   kazdym rebuildzie platformy; ID `#section-xxx` ginie, gdy blok zostanie
+   skasowany i dodany w edytorze. Skrypt czyta wyliczony styl i dokleja klase.
+
+   Wzorzec = karta ze strony glownej (`.ak-card`), zmierzona na / i /academy:
+   Cream, ramka 1px rgba(45,45,45,.10) rowna na czterech bokach, promien 4px,
+   cien przygaszonego Forestu, przejscie na jednej krzywej.
+
+   ⚠️ Hover jest TAKZE na kartach nieklikalnych — swiadoma decyzja Kacpra
+   z 28.08, wbrew rekomendacji w surfaces.html. Nie zmieniac bez niego.
+   ============================================================================ */
+
+/* --- wejscie przy przewijaniu ---------------------------------------------
+   `ak-rise` bylo dotad na osmiu elementach strony glownej; teraz dostaje je
+   kazda karta. Animacja, nie przejscie: przejscie na .aks-in przejmowaloby
+   czas z reguly docelowej (220 ms zamiast 600). Po zakonczeniu JS zdejmuje
+   klase i dokleja .aks-done, zeby wypelnienie `both` nie zamrozilo transformu
+   i nie zablokowalo uniesienia pod kursorem. */
+@keyframes ak-rise { from { opacity: 0; transform: translateY(22px); } to { opacity: 1; transform: translateY(0); } }
+html body .aks-rise { opacity: 0; }
+html body .aks-rise.aks-in { animation: ak-rise var(--ak-t-in) var(--ak-ease) both; }
+html body .aks-done { opacity: 1; animation: none; }
+
+/* --- karta ---------------------------------------------------------------- */
+html body .aks.aks-card {
+  box-sizing: border-box !important;
+  border-radius: 4px !important;
+  border: 1px solid var(--ak-bd) !important;
+  box-shadow: var(--ak-sh-sm) !important;
+  transition: transform var(--ak-t-move) var(--ak-ease),
+              box-shadow var(--ak-t-move) var(--ak-ease),
+              border-color var(--ak-t-color) var(--ak-ease),
+              background-color var(--ak-t-color) var(--ak-ease) !important;
+}
+html body .aks.aks-card.aks-dark { border-color: var(--ak-bd-dark) !important; }
+html body .aks.aks-card.aks-md   { box-shadow: var(--ak-sh-md) !important; }
+
+/* hover: uniesienie o 2 px, cien poziomu 3, ramka ciemniejsza o kilka procent.
+   Selektory z .aks-in / .aks-done musza byc wymienione osobno — inaczej
+   przegrywaja specyficznoscia z regula wejscia, ktora ustawia transform. */
+html body .aks.aks-card:hover,
+html body .aks.aks-card.aks-rise.aks-in:hover,
+html body .aks.aks-card.aks-done:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: var(--ak-sh-lg) !important;
+  border-color: var(--ak-bd-hi) !important;
+}
+html body .aks.aks-card.aks-dark:hover,
+html body .aks.aks-card.aks-dark.aks-done:hover { border-color: var(--ak-bd-dark-hi) !important; }
+
+/* --- panel: powierzchnia na pelna szerokosc kontenera ---------------------
+   Pas, banda, sekcja z wlasnym tlem. Dostaje ten sam promien i te sama ramke,
+   ale nie unosi sie — uniesienie pasa przez cala szerokosc ekranu nie mowi
+   nic o klikalnosci, tylko szarpie. Promien 0 dla powierzchni pelnoekranowych. */
+html body .aks.aks-panel { border-radius: 4px !important; }
+html body .aks.aks-panel.aks-bleed { border-radius: 0 !important; }
+html body .aks.aks-panel.aks-bd { border-color: var(--ak-bd) !important; }
+html body .aks.aks-panel.aks-bd.aks-dark { border-color: var(--ak-bd-dark) !important; }
+html body .aks.aks-panel.aks-sh { box-shadow: var(--ak-sh-sm) !important; }
+
+/* --- rowne wysokosci w rzedzie -------------------------------------------
+   `align-items: start` na kontenerach dawal karty roznej wysokosci w 9 z 10
+   sekcji (na /academy 809 / 870 / 595 px). Stretch wyrownuje ramki, a
+   `margin-top:auto` na elemencie z CTA dosuwa przycisk do dolu, zeby rzad
+   konczyl sie rowno takze wewnatrz. */
+html body .aks-row { align-items: stretch !important; }
+html body .aks.aks-card.aks-col { display: flex !important; flex-direction: column !important; }
+html body .aks-bottom { margin-top: auto !important; }
+
+/* karta bywa o poziom glebiej niz dziecko siatki — wysokosc musi zejsc az do niej */
+html body .aks-fill { height: 100% !important; }
+html body .aks-fill.aks-card { height: auto !important; min-height: 100% !important; }
+
+/* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
+   Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>
+   z edytora systeme, ktorego nie da sie edytowac z repo. Tamte reguly nie
+   maja `!important`, wiec wystarczy je przebic stad. Trzy rzeczy odstawaly:
+   kontener 1140 zamiast 1120, rytm sekcji 120 zamiast 128 i wlasna krzywa
+   `--ease: cubic-bezier(.22,.61,.36,1)` na 146 przejsciach. */
+html body .ak-book { --ease: cubic-bezier(.2,.6,.2,1) !important; }
+html body .ak-book .pdk-wrap { max-width: 1120px !important; }
+html body .ak-book .pdk-section { padding-top: clamp(72px,9vw,128px) !important; padding-bottom: clamp(72px,9vw,128px) !important; }
+
+
+
+/* --- ustawienia systemu ---------------------------------------------------
+   Przy prefers-reduced-motion znika ruch, nie tresc: uniesienia, przejscia,
+   wejscia i marquee. Regula jest szeroka celowo — obejmuje takze `pdkPulse`
+   na /pitching-decoded, ktora siedzi w inline <style> z edytora
+   (`.ak-book.pdk-on .pdk-dot`) i pulsowala bez konca niezaleznie od ustawien.
+   Wygrywa nie specyficznoscia, tylko `!important`: tamta regula go nie ma. */
+@media (prefers-reduced-motion: reduce) {
+  html body *, html body *::before, html body *::after {
+    animation-duration: 1ms !important;
+    animation-iteration-count: 1 !important;
+    animation-delay: 0ms !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+  html body .aks-rise, html body .aks-rise.aks-in { opacity: 1 !important; animation: none !important; }
+  html body .aks.aks-card:hover,
+  html body .aks.aks-card.aks-rise.aks-in:hover,
+  html body .aks.aks-card.aks-done:hover { transform: none !important; }
+}
