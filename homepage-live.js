@@ -325,6 +325,52 @@
     }
   }
 
+
+  /* --- alt dla pozostalych obrazow ------------------------------
+     Widgety Image w systeme nie maja atrybutu alt. Mapujemy po nazwie
+     pliku, bo ten sam obraz wraca na kilku stronach pod roznymi id
+     (avatary opinii sa i na home, i na /academy).
+     Docelowo do wpisania w panelu systeme, przy kazdym obrazie
+     osobno — dopoki tego nie ma, opisy ida stad. ---------------- */
+  var IMG_ALT = {
+    'C45D5D7C-DED7-4089-8039-040BB51F1FC7': 'Greta N., interior designer',
+    '564532217_10161734967827681': 'Ingunn E., baker',
+    '1772914831569': 'Preethy M. J., Norstellar',
+    '432136413_1867835113645540': 'Elise U. L., Norstellar',
+    '1681044482483': 'Kacper K., freelance graphic designer',
+    'augustlogowhite': 'August Kjerland',
+    '3L3A3140': 'August Kjerland teaching a cross-cultural communication session',
+    '3L3A3811': 'August Kjerland during a workshop',
+    '3L3A3308': 'August Kjerland presenting the pitching webinar',
+    'TheCross-CulturalNegotiationPlaybook': 'Cover of The Cross-Cultural Negotiation Playbook',
+    'presentation-room-podium': 'A presentation room with a podium'
+  };
+
+  function initImageAlt() {
+    var przejscie = function () {
+      var brakuje = 0;
+      var obrazy = document.querySelectorAll('img');
+      for (var i = 0; i < obrazy.length; i++) {
+        var img = obrazy[i];
+        if ((img.getAttribute('alt') || '').trim()) continue;
+        var src = (img.currentSrc || img.src || '');
+        if (!src) { brakuje++; continue; }          /* jeszcze sie nie zaladowal */
+        var trafiony = false;
+        for (var klucz in IMG_ALT) {
+          if (src.indexOf(klucz) > -1) { img.setAttribute('alt', IMG_ALT[klucz]); trafiony = true; break; }
+        }
+        if (!trafiony) brakuje++;
+      }
+      return brakuje;
+    };
+    /* czesc obrazow systeme laduje sie leniwie, juz po DOMContentLoaded */
+    przejscie();
+    var prob = 0;
+    var timer = setInterval(function () {
+      if (przejscie() === 0 || ++prob > 20) clearInterval(timer);   /* max 4 s */
+    }, 200);
+  }
+
   /* --- Boot ---------------------------------------------- */
   function init() {
     applyHomeClass();
@@ -335,6 +381,7 @@
     initLatestWriting();
     initBlogHeading();
     initLogoAlt();
+    initImageAlt();
   }
 
   applyHomeClass(); // earliest possible, before paint where we can
