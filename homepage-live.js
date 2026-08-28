@@ -988,6 +988,11 @@
     var row = e.closest('[id^="row-"]');
     if (row && row.querySelector('[id^="menu-"]')) return true;      /* pasek nawigacji lejka */
     if (e.closest('.ak-marquee, .marquee, [class*="mq__"]')) return true;
+    /* FAQ jest z zalozenia lista rozdzielona kreskami — tak wyglada na
+       /pitching-decoded i tak ma wygladac wszedzie. Widget systeme daje
+       swoim pozycjom cien, wiec bez tego wyjatku kazda pozycja i caly
+       pojemnik stawaly sie karta i oba FAQ w serwisie wygladaly inaczej. */
+    if (e.closest('[id^="faq-"]')) return true;
     if (e.matches('[id^="section-"]')) return true;                  /* sekcja to nosnik, nie powierzchnia */
     /* Siatka z wlosowa kreska (odstep <= 4 px) to jedna tablica z liniami
        podzialu, a nie rzad kart: /consulting "What you get" ma piec komorek
@@ -1136,6 +1141,9 @@
       }
 
       if (karty.length >= 2) {
+        /* Pojemnik, ktorego dziecmi sa karty, jest ukladem — nie karta.
+           Bez tego pojemnik FAQ dostawal ramke dookola rzedu pozycji. */
+        e.classList.remove('aks-card', 'aks-md');
         e.classList.add('aks-row');
         /* 32 px tylko tam, gdzie odstep juz byl — wlosowa kreska zostaje kreska */
         var stary = parseFloat(s.gap);
@@ -1303,14 +1311,70 @@
     ustawOdstep(p, docelowy);
   }
 
+  /* Etykieta nad naglowkiem bywa eyebrowem tylko z nazwy: na
+     /cross-cultural-playbook „What's inside" ma 16 px, malymi literami i bez
+     swiatla, wiec klasyfikator typograficzny (wersaliki + rozstrzelenie) jej
+     nie widzial. Rozpoznajemy ja po roli: krotka, bezszeryfowa, w terakocie
+     i stoi bezposrednio nad naglowkiem. */
+  function eyebrowPoRoli(root) {
+    var l = root.querySelectorAll('.akt.akt-sans'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (e.children.length || e.classList.contains('akt-eyebrow')) continue;
+      if (pomijamy(e)) continue;
+      var t = (e.textContent || '').trim();
+      if (!t || t.length > 34 || t.split(/\s+/).length > 5 || /[.!?:]$/.test(t)) continue;
+      var s = gcs(e);
+      if (parseFloat(s.fontSize) > 17) continue;
+      if (!/^rgb\(154, 88, 50\)$|^rgb\(180, 106, 60\)$|^rgb\(217, 164, 122\)$/.test(s.color)) continue;
+      var n = blokPo(e); if (!n) continue;
+      var h = (n.matches && n.matches('[class*="akt-h"]')) ? n : (n.querySelector && n.querySelector('[class*="akt-h"]'));
+      if (!h) continue;
+      var k = e.className.split(/\s+/);
+      for (var j = 0; j < k.length; j++) if (/^akt-t\d/.test(k[j])) e.classList.remove(k[j]);
+      e.classList.add('akt-eyebrow');
+    }
+  }
+
+  /* Cytat wyrozniony to nie naglowek, choc klasyfikator typograficzny widzi
+     go tak samo: szeryfowy, duzy, kursywa. Zmierzone trzy traktowania na
+     trzech stronach — 24/1.30 Forest do lewej, 24/1.35 Forest na srodku
+     i 21/1.35 Ink 72% do lewej. Kanon: 24/1.30, Forest, kursywa. */
+  function cytaty(root) {
+    var l = root.querySelectorAll('.akt.akt-serif'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (e.children.length || e.classList.contains('akt-quote')) continue;
+      if (pomijamy(e)) continue;
+      var s = gcs(e);
+      if (s.fontStyle !== 'italic') continue;
+      var t = (e.textContent || '').trim();
+      if (t.length < 40) continue;
+      if (!(t.length > 60 || /^["“„«]/.test(t))) continue;
+      var k = e.className.split(/\s+/);
+      for (var j = 0; j < k.length; j++) if (/^akt-h\d/.test(k[j])) e.classList.remove(k[j]);
+      e.classList.add('akt-quote');
+    }
+  }
+
   function rytm(root) {
+    eyebrowPoRoli(root);
+    cytaty(root);
     var l = root.querySelectorAll('.akt-eyebrow'), i;
     for (i = 0; i < l.length; i++) {
       var e = l[i];
-      if (pomijamy(e) || e.getBoundingClientRect().height < 4) continue;
+      /* etykieta nad paskiem logotypow tez jest eyebrowem — `pomijamy` odsiewa
+         marquee przed klasyfikacja powierzchni, ale kolor obowiazuje i tam */
+      if (e.getBoundingClientRect().height < 4) continue;
+      if (pomijamy(e) && !e.closest('.ak-marquee, .marquee, [class*="mq__"], [class*="marquee"]')) continue;
       /* kolor: terakota na jasnym, jasniejszy odcien na ciemnym — dwa, nie czternascie */
       var pod = tloPod(e.parentElement || e);
-      e.classList.add(pod && lum(pod) < 0.35 ? 'akt-eyebrow--dark' : 'akt-eyebrow--light');
+      var ciemno = pod && lum(pod) < 0.35;
+      e.classList.add(ciemno ? 'akt-eyebrow--dark' : 'akt-eyebrow--light');
+      /* Kolor idzie inline: 19 eyebrow na czterech stronach malowala regula
+         z ID (Forest), a ID przebija dowolna liczbe klas takze przy
+         `!important`. Styl inline z priorytetem wygrywa z jednym i drugim. */
+      try { e.style.setProperty('color', ciemno ? '#D9A47A' : '#9A5832', 'important'); } catch (err) { }
       ustawOdstepNad(e, RYTM.nadBlok);
       ustawOdstep(e, RYTM.eyebrow);
     }
@@ -1320,6 +1384,15 @@
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
       ustawOdstepNad(h, RYTM.nadBlok);
       var nast = blokPo(h); if (!nast) continue;
+      /* Naglowek wysrodkowany nad akapitem do lewej czyta sie jak dwa
+         osobne bloki — na /cultural-communication „About August Kjerland."
+         stalo na srodku, a biografia pod nim przy lewej krawedzi. */
+      var tresc = (nast.matches && nast.matches('[class*="akt-t"]')) ? nast : (nast.querySelector && nast.querySelector('[class*="akt-t"]'));
+      if (tresc) {
+        var at = gcs(tresc).textAlign, ah = gcs(h).textAlign;
+        if (at !== ah && (at === 'left' || at === 'start') && !pomijamy(tresc))
+          try { h.style.setProperty('text-align', 'left', 'important'); } catch (err) { }
+      }
       /* Gdy zaraz po naglowku zaczyna sie NOWY blok (czyli nastepny element to
          eyebrow), ten sam odstep opisuja dwie reguly naraz: „pod naglowkiem 48"
          i „nad blokiem 64". Pierwszenstwo ma „nad blokiem" — naglowek domknal
@@ -1331,6 +1404,22 @@
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
       ustawOdstep(h, kart >= 2 ? RYTM.siatka : RYTM.tresc);
     }
+    /* Eyebrow dziedziczy wyrownanie po naglowku, ktory zapowiada — przebieg
+       osobny i na koncu, bo naglowki dostaja swoje wyrownanie dopiero w petli
+       wyzej. Na /cross-cultural-playbook „WHAT'S INSIDE" stalo na srodku nad
+       naglowkiem dosunietym do lewej. */
+    l = root.querySelectorAll('.akt-eyebrow');
+    for (i = 0; i < l.length; i++) {
+      var eb = l[i];
+      if (eb.getBoundingClientRect().height < 4) continue;
+      var po = blokPo(eb); if (!po) continue;
+      var nag = (po.matches && po.matches('[class*="akt-h"]')) ? po : (po.querySelector && po.querySelector('[class*="akt-h"]'));
+      if (!nag) continue;
+      var an = gcs(nag).textAlign;
+      if (gcs(eb).textAlign !== an)
+        try { eb.style.setProperty('text-align', an, 'important'); } catch (err) { }
+    }
+
     /* akapit wprowadzajacy -> przycisk: w hero mierzylo sie od 30 do 1036 px */
     l = root.querySelectorAll('.akt.akt-t20');
     for (i = 0; i < l.length; i++) {
@@ -1351,6 +1440,7 @@
   var MAPA_KOLOROW = {
     'rgba(249, 247, 241, 0.7)': 'cream80', 'rgba(249, 247, 241, 0.72)': 'cream80',
     'rgba(249, 247, 241, 0.82)': 'cream80', 'rgba(243, 240, 231, 0.8)': 'cream80',
+    'rgba(249, 247, 241, 0.68)': 'cream80', 'rgba(249, 247, 241, 0.78)': 'cream80',
     'rgb(255, 255, 255)': 'cream', 'rgb(243, 240, 231)': 'cream',
     'rgb(180, 106, 60)': 'terra', 'rgb(228, 182, 138)': 'terra-jasna',
     'rgb(214, 154, 110)': 'terra-jasna',

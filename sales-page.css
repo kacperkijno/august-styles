@@ -3505,6 +3505,26 @@ html body .akt.aks-kolor-terra-jasna, html body .akt.aks-kolor-terra-jasna * { c
 html body .akt.aks-kolor-ink72,       html body .akt.aks-kolor-ink72 *       { color: rgba(45,45,45,.72) !important; }
 html body .akt.aks-kolor-ink62,       html body .akt.aks-kolor-ink62 *       { color: rgba(45,45,45,.62) !important; }
 
+/* --- cytat wyrozniony ------------------------------------------------------
+   Klasyfikator typograficzny widzial go jako naglowek (szeryfowy, duzy,
+   kursywa), przez co ten sam cytat miewal 21 albo 24 px, Forest albo Ink 72%,
+   do lewej albo na srodku. Jedno traktowanie: 24/1.30, Forest, kursywa. */
+html body .akt.akt-quote, html body .akt.akt-quote * {
+  font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
+  font-size: 24px !important;
+  line-height: 1.30 !important;
+  font-style: italic !important;
+  font-weight: 400 !important;
+  color: #1A3C2F !important;
+}
+html body .akt-list--dark .akt.akt-quote, html body .aks-dark .akt.akt-quote,
+html body .aks-dark .akt.akt-quote * { color: #F9F7F1 !important; }
+
+/* Przycisk nie lamie etykiety: w hero /cultural-communication „Get instant
+   access - €49" schodzil do drugiej linii i mial 50 px obok sasiada o 48. */
+html body .akb { white-space: nowrap !important; }
+
+
 
 
 /* ============================================================================
