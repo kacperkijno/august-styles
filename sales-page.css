@@ -2906,3 +2906,90 @@ html body .ak-title em, html body .ak-title i {
   font-size: inherit !important;
   line-height: inherit !important;
 }
+
+/* ---------- CHECKOUT (/pitching-buy): branding ----------------
+   Strona platnosci przychodzi z wlasna paleta systeme: granat
+   #273C63 na naglowku i etykietach, szaroniebieskie ramki pol
+   (#5F7F8A — ten sam odcien, ktory usunelismy z lead magnetow),
+   szary przycisk kuponu i przycisk zakupu z promieniem 10px.
+   W momencie platnosci strona wygladala jak obcy formularz.
+   Zmierzone 2026-08-28. */
+
+/* naglowek produktu — Forest, jak kazdy H1 */
+html body #headline-939d99ba,
+html body #headline-939d99ba * {
+  color: #1A3C2F !important;
+}
+
+/* etykiety pol — Ink zamiast granatu */
+html body #text-194fedc0, html body #text-194fedc0 *,
+html body #text-0b79c7e5, html body #text-0b79c7e5 *,
+html body #text-c1a78084, html body #text-c1a78084 *,
+html body #text-30731b2e, html body #text-30731b2e *,
+html body #text-315d0992, html body #text-315d0992 *,
+html body #text-4d2798bd, html body #text-4d2798bd * {
+  color: #2D2D2D !important;
+}
+
+/* naglowek "Summary" i pozycje w podsumowaniu zamowienia */
+html body #text-d40959b7, html body #text-d40959b7 *,
+html body #offerprice-6507e2a0, html body #offerprice-6507e2a0 * {
+  color: #2D2D2D !important;
+}
+
+/* etykiety pol karty (Card number / Expiration / CVC) — Ink 72% */
+html body #payment-method-ca59ea12 label {
+  color: rgba(45, 45, 45, 0.72) !important;
+}
+
+/* pola formularza — kanon: r=4px, tlo Cream-soft, ramka rgba(45,45,45,.1) */
+html body #form-input-195bcc17, html body #form-input-195bcc17 input,
+html body #form-input-59b113a4, html body #form-input-59b113a4 input,
+html body #field-c444b81e, html body #field-8ed097fb,
+html body #field-eb2d4c2f, html body #field-6be7d31e,
+html body #coupon-73d088b7 input {
+  border-radius: 4px !important;
+  border: 1px solid rgba(45, 45, 45, 0.1) !important;
+  background-color: #F3F0E7 !important;
+  color: #2D2D2D !important;
+  font-size: 15px !important;
+}
+html body #form-input-195bcc17:focus, html body #form-input-195bcc17 input:focus,
+html body #form-input-59b113a4:focus, html body #form-input-59b113a4 input:focus,
+html body #field-c444b81e:focus, html body #field-8ed097fb:focus,
+html body #field-eb2d4c2f:focus, html body #field-6be7d31e:focus,
+html body #coupon-73d088b7 input:focus {
+  border-color: rgba(26, 60, 47, 0.45) !important;
+  outline: none !important;
+}
+
+/* przycisk zakupu — kanon przyciskow (byl r=10px, h=54, tekst czysto bialy) */
+html body #payment-button-7e78910c,
+html body #payment-button-7e78910c * {
+  border-radius: 4px !important;
+  color: #F9F7F1 !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+}
+html body #payment-button-7e78910c {
+  height: auto !important;
+  min-height: 48px !important;
+  background-color: #1A3C2F !important;
+}
+
+/* przycisk kuponu — Forest zamiast szarosci systeme */
+html body #coupon-73d088b7 button,
+html body #coupon-73d088b7 button * {
+  background-color: #1A3C2F !important;
+  color: #F9F7F1 !important;
+  border-radius: 4px !important;
+}
+
+/* przelaczniki i checkboxy na checkoucie — Forest zamiast systemowego blekitu */
+html body #payment-button-7e78910c ~ *,
+html body [id^="payment-method-"] input[type="radio"],
+html body [id^="payment-method-"] input[type="checkbox"],
+html body #form-input-195bcc17 ~ * input[type="radio"],
+html body input[type="radio"], html body input[type="checkbox"] {
+  accent-color: #1A3C2F;
+}
