@@ -1018,7 +1018,11 @@
     var s = gcs(e), r = e.getBoundingClientRect();
     var tlo = s.backgroundColor;
     var maTlo = !przezr(tlo);
-    var maRamke = parseFloat(s.borderTopWidth) > 0 && s.borderTopStyle !== 'none' && !przezr(s.borderTopColor);
+    var szer = [s.borderTopWidth, s.borderRightWidth, s.borderBottomWidth, s.borderLeftWidth].map(parseFloat);
+    var kol = [s.borderTopColor, s.borderRightColor, s.borderBottomColor, s.borderLeftColor];
+    var maRamke = s.borderTopStyle !== 'none' && szer[0] > 0 && !przezr(kol[0])
+      && szer[1] === szer[0] && szer[2] === szer[0] && szer[3] === szer[0]
+      && kol[1] === kol[0] && kol[2] === kol[0] && kol[3] === kol[0];
     var maCien = s.boxShadow !== 'none';
     var podSpodem = e.parentElement ? tloPod(e.parentElement) : null;
     var wlasneTlo = maTlo && tlo !== podSpodem;
@@ -1138,6 +1142,7 @@
           var dz = cta;
           while (dz.parentElement && dz.parentElement !== kt) dz = dz.parentElement;
           if (dz.parentElement !== kt) continue;
+          if (!dz.previousElementSibling) continue;   /* jedyne dziecko: nie ma czego dosuwac */
           kt.classList.add('aks-col');
           dz.classList.add('aks-bottom');
         }
@@ -1200,6 +1205,7 @@
       } catch (err) { }
     }
   }
+
 
   /* --- 7. wejscie przy przewijaniu -----------------------------------------
      Detekcja przez scroll, nie IntersectionObserver: IO nie odpalal dla

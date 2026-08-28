@@ -92,7 +92,7 @@
 
 /* ---------- LOGO MARQUEE ---------- */
 .akb-marquee-sec{padding:60px 0 54px;background:var(--cream);overflow:hidden;}
-.akb-marquee-sec__label{text-align:center;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);margin:0 auto 36px;max-width:56ch;line-height:1.6;}
+.akb-marquee-sec__label{display:block;text-align:center;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);margin:0 auto 36px;max-width:56ch;line-height:1.6;}
 .akb-mq{position:relative;width:100%;max-width:var(--container);margin-inline:auto;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);}
 .akb-mq + .akb-mq{margin-top:22px;}
 .akb-mq__track{display:flex;width:max-content;animation:ak-marquee-ltr 65s linear infinite;will-change:transform;}
