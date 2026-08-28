@@ -1141,7 +1141,10 @@
         for (k = 0; k < karty.length; k++) {
           var kt = karty[k];
           /* rozciagniete dziecko siatki musi przekazac wysokosc az do karty */
-          for (var w2 = kt; w2 && w2 !== e; w2 = w2.parentElement) w2.classList.add('aks-fill');
+          /* wysokosc przekazujemy WRAPPEROM miedzy siatka a karta, nie samej karcie:
+             na /materials karta to obudowa miniatury, a rozciagnieta zostawiala
+             puste pole pod obrazem (318 px ramki na 288 px obrazu) */
+          for (var w2 = kt.parentElement; w2 && w2 !== e; w2 = w2.parentElement) w2.classList.add('aks-fill');
           if (kt.classList.contains('aks-rise')) kt.style.animationDelay = (k * 90) + 'ms';
           var cta = kt.querySelector('.akb, [id^="button-"], [id^="payment-button-"]');
           if (!cta) continue;
@@ -1213,6 +1216,74 @@
   }
 
 
+
+  /* --- 6b. rytm pionowy i kolor eyebrow ------------------------------------
+     Pomiar na 16 stronach: eyebrow -> naglowek mial 31 wartosci (od 5 do 250 px),
+     naglowek -> tresc 29, naglowek -> rzad kart 9, a sam eyebrow wystepowal
+     w 14 kolorach. Ta sama sekcja na dwoch stronach wygladala przez to inaczej.
+
+     Dlaczego JS: odstep nie siedzi na tekscie. systeme opakowuje kazdy blok
+     wlasnym <div>, marginesy raz sie skladaja a raz zlepiaja, a naglowek bywa
+     o trzy poziomy glebiej niz kontener trzymajacy odstep. Zamiast zerowac
+     cala te konstrukcje MIERZYMY rzeczywisty odstep i dokladamy roznice.
+     Poprawka jest zbiezna: w kolejnym przebiegu odstep jest juz docelowy,
+     roznica wynosi zero i nic sie nie dzieje. */
+  var RYTM = { eyebrow: 16, tresc: 24, siatka: 48 };
+
+  function blokPo(e) {
+    var w = e, i = 0;
+    while (w && i++ < 6) {
+      var n = w.nextElementSibling;
+      while (n) {
+        var r = n.getBoundingClientRect();
+        if (r.height > 4 && gcs(n).display !== 'none') return n;
+        n = n.nextElementSibling;
+      }
+      w = w.parentElement;
+    }
+    return null;
+  }
+  function przytulony(e) {          /* najwyzszy przodek oplywajacy element co do piksela */
+    var r = e.getBoundingClientRect(), w = e, i = 0;
+    while (w.parentElement && i++ < 4) {
+      var pr = w.parentElement.getBoundingClientRect();
+      if (Math.abs(pr.top - r.top) > 2 || Math.abs(pr.bottom - r.bottom) > 2) break;
+      w = w.parentElement;
+    }
+    return w;
+  }
+  function ustawOdstep(od, docelowy) {
+    var nast = blokPo(od); if (!nast) return;
+    var a = od.getBoundingClientRect(), b = nast.getBoundingClientRect();
+    if (b.top < a.bottom - 2) return;              /* nie sasiaduja pionowo */
+    if (Math.abs(b.left - a.left) > 240) return;   /* inna kolumna, nie ten sam watek */
+    var roznica = docelowy - (b.top - a.bottom);
+    if (Math.abs(roznica) < 3 || Math.abs(roznica) > 200) return;
+    var nosnik = przytulony(od);
+    var maja = parseFloat(gcs(nosnik).marginBottom) || 0;
+    nosnik.style.setProperty('margin-bottom', Math.max(0, Math.round(maja + roznica)) + 'px', 'important');
+  }
+
+  function rytm(root) {
+    var l = root.querySelectorAll('.akt-eyebrow'), i;
+    for (i = 0; i < l.length; i++) {
+      var e = l[i];
+      if (pomijamy(e) || e.getBoundingClientRect().height < 4) continue;
+      /* kolor: terakota na jasnym, jasniejszy odcien na ciemnym — dwa, nie czternascie */
+      var pod = tloPod(e.parentElement || e);
+      e.classList.add(pod && lum(pod) < 0.35 ? 'akt-eyebrow--dark' : 'akt-eyebrow--light');
+      ustawOdstep(e, RYTM.eyebrow);
+    }
+    l = root.querySelectorAll('[class*="akt-h"]');
+    for (i = 0; i < l.length; i++) {
+      var h = l[i];
+      if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
+      var nast = blokPo(h); if (!nast) continue;
+      var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
+      ustawOdstep(h, kart >= 2 ? RYTM.siatka : RYTM.tresc);
+    }
+  }
+
   /* --- 7. wejscie przy przewijaniu -----------------------------------------
      Detekcja przez scroll, nie IntersectionObserver: IO nie odpalal dla
      wezlow systeme przy poprzednim podejsciu (patrz initReveal wyzej). */
@@ -1251,6 +1322,7 @@
     try {
       var docs = dokumenty();
       for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
+      for (i = 0; i < docs.length; i++) rytm(docs[i]);   /* na koncu: potrzebuje ulozonego ukladu */
       sekcje();
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');

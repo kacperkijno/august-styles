@@ -3362,6 +3362,15 @@ html body .akb, html body .akb * { letter-spacing: .022em !important; }
 html body .akf, html body [id^="field-"], html body textarea { letter-spacing: .022em !important; }
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * { letter-spacing: .18em !important; }
 
+/* --- eyebrow: dwa kolory zamiast czternastu -------------------------------
+   Pomiar 28.08: eyebrow wystepowal w 14 kolorach — obok kanonicznej terakoty
+   takze jasna terakota #B46A3C, Forest, Ink, Ink 62%, Cream w piu odcieniach.
+   O tym, ktory z dwoch wybrac, decyduje jasnosc tla POD elementem, czego CSS
+   nie widzi — klase nadaje JS. */
+html body .akt.akt-eyebrow.akt-eyebrow--light, html body .akt.akt-eyebrow.akt-eyebrow--light * { color: #9A5832 !important; }
+html body .akt.akt-eyebrow.akt-eyebrow--dark,  html body .akt.akt-eyebrow.akt-eyebrow--dark  * { color: #D9A47A !important; }
+
+
 /* ============================================================================
    SYSTEM POWIERZCHNI — boksy, cienie, hover, wejscie, odstepy (2026-08-28)
    ----------------------------------------------------------------------------
@@ -3451,7 +3460,6 @@ html body .aks-bottom { margin-top: auto !important; }
 
 /* karta bywa o poziom glebiej niz dziecko siatki — wysokosc musi zejsc az do niej */
 html body .aks-fill { height: 100% !important; }
-html body .aks-fill.aks-card { height: auto !important; min-height: 100% !important; }
 
 /* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
    Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>
