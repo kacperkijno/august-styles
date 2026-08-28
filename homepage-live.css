@@ -2748,3 +2748,13 @@ html body .ak-book .pdk-btn {
 html body .ak-book .pdk-numcard, html body .ak-book .pdk-case, html body .ak-book .pdk-tag {
   border-radius: 4px !important;
 }
+
+/* kursywa w naglowku ma dziedziczyc rozmiar, a nie miec wlasny —
+   na /about "clearer." bylo 48px w naglowku 40px, na /consulting
+   "conversation." 44px. */
+html body .akb-h2 em, html body .akb-h2 i,
+html body .akc-h2 em, html body .akc-h2 i,
+html body .ak-title em, html body .ak-title i {
+  font-size: inherit !important;
+  line-height: inherit !important;
+}
