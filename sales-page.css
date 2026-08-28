@@ -725,13 +725,12 @@ html body.ak-sales-page [id^="bulletlist-"] ul {
   margin: 0 !important;
 }
 html body.ak-sales-page [id^="bulletlist-"] ul li {
-  padding: 14px 0 !important;
-  margin: 0 !important;
-  border-top: 1px solid var(--ak-ink-10);
+  padding: 0 0 0 28px !important;
+  margin: 0 0 12px !important;
+  border-top: 0;
   align-items: baseline !important;
-  gap: 12px;
-  font-size: 15.5px !important;
-  line-height: 1.6 !important;
+  font-size: 16px !important;
+  line-height: 1.55 !important;
 }
 html body.ak-sales-page [id^="bulletlist-"] ul li:first-child {
   border-top: 0;
@@ -765,7 +764,7 @@ html body.ak-sales-page #bulletlist-bd18b09a ul li i {
 /* Pricing list lives inside the pricing card — no top border on first
    item, but keep dividers between others, slightly tighter. */
 html body.ak-sales-page #bulletlist-f2677d28 ul li {
-  padding: 12px 0 !important;
+  padding: 0 0 0 28px !important;
   font-size: 16px !important;
 }
 
@@ -837,9 +836,9 @@ html body.ak-sales-page #bulletlist-bd18b09a ul {
 html body.ak-sales-page #bulletlist-b07c307b ul li,
 html body.ak-sales-page #bulletlist-bd18b09a ul li {
   border-top: 0 !important;
-  padding: 10px 0 !important;
+  padding: 0 0 0 28px !important;
   font-size: 16px !important;
-  margin: 0 !important;
+  margin: 0 0 12px !important;
 }
 html body.ak-sales-page #bulletlist-b07c307b,
 html body.ak-sales-page #bulletlist-bd18b09a {
@@ -896,8 +895,8 @@ html body.ak-sales-page #bulletlist-f2677d28 ul {
 }
 html body.ak-sales-page #bulletlist-f2677d28 ul li {
   border-top: 0 !important;
-  padding: 10px 0 !important;
-  margin: 0 !important;
+  padding: 0 0 0 28px !important;
+  margin: 0 0 12px !important;
 }
 html body.ak-sales-page #bulletlist-f2677d28 ul li strong {
   font-weight: 500 !important;
@@ -3296,8 +3295,8 @@ html body .akt.akt-cream80, html body .akt.akt-cream80 * { color: rgba(249,247,2
 /* --- listy: jeden rytm, punktor niesie znaczenie -------------------------- */
 /* Bylo 14 ukladow na 36 list: rozmiary 15/16/17, interlinie od 1.33 do 2.25,
    odstepy raz marginesem raz paddingiem, wciecia od 0 do 56px. */
-html body .akt-list.akt-list { padding-left:0 !important; margin-top:0 !important; list-style:none !important; }
-html body .akt-list.akt-list > li {
+html body .akt-list.akt-list.akt-list { padding-left:0 !important; margin-top:0 !important; list-style:none !important; }
+html body .akt-list.akt-list.akt-list > li {
   position: relative !important;
   padding-left: 28px !important;
   padding-top: 0 !important;
@@ -3309,8 +3308,8 @@ html body .akt-list.akt-list > li {
   border: 0 !important;
   list-style: none !important;
 }
-html body .akt-list.akt-list > li:last-child { margin-bottom:0 !important; }
-html body .akt-list.akt-list > li strong, html body .akt-list.akt-list > li b {
+html body .akt-list.akt-list.akt-list > li:last-child { margin-bottom:0 !important; }
+html body .akt-list.akt-list.akt-list > li strong, html body .akt-list.akt-list.akt-list > li b {
   color: var(--ak-ink, #2D2D2D) !important; font-weight:500 !important;
 }
 /* na ciemnym tle */
@@ -3323,6 +3322,12 @@ html body .akt-list.akt-list--check > li::before {
   border-left:1.5px solid var(--ak-terracotta-dark,#9A5832) !important;
   border-bottom:1.5px solid var(--ak-terracotta-dark,#9A5832) !important;
   transform:rotate(-45deg) !important; background:none !important;
+}
+/* krzyzyk — wykluczenie ("to nie jest dla ciebie") */
+html body .akt-list.akt-list--x > li::before {
+  content:"×" !important; position:absolute !important; left:1px !important; top:0 !important;
+  width:auto !important; height:auto !important; border:0 !important; background:none !important;
+  font-size:15px !important; line-height:1.55 !important; color: rgba(45,45,45,.50) !important;
 }
 /* kropka — wyliczenie */
 html body .akt-list.akt-list--dot > li::before {
@@ -3340,8 +3345,16 @@ html body .akt-list.akt-list--num > li::before {
   font-size:14px !important; color: var(--ak-terracotta-dark,#9A5832) !important;
   background:none !important; border:0 !important; width:auto !important; height:auto !important;
 }
-/* ikona ptaszka wstawiona przez systeme — chowamy, punktor idzie z CSS */
-html body .akt-list.akt-list > li > i.fa-check { display:none !important; }
+/* Znacznik wstawiony przez systeme albo przez nasz wlasny blok Raw HTML —
+   chowamy, bo punktor rysuje CSS. Bez tego /academy mialo DWA ptaszki obok
+   siebie (`span.ak-check` z bloku + nasz `::before`), a listy z ikona ✗
+   dostawaly krzyzyk i kropke naraz.
+   ⚠️ Znaczenie niesie punktor, wiec lista z ✗ dostaje wariant `--x`,
+   a nie kropke: to jest lista "czego tu nie ma". */
+html body .akt-list.akt-list > li > i[class*="fa-"],
+html body .akt-list.akt-list > li > .ak-check,
+html body .akt-list.akt-list > li > .akb-check,
+html body .akt-list.akt-list > li > svg { display:none !important; }
 
 /* --- szerokosc kolumny ---------------------------------------------------- */
 /* Najszersze akapity mialy 1045px — ok. 130 znakow w wierszu. */
@@ -3540,6 +3553,16 @@ html body .aks.aks-panel.aks-bleed { border-radius: 0 !important; }
 html body .aks.aks-panel.aks-bd { border-color: var(--ak-bd) !important; }
 html body .aks.aks-panel.aks-bd.aks-dark { border-color: var(--ak-bd-dark) !important; }
 html body .aks.aks-panel.aks-sh { box-shadow: var(--ak-sh-sm) !important; }
+
+/* --- tlo: dwa jasne, nie trzy ---------------------------------------------
+   Paleta zna Cream i Cream-soft. Biel wchodzila jako trzecie tlo na 29
+   powierzchniach (glownie /pitching-home, /blueprint, /pitch-diagnostic,
+   /pitching-buy i `.pdk-section--alt`), przez co karta na bieli obok karty
+   na kremie czytala sie jak dwa rozne systemy. Klase nadaje JS, bo o tym,
+   ktory z dwoch kremow wybrac, decyduje tlo LEZACE POD spodem. */
+html body .aks.aks-bg-cream { background-color: #F9F7F1 !important; }
+html body .aks.aks-bg-soft  { background-color: #F3F0E7 !important; }
+
 
 /* --- rowne wysokosci w rzedzie -------------------------------------------
    `align-items: start` na kontenerach dawal karty roznej wysokosci w 9 z 10

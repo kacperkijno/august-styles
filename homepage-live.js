@@ -715,8 +715,12 @@
       /* lista numerowana 01-05 na / ma wlasny licznik — nie dotykamy */
       if (l.closest('#section-22d30859')) continue;
 
+      /* Punktor niesie znaczenie, wiec ikona wstawiona w tresci decyduje o typie,
+         a nie tylko o tym, ze jakas ikona tam jest. Lista z ✗ to "czego tu nie ma"
+         — kropka by to znaczenie zgubila. */
       var typ = 'dot';
       if (l.tagName === 'OL') typ = 'num';
+      else if (l.querySelector('i.fa-times, i.fa-xmark, i.fa-close, i.fa-ban')) typ = 'x';
       else if (l.querySelector('i.fa-check, svg')) typ = 'check';
 
       l.classList.add('akt-list', 'akt-list--' + typ);
@@ -940,7 +944,20 @@
   var RUCH = /^(transform|box-shadow|filter|height|max-height|min-height|width|max-width|translate|scale|rotate|all|backdrop-filter|padding|margin|gap)$/;
   var KRZYWA = 'cubic-bezier(.2,.6,.2,1)';
   var KRZYWA_LICZONA = 'cubic-bezier(0.2, 0.6, 0.2, 1)';
-  var MOJE = ['aks', 'aks-card', 'aks-panel', 'aks-dark', 'aks-md', 'aks-bd', 'aks-sh', 'aks-bleed', 'aks-col'];
+  var MOJE = ['aks', 'aks-card', 'aks-panel', 'aks-dark', 'aks-md', 'aks-bd', 'aks-sh', 'aks-bleed', 'aks-col',
+              'aks-bg-cream', 'aks-bg-soft'];
+  var CREAM = 'rgb(249, 247, 241)';
+  /* Biel i zimne szarosci: trzecie tlo, ktorego paleta nie przewiduje.
+     Rozpoznajemy je po NEUTRALNOSCI, nie po dokladnej wartosci — kremy marki
+     sa cieple (Cream 249/247/241 ma 8 punktow rozrzutu, Cream-soft 12), wiec
+     prog 6 trzyma je z dala od tej reguly nawet przy drobnej zmianie palety. */
+  function bielSzarosc(c) {
+    var m = (c || '').match(/\d+/g); if (!m || m.length < 3) return false;
+    if (m.length > 3 && parseFloat(m[3]) < 0.9) return false;      /* polprzezroczyste zostawiamy */
+    var r = +m[0], g = +m[1], bb = +m[2];
+    var rozrzut = Math.max(r, g, bb) - Math.min(r, g, bb);
+    return rozrzut <= 6 && Math.min(r, g, bb) >= 232;
+  }
 
   function gcs(el) { var d = el.ownerDocument, w = (d && d.defaultView) || window; return w.getComputedStyle(el); }
   function przezr(c) { return !c || c === 'transparent' || c === 'rgba(0, 0, 0, 0)' || /,\s*0\)\s*$/.test(c); }
@@ -1006,6 +1023,7 @@
     var podSpodem = e.parentElement ? tloPod(e.parentElement) : null;
     var wlasneTlo = maTlo && tlo !== podSpodem;
     return {
+      tlo: maTlo ? tlo : null, podSpodem: podSpodem,
       jest: wlasneTlo || maRamke || maCien,
       ciemno: lum(maTlo ? tlo : (podSpodem || 'rgb(249,247,241)')) < 0.35,
       maRamke: maRamke, maCien: maCien, w: r.width, h: r.height,
@@ -1054,6 +1072,10 @@
         if (d.wyroz) kl.push('aks-md');
       }
       if (d.ciemno) kl.push('aks-dark');
+      /* Paleta ma dwa jasne tla: Cream na Cream-soft i Cream-soft na Cream.
+         Biel jest trzecim, ktorego nie ma w palecie — 29 powierzchni siedzialo
+         na niej, glownie na stronach lejka i w `.pdk-section--alt`. */
+      if (d.tlo && bielSzarosc(d.tlo)) kl.push(d.podSpodem === CREAM ? 'aks-bg-soft' : 'aks-bg-cream');
       e.classList.add.apply(e.classList, kl);
       if (!e.getAttribute('data-aks-rise') && kl.indexOf('aks-card') > -1 && !maWlasneWejscie(e, d)) {
         e.classList.add('aks-rise');
