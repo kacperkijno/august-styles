@@ -3102,7 +3102,13 @@ html body .akc-btn .akc-arrow { display: none !important; }
    Dlatego interlinia jest tu funkcja stopnia i nie ustawia sie jej osobno.
 
    KROJE. Od teraz z Adobe Fonts (kit luy3mna, @import na gorze pliku):
-   `adobe-caslon-pro` i `neue-haas-grotesk-display`. Nasze pliki w fonts/
+   `adobe-caslon-pro` i `neue-haas-grotesk-TEXT`.
+   ⚠️ TEXT, nie DISPLAY. Display jest rysowany do duzych stopni i ma celowo
+   sciesnione swiatla — ta sama linia w 15px wychodzi w nim 249px zamiast
+   264px, czyli o 6% ciasniej niz w pliku uzywanym wczesniej. W tekscie
+   czytalo sie to jak zlepiony blok. Display zostawiamy dla stopni 40px+,
+   gdyby kiedys pojawil sie duzy naglowek bezszeryfowy; naglowki sa Caslonem,
+   wiec w praktyce caly sans na stronie to Text. Nasze pliki w fonts/
    zostaja jako zapas na czas ladowania kitu — to te same kroje, wiec
    podmiana jest wizualnie niewidoczna.
 
@@ -3118,7 +3124,7 @@ html body .akt.akt-serif, html body .akt.akt-serif * {
   font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
 }
 html body .akt.akt-sans, html body .akt.akt-sans * {
-  font-family: "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif !important;
+  font-family: "neue-haas-grotesk-text", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif !important;
 }
 
 /* --- skala naglowkow: im wiekszy stopien, tym ciasniej -------------------- */
@@ -3150,7 +3156,7 @@ html body .akt.akt-w500, html body .akt.akt-w500 * { font-weight:500 !important;
 
 /* --- eyebrow: jeden kanon zamiast 29 wariantow ---------------------------- */
 html body .akt.akt-eyebrow, html body .akt.akt-eyebrow * {
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "neue-haas-grotesk-text", "AKHaas", "Helvetica Neue", sans-serif !important;
   font-size: 11px !important;
   font-weight: 500 !important;
   line-height: 1.40 !important;
@@ -3246,7 +3252,7 @@ html body textarea, html body select {
   height: auto !important;
   padding: 0 16px !important;
   border-radius: 4px !important;
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "neue-haas-grotesk-text", "AKHaas", "Helvetica Neue", sans-serif !important;
   font-size: 15px !important;
   font-weight: 400 !important;
   line-height: 1.55 !important;
@@ -3302,7 +3308,7 @@ html body input[type="checkbox"], html body input[type="radio"] {
 
 /* --- etykiety --------------------------------------------------------------- */
 html body label {
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "neue-haas-grotesk-text", "AKHaas", "Helvetica Neue", sans-serif !important;
   font-size: 14px !important;
   line-height: 1.45 !important;
   font-weight: 400 !important;
@@ -3328,5 +3334,5 @@ html body textarea.akf { min-height: 120px !important; padding: 12px 16px !impor
    trzy pola zapisu zostawaly na wadze 300. */
 html body .ak-book .akf, html body .ak-book input.akf {
   font-weight: 400 !important;
-  font-family: "neue-haas-grotesk-display", "AKHaas", "Helvetica Neue", sans-serif !important;
+  font-family: "neue-haas-grotesk-text", "AKHaas", "Helvetica Neue", sans-serif !important;
 }
