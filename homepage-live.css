@@ -2845,3 +2845,33 @@ html body #form-input-195bcc17 ~ * input[type="radio"],
 html body input[type="radio"], html body input[type="checkbox"] {
   accent-color: #1A3C2F;
 }
+
+/* ---------- Check lists — one look everywhere, taken from /academy -------
+   Reference: #section-ba1fb6ee .ak-list (Academy) — a light terracotta tick
+   at 13px next to text at 72% ink. systeme renders these lists as
+   <li><i class="fas fa-check"><div><p>…, and without a rule the tick
+   inherits full Ink: on /, /pitching-home and the blog posts it came out
+   dark and heavier than the copy beside it, and the copy itself sat at
+   full Ink — darker than body text anywhere else on the site.
+
+   The nested <p>/<span> carry their own inline colour from systeme, so
+   inheriting from <li> alone is not enough — they have to be named.
+   <strong> is deliberately left at full Ink: it is the emphasis inside an
+   otherwise muted line, same as .check-list li strong in course-landing.css.
+
+   #section-22d30859 is excluded — its tick is hidden and replaced by the
+   01–05 counter above. */
+html body i.fa-check {
+  color: var(--ak-terracotta-dark) !important;
+  font-size: 13px !important;
+}
+html body li:has(i.fa-check):not(#section-22d30859 li),
+html body li:has(i.fa-check):not(#section-22d30859 li) p,
+html body li:has(i.fa-check):not(#section-22d30859 li) div,
+html body li:has(i.fa-check):not(#section-22d30859 li) span {
+  color: var(--ak-ink-72) !important;
+}
+html body li:has(i.fa-check) strong,
+html body li:has(i.fa-check) strong * {
+  color: var(--ak-ink) !important;
+}

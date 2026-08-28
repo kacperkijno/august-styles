@@ -2993,3 +2993,23 @@ html body #form-input-195bcc17 ~ * input[type="radio"],
 html body input[type="radio"], html body input[type="checkbox"] {
   accent-color: #1A3C2F;
 }
+
+/* ---------- Check lists — match /academy ---------------------------------
+   /cultural-communication loads this sheet, not homepage-live.css, so the
+   rule is repeated here. The tick is already terracotta 13px on this page;
+   only the copy needed muting from full Ink to 72%, so a line here reads
+   the same weight as the same line on /academy.
+   Literal rgba rather than var(): this sheet defines no :root of its own.
+
+   Unlike homepage-live.css, <strong> is muted here too. On this page the
+   whole bullet sits inside <strong> — it is the line, not an emphasis
+   within it — so exempting it would leave the entire list black, which is
+   the thing being fixed. On / and /pitching-home <strong> opens a longer
+   sentence, so there it stays full Ink. */
+html body.ak-sales-page li:has(i.fa-check),
+html body.ak-sales-page li:has(i.fa-check) p,
+html body.ak-sales-page li:has(i.fa-check) div,
+html body.ak-sales-page li:has(i.fa-check) span,
+html body.ak-sales-page li:has(i.fa-check) strong {
+  color: rgba(45, 45, 45, .72) !important;
+}
