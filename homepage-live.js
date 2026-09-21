@@ -1510,7 +1510,20 @@
       if (e.children.length || e.classList.contains('akt-eyebrow')) continue;
       if (pomijamy(e)) continue;
       var t = (e.textContent || '').trim();
-      if (!t || t.length > 34 || t.split(/\s+/).length > 5 || /[.!?:]$/.test(t)) continue;
+      if (!t || /[.!?:]$/.test(t)) continue;
+      /* ⚠️ Linia META nad H1 tez jest eyebrowem hero, choc jest dluzsza niz
+         etykieta sekcji. Na /cultural-communication „A practical course ·
+         Japan & U.S. negotiation · 40 years in practice" ma 72 znaki
+         i 13 slow, wiec limit 34/5 ja odsiewal — stala 12 px, waga 400,
+         malymi literami, podczas gdy ta sama linia na /webinar („Free live
+         webinar") jest kanonicznym eyebrowem 11/500 wersalikami.
+         Luzniejszy limit obowiazuje WYLACZNIE nad H1: reszta warunkow
+         (bezszeryfowy, <=17 px, terakota albo ciemne tlo, bez kropki na
+         koncu) zostaje bez zmian, wiec akapit wprowadzajacy pod naglowkiem
+         nadal sie nie lapie. */
+      var n0 = blokPo(e);
+      var nadH1 = !!(n0 && ((n0.matches && n0.matches('h1')) || (n0.querySelector && n0.querySelector('h1'))));
+      if (t.length > (nadH1 ? 80 : 34) || t.split(/\s+/).length > (nadH1 ? 14 : 5)) continue;
       var s = gcs(e);
       if (parseFloat(s.fontSize) > 17) continue;
       /* ⚠️ Na ciemnym pasie etykieta bywa kremowa, nie terakotowa — kanon ma
