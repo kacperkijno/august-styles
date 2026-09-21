@@ -1552,7 +1552,7 @@ html body.ak-home #section-d54243f0 img {
 #row-d553c684:hover #text-630b4ccf * { color: #1A3C2F !important; }
 
 /* ============================================================
-   Testimoniale na `/` — rowne wysokosci w rzedzie (21.09.2026)
+   Testimoniale na `/` i /academy — rowne wysokosci w rzedzie (21.09.2026)
    ============================================================
    Karty stoja w TRZECH KOLUMNACH po 1-2 sztuki, wiec karty w jednym
    wizualnym rzedzie nigdy nie mialy rownej wysokosci: 305/329/300 w pierwszym
@@ -1561,29 +1561,34 @@ html body.ak-home #section-d54243f0 img {
    przenosi karty do siatki nadrzednej — uklad staje sie wierszowy i wysokosci
    wyrownuja sie same (329/329/329 i 300/300).
    Kolumny nie maja wlasnego tla ani ramki, wiec `contents` nie ma czego zgubic.
+   Ta sama struktura na /academy (`#row-a828b786`): 3 kolumny, 2+2+1 kart.
    ⚠️ Kolejnosc idzie teraz za DOM: rzad pierwszy to Greta / Ingunn / Preethy. */
-#row-5fab714b {
+#row-5fab714b,
+#row-a828b786 {
   display: grid !important;
   grid-template-columns: repeat(3, 1fr) !important;
   gap: 32px !important;
   align-items: stretch !important;
 }
-#row-5fab714b > div,
-#row-5fab714b > div > div { display: contents !important; }
+#row-5fab714b > div, #row-5fab714b > div > div,
+#row-a828b786 > div, #row-a828b786 > div > div { display: contents !important; }
 /* Podpis z awatarem siada przy DOLE karty, nie tuz pod cytatem: bez tego pod
    krotkim cytatem zostawala luka 33-146 px. Po przejsciu kolumn na `contents`
    karty nie sa juz dziecmi `.aks-row`, wiec mechanizm `aks-col`/`aks-bottom`
    z JS ich nie obejmuje — regula jest wiec tutaj, przy samej siatce.
    ⚠️ `margin-top:auto` idzie na OSTATNIE z rodzenstwa; na jedynym dziecku
    zepchneloby cala tresc na dol. */
-#row-5fab714b .aks-card { display: flex !important; flex-direction: column !important; }
-#row-5fab714b .aks-card > * { flex: 1 1 auto !important; display: flex !important; flex-direction: column !important; }
-#row-5fab714b .aks-card > * > *:last-child:not(:only-child) { margin-top: auto !important; }
+#row-5fab714b .aks-card,
+#row-a828b786 .aks-card { display: flex !important; flex-direction: column !important; }
+#row-5fab714b .aks-card > *,
+#row-a828b786 .aks-card > * { flex: 1 1 auto !important; display: flex !important; flex-direction: column !important; }
+#row-5fab714b .aks-card > * > *:last-child:not(:only-child),
+#row-a828b786 .aks-card > * > *:last-child:not(:only-child) { margin-top: auto !important; }
 @media (max-width: 1024px) {
-  #row-5fab714b { grid-template-columns: repeat(2, 1fr) !important; }
+  #row-5fab714b, #row-a828b786 { grid-template-columns: repeat(2, 1fr) !important; }
 }
 @media (max-width: 767px) {
-  #row-5fab714b { grid-template-columns: 1fr !important; }
+  #row-5fab714b, #row-a828b786 { grid-template-columns: 1fr !important; }
 }
 
 /* ==================== FOOTER (global, all pages) ==================== */
