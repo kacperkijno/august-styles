@@ -3447,6 +3447,7 @@ html body .akt.aks-kolor-terra,       html body .akt.aks-kolor-terra *       { c
 html body .akt.aks-kolor-terra-jasna, html body .akt.aks-kolor-terra-jasna * { color: #D9A47A !important; }
 html body .akt.aks-kolor-ink72,       html body .akt.aks-kolor-ink72 *       { color: rgba(45,45,45,.72) !important; }
 html body .akt.aks-kolor-ink62,       html body .akt.aks-kolor-ink62 *       { color: rgba(45,45,45,.62) !important; }
+html body .akt.aks-kolor-ink,         html body .akt.aks-kolor-ink *         { color: #2D2D2D !important; }
 
 /* --- cytat wyrozniony ------------------------------------------------------
    Klasyfikator typograficzny widzial go jako naglowek (szeryfowy, duzy,
@@ -3733,3 +3734,9 @@ html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { text-align: center 
    co przy etykiecie nad marquee na /about. */
 html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { display: block !important; width: 100% !important; }
 html body .ak-book .pdk-faq { max-width: 760px !important; margin-inline: auto !important; }
+
+/* --- SUROWY NIEBIESKI LINK (2026-09-21) ------------------------------------
+   Ta sama poprawka co w sales-page.css: odnosnik bez wlasnej reguly dostaje
+   od przegladarki rgb(0, 0, 238). Na stronach Website widac to w stopce
+   zanim JS doklei `.akt` dzieciom. Bez `!important` — jawna regula wygrywa. */
+html body a { color: inherit; }

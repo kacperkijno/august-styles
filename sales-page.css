@@ -80,7 +80,10 @@ body.ak-sales-page {
   --ak-terracotta-warm: #E4B68A;
   --ak-ink:        #2D2D2D;
   --ak-ink-10:     rgba(45, 45, 45, 0.10);
-  --ak-ink-50:     rgba(45, 45, 45, 0.50);
+  --ak-ink-50:     rgba(45, 45, 45, 0.50);   /* tylko ikony/kreski */
+  /* Kanon typograficzny (28.08) zastapil 50% przez 62% w TEKSCIE — 4,6:1
+     zamiast 3,5:1. Token zostaje osobno, zeby nie zmieniac ikon. */
+  --ak-ink-62:     rgba(45, 45, 45, 0.62);
   --ak-sage:       #D7DDD8;
   --ak-ease:       cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -813,17 +816,13 @@ html body.ak-sales-page #text-94303200 {
   border-bottom: 1px solid var(--ak-ink-10);
   margin-bottom: 4px !important;
 }
-html body.ak-sales-page #text-e4dccc87 strong,
-html body.ak-sales-page #text-94303200 strong {
-  font-size: 14px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.14em !important;
-  text-transform: uppercase !important;
-  color: var(--ak-forest) !important;
-}
-html body.ak-sales-page #text-94303200 strong {
-  color: var(--ak-ink-70) !important;
-}
+/* ⚠️ Typografia naglowkow „This course is for you" / „…is not for you"
+   USUNIETA 2026-09-21 — ten sam wzorzec co eyebrow na stronach „thank you":
+   regula z czerwca celowala po ID (14 px, swiatlo .14em, Forest/Ink-70)
+   i wygrywala z kanonem eyebrow (11 px, .18em, Terracotta). JS rozpoznaje
+   oba napisy po ksztalcie i nadaje im `.akt-eyebrow`, wiec kanon je obejmuje.
+   Zostaje tylko KOMPOZYCJA: kreska pod naglowkiem karty, ktora nie wynika
+   z typografii. */
 /* Override box border color to brand ink-10 + comfortable inner padding */
 html body.ak-sales-page #row-521edb5a,
 html body.ak-sales-page #row-7dc91164 {
@@ -854,19 +853,23 @@ html body.ak-sales-page #bulletlist-bd18b09a {
    23. PRICING HEADLINE — italic terracotta euro accent.
    #headline-449b4d61 contains H2 "Instant access:" + p "€49 (one-time)"
    ============================================================ */
-/* "Instant access:" — full H2 size like the rest of the page */
+/* „Instant access:" — stopien H2, jak reszta naglowkow drugiego rzedu
+   na tej stronie (2026-09-21: bylo 54, czyli stopien H1). */
 html body.ak-sales-page #headline-449b4d61 h2 {
-  font-size: 54px !important;
+  font-size: 40px !important;
   line-height: 1.1 !important;
   margin-bottom: 12px !important;
   color: var(--ak-ink) !important;
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
 }
-/* "€49" — large italic terracotta accent */
+/* „€49" — duzy kursywny akcent terakoty.
+   2026-09-21: 72 px nie istnialo w skali (…88, 54, 40, 36…). Cena schodzi
+   na 54, etykieta nad nia na 40 — hierarchia „cena wieksza od etykiety"
+   zostaje, a oba stopnie sa na skali. */
 html body.ak-sales-page #headline-449b4d61 p {
   font-style: italic !important;
   color:var(--ak-terracotta-dark) !important;
-  font-size: 72px !important;
+  font-size: 54px !important;
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   line-height: 1 !important;
   margin: 0 !important;
@@ -880,7 +883,7 @@ html body.ak-sales-page #text-1e9b4b39 {
 html body.ak-sales-page #text-1e9b4b39 p {
   font-size: 14px !important;
   letter-spacing: 0.04em !important;
-  color: var(--ak-ink-50) !important;
+  color: var(--ak-ink-62) !important;
   margin: 0 !important;
 }
 
@@ -918,7 +921,7 @@ html body.ak-sales-page #text-1e027c48 p,
 html body.ak-sales-page #text-1e027c48 span {
   font-size: 14px !important;
   line-height: 1.4 !important;
-  color: var(--ak-ink-50) !important;
+  color: var(--ak-ink-62) !important;
   letter-spacing: 0.02em !important;
 }
 
@@ -1371,7 +1374,7 @@ html body.ak-sales-page #section-611e31fb #text-3fc65725 p {
 html body.ak-sales-page #section-611e31fb #text-38559b5b p {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   color: var(--ak-forest) !important;
-  font-size: 26px !important;
+  font-size: 24px !important;
   line-height: 1 !important;
 }
 
@@ -1400,7 +1403,7 @@ html body.ak-sales-page #section-611e31fb #text-5fc74eb0 p {
   font-weight: 500 !important;
 }
 html body.ak-sales-page #section-611e31fb #text-5fc74eb0 p span {
-  color: var(--ak-ink-50, rgba(45, 45, 45, 0.5)) !important;
+  color: var(--ak-ink-62, rgba(45, 45, 45, 0.62)) !important;
 }
 
 /* ----- Guarantee row — star prefix on label, same look as magnet author card */
@@ -1430,11 +1433,16 @@ html body.ak-sales-page #text-72c395e5 p::before {
 html body.ak-sales-page #text-72c395e5 p strong {
   font-weight: 500 !important;
 }
+/* Tekst gwarancji jest szeryfowa kursywa, wiec JS nadaje mu `.akt-quote`
+   i mierzy go SKALA SZERYFOWA (…30, 24, 21). 16,5 px nie istnialo w zadnej
+   z dwoch skal. Schodzimy na 21 — najnizszy stopien szeryfowy — zamiast
+   kanonicznych 24 dla cytatu, bo boks gwarancji jest waski (ok. 360 px)
+   i 24 rozbijalo go na siedem wierszy. */
 html body.ak-sales-page #text-b2684011 p,
 html body.ak-sales-page #text-b2684011 p span {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   font-style: italic !important;
-  font-size: 16.5px !important;
+  font-size: 21px !important;
   line-height: 1.5 !important;
   color: var(--ak-ink) !important;
 }
@@ -1449,7 +1457,7 @@ html body.ak-sales-page #section-611e31fb #offerprice-698a1992 {
 html body.ak-sales-page #section-611e31fb #offerprice-698a1992 span[data-testid$="-price"] {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
   color: var(--ak-forest) !important;
-  font-size: 22px !important;
+  font-size: 21px !important;
   font-weight: 400 !important;
 }
 
@@ -1524,7 +1532,7 @@ html body.ak-sales-page #text-cee9f10f p::before {
 html body.ak-sales-page #text-df5b324f,
 html body.ak-sales-page #text-df5b324f * {
   font-size: 14px !important;
-  color: var(--ak-ink-50) !important;
+  color: var(--ak-ink-62) !important;
 }
 
 /* ----- Hero photo: floating shadow (radius 4px already set in editor) ----- */
@@ -1663,7 +1671,7 @@ html body.ak-sales-page #section-89f347ed input:focus {
 /* ----- Form consent fine print ----- */
 html body.ak-sales-page #text-c51f54be * {
   font-size: 12.5px !important;
-  color: var(--ak-ink-50) !important;
+  color: var(--ak-ink-62) !important;
 }
 
 /* ----- Section eyebrows ("What you'll leave with", "One session,
@@ -1873,18 +1881,34 @@ html body.ak-sales-page #text-6df26f66 * {
    Added 2026-06-10.
    ============================================================ */
 
-/* ----- Eyebrows: uppercase tracked (both thank-you pages) -----
+/* ----- Eyebrows na stronach „thank you" -----
    /webinar-confirmed: "You're in" + "While you wait"
-   /cc-playbook-thanks: "You're in" + "Going deeper" */
+
+   2026-09-21. Regula powstala 10.06, ZANIM istnial kanon eyebrow (28.08),
+   i celujac po ID wygrywala specyficznoscia z `html body .akt.akt-eyebrow`.
+   Trzymala cztery napisy na 12 px zamiast 11 i swietle .18em — jedyne takie
+   w lejku.
+
+   Z listy WYPADAJA `#text-1cac3927` i `#text-45740cbe` (/cc-playbook-thanks):
+   ta strona laduje `homepage-live.js`, wiec JS rozpoznaje oba napisy po
+   KSZTALCIE i nadaje im `.akt-eyebrow` — kanon je obejmuje.
+
+   ⚠️ ZOSTAJA dwa ID z `/webinar-confirmed`, bo TA strona laduje wylacznie
+   `sales-page.css` — bez skryptu (sprawdzone `curl | grep august-styles`).
+   Bez tej reguly oba napisy spadaja do zwyklego tekstu 16 px/400, malymi
+   literami. Wartosci sa teraz przepisane z KANONU, zeby obie strony
+   wygladaly tak samo. `display: inline-block` odchodzi — to ten sam
+   mechanizm, ktory w `contact.css` przyklejal pudelko do tekstu i psul
+   rozstrzyganie wyrownania.
+   Docelowo: wkleic `homepage-live.js` w naglowek /webinar-confirmed
+   i skasowac te regule. */
 html body.ak-sales-page #text-6b213f38 *,
-html body.ak-sales-page #text-b25ca5db *,
-html body.ak-sales-page #text-1cac3927 *,
-html body.ak-sales-page #text-45740cbe * {
-  display: inline-block;
+html body.ak-sales-page #text-b25ca5db * {
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
   font-weight: 500 !important;
-  font-size: 12px !important;
+  font-size: 11px !important;
+  color: var(--ak-terracotta-dark) !important;
 }
 
 /* ----- Hero H1: Caslon italic cream (was black roman on forest bg) ----- */
@@ -3523,6 +3547,7 @@ html body .akt.aks-kolor-terra,       html body .akt.aks-kolor-terra *       { c
 html body .akt.aks-kolor-terra-jasna, html body .akt.aks-kolor-terra-jasna * { color: #D9A47A !important; }
 html body .akt.aks-kolor-ink72,       html body .akt.aks-kolor-ink72 *       { color: rgba(45,45,45,.72) !important; }
 html body .akt.aks-kolor-ink62,       html body .akt.aks-kolor-ink62 *       { color: rgba(45,45,45,.62) !important; }
+html body .akt.aks-kolor-ink,         html body .akt.aks-kolor-ink *         { color: #2D2D2D !important; }
 
 /* --- cytat wyrozniony ------------------------------------------------------
    Klasyfikator typograficzny widzial go jako naglowek (szeryfowy, duzy,
@@ -3672,15 +3697,18 @@ html body .aks.aks-card.aks-col, html body .aks-col { display: flex !important; 
   display: flex !important;
   flex-direction: column !important;
 }
-#row-8d0c7926 .aks-card > * > *:last-child:not(:only-child) { margin-top: auto !important; }
-/* ⚠️ `margin-top: auto` tu NIE wystarcza: blok podpisu sam rosnie i wypelnia
+/* ⚠️ `margin-top: auto` sam NIE wystarcza: blok podpisu rosnie i wypelnia
    reszte karty, wiec nie ma wolnej przestrzeni do rozepchniecia i `auto`
-   wychodzi 0. Bloki koncza sie wiec rowno (@320), ale awatar siedzial przy ich
-   GORZE, a ze maja rozna wysokosc (137/81/109 px), awatary staly na trzech
-   roznych poziomach. Dosuwamy zawartosc bloku, nie sam blok. */
-#row-8d0c7926 .aks-card > * > *:last-child:not(:only-child) > * {
-  align-content: end !important;
-  align-items: end !important;
+   wychodzi 0. Dosuwamy wiec ZAWARTOSC bloku, nie sam blok — blok jest
+   kolumna, ktora sklada tresc do dolu. (21.09: bylo `align-content/items:end`
+   na dzieciach; po splaszczeniu wiersza podpisu z siatki na rzad — patrz
+   punkty 6 i 7 na koncu pliku — ta wersja jest jedyna, ktora trzyma wszystkie
+   trzy podpisy na jednej linii.) */
+#row-8d0c7926 .aks-card > * > *:last-child:not(:only-child) {
+  margin-top: auto !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
 }
 
 /* Kropki karuzeli: pod slajderem i w palecie, nie czysta czern na tresci. */
@@ -3837,3 +3865,121 @@ html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { text-align: center 
    co przy etykiecie nad marquee na /about. */
 html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { display: block !important; width: 100% !important; }
 html body .ak-book .pdk-faq { max-width: 760px !important; margin-inline: auto !important; }
+
+/* ============================================================================
+   LEJEK CULTURAL COMMUNICATION — siedem poprawek z audytu (2026-09-21)
+   ----------------------------------------------------------------------------
+   Audyt piecioetapowego lejka po doklejeniu brakujacych arkuszy i skryptu.
+   Kazda poprawka mierzona PRZED i PO na wszystkich 19 stronach kontroli, nie
+   tylko na tej, ktorej dotyczy.
+   ============================================================================ */
+
+/* --- 1. SUROWY NIEBIESKI LINK ---------------------------------------------
+   Odnosniki, ktorym nikt nie nadal koloru, dostaja od PRZEGLADARKI
+   `rgb(0, 0, 238)`. W stopce lejka jest takich kilkanascie: „How to Pitch",
+   „Cross-Cultural Communication", „All courses", adres e-mail, logo.
+   Na produkcji widac to tylko przez chwile — JS dokleja `.akt` dzieciom
+   i kolor spod nich znika — ale kazda sekunda przed uruchomieniem skryptu
+   (i kazda awaria skryptu) pokazuje cala kolumne linkow na niebiesko,
+   na ciemnym tle. Dokladnie ten sam powod, dla ktorego pasek nawigacji jest
+   „DOMYSLNIE SOLIDNY": stan bez JS ma byc czytelny, nie przypadkowy.
+   Bez `!important` — kazda jawna regula (nawigacja, przyciski, stopka) wygrywa;
+   ruszamy wylacznie linki, ktore nie maja zadnej. */
+html body a { color: inherit; }
+
+/* --- 2. SKALA NAGLOWKOW: H1 na stronie sprzedazowej ------------------------
+   Pomiar H1 na 18 podstronach: 54 px na szesnastu. Odstaja dwie —
+   /cultural-communication (88) i /pitching-decoded (88, ale tam „Decoded"
+   to potraktowany osobno tytul ksiazki). 88 jest w skali, wiec kontroler
+   tego nie zglaszal; to nie blad stopnia, tylko zlamana hierarchia. */
+html body.ak-sales-page #headline-48beb1b2 h1,
+html body.ak-sales-page #headline-48beb1b2 h1 * {
+  font-size: 54px !important;
+}
+/* Przy 88 px naglowek lamal sie sam po „a" — dwa rowne wiersze. Przy 54 px
+   miesci sie wiecej i zostawala sierota („…professional / skill."), bo
+   pojemnik ma 632 px. `balance` rozklada wiersze rowno, zamiast sztywnego
+   `max-width`, ktory rozjechalby sie przy innym kroju albo szerokosci. */
+html body.ak-sales-page #headline-48beb1b2 h1 {
+  text-wrap: balance;
+}
+
+/* --- 5. BIALE TLO BOKSU NA CHECKOUCIE --------------------------------------
+   Panel formularza mial czysta biel — koloru, ktorego paleta nie zna.
+   Sama zamiana na Cream zlalaby go ze strona (tlo sekcji to tez Cream),
+   wiec panel dostaje kanoniczny zestaw karty: Cream + wlosowa ramka Ink 10%
+   + sredni cien. Tlo idzie po ID, bo klasa `.blnDtI` to styled-component
+   i przegeneruje sie przy najblizszym rebuildzie platformy. */
+html body.ak-sales-page #row-72f32b22 {
+  background-color: var(--ak-cream) !important;
+  border: 1px solid var(--ak-ink-10) !important;
+  border-radius: 4px !important;
+  box-shadow: var(--ak-sh-md);
+}
+
+/* --- 6. POZIOME PRZEWIJANIE PRZY 900 px ------------------------------------
+   Winowajca NIE jest marquee (tamta ma `overflow: hidden` na dwoch poziomach)
+   tylko wiersz podpisu w trzeciej opinii. systeme liczy szerokosc kolumny
+   `div[size="12"]` z szerokosci wiersza SPRZED paddingu karty: karta ma
+   265 px, a kolumna w srodku 284 px i wystaje 27 px w prawo (scrollWidth 926
+   przy oknie 900). Docinamy zawartosc karty do jej wlasnej szerokosci.
+   `min-width: 0` jest konieczne — bez niego element siatki i tak rozpycha
+   sie do rozmiaru tresci i `max-width` nic nie zmienia. */
+#row-8d0c7926 .aks-card > div,
+#row-8d0c7926 .aks-card > div > div,
+#row-8d0c7926 .aks-card [id^="row-"] {
+  max-width: 100% !important;
+  min-width: 0 !important;
+}
+
+/* Wiersz podpisu przestaje byc dwunastokolumnowa siatka systeme i staje sie
+   zwyklym rzedem: awatar, obok niego nazwisko z rola, wysrodkowane w pionie.
+   Siatka byla zrodlem obu usterek naraz — rozpychala karte przy 900 px
+   (pkt 6) i dawala trzem wierszom trzy rozne wysokosci (137/81/109 px),
+   przez co podpisy staly na roznych poziomach mimo rownych den kart (pkt 7). */
+#row-8d0c7926 .aks-card [id^="row-"] {
+  display: flex !important;
+  align-items: center !important;
+  gap: 16px !important;
+  height: auto !important;
+  min-height: 0 !important;
+}
+#row-8d0c7926 .aks-card [id^="row-"] > div {
+  width: auto !important;
+  flex: 0 0 auto !important;
+  padding: 0 !important;
+  /* ⚠️ `align-items` na rzedzie nie wystarcza: systeme daje kolumnom wlasne
+     `align-self` i akurat w dwoch opiniach z trzech jest to `flex-start`.
+     Stad awatary staly na trzech wysokosciach mimo rownych kart. */
+  align-self: center !important;
+}
+/* Kolumna awatara ma dokladnie rozmiar awatara. Bez tego pojemnik obrazka
+   zostawal przy starej wysokosci (66 px przy zdjeciu 44 px) i rozpychal rzad
+   do 86 px, czyli o 5 px wiecej niz dwa pozostale. */
+#row-8d0c7926 .aks-card [id^="row-"] > div:first-child,
+#row-8d0c7926 .aks-card [id^="row-"] > div:first-child > div {
+  width: 44px !important;
+  height: 44px !important;
+  flex: 0 0 44px !important;
+}
+#row-8d0c7926 .aks-card [id^="row-"] > div:last-child {
+  flex: 1 1 auto !important;
+  min-width: 0 !important;
+}
+
+/* --- 7. ROZRZUT PODPISOW W OPINIACH ----------------------------------------
+   Dna kart stoja rowno od 21.09, ale podpisy nadal na trzech wysokosciach.
+   Przyczyna nie byla w ukladzie: awatar Grety ma 48x72 px, dwa pozostale
+   44x44. Wiersze podpisu mialy przez to 137 / 81 / 109 px i przy dosunietej
+   do dolu tresci nazwiska wypadaly na roznych poziomach.
+   ⚠️ Celujemy STRUKTURALNIE (obrazek w wierszu wewnatrz bloku opinii),
+   nie przez `sc-*` — to ta sama zasada, przez ktora w 2026-08-27 wyleciala
+   martwa regula wymiarowa awatarow. `object-fit: cover` przycina kadr
+   zamiast go sciskac. */
+#row-8d0c7926 .aks-card [id^="row-"] img {
+  display: block !important;
+  width: 44px !important;
+  height: 44px !important;
+  object-fit: cover !important;
+  border-radius: 999px !important;
+}

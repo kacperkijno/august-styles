@@ -1427,6 +1427,20 @@
     var roznica = docelowy - (b.top - a.bottom);
     if (Math.abs(roznica) < 3 || Math.abs(roznica) > 200) return;
     var nosnik = przytulony(od);
+    /* ⚠️ Element INLINE ignoruje margines pionowy. Naglowki systeme to czesto
+       <em>/<span> wewnatrz <p>, ktore nie oplywa ich co do piksela (inny
+       wiersz bazowy), wiec `przytulony` zatrzymuje sie na elemencie inline
+       i caly rytm szedl w prozne: „August's Brief" mial 2 px na jednej
+       stronie, 38 na drugiej i 41 na trzeciej — ten sam blok stopki, trzy
+       rozne odstepy, zaleznie od tego, na jakim poziomie skonczylo sie
+       wspinanie. Gdy nosnik jest inline, korekte zapisujemy z DRUGIEJ strony:
+       marginesem gornym nastepnego bloku, ktory jest zwyklym pojemnikiem. */
+    if (gcs(nosnik).display === 'inline') {
+      if (gcs(nast).display === 'inline') return;      /* nie ma czego chwycic */
+      var majaN = parseFloat(gcs(nast).marginTop) || 0;
+      nast.style.setProperty('margin-top', Math.max(0, Math.round(majaN + roznica)) + 'px', 'important');
+      return;
+    }
     var maja = parseFloat(gcs(nosnik).marginBottom) || 0;
     nosnik.style.setProperty('margin-bottom', Math.max(0, Math.round(maja + roznica)) + 'px', 'important');
   }
@@ -1464,6 +1478,21 @@
     if (taSamaFraza(p, el)) return;                  /* drugi wiersz tej samej frazy */
     if (p.classList && p.classList.contains('akt-eyebrow')) return;   /* para eyebrow+naglowek ma wlasne 16 */
     if (p.querySelector && p.querySelector('.akt-eyebrow')) return;
+    /* ⚠️ NAGLOWEK PO NAGLOWKU to takze para, nie dwa bloki. „Instant access:"
+       i „€49" w karcie cennika to etykieta i jej cena; odstep miedzy nimi
+       rozstrzyga regula „pod naglowkiem" (48), wiec „nad blokiem" (64)
+       walczyloby z nia o ten sam odstep i wygrywalaby ta, ktora wykona sie
+       druga. Ujawnilo sie to dopiero, gdy cena trafila na skale (54 px)
+       i klasyfikator zaczal ja widziec jako naglowek.
+       ⚠️ Warunek musi obejmowac OBIE strony. Sam poprzednik nie wystarcza:
+       „01" w kartach metody tez jest naglowkiem, a to, co po nim idzie, to
+       EYEBROW otwierajacy kolejny blok — tam 24 px „nad blokiem" jest
+       poprawne. Pierwsze podejscie pominelo ten przypadek i podnioslo
+       kontrole o 7 na czterech stronach. */
+    var jestNagl = function (x) {
+      return !!(x && x.matches && x.matches('[class*="akt-h"], h1, h2, h3'));
+    };
+    if (!(el.classList && el.classList.contains('akt-eyebrow')) && jestNagl(el) && jestNagl(p)) return;
     var sek = el.closest('[id^="section-"], section');
     if (!sek || !sek.contains(p)) return;                             /* poprzednik poza sekcja = padding sekcji */
     ustawOdstep(p, docelowy);
@@ -1617,6 +1646,14 @@
       var h = l[i];
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
       var Rh = skala(h);
+      /* ⚠️ Naglowek na NAJNIZSZYCH stopniach szeryfowych (21/24) nie otwiera
+         sekcji — jest podpisem wewnatrz kompozycji. „Entrepreneurship.
+         Decoded." pod logotypem w stopce zapowiada wlasny biogram, tak samo
+         jak tytul karty zapowiada jej tresc. Rytm sekcji (48) odrywa go od
+         tego, co zapowiada, i zostawia zawieszony miedzy logotypem a tekstem.
+         Ta sama zasada co przy kartach: kompozycja ma sie czytac jako calosc,
+         wiec rytm schodzi o dwa stopnie. Ta sama regula siedzi w kontrola.cjs. */
+      if (Math.round(parseFloat(gcs(h).fontSize)) <= 24) Rh = RYTM_KARTA;
       ustawOdstepNad(h, Rh.nadBlok);
       /* WYROWNANIE. Eyebrow i naglowek to jedna para — musza stac na tej samej
          osi. Na /cultural-communication „ABOUT" zaczynalo sie na 732 px, a
@@ -1715,7 +1752,17 @@
     'rgba(249, 247, 241, 0.7)': 'cream80', 'rgba(249, 247, 241, 0.72)': 'cream80',
     'rgba(249, 247, 241, 0.82)': 'cream80', 'rgba(243, 240, 231, 0.8)': 'cream80',
     'rgba(249, 247, 241, 0.68)': 'cream80', 'rgba(249, 247, 241, 0.78)': 'cream80',
+    /* 21.09: lead pod H1 na /cultural-communication */
+    'rgba(249, 247, 241, 0.86)': 'cream80',
     'rgb(255, 255, 255)': 'cream', 'rgb(243, 240, 231)': 'cream',
+    /* 21.09: prawie-biel z edytora systeme — H1 na /cc-playbook-thanks
+       i /cc-thanks. Kolor siedzi INLINE, wiec zadna regula arkusza go nie
+       zdejmie; klasa `aks-kolor-*` maluje z `!important` i wygrywa. */
+    'rgb(245, 242, 242)': 'cream',
+    /* 21.09: czysta czern. 27.08 zamienilismy 218 takich miejsc w arkuszach,
+       ale H2 „The PDF is the map…" na /cc-playbook-thanks nie mial ZADNEJ
+       reguly koloru i bral czern domyslna przegladarki. */
+    'rgb(0, 0, 0)': 'ink',
     'rgb(180, 106, 60)': 'terra', 'rgb(228, 182, 138)': 'terra-jasna',
     'rgb(214, 154, 110)': 'terra-jasna',
     'rgba(45, 45, 45, 0.5)': 'ink62', 'rgb(110, 108, 104)': 'ink72', 'rgb(90, 90, 90)': 'ink72'
