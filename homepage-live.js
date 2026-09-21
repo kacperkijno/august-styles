@@ -1349,7 +1349,21 @@
      rozrywaja mala kompozycje, ktora ma sie czytac jako jedna calosc.
      Skala jest ta sama, tylko o dwa stopnie nizej. */
   var RYTM_KARTA = { eyebrow: 8, tresc: 12, siatka: 24, nadBlok: 24, leadCta: 16 };
-  function skala(el) { return el.closest('.aks-card') ? RYTM_KARTA : RYTM; }
+  function skala(el) {
+    if (el.closest('.aks-card')) return RYTM_KARTA;
+    /* ⚠️ Kafelek wideo to JEDNA kompozycja (obraz + tytul + tag), choc od
+       21.09 nie jest juz karta — wykluczylismy go z systemu powierzchni, zeby
+       zdjac ramke. Bez tego tag pod tytulem dostawal 64 px „nad blokiem"
+       i odjezdzal od tytulu: 71 px na /materials przy 49 px na `/`.
+       Eyebrow lezy POZA `.materials-grid` (systeme trzyma tytul i tag w osobnym
+       bloku), wiec pytamy o wspolny rzad. */
+    var w = el, i;
+    for (i = 0; i < 8 && w; i++) {
+      w = w.parentElement; if (!w) break;
+      if (w.querySelector && w.querySelector('.materials-grid')) return RYTM_KARTA;
+    }
+    return RYTM;
+  }
 
   function blokPo(e) {
     var w = e, i = 0;
