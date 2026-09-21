@@ -1144,6 +1144,61 @@
     }
   }
 
+  /* --- 3c. kropki karuzeli --------------------------------------------------- */
+  /* Widget karuzeli maluje kropki czysta czernia (poza paleta) i wiesza ich
+     pojemnik absolutnie w polowie kolumny tekstowej, wiec leza na tresci
+     zamiast pod slajderem.
+     ⚠️ Ktora kropka jest aktywna, widac TYLKO po klasie styled-components,
+     a ta zmienia sie przy kazdym rebuildzie platformy. Nie wpisujemy jej wiec
+     do kodu — zapamietujemy w locie, ZANIM nadpiszemy wyglad (po tym momencie
+     wypelnienie czytaloby juz nasze wlasne). */
+  function kropki(root) {
+    var l = root.querySelectorAll('span'), i, poj = [];
+    for (i = 0; i < l.length; i++) {
+      var e = l[i], r = e.getBoundingClientRect();
+      if (r.width < 6 || r.width > 14 || Math.abs(r.width - r.height) > 2) continue;
+      if (parseFloat(gcs(e).borderRadius) < r.width * 0.4) continue;
+      var p = e.parentElement;
+      if (!p || p.children.length < 3 || p.getAttribute('data-aks-dots')) continue;
+      if (poj.indexOf(p) < 0) poj.push(p);
+    }
+    for (i = 0; i < poj.length; i++) oznaczKropki(poj[i]);
+  }
+  /* ⚠️ Stanu NIE czytamy z wypelnienia: karuzela zaznacza aktywna kropke
+     asynchronicznie, wiec przy pierwszym przebiegu wszystkie bywaja jeszcze
+     puste — a po nadaniu naszych klas wypelnienie jest juz nasze i prawdy
+     nie da sie odzyskac. Aktywna poznajemy po tym, ze jej klasa widgetu
+     wystepuje w grupie TYLKO RAZ; to dziala niezaleznie od momentu i od
+     tego, jak klasa sie nazywa po kolejnym rebuildzie platformy. */
+  function klasaAktywnej(p) {
+    var licz = {}, q, z, kl, k;
+    for (q = 0; q < p.children.length; q++) {
+      kl = (p.children[q].className || '').toString().split(/\s+/);
+      for (z = 0; z < kl.length; z++) {
+        if (!kl[z] || kl[z].indexOf('aks-') === 0) continue;
+        licz[kl[z]] = (licz[kl[z]] || 0) + 1;
+      }
+    }
+    for (k in licz) if (licz[k] === 1) return k;
+    return null;
+  }
+  function oznaczKropki(p) {
+    p.setAttribute('data-aks-dots', '1');
+    var d = p.children, j;
+    p.classList.add('aks-dots');
+    for (j = 0; j < d.length; j++) d[j].classList.add('aks-dot');
+    var odswiez = function () {
+      var stan = klasaAktywnej(p);
+      for (var q = 0; q < p.children.length; q++) {
+        var on = stan && (p.children[q].className || '').toString().indexOf(stan) > -1;
+        p.children[q].classList.toggle('aks-dot--on', !!on);
+      }
+    };
+    odswiez();
+    try { new MutationObserver(odswiez).observe(p, { attributes: true, subtree: true, attributeFilter: ['class'] }); }
+    catch (err) { }
+  }
+
   /* --- 4. rzedy: rowne wysokosci, odstep 32, CTA do dolu -------------------- */
   function rzedy(root) {
     var l = root.querySelectorAll('*');
@@ -1396,10 +1451,33 @@
       if (!t || t.length > 34 || t.split(/\s+/).length > 5 || /[.!?:]$/.test(t)) continue;
       var s = gcs(e);
       if (parseFloat(s.fontSize) > 17) continue;
-      if (!/^rgb\(154, 88, 50\)$|^rgb\(180, 106, 60\)$|^rgb\(217, 164, 122\)$/.test(s.color)) continue;
+      /* ⚠️ Na ciemnym pasie etykieta bywa kremowa, nie terakotowa — kanon ma
+         dla niej wariant `--dark`. Warunek na sam kolor terakoty odsiewal
+         naglowki kolumn w stopce /blog. */
+      var terakota = /^rgb\(154, 88, 50\)$|^rgb\(180, 106, 60\)$|^rgb\(217, 164, 122\)$/.test(s.color);
+      var podEt = tloPod(e.parentElement || e);
+      if (!terakota && !(podEt && lum(podEt) < 0.35)) continue;
       var n = blokPo(e); if (!n) continue;
       var h = (n.matches && n.matches('[class*="akt-h"]')) ? n : (n.querySelector && n.querySelector('[class*="akt-h"]'));
-      if (!h) continue;
+      /* ⚠️ Etykieta kolumny w stopce zapowiada LISTE LINKOW, nie naglowek.
+         Na /blog „Academy", „Work with August" i „Connect" staly przez to
+         12 px waga 400 bez wersalikow, a na `/` te same etykiety sa
+         wersalikami 11/500 w AKHaas. Ta sama rola, ten sam stopien. */
+      /* ⚠️ Lista musi byc TA SAMA kompozycja, nie kolejna sekcja: na /about
+         podpisy pod liczbami („companies & institutions engaged") lezą na
+         ciemnym pasie, a `blokPo` wychodzilo z nich do nastepnej sekcji
+         z linkami i robilo z podpisu etykiete. */
+      var sekE = e.closest('[id^="section-"], section, footer, [id^="websitefooter"]');
+      var odstepDoListy = n.getBoundingClientRect().top - e.getBoundingClientRect().bottom;
+      var listaPod = !h && !e.closest('a')
+        && n.querySelectorAll && n.querySelectorAll('a').length >= 2
+        && odstepDoListy >= 0 && odstepDoListy <= 48
+        && sekE && sekE.contains(n);
+      if (!h && !listaPod) continue;
+      /* ⚠️ Kremowy kolor dopuszczamy WYLACZNIE dla etykiety kolumny. Inaczej
+         podpisy pod liczbami na ciemnym pasie /about („companies & institutions
+         engaged") tez staja sie wersalikami 11/500 — a to podpisy, nie etykiety. */
+      if (!terakota && !listaPod) continue;
       var k = e.className.split(/\s+/);
       for (var j = 0; j < k.length; j++) if (/^akt-t\d/.test(k[j])) e.classList.remove(k[j]);
       e.classList.add('akt-eyebrow');
@@ -1660,7 +1738,7 @@
   function przebieg() {
     try {
       var docs = dokumenty();
-      for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
+      for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); kropki(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
       for (i = 0; i < docs.length; i++) { kolory(docs[i]); rytm(docs[i]); }   /* na koncu: rytm potrzebuje ulozonego ukladu */
       sekcje();
       if (reduce) {
