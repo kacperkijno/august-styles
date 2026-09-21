@@ -1803,6 +1803,10 @@
        ale H2 „The PDF is the map…" na /cc-playbook-thanks nie mial ZADNEJ
        reguly koloru i bral czern domyslna przegladarki. */
     'rgb(0, 0, 0)': 'ink',
+    /* 21.09: dwie prawie-czernie z motywu systeme, znalezione dopiero po
+       dopisaniu do kontroli stron podziekowan z lejka Pitching (/thanks
+       i /thanks-2892c7f5). Obie sa o wlos od Ink i obie siedza w TEKSCIE. */
+    'rgb(26, 27, 30)': 'ink', 'rgb(46, 43, 41)': 'ink',
     'rgb(180, 106, 60)': 'terra', 'rgb(228, 182, 138)': 'terra-jasna',
     'rgb(214, 154, 110)': 'terra-jasna',
     'rgba(45, 45, 45, 0.5)': 'ink62', 'rgb(110, 108, 104)': 'ink72', 'rgb(90, 90, 90)': 'ink72'
