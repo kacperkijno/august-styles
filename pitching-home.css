@@ -1,0 +1,457 @@
+/* ============================================================================
+   AK /pitching-home — strona sprzedazowa kursu „How to Pitch" (2026-09-21)
+   ----------------------------------------------------------------------------
+   Blok tresci: redesign/pitching-home-block-standalone.html, wklejony w systeme
+   jako JEDEN element Custom HTML w wierszu pelnej szerokosci. Nawigacja
+   i stopka zostaja z systeme — blok ich nie dotyka.
+
+   ⚠️ SCOPE. Kazda regula zaczyna sie od `.ak-pitch`. Ten arkusz idzie
+   `@import` do `homepage-live.css`, czyli laduje sie na KAZDEJ podstronie
+   serwisu. `about.css` nie mial scope'u i `akb-` wylalo sie na caly serwis
+   ([[reference_css_prefix_collision]]), a `.akt-eyebrow` w `contact.css`
+   nadawalo `display:inline-block` kazdemu eyebrow w serwisie. Prefiks `akp-`
+   byl wolny (sprawdzone: 0 wystapien w repo).
+
+   ⚠️ KANON, NIE WLASNE WARTOSCI. `homepage-live.js` przejedzie po tym bloku
+   tak samo jak po blokach systeme: nada klasy typografii, przyciskow
+   i powierzchni, a potem SKORYGUJE odstepy marginesem inline z `!important`.
+   Dlatego wszystko ponizej jest juz w kanonie — wtedy silnik rytmu mierzy
+   roznice < 3 px i nic nie rusza. Kazde odstepstwo tutaj zostanie po cichu
+   nadpisane i bedzie wygladalo jak „CSS nie dziala".
+
+   ⚠️ ZDJECIA. Wszystkie fotografie pitchingowe w systeme sa PIONOWE
+   (1000x1369, 500x750, 450x675). Nie ma szerokiego kadru, wiec hero NIE jest
+   pelnoekranowym zdjeciem jak na /cultural-communication, tylko ciemnym pasem
+   Forest z fotografia w kolumnie. Gdy pojawi sie kadr poziomy (min. 2000 px
+   szerokosci), hero mozna przelaczyc na pelne zdjecie — patrz `.akp-hero`.
+   ============================================================================ */
+
+.ak-pitch {
+  --p-forest: #1A3C2F;
+  --p-forest-deep: #0E2A20;
+  --p-cream: #F9F7F1;
+  --p-cream-soft: #F3F0E7;
+  --p-terra: #B46A3C;
+  --p-terra-dark: #9A5832;      /* tekst na jasnym: 5,05:1 */
+  /* ⚠️ Terakota na ciemnym ma w kanonie DWA odcienie i tylko jeden jest
+     kolorem TEKSTU. #E4B68A istnieje, ale mapa kolorow w homepage-live.js
+     zamienia go na #D9A47A — czyli gdybym uzyl tu jasniejszego, JS i tak
+     przemalowalby wiekszosc, a to, czego nie zlapie, zostaloby poza paleta.
+     Zmierzone: „3" w linii pod CTA w hero. Bierzemy od razu kanon. */
+  --p-terra-warm: #D9A47A;      /* tekst na ciemnym */
+  --p-ink: #2D2D2D;
+  --p-ink-72: rgba(45, 45, 45, .72);
+  --p-ink-62: rgba(45, 45, 45, .62);
+  --p-ink-10: rgba(45, 45, 45, .10);
+  --p-cream-80: rgba(249, 247, 241, .80);
+  --p-bd-dark: rgba(249, 247, 241, .22);
+  --p-sh-sm: 0 1px 12px rgba(26, 60, 47, .04);
+  --p-sh-md: 0 2px 16px rgba(26, 60, 47, .06);
+  --p-sh-lg: 0 8px 32px rgba(26, 60, 47, .09);
+  --p-ease: cubic-bezier(.2, .6, .2, 1);
+  --p-t-color: .18s;
+  --p-t-move: .22s;
+  --p-serif: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif;
+  --p-sans: "AKHaas", "NeueHaasDisplay-Roman42448762", "neue-haas-grotesk-display", "Helvetica Neue", sans-serif;
+
+  background: var(--p-cream);
+  color: var(--p-ink);
+  font-family: var(--p-sans);
+}
+/* ⚠️ `border-box` na calym bloku. Bez tego przycisk `width:100%` w karcie
+   cennika dolicza sobie padding 2x24 i wystaje poza ekran: zmierzone
+   scrollWidth 399 przy oknie 390. Ten sam ksztalt bledu co szerokosc kolumny
+   systeme w opiniach na /cultural-communication. */
+.ak-pitch,
+.ak-pitch *,
+.ak-pitch *::before,
+.ak-pitch *::after { box-sizing: border-box; }
+
+/* --- rusztowanie ---------------------------------------------------------- */
+.ak-pitch .akp-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+.ak-pitch .akp-sec { padding: 128px 0; background: var(--p-cream); }
+.ak-pitch .akp-sec--soft { background: var(--p-cream-soft); }
+.ak-pitch .akp-sec--dark { background: var(--p-forest); color: var(--p-cream); }
+
+/* --- typografia: stopnie z kanonu ----------------------------------------- */
+.ak-pitch .akp-eyebrow {
+  font-family: var(--p-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--p-terra-dark);
+  margin: 0 0 16px;            /* kanon: 16 pod eyebrow */
+}
+.ak-pitch .akp-sec--dark .akp-eyebrow,
+.ak-pitch .akp-hero .akp-eyebrow { color: var(--p-terra-warm); }
+
+.ak-pitch .akp-h1 {
+  font-family: var(--p-serif);
+  font-weight: 400;
+  font-size: 54px;
+  line-height: 1.06;
+  letter-spacing: -.015em;
+  text-wrap: balance;
+  margin: 0;
+  color: var(--p-cream);
+}
+.ak-pitch .akp-h1 em { font-style: italic; color: var(--p-terra-warm); }
+
+.ak-pitch .akp-h2 {
+  font-family: var(--p-serif);
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 1.12;
+  letter-spacing: -.005em;
+  text-wrap: balance;
+  margin: 0 0 48px;            /* kanon: 48 pod naglowkiem */
+  color: var(--p-ink);
+}
+.ak-pitch .akp-h2 em { font-style: italic; color: var(--p-terra-dark); }
+.ak-pitch .akp-h2--tight { margin-bottom: 24px; }
+
+.ak-pitch .akp-lead {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--p-ink-72);
+  margin: 0 0 32px;            /* kanon: 32 lead -> CTA */
+  max-width: 62ch;
+}
+.ak-pitch .akp-body { font-size: 16px; line-height: 1.6; color: var(--p-ink-72); margin: 0 0 16px; }
+.ak-pitch .akp-body:last-child { margin-bottom: 0; }
+.ak-pitch .akp-quote {
+  font-family: var(--p-serif);
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.4;
+  color: var(--p-forest);
+  margin: 48px 0 0;
+  text-wrap: balance;
+}
+
+/* --- przyciski: kanon 48 / 8x24 / promien 4 -------------------------------- */
+.ak-pitch .akp-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 48px;
+  padding: 8px 24px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  font-family: var(--p-sans);
+  font-size: 16px;
+  font-weight: 400;
+  line-height: 1.2;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--p-t-color) var(--p-ease),
+              border-color var(--p-t-color) var(--p-ease),
+              color var(--p-t-color) var(--p-ease);
+}
+.ak-pitch .akp-btn--terra { background: var(--p-terra); color: var(--p-cream); }
+.ak-pitch .akp-btn--terra:hover { background: var(--p-terra-dark); }
+.ak-pitch .akp-btn--forest { background: var(--p-forest); color: var(--p-cream); }
+.ak-pitch .akp-btn--forest:hover { background: #142E24; }
+.ak-pitch .akp-btn--ghost {
+  background: transparent; color: var(--p-ink); border-color: var(--p-ink-10);
+}
+.ak-pitch .akp-btn--ghost:hover { border-color: rgba(45, 45, 45, .18); background: rgba(45, 45, 45, .03); }
+/* wariant na ciemnym — kontrast 1,00:1 przy zwyklym ghost (lekcja z 21.09) */
+.ak-pitch .akp-btn--ghost-light {
+  background: transparent; color: var(--p-cream); border-color: var(--p-bd-dark);
+}
+.ak-pitch .akp-btn--ghost-light:hover { border-color: rgba(249, 247, 241, .34); background: rgba(249, 247, 241, .06); }
+.ak-pitch .akp-btns { display: flex; flex-wrap: wrap; gap: 12px; }
+
+.ak-pitch .akp-fine {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--p-ink-62);
+  margin: 16px 0 0;
+}
+.ak-pitch .akp-sec--dark .akp-fine,
+.ak-pitch .akp-hero .akp-fine { color: var(--p-cream-80); }
+.ak-pitch .akp-fine b { font-weight: 500; color: var(--p-terra-warm); }
+
+/* --- HERO ----------------------------------------------------------------- */
+/* Ciemny pas Forest + fotografia w kolumnie. Gdy pojawi sie kadr poziomy,
+   wystarczy dac `.akp-hero` background-image i zdjac `.akp-hero__media`. */
+.ak-pitch .akp-hero {
+  /* ⚠️ TLO MUSI BYC SOLIDNE, nie samym gradientem. `homepage-live.js` czyta
+     `backgroundColor`, zeby rozstrzygnac, czy przycisk stoi na ciemnym i czy
+     dac mu wariant `--ghost-light`. Sam `linear-gradient` siedzi w
+     `background-image`, wiec `backgroundColor` wychodzi `transparent`,
+     skrypt wspina sie wyzej, trafia na kremowa strone i uznaje hero za jasne.
+     Zmierzone: „See what's inside" stalo ciemnym tekstem na ciemnym tle,
+     czyli ten sam blad kontrastu co wariant `akb--light` z 21.09.
+     Kolor podajemy osobno OD gradientu. */
+  background-color: var(--p-forest);
+  background-image: linear-gradient(180deg, var(--p-forest) 0%, var(--p-forest-deep) 100%);
+  color: var(--p-cream);
+  padding: 128px 0 80px;
+}
+.ak-pitch .akp-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;
+  align-items: center;
+}
+.ak-pitch .akp-hero__sub {
+  font-size: 20px;
+  line-height: 1.55;
+  color: var(--p-cream-80);
+  margin: 48px 0 32px;         /* kanon: 48 pod naglowkiem, 32 lead -> CTA */
+  max-width: 54ch;
+}
+.ak-pitch .akp-hero__media { margin: 0; }
+.ak-pitch .akp-hero__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: var(--p-sh-lg);
+}
+
+/* --- pasek logotypow ------------------------------------------------------ */
+/* Sam marquee ma wlasny arkusz (marquee.css) i jest pomijany przez JS. */
+.ak-pitch .akp-logos { background: var(--p-cream); }
+
+/* --- uklad dwukolumnowy tekst + zdjecie ----------------------------------- */
+.ak-pitch .akp-split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 48px;                   /* kanon: 48 w siatce */
+  align-items: center;
+}
+.ak-pitch .akp-split--rev .akp-split__media { order: -1; }
+.ak-pitch .akp-split__media { margin: 0; }
+.ak-pitch .akp-split__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: var(--p-sh-md);
+}
+
+/* --- listy z ptaszkiem: wzorzec /academy ---------------------------------- */
+.ak-pitch .akp-list { list-style: none; padding: 0; margin: 0; }
+.ak-pitch .akp-list li {
+  position: relative;
+  padding-left: 28px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--p-ink-72);
+  margin: 0 0 12px;
+}
+.ak-pitch .akp-list li:last-child { margin-bottom: 0; }
+.ak-pitch .akp-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .45em;
+  width: 13px;
+  height: 7px;
+  border-left: 1.5px solid var(--p-terra-dark);
+  border-bottom: 1.5px solid var(--p-terra-dark);
+  transform: rotate(-45deg);
+}
+.ak-pitch .akp-list li b,
+.ak-pitch .akp-list li strong { font-weight: 500; color: var(--p-ink); }
+/* wariant „nie dla ciebie" — krzyzyk zamiast ptaszka */
+.ak-pitch .akp-list--no li::before {
+  content: "\2715";
+  border: 0;
+  transform: none;
+  width: auto; height: auto;
+  top: 0;
+  color: var(--p-ink-62);
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+/* --- karty: kanon powierzchni --------------------------------------------- */
+.ak-pitch .akp-card {
+  background: var(--p-cream);
+  border: 1px solid var(--p-ink-10);
+  border-radius: 4px;
+  box-shadow: var(--p-sh-sm);
+  padding: 32px;
+  transition: box-shadow var(--p-t-move) var(--p-ease),
+              border-color var(--p-t-color) var(--p-ease),
+              transform var(--p-t-move) var(--p-ease);
+}
+.ak-pitch .akp-card:hover {
+  box-shadow: var(--p-sh-lg);
+  border-color: rgba(26, 60, 47, .30);
+  transform: translateY(-2px);
+}
+.ak-pitch .akp-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.ak-pitch .akp-grid-2 { display: grid; grid-template-columns: repeat(2, 1fr); gap: 48px; }
+
+/* karta metody 01/02/03 — rytm karty: 8 pod eyebrow, 12 pod naglowkiem */
+.ak-pitch .akp-num {
+  font-family: var(--p-serif);
+  font-style: italic;
+  font-size: 36px;
+  line-height: 1;
+  color: var(--p-terra-dark);
+  margin: 0 0 24px;            /* rytm karty: 24 nad blokiem */
+}
+.ak-pitch .akp-card__kicker {
+  font-family: var(--p-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--p-terra-dark);
+  margin: 0 0 8px;             /* rytm karty: 8 pod eyebrow */
+}
+.ak-pitch .akp-card__text { font-size: 16px; line-height: 1.6; color: var(--p-ink-72); margin: 0; }
+
+/* karta „co dostajesz" — ikona + tytul + opis */
+.ak-pitch .akp-grid-inc { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.ak-pitch .akp-inc__icon { width: 28px; height: 28px; display: block; margin: 0 0 24px; opacity: .75; }
+.ak-pitch .akp-inc__title {
+  font-family: var(--p-sans);
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.4;
+  color: var(--p-ink);
+  margin: 0 0 12px;            /* rytm karty: 12 pod naglowkiem */
+}
+
+/* karta FIT */
+.ak-pitch .akp-fit__head {
+  font-family: var(--p-sans);
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--p-terra-dark);
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--p-ink-10);
+  margin: 0 0 24px;
+}
+.ak-pitch .akp-card--no .akp-fit__head { color: var(--p-ink-62); }
+
+/* --- cennik --------------------------------------------------------------- */
+.ak-pitch .akp-price { text-align: center; }
+.ak-pitch .akp-price__amount {
+  font-family: var(--p-serif);
+  font-style: italic;
+  font-size: 54px;
+  line-height: 1;
+  color: var(--p-terra-dark);
+  margin: 0;
+}
+.ak-pitch .akp-price__unit { font-size: 14px; color: var(--p-ink-62); margin: 4px 0 0; }
+.ak-pitch .akp-price__card {
+  max-width: 520px;
+  margin: 48px auto 0;
+  background: var(--p-cream);
+  border: 1px solid var(--p-ink-10);
+  border-top: 2px solid var(--p-terra);
+  border-radius: 4px;
+  box-shadow: var(--p-sh-md);
+  padding: 36px 40px;
+  text-align: left;
+}
+.ak-pitch .akp-price__card .akp-btn { width: 100%; margin-top: 24px; }
+.ak-pitch .akp-price__note { font-size: 14px; color: var(--p-ink-62); text-align: center; margin: 16px 0 0; }
+
+/* --- opinie --------------------------------------------------------------- */
+.ak-pitch .akp-tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
+.ak-pitch .akp-tcard { display: flex; flex-direction: column; height: 100%; }
+.ak-pitch .akp-tcard__quote {
+  font-family: var(--p-serif);
+  font-size: 21px;
+  line-height: 1.45;
+  color: var(--p-ink);
+  margin: 0;
+}
+.ak-pitch .akp-tcard__by { margin-top: auto; padding-top: 24px; }
+.ak-pitch .akp-tcard__name { font-size: 14px; font-weight: 500; color: var(--p-ink); margin: 0; }
+.ak-pitch .akp-tcard__role { font-size: 14px; color: var(--p-ink-72); margin: 2px 0 0; }
+
+/* --- FAQ ------------------------------------------------------------------ */
+/* Lista rozdzielona wlosowa kreska — tak wyglada FAQ na /pitching-decoded
+   i /cultural-communication. JS pomija `[id^="faq-"]`, ale nasz blok nie ma
+   tego ID, wiec kreski i stopnie ustawiamy tutaj. */
+.ak-pitch .akp-faq { max-width: 820px; margin: 0 auto; }
+.ak-pitch .akp-faq details { border-top: 1px solid var(--p-ink-10); }
+.ak-pitch .akp-faq details:last-child { border-bottom: 1px solid var(--p-ink-10); }
+.ak-pitch .akp-faq summary {
+  list-style: none;
+  cursor: pointer;
+  padding: 24px 40px 24px 0;
+  position: relative;
+  font-size: 16px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: var(--p-ink);
+  transition: color var(--p-t-color) var(--p-ease);
+}
+.ak-pitch .akp-faq summary::-webkit-details-marker { display: none; }
+.ak-pitch .akp-faq summary:hover { color: var(--p-terra-dark); }
+.ak-pitch .akp-faq summary::after {
+  content: "";
+  position: absolute;
+  right: 6px;
+  top: 50%;
+  width: 9px;
+  height: 9px;
+  border-right: 1.5px solid var(--p-terra-dark);
+  border-bottom: 1.5px solid var(--p-terra-dark);
+  transform: translateY(-70%) rotate(45deg);
+  transition: transform var(--p-t-move) var(--p-ease);
+}
+.ak-pitch .akp-faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
+.ak-pitch .akp-faq__a { font-size: 16px; line-height: 1.6; color: var(--p-ink-72); margin: 0 0 24px; padding-right: 40px; }
+
+/* --- domkniecie ----------------------------------------------------------- */
+.ak-pitch .akp-close { text-align: center; }
+.ak-pitch .akp-close .akp-h2 { margin-bottom: 32px; }
+
+/* ============================================================================
+   RESPONSYWNOSC — dwa progi, tak jak reszta serwisu.
+   ⚠️ 900 px jest progiem KRYTYCZNYM: przy tej szerokosci lapaly sie
+   wszystkie dotychczasowe przypadki poziomego przewijania w serwisie.
+   ============================================================================ */
+@media (max-width: 1024px) {
+  .ak-pitch .akp-hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  .ak-pitch .akp-hero__media { max-width: 420px; }
+  .ak-pitch .akp-split { grid-template-columns: 1fr; gap: 32px; }
+  .ak-pitch .akp-split--rev .akp-split__media { order: 0; }
+  .ak-pitch .akp-grid-3,
+  .ak-pitch .akp-grid-inc,
+  .ak-pitch .akp-tgrid { grid-template-columns: repeat(2, 1fr); gap: 32px; }
+  .ak-pitch .akp-sec { padding: 80px 0; }
+  .ak-pitch .akp-hero { padding: 96px 0 64px; }
+}
+@media (max-width: 640px) {
+  .ak-pitch .akp-wrap { padding-left: 16px; padding-right: 16px; }
+  .ak-pitch .akp-h1 { font-size: 40px; }
+  .ak-pitch .akp-h2 { font-size: 30px; margin-bottom: 32px; }
+  .ak-pitch .akp-hero__sub,
+  .ak-pitch .akp-lead { font-size: 16px; margin-top: 32px; }
+  .ak-pitch .akp-grid-3,
+  .ak-pitch .akp-grid-2,
+  .ak-pitch .akp-grid-inc,
+  .ak-pitch .akp-tgrid { grid-template-columns: 1fr; gap: 24px; }
+  .ak-pitch .akp-card { padding: 24px; }
+  .ak-pitch .akp-price__card { padding: 28px 24px; }
+  .ak-pitch .akp-price__amount { font-size: 40px; }
+  .ak-pitch .akp-btns .akp-btn { width: 100%; }
+  .ak-pitch .akp-quote { font-size: 21px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ak-pitch * { transition-duration: 0s !important; animation-duration: 0s !important; }
+  .ak-pitch .akp-card:hover { transform: none; }
+}

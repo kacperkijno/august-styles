@@ -10,6 +10,14 @@
 @import url("about.css");
 @import url("consulting.css");
 @import url("contact.css");
+@import url("pitching-home.css");
+/* ⚠️ marquee.css bylo dotad wpinane osobnym <link> tylko na stronach,
+   ktore maja pasek logotypow (/cultural-communication). Blok
+   /pitching-home tez go ma, a ta strona laduje WYLACZNIE
+   homepage-live.css — bez tego logotypy renderowaly sie jako zwykle
+   obrazki w kolumnie, bez paska i bez przyciecia.
+   Bezpieczne globalnie: caly arkusz jest pod `.ak-marquee`. */
+@import url("marquee.css");
 
 /* --- kanon powierzchni (surfaces.html, 28.08.2026) ------------------------
    Trzy cienie, dwa czasy, jedna krzywa. Cien jest zawsze przygaszonym
