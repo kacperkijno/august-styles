@@ -3673,6 +3673,15 @@ html body .aks.aks-card.aks-col, html body .aks-col { display: flex !important; 
   flex-direction: column !important;
 }
 #row-8d0c7926 .aks-card > * > *:last-child:not(:only-child) { margin-top: auto !important; }
+/* ⚠️ `margin-top: auto` tu NIE wystarcza: blok podpisu sam rosnie i wypelnia
+   reszte karty, wiec nie ma wolnej przestrzeni do rozepchniecia i `auto`
+   wychodzi 0. Bloki koncza sie wiec rowno (@320), ale awatar siedzial przy ich
+   GORZE, a ze maja rozna wysokosc (137/81/109 px), awatary staly na trzech
+   roznych poziomach. Dosuwamy zawartosc bloku, nie sam blok. */
+#row-8d0c7926 .aks-card > * > *:last-child:not(:only-child) > * {
+  align-content: end !important;
+  align-items: end !important;
+}
 
 /* Kropki karuzeli: pod slajderem i w palecie, nie czysta czern na tresci. */
 html body .aks-dots {
