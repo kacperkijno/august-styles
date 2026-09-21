@@ -1222,6 +1222,18 @@
         if (kt) { karty.push(kt); drogi.push(ch); }
       }
 
+      /* ⚠️ Rzad kart to karty o ZBLIZONEJ szerokosci. Na /cc-checkout kolumna
+         z opisem (448 px) i kolumna z formularzem (640 px) obie zawieraja karte,
+         wiec mechanizm uznal je za rzad i wyrownal wysokosci: opis rozciagnal
+         sie do 1649 px i tresc rozlozyla sie na calej wysokosci formularza.
+         /pitching-buy tego nie mial, bo do 21.09 nie ladowal naszego JS — czyli
+         ujawnilo sie to dopiero po wklejeniu skryptu. Uklad dwoch roznych kolumn
+         nie jest rzedem kart. */
+      if (karty.length >= 2) {
+        var szerD = drogi.map(function (d) { return d.getBoundingClientRect().width; });
+        var minD = Math.min.apply(null, szerD), maxD = Math.max.apply(null, szerD);
+        if (maxD > 0 && minD / maxD < 0.75) continue;
+      }
       if (karty.length >= 2) {
         /* Pojemnik, ktorego dziecmi sa karty, jest ukladem — nie karta.
            Bez tego pojemnik FAQ dostawal ramke dookola rzedu pozycji. */
