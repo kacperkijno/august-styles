@@ -1882,34 +1882,20 @@ html body.ak-sales-page #text-6df26f66 * {
    ============================================================ */
 
 /* ----- Eyebrows na stronach „thank you" -----
-   /webinar-confirmed: "You're in" + "While you wait"
+   USUNIETE 2026-09-21 (wieczorem). Regula powstala 10.06, ZANIM istnial kanon
+   eyebrow (28.08), i celujac po ID wygrywala z nim specyficznoscia — trzymala
+   cztery napisy na 12 px zamiast 11 i swietle .18em.
 
-   2026-09-21. Regula powstala 10.06, ZANIM istnial kanon eyebrow (28.08),
-   i celujac po ID wygrywala specyficznoscia z `html body .akt.akt-eyebrow`.
-   Trzymala cztery napisy na 12 px zamiast 11 i swietle .18em — jedyne takie
-   w lejku.
+   Do wieczora 21.09 dwa ID z `/webinar-confirmed` musialy zostac, bo ta strona
+   jako jedyna w lejku **nie ladowala `homepage-live.js`** i bez tej reguly oba
+   napisy spadaly do zwyklego tekstu 16 px/400 malymi literami. Kacper wkleil
+   znacznik skryptu w edytorze, wiec JS rozpoznaje je juz po KSZTALCIE
+   i kanon je obejmuje. Zweryfikowane: eyebrow na tej stronie 11/500/.18em,
+   zero naruszen typografii po usunieciu.
 
-   Z listy WYPADAJA `#text-1cac3927` i `#text-45740cbe` (/cc-playbook-thanks):
-   ta strona laduje `homepage-live.js`, wiec JS rozpoznaje oba napisy po
-   KSZTALCIE i nadaje im `.akt-eyebrow` — kanon je obejmuje.
-
-   ⚠️ ZOSTAJA dwa ID z `/webinar-confirmed`, bo TA strona laduje wylacznie
-   `sales-page.css` — bez skryptu (sprawdzone `curl | grep august-styles`).
-   Bez tej reguly oba napisy spadaja do zwyklego tekstu 16 px/400, malymi
-   literami. Wartosci sa teraz przepisane z KANONU, zeby obie strony
-   wygladaly tak samo. `display: inline-block` odchodzi — to ten sam
-   mechanizm, ktory w `contact.css` przyklejal pudelko do tekstu i psul
-   rozstrzyganie wyrownania.
-   Docelowo: wkleic `homepage-live.js` w naglowek /webinar-confirmed
-   i skasowac te regule. */
-html body.ak-sales-page #text-6b213f38 *,
-html body.ak-sales-page #text-b25ca5db * {
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
-  font-weight: 500 !important;
-  font-size: 11px !important;
-  color: var(--ak-terracotta-dark) !important;
-}
+   ⚠️ Gdyby kiedys wrocily jako 16 px malymi literami — pierwsze, co sprawdzic,
+   to `curl https://www.augustkjerland.com/webinar-confirmed | grep august-styles`.
+   To znaczyloby, ze znacznik skryptu wypadl z naglowka strony. */
 
 /* ----- Hero H1: Caslon italic cream (was black roman on forest bg) ----- */
 html body.ak-sales-page #headline-976bde7f,

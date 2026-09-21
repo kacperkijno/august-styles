@@ -1533,7 +1533,34 @@
       var podEt = tloPod(e.parentElement || e);
       if (!terakota && !(podEt && lum(podEt) < 0.35)) continue;
       var n = blokPo(e); if (!n) continue;
-      var h = (n.matches && n.matches('[class*="akt-h"]')) ? n : (n.querySelector && n.querySelector('[class*="akt-h"]'));
+      var szukajNagl = function (x) {
+        return (x.matches && x.matches('[class*="akt-h"]')) ? x
+             : (x.querySelector && x.querySelector('[class*="akt-h"]'));
+      };
+      var h = szukajNagl(n);
+      /* ⚠️ PUSTY POJEMNIK MIEDZY ETYKIETA A NAGLOWKIEM. systeme wstawia
+         w hero stron „thank you" dystansownik: <div> bez tekstu, ale
+         z wysokoscia, wiec `blokPo` zatrzymuje sie na nim i pytanie „czy
+         ta etykieta zapowiada naglowek" wychodzi na „nie".
+         Tak bylo z „You're in" na /cc-playbook-thanks i /webinar-confirmed:
+         stalo 16 px/400 malymi literami obok „Going deeper" i „While you
+         wait", ktore maja naglowek od razu pod soba i lapaly sie normalnie.
+         Pusty pojemnik nie jest trescia, ktora cos zapowiada — przeskakujemy
+         go (najwyzej dwa razy) i pytamy o blok z TRESCIA.
+         ⚠️ Nie mierzymy tu odleglosci od etykiety. Pierwsza wersja odcinala
+         na 140 px i dzialala na /webinar-confirmed, ale nie na
+         /cc-playbook-thanks, gdzie ten sam dystansownik ma 72 px i naglowek
+         wypada 164 px nizej. Dystansownik to UKLAD, nie tresc — mierzenie
+         przez niego mierzy grubosc pustki. Zamiast tego wymagamy, zeby
+         naglowek lezal w TEJ SAMEJ sekcji co etykieta (warunek nizej, `sekE`),
+         a przeskok ograniczamy do dwoch pustych blokow. */
+      var przeskoki = 0;
+      var sekcjaEt = e.closest('[id^="section-"], section, footer, [id^="websitefooter"]');
+      while (!h && n && !(n.textContent || '').trim() && przeskoki++ < 2) {
+        var dalej = blokPo(n); if (!dalej) break;
+        if (sekcjaEt && !sekcjaEt.contains(dalej)) break;
+        n = dalej; h = szukajNagl(n);
+      }
       /* ⚠️ Etykieta kolumny w stopce zapowiada LISTE LINKOW, nie naglowek.
          Na /blog „Academy", „Work with August" i „Connect" staly przez to
          12 px waga 400 bez wersalikow, a na `/` te same etykiety sa
