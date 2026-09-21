@@ -3703,6 +3703,18 @@ html body .aks-dot.aks-dot--on {
   border-color: #1A3C2F !important;
 }
 
+/* Primary na CIEMNYM tle: krem z Forestowym tekstem. Forest na Forest to
+   kontrast 1,00 — przycisk znika, a zostaje sam napis. */
+html body .akb.akb--light {
+  background: #F9F7F1 !important;
+  color: #1A3C2F !important;
+  border-color: transparent !important;
+}
+html body .akb.akb--light:hover {
+  background: #FFFFFF !important;
+  color: #1A3C2F !important;
+}
+
 html body .aks-grow {
   flex: 1 1 auto !important; min-height: 0 !important;
   display: flex !important; flex-direction: column !important;

@@ -516,7 +516,7 @@
     return out;
   }
 
-  var WARIANTY = ['akb--forest', 'akb--terra', 'akb--ghost', 'akb--ghost-light'];
+  var WARIANTY = ['akb--forest', 'akb--terra', 'akb--ghost', 'akb--ghost-light', 'akb--light'];
 
   /* Wariant liczymy przy CHWILOWO ZDJETYCH wlasnych klasach. Inaczej przy
      drugim przebiegu odczytalibysmy kolor, ktory sami przed chwila nalozylismy,
@@ -537,6 +537,13 @@
       } else {
         var v = rgb(bg);                       /* terakota ma przewage czerwieni */
         w = (v && v.r > v.g) ? 'terra' : 'forest';
+        /* ⚠️ Forest na sekcji Forest to kontrast 1,00 — przycisk znika, zostaje
+           sam tekst. Tak wygladalo glowne CTA na /cc-thanks („Start lesson 1")
+           i /cc-playbook-thanks („Download the PDF now") po doklejeniu JS:
+           systeme dawal im jasne tlo, a my nadpisywalismy je Forestem.
+           Na ciemnym tle primary jest JASNY — `ghost-light` zostaje dla
+           drugiego przycisku, zeby hierarchia sie nie splaszczyla. */
+        if (w === 'forest' && ciemnoPod(e)) w = 'light';
       }
     }
     for (var j = 0; j < zdjete.length; j++) e.classList.add(zdjete[j]);
