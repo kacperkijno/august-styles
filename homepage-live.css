@@ -3547,7 +3547,18 @@ html body .aks-bg-soft  { background-color: #F3F0E7 !important; }
    `margin-top:auto` na elemencie z CTA dosuwa przycisk do dolu, zeby rzad
    konczyl sie rowno takze wewnatrz. */
 html body .aks-row { align-items: stretch !important; }
-html body .aks.aks-card.aks-col { display: flex !important; flex-direction: column !important; }
+html body .aks.aks-card.aks-col, html body .aks-col { display: flex !important; flex-direction: column !important; }
+/* Pojemnik miedzy karta a jej stopka musi rosnac, zeby `margin-top:auto` mialo
+   co rozepchnac — inaczej luka ląduje pod pojemnikiem, nie nad stopka.
+   ⚠️ Sam `flex: 1` nie wystarcza: pojemniki systeme bywaja SIATKAMI, a tam
+   `flex` nic nie znaczy i lancuch wysokosci sie urywa. Na karcie „Business
+   Model Canvas" pojemnik miał pelne 990 px, a jego dziecko zostawalo przy 637,
+   wiec CTA wisialo 294 px nad dolem. Kazdy pojemnik w lancuchu staje sie wiec
+   kolumna — ma na tej sciezce jedno dziecko, wiec zamiana jest bez skutkow. */
+html body .aks-grow {
+  flex: 1 1 auto !important; min-height: 0 !important;
+  display: flex !important; flex-direction: column !important;
+}
 html body .aks-bottom { margin-top: auto !important; }
 
 /* karta bywa o poziom glebiej niz dziecko siatki — wysokosc musi zejsc az do niej */

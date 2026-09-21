@@ -1185,11 +1185,25 @@
           if (kt.classList.contains('aks-rise')) kt.style.animationDelay = (k * 90) + 'ms';
           var cta = kt.querySelector('.akb, [id^="button-"], [id^="payment-button-"]');
           if (!cta) continue;
-          var dz = cta;
-          while (dz.parentElement && dz.parentElement !== kt) dz = dz.parentElement;
-          if (dz.parentElement !== kt) continue;
-          if (!dz.previousElementSibling) continue;   /* jedyne dziecko: nie ma czego dosuwac */
+          /* ⚠️ Szukamy poziomu, na ktorym CTA MA nad soba rodzenstwo — dopiero
+             tam `margin-top:auto` ma co rozepchnac. Dotad rezygnowalismy, gdy
+             bezposrednie dziecko karty bylo jedynakiem, a po ujednoliceniu ram
+             (21.09) karty kursow wygladaja wlasnie tak: cala tresc siedzi
+             w jednym pojemniku. CTA „Join the waitlist" wisialo przez to
+             294 px nad dolem karty.
+             ⚠️ `margin-top:auto` idzie na element MAJACY rodzenstwo — na jedynaku
+             zepchneloby cala tresc na dol (regresja z 28.08). */
+          var dz = cta, rodzic = null;
+          while (dz.parentElement && dz.parentElement !== kt) {
+            if (dz.previousElementSibling) { rodzic = dz.parentElement; break; }
+            dz = dz.parentElement;
+          }
+          if (!rodzic && dz.parentElement === kt && dz.previousElementSibling) rodzic = kt;
+          if (!rodzic) continue;
           kt.classList.add('aks-col');
+          /* lancuch od karty w dol musi rosnac, inaczej luka ląduje pod pojemnikiem */
+          for (var q = rodzic; q && q !== kt; q = q.parentElement) q.classList.add('aks-grow');
+          if (rodzic !== kt) rodzic.classList.add('aks-col');
           dz.classList.add('aks-bottom');
         }
       } else if (s.display === 'grid') {
