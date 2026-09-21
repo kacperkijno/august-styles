@@ -945,7 +945,7 @@
   var KRZYWA = 'cubic-bezier(.2,.6,.2,1)';
   var KRZYWA_LICZONA = 'cubic-bezier(0.2, 0.6, 0.2, 1)';
   var MOJE = ['aks', 'aks-card', 'aks-panel', 'aks-dark', 'aks-md', 'aks-bd', 'aks-sh', 'aks-bleed', 'aks-col',
-              'aks-bg-cream', 'aks-bg-soft'];
+              'aks-bg-cream', 'aks-bg-soft', 'aks-bezramy'];
   var CREAM = 'rgb(249, 247, 241)';
   /* Biel i zimne szarosci: trzecie tlo, ktorego paleta nie przewiduje.
      Rozpoznajemy je po NEUTRALNOSCI, nie po dokladnej wartosci — kremy marki
@@ -1071,12 +1071,28 @@
        swoja, a karta kursu w srodku swoja. Warunek jest teraz o zawieraniu,
        nie o proporcji wymiarow: wczesniej wymagalismy, zeby wewnetrzna miala
        85% wysokosci zewnetrznej, a karta kursu ma 70%, miniatura 52%. */
+    /* ⚠️ Opakowaniem nie zawsze jest ten ZEWNETRZNY. Karta kursu na stronie
+       glownej to `#row-4332dc25 > div[size="4"] > div`: tlo, ramka, cien, hover
+       i wejscie ma z arkusza. Pojemnik w jej srodku ma z systeme sam cien.
+       Poprzednia wersja pomijala zewnetrzny zawsze, wiec `aks-card` ladowalo na
+       tym wewnetrznym i ramki byly dwie — a poniewaz wyrownanie wysokosci
+       rozciaga zewnetrzny, pod karta zostawal pusty pas (984 px w 1024 px).
+       Rozstrzyga PELNOSC ramy, nie glebokosc: tlo + ramka + cien bije sam cien.
+       Przy remisie zostaje wewnetrzny, czyli jak dotad. */
+    function pelnosc(d) { return (d.maRamke ? 2 : 0) + (d.wlasneTlo ? 1 : 0) + (d.maCien ? 1 : 0); }
     var pomin = new Array(kand.length);
+    for (i = 0; i < kand.length; i++) if (!dane[i].jest) pomin[i] = 1;
     for (i = 0; i < kand.length; i++) {
-      if (!dane[i].jest) { pomin[i] = 1; continue; }
+      if (pomin[i]) continue;
       for (var j = 0; j < kand.length; j++) {
-        if (i === j || !dane[j].jest) continue;
-        if (kand[i].contains(kand[j]) && dane[j].w >= dane[i].w * 0.85) { pomin[i] = 1; break; }
+        if (i === j || pomin[j]) continue;
+        if (!kand[i].contains(kand[j]) || dane[j].w < dane[i].w * 0.85) continue;
+        if (pelnosc(dane[j]) >= pelnosc(dane[i])) { pomin[i] = 1; break; }
+        /* ⚠️ Samo odebranie klasy nie wystarcza: pojemnik w karcie kursu ma
+           cien z systeme (inline), wiec po zdjeciu ramki nadal rysowal swoja
+           krawedz w polowie karty. Przegrany w parze gasi tez wlasna rame. */
+        pomin[j] = 1;
+        kand[j].classList.add('aks-bezramy');
       }
     }
 
@@ -1311,8 +1327,32 @@
      poczatku kolejnego bloku wewnatrz sekcji: gdy eyebrow albo naglowek
      otwiera sekcje, odstep nad nim daje padding sekcji (128 px) i nie ma
      tam czego poprawiac. */
+  /* ⚠️ Jedno zdanie rozbite na dwa elementy NIE jest dwoma blokami. Na stronie
+     glownej naglowek „Practical insight / for serious leaders” to dwa <h2>,
+     a cytat „Strategy must be lived, / not laminated.” dwa <p>. Regula
+     „64 nad blokiem” wchodzila w srodek jednej frazy: 112 px zamiast 48
+     w naglowku i 95 px zamiast 31 w cytacie. Kontynuacje poznajemy po tym, ze
+     oba wiersze maja ten sam kroj i stopien, a pierwszy nie domyka zdania. */
+  function znakTypo(el) {
+    var t = el;
+    if (!/^H[1-6]$/.test(el.tagName) && !/akt-h/.test((el.className || '').toString())) {
+      var w = el.querySelector && el.querySelector('[class*="akt-h"], h1, h2, h3');
+      if (w) t = w;
+    }
+    var s = gcs(t);
+    return s.fontSize + '|' + s.fontFamily + '|' + s.fontStyle + '|' + s.fontWeight;
+  }
+  function taSamaFraza(p, el) {
+    if (!p || !el) return false;
+    var tp = (p.textContent || '').trim();
+    if (!tp || tp.length > 120) return false;        /* akapit, nie wiersz frazy */
+    if (/[.!?]$/.test(tp)) return false;             /* zdanie domkniete = nowy blok */
+    return znakTypo(p) === znakTypo(el);
+  }
+
   function ustawOdstepNad(el, docelowy) {
     var p = blokPrzed(el); if (!p) return;
+    if (taSamaFraza(p, el)) return;                  /* drugi wiersz tej samej frazy */
     if (p.classList && p.classList.contains('akt-eyebrow')) return;   /* para eyebrow+naglowek ma wlasne 16 */
     if (p.querySelector && p.querySelector('.akt-eyebrow')) return;
     var sek = el.closest('[id^="section-"], section');
@@ -1460,6 +1500,9 @@
         }
       }
       var nast = blokPo(h); if (!nast) continue;
+      if (taSamaFraza(h, nast)) continue;            /* „Practical insight / for serious
+                                                        leaders” to jeden naglowek w dwoch
+                                                        wierszach — 48 rozrywalo go na dwa */
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
       ustawOdstep(h, kart >= 2 ? Rh.siatka : Rh.tresc);
     }

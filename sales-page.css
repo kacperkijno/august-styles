@@ -3635,6 +3635,8 @@ html body .aks-bottom { margin-top: auto !important; }
 
 /* karta bywa o poziom glebiej niz dziecko siatki — wysokosc musi zejsc az do niej */
 html body .aks-fill { height: 100% !important; }
+/* Wnetrze karty, ktore samo bylo pudelkiem: rama nalezy do zewnetrznego. */
+html body .aks-bezramy { border-color: transparent !important; box-shadow: none !important; }
 
 /* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
    Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>
