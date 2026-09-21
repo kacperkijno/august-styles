@@ -1532,6 +1532,11 @@ html body.ak-home #section-d54243f0 img {
    column), so hovering one never triggers the other. */
 #row-8943a7f1, #row-d553c684 {
   transition: transform var(--ak-t-move) var(--ak-ease) !important;
+  /* Kafelek wideo to zdjecie z podpisem, nie karta: zdjecie samo jest
+     prostokatem, wiec ramka wokol niego niczego nie domyka (decyzja 21.09).
+     Ruch przy najechaniu zostaje — znika tylko rama. */
+  border-color: transparent !important;
+  box-shadow: none !important;
 }
 #row-8943a7f1:hover, #row-d553c684:hover { transform: translateY(-4px) !important; }
 /* Neutralize the thumbnail's own lift so it doesn't double up — the box moves. */
@@ -1545,6 +1550,32 @@ html body.ak-home #section-d54243f0 img {
 #row-d553c684 #text-630b4ccf * { transition: color var(--ak-t-color) var(--ak-ease); }
 #row-8943a7f1:hover #text-1e2d91b1 *,
 #row-d553c684:hover #text-630b4ccf * { color: #1A3C2F !important; }
+
+/* ============================================================
+   Testimoniale na `/` — rowne wysokosci w rzedzie (21.09.2026)
+   ============================================================
+   Karty stoja w TRZECH KOLUMNACH po 1-2 sztuki, wiec karty w jednym
+   wizualnym rzedzie nigdy nie mialy rownej wysokosci: 305/329/300 w pierwszym
+   i 244/244 w drugim. Te same cytaty na /about stoja rowno, bo tam karta jest
+   bezposrednim dzieckiem siatki (`.akb-tgrid`). `display:contents` na kolumnach
+   przenosi karty do siatki nadrzednej — uklad staje sie wierszowy i wysokosci
+   wyrownuja sie same (329/329/329 i 300/300).
+   Kolumny nie maja wlasnego tla ani ramki, wiec `contents` nie ma czego zgubic.
+   ⚠️ Kolejnosc idzie teraz za DOM: rzad pierwszy to Greta / Ingunn / Preethy. */
+#row-5fab714b {
+  display: grid !important;
+  grid-template-columns: repeat(3, 1fr) !important;
+  gap: 32px !important;
+  align-items: stretch !important;
+}
+#row-5fab714b > div,
+#row-5fab714b > div > div { display: contents !important; }
+@media (max-width: 1024px) {
+  #row-5fab714b { grid-template-columns: repeat(2, 1fr) !important; }
+}
+@media (max-width: 767px) {
+  #row-5fab714b { grid-template-columns: 1fr !important; }
+}
 
 /* ==================== FOOTER (global, all pages) ==================== */
 /* Live loads homepage-live.css, NOT core.css — so footer social/title
@@ -3509,6 +3540,12 @@ html body .aks-bottom { margin-top: auto !important; }
 html body .aks-fill { height: 100% !important; }
 /* Wnetrze karty, ktore samo bylo pudelkiem: rama nalezy do zewnetrznego. */
 html body .aks-bezramy { border-color: transparent !important; box-shadow: none !important; }
+/* Kafelek wideo: zdjecie z podpisem, bez ramki i cienia (decyzja 21.09). */
+html body .material-thumb, html body .material-card {
+  border-color: transparent !important; box-shadow: none !important;
+}
+html body .material-thumb:hover, html body .material-card:hover,
+html body [id^="row-"]:hover .material-thumb { box-shadow: none !important; }
 
 /* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
    Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>

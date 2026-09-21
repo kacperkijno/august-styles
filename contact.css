@@ -51,7 +51,12 @@ src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regula
 .akt-grid{display:grid;grid-template-columns:5fr 6fr;gap: clamp(32px,7vw,64px);align-items:start;}
 
 /* ---- left column ---- */
-.akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
+/* ⚠️ `.akt-eyebrow` to nazwa z GLOBALNEGO kanonu typograficznego, nie prefiks
+   tej strony — a ten arkusz idzie @importem do homepage-live.css, wiec bez
+   scope'u regula nadawala `display:inline-block` KAZDEMU eyebrow w serwisie.
+   Stad etykieta nad logotypami na /about przyklejala sie do lewej mimo
+   `margin:0 auto`, a eyebrow w kartach kursow mial pudelko rowne tekstowi. */
+.ak-contact .akt-eyebrow{display:inline-block;font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 22px;}
 .akt-h1{font-family:var(--serif);font-weight:400;font-size:clamp(40px,5.4vw,54px);line-height:1.04;letter-spacing:-.015em;text-wrap:balance;color:var(--cream);margin:0;}
 .akt-h1 em{font-style:italic;color:var(--terracotta-deco);}
 .akt-lead{font-family:var(--sans);font-weight:400;font-size:clamp(16px,1.7vw,19px);line-height:1.6;color:rgba(249,247,241,.82);max-width:46ch;margin:24px 0 0;}

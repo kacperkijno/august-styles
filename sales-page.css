@@ -3637,6 +3637,12 @@ html body .aks-bottom { margin-top: auto !important; }
 html body .aks-fill { height: 100% !important; }
 /* Wnetrze karty, ktore samo bylo pudelkiem: rama nalezy do zewnetrznego. */
 html body .aks-bezramy { border-color: transparent !important; box-shadow: none !important; }
+/* Kafelek wideo: zdjecie z podpisem, bez ramki i cienia (decyzja 21.09). */
+html body .material-thumb, html body .material-card {
+  border-color: transparent !important; box-shadow: none !important;
+}
+html body .material-thumb:hover, html body .material-card:hover,
+html body [id^="row-"]:hover .material-thumb { box-shadow: none !important; }
 
 /* --- /pitching-decoded: pogodzenie z kanonem -----------------------------
    Cala strona ksiazki siedzi w bloku Raw HTML z wlasnym inline <style>

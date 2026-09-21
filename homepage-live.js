@@ -993,6 +993,13 @@
        swoim pozycjom cien, wiec bez tego wyjatku kazda pozycja i caly
        pojemnik stawaly sie karta i oba FAQ w serwisie wygladaly inaczej. */
     if (e.closest('[id^="faq-"]')) return true;
+    /* Kafelek wideo to zdjecie z podpisem, nie karta: zdjecie samo w sobie
+       jest prostokatem, wiec ramka wokol niego niczego nie domyka (decyzja
+       Kacpra 21.09). Pomijamy sam kafelek i pojemnik, ktory nie trzyma nic
+       poza siatka kafelkow — inaczej rame dostawal `#row-8943a7f1` na `/`. */
+    if (e.closest('.material-card, .material-thumb, .materials-grid')) return true;
+    if (e.querySelector && e.querySelector('.materials-grid')
+        && !e.querySelector('.aks-card, [id^="button-"]')) return true;
     if (e.matches('[id^="section-"]')) return true;                  /* sekcja to nosnik, nie powierzchnia */
     /* Siatka z wlosowa kreska (odstep <= 4 px) to jedna tablica z liniami
        podzialu, a nie rzad kart: /consulting "What you get" ma piec komorek
@@ -1494,8 +1501,31 @@
         var srodkiZgodne = Math.abs((ze.left + ze.width / 2) - (zh.left + zh.width / 2)) <= 8;
         var lewaZgodna = Math.abs(ze.left - zh.left) <= 8;
         if (!srodkiZgodne && !lewaZgodna) {
-          var pudloE = ebNad.getBoundingClientRect();
-          var doLewej = Math.abs(ze.left - pudloE.left) <= 8;
+          var pudloE = ebNad.getBoundingClientRect(), doLewej;
+          if (Math.abs(ze.width - pudloE.width) <= 2) {
+            /* ⚠️ Eyebrow bywa `inline-block` — wtedy pudelko przykleja sie do
+               tekstu i pytanie „czy tekst stoi przy lewej krawedzi pudelka"
+               ZAWSZE odpowiada „tak", niezaleznie od prawdy. Tak sa zbudowane
+               wszystkie trzy eyebrow w kartach kursow na `/`, przez co dwa
+               z trzech tytulow dostawaly inline `left` obok wysrodkowanej
+               reszty karty. Przy takim eyebrow pyta sie KONTENER. */
+            var kont = ebNad.parentElement ? ebNad.parentElement.getBoundingClientRect() : pudloE;
+            var srodkiK = Math.abs((pudloE.left + pudloE.width / 2) - (kont.left + kont.width / 2)) <= 8;
+            doLewej = !srodkiK && Math.abs(pudloE.left - kont.left) <= 12;
+            /* ⚠️ Eyebrow nie rozstrzyga sam. Na /pitching-decoded „Mindset"
+               i „Mastery" maja wysrodkowany eyebrow, ale tekst pod naglowkiem
+               stoi do lewej — wysrodkowanie naglowka rozjechaloby go z trescia,
+               ktora zapowiada. Tekst pod spodem ma glos rozstrzygajacy. */
+            var podN = blokPo(h);
+            if (!doLewej && podN) {
+              var zp = zakres(podN), pp = podN.getBoundingClientRect();
+              var podSrodek = Math.abs((zp.left + zp.width / 2) - (pp.left + pp.width / 2)) <= 8;
+              var podLewa = Math.abs(zp.left - pp.left) <= 8;
+              if (!podSrodek && podLewa) doLewej = true;
+            }
+          } else {
+            doLewej = Math.abs(ze.left - pudloE.left) <= 8;
+          }
           try { h.style.setProperty('text-align', doLewej ? 'left' : 'center', 'important'); } catch (err) { }
         }
       }
