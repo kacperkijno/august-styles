@@ -1570,6 +1570,15 @@ html body.ak-home #section-d54243f0 img {
 }
 #row-5fab714b > div,
 #row-5fab714b > div > div { display: contents !important; }
+/* Podpis z awatarem siada przy DOLE karty, nie tuz pod cytatem: bez tego pod
+   krotkim cytatem zostawala luka 33-146 px. Po przejsciu kolumn na `contents`
+   karty nie sa juz dziecmi `.aks-row`, wiec mechanizm `aks-col`/`aks-bottom`
+   z JS ich nie obejmuje — regula jest wiec tutaj, przy samej siatce.
+   ⚠️ `margin-top:auto` idzie na OSTATNIE z rodzenstwa; na jedynym dziecku
+   zepchneloby cala tresc na dol. */
+#row-5fab714b .aks-card { display: flex !important; flex-direction: column !important; }
+#row-5fab714b .aks-card > * { flex: 1 1 auto !important; display: flex !important; flex-direction: column !important; }
+#row-5fab714b .aks-card > * > *:last-child:not(:only-child) { margin-top: auto !important; }
 @media (max-width: 1024px) {
   #row-5fab714b { grid-template-columns: repeat(2, 1fr) !important; }
 }
