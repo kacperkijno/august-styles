@@ -1897,6 +1897,21 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
    Świadomie NIE ustawiamy tu width/height — tylko kolor, promień i typografia.
    ============================================================================ */
+/* ⚠️ Pasek nawigacji lejka bywa u systeme `position: fixed` z `bottom: 0`,
+   a wtedy przegladarka liczy wysokosc z `top` i `bottom` i IGNORUJE tresc:
+   pasek rozciagal sie na cala wysokosc okna (900 px), a menu — jedyne dziecko
+   z `align-self: center` — ladowalo na jego srodku, czyli na zdjeciu hero.
+   Zmierzone @440 przy oknie 900 px na /blueprint, /pitching-home,
+   /pitch-diagnostic i /pitching-decoded. Logo i CTA staly poprawnie, bo maja
+   `flex-start` — stad wygladalo to jak „rozsypane menu".
+   Te strony laduja homepage-live.css, a /cultural-communication i /webinar
+   sales-page.css, wiec ta sama korekta musi byc w OBU arkuszach. */
+[id^="row-"]:has([id^="menu-"]) {
+  bottom: auto !important;
+  height: auto !important;
+  grid-template-rows: auto !important;
+  align-items: center !important;
+}
 [id^="row-"]:has([id^="menu-"]) [id^="menu-"] a {
   color: #2D2D2D !important;
 }

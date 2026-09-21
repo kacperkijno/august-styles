@@ -2065,6 +2065,21 @@ html body.ak-sales-page #text-4353c41d * {
   right: 0 !important;
   z-index: 1000 !important;
   margin: 0 auto !important;
+  /* ⚠️ systeme trzyma wiersz nawigacji w SIATCE o wierszu ~880 px — tyle,
+     ile ma hero, obok ktorego pasek stoi w edytorze. `position: fixed` wyjmuje
+     pasek z przeplywu, ale NIE rusza `grid-template-rows`, wiec menu (jedyne
+     dziecko z `align-self: center`) ladowalo na srodku ekranu, na zdjeciu hero:
+     zmierzone @440 przy oknie 900 px na /cultural-communication, /webinar
+     i /blueprint. Logo i CTA stoja poprawnie, bo maja `flex-start`. */
+  /* ⚠️ `bottom` musi byc `auto`: przy `position: fixed` z podanym `top`
+     ORAZ `bottom` przegladarka liczy wysokosc z nich i IGNORUJE `height: auto`.
+     systeme daje temu wierszowi `bottom: 0` na czesci stron lejka
+     (/blueprint, /pitching-home, /pitch-diagnostic, /pitching-decoded),
+     przez co pasek rozciagal sie na cala wysokosc okna. */
+  bottom: auto !important;
+  grid-template-rows: auto !important;
+  height: auto !important;
+  align-items: center !important;
   /* DOMYSLNIE SOLIDNY — bezpieczny stan. Strona, ktora z jakiegos powodu nie
      zaladuje homepage-live.js, dostaje czytelny pasek zamiast cream linkow
      na jasnym tle. Przezroczystosc dokleja JS i tylko tam, gdzie pod paskiem
