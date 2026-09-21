@@ -414,6 +414,21 @@
 .ak-pitch .akp-faq details[open] summary::after { transform: translateY(-30%) rotate(-135deg); }
 .ak-pitch .akp-faq__a { font-size: 16px; line-height: 1.6; color: var(--p-ink-72); margin: 0 0 24px; padding-right: 40px; }
 
+/* --- sekcja na ciemnym: komplet, zeby nie stylowac inline -----------------
+   Uzywaja jej domkniecie /pitching-home i miekka oferta na stronach
+   podziekowan. Bez tego kazdy naglowek i lista na Forest wymagalyby
+   `style="color:..."`, a stylowanie inline jest dokladnie tym, co 27.08
+   kazalo przepisywac 218 miejsc. */
+.ak-pitch .akp-sec--dark .akp-h1,
+.ak-pitch .akp-sec--dark .akp-h2 { color: var(--p-cream); }
+.ak-pitch .akp-sec--dark .akp-body,
+.ak-pitch .akp-sec--dark .akp-lead { color: var(--p-cream-80); }
+.ak-pitch .akp-sec--dark .akp-list li { color: var(--p-cream-80); }
+.ak-pitch .akp-sec--dark .akp-list li::before { border-color: var(--p-terra-warm); }
+.ak-pitch .akp-sec--dark .akp-list li b,
+.ak-pitch .akp-sec--dark .akp-list li strong { color: var(--p-cream); }
+.ak-pitch .akp-sec--dark .akp-quote { color: var(--p-cream); }
+
 /* --- domkniecie ----------------------------------------------------------- */
 .ak-pitch .akp-close { text-align: center; }
 .ak-pitch .akp-close .akp-h2 { margin-bottom: 32px; }
