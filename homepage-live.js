@@ -1404,6 +1404,23 @@
       for (var j = 0; j < k.length; j++) if (/^akt-t\d/.test(k[j])) e.classList.remove(k[j]);
       e.classList.add('akt-eyebrow');
     }
+    /* ⚠️ Tag stojacy OBOK eyebrow tez jest eyebrowem. Etykiete rozpoznajemy po
+       tym, ze pod nia stoi naglowek — a karta wpisu na /blog ma DWA tagi
+       („Pitching | Cultural Communication"). Drugi ma pod soba tytul wpisu
+       i przechodzi; pierwszy ma pod soba tylko drugi tag i wypadal, wiec stal
+       12 px waga 400 malymi literami obok wersalikow 11/500. Ta sama rola,
+       ten sam stopien. */
+    var sas = root.querySelectorAll('a.akt-eyebrow'), si, sk, kier = ['previousElementSibling', 'nextElementSibling'];
+    for (si = 0; si < sas.length; si++) {
+      for (sk = 0; sk < kier.length; sk++) {
+        var sib = sas[si][kier[sk]];
+        if (!sib || sib.tagName !== 'A' || !sib.classList.contains('akt')) continue;
+        if (sib.classList.contains('akt-eyebrow')) continue;
+        var kk = sib.className.split(/\s+/);
+        for (var kj = 0; kj < kk.length; kj++) if (/^akt-(t\d|w\d)/.test(kk[kj])) sib.classList.remove(kk[kj]);
+        sib.classList.add('akt-eyebrow');
+      }
+    }
   }
 
   /* Cytat wyrozniony to nie naglowek, choc klasyfikator typograficzny widzi

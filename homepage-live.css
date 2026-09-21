@@ -1591,6 +1591,13 @@ html body.ak-home #section-d54243f0 img {
   #row-5fab714b, #row-a828b786 { grid-template-columns: 1fr !important; }
 }
 
+/* Dwa tagi wpisu rozdziela goly znak „|" wpisany w tresc. Przy wersalikach
+   i rozstrzeleniu .18em przykleja sie do obu slow („PITCHING|CULTURAL"),
+   wiec odsuwamy go z obu stron. W calym serwisie takich par sa dwie, obie
+   na /blog. */
+html body a.akt-eyebrow + a.akt-eyebrow { margin-left: .4em; }
+html body a.akt-eyebrow:has(+ a.akt-eyebrow) { margin-right: .4em; }
+
 /* ==================== FOOTER (global, all pages) ==================== */
 /* Live loads homepage-live.css, NOT core.css — so footer social/title
    styles must live here too. .footer__social markup is a raw-HTML widget. */
