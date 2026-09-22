@@ -1662,6 +1662,19 @@
          plakietka z wlasnym tlem. Etykieta „A5 · 142 PAGES" na
          /pitching-decoded siedzi na terakotowej plakietce i po pomiarze
          tla rodzica dostawala terakote na terakocie — czyli znikala. */
+      /* ⚠️ PODPIS W PASKU STATYSTYK TO NIE EYEBROW SEKCJI.
+         `.pdk-spec` na /pitching-decoded to `<b>14</b><span>Chapters</span>`,
+         czyli jedna kompozycja: liczba i jej podpis. `<span>` jest wersalikowy
+         i 11-12 px, wiec klasyfikator robi z niego eyebrow, a ta petla robila
+         mu potem DWIE rzeczy naraz i obie psuly pasek:
+           1. `ustawOdstepNad(e, nadBlok)` wpisywalo poprzednikowi, czyli
+              LICZBIE, `margin-bottom: 56px !important` — zmierzone 22.09 na
+              wszystkich pieciu pozycjach. Arkusz bloku daje tam 9 px.
+           2. kolor eyebrow na ciemnym to `#D9A47A`, czyli DOKLADNIE ten sam
+              kolor co liczba — pasek tracil hierarchie i czytal sie jako
+              dziesiec rownorzednych napisow zamiast pieciu par.
+         Rytm i kolor tej kompozycji naleza do jej wlasnego arkusza. */
+      if (e.closest('.pdk-spec, [class*="-spec"], [class*="-stat"]')) continue;
       var wlasne = gcs(e).backgroundColor;
       var pod = przezr(wlasne) ? tloPod(e.parentElement || e) : wlasne;
       var m = (pod || '').match(/\d+/g);

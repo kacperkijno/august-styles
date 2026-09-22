@@ -3765,3 +3765,32 @@ html body .ak-book .pdk-faq { max-width: 760px !important; margin-inline: auto !
    od przegladarki rgb(0, 0, 238). Na stronach Website widac to w stopce
    zanim JS doklei `.akt` dzieciom. Bez `!important` — jawna regula wygrywa. */
 html body a { color: inherit; }
+
+
+/* ============================================================================
+   /pitching-decoded — pasek statystyk i FAQ (2026-09-22)
+   ⚠️ TE REGULY MUSZA BYC TUTAJ, NIE W sales-page.css. Sprawdzone curlem:
+   /pitching-decoded laduje WYLACZNIE `homepage-live.css` i `homepage-live.js`.
+   Pierwsze podejscie wrzucilo je do `sales-page.css` i nie zadzialaly wcale.
+   Scope `.ak-book` istnieje tylko na tej stronie, wiec sa bezpieczne.
+   ============================================================================ */
+html body .ak-book .pdk-spec b {
+  /* kanon: 8 pod eyebrow. Arkusz bloku mial 9, JS podbijal do 56 inline —
+     patrz wyjatek `.pdk-spec` w homepage-live.js, bez niego to nie wystarczy. */
+  margin-bottom: 8px !important;
+}
+/* ⚠️ ETYKIETA PASKA MUSI BYC W PALECIE, INACZEJ MAPA KOLOROW JA PRZEMALUJE.
+   Arkusz bloku dawal jej `rgba(249,247,241,.62)`, czego w kanonie nie ma.
+   Kremowy 80 jest, wiec zostaje nietkniety i podpis czyta sie jako podrzedny
+   wzgledem terakotowej liczby. */
+html body .ak-book .pdk-spec span {
+  color: rgba(249, 247, 241, .8) !important;
+}
+/* ⚠️ FAQ BYLO JEDYNA WYSRODKOWANA SEKCJA NA CALEJ STRONIE. Zmierzone:
+   wszystkie `.pdk-h2` stoja do lewej na 224 px, a „QUESTIONS" i „Before you
+   ask." na srodku. Sekcja FAQ nie ma wlasnego ID ani klasy modyfikujacej,
+   wiec rozpoznajemy ja po tym, co ja definiuje: jako jedyna ma `<details>`. */
+html body .ak-book .pdk-section:has(details) .pdk-eyebrow,
+html body .ak-book .pdk-section:has(details) .pdk-h2 {
+  text-align: left !important;
+}
