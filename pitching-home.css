@@ -57,6 +57,19 @@
   background: var(--p-cream);
   color: var(--p-ink);
   font-family: var(--p-sans);
+  /* ⚠️ WIDGET CUSTOM HTML W SYSTEME MA `text-align: center`.
+     Zmierzone na produkcji: `#rawhtml-e3f25efc` = center, wszystko nad nim
+     = start. Bez tej linii caly blok dziedziczy srodek — hero, karty metody,
+     sekcje dwukolumnowe, cennik, absolutnie wszystko. Wysrodkowane maja byc
+     TYLKO naglowki sekcji pelnej szerokosci (inline `text-align:center`
+     w bloku) oraz `.akp-price` i `.akp-close`.
+     To ta sama pulapka co przy /about ([[project_about_block_built]]) —
+     kazdy blok raw-HTML musi zerowac wyrownanie na swoim scope.
+     ⚠️ Skutek uboczny: `homepage-live.js` wyrownuje eyebrow do naglowka,
+     ktory zapowiada, wiec przy odziedziczonym srodku dopisywal jeszcze
+     `text-align: center` INLINE z `!important` — poprawka u zrodla zdejmuje
+     jedno i drugie. */
+  text-align: left;
 }
 /* ⚠️ `border-box` na calym bloku. Bez tego przycisk `width:100%` w karcie
    cennika dolicza sobie padding 2x24 i wystaje poza ekran: zmierzone
@@ -250,31 +263,16 @@
   margin: 0 0 12px;
 }
 .ak-pitch .akp-list li:last-child { margin-bottom: 0; }
-.ak-pitch .akp-list li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: .45em;
-  width: 13px;
-  height: 7px;
-  border-left: 1.5px solid var(--p-terra-dark);
-  border-bottom: 1.5px solid var(--p-terra-dark);
-  transform: rotate(-45deg);
-}
+/* ⚠️ PUNKTOR RYSUJE KANON, NIE MY.
+   `homepage-live.js` wybiera rodzaj punktora po ikonie w <li> (`fa-check`,
+   `fa-times`, `svg`); nasz blok ikon nie ma, wiec dostawal wariant KROPKA
+   i kanon nadpisywal narysowany tutaj ptaszek — na zywej stronie checklisty
+   wyszly z kropkami. Zamiast podbijac specyficznosc deklarujemy rodzaj
+   WPROST w HTML: `akt-list akt-list--check` (albo `--x`, `--dark`) plus
+   `data-akt-list`, na ktorym JS przerywa i zostawia liste w spokoju.
+   Dzieki temu punktory sa te same co w calym serwisie. */
 .ak-pitch .akp-list li b,
 .ak-pitch .akp-list li strong { font-weight: 500; color: var(--p-ink); }
-/* wariant „nie dla ciebie" — krzyzyk zamiast ptaszka */
-.ak-pitch .akp-list--no li::before {
-  content: "\2715";
-  border: 0;
-  transform: none;
-  width: auto; height: auto;
-  top: 0;
-  color: var(--p-ink-62);
-  font-size: 13px;
-  line-height: 1.6;
-}
-
 /* --- karty: kanon powierzchni --------------------------------------------- */
 .ak-pitch .akp-card {
   background: var(--p-cream);
