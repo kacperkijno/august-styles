@@ -3751,9 +3751,15 @@ html body .ak-book .pdk-faq details > *:not(summary) {
   font-size: 16px !important;
   line-height: 1.65 !important;
 }
-/* eyebrow i naglowek nad FAQ — na srodku, jak we wzorcu */
+/* ⚠️ FAQ IDZIE DO LEWEJ, TAK JAK CALA TA STRONA (decyzja Kacpra 22.09).
+   Ta regula stala tu wczesniej z `center` i uzasadnieniem „jak we wzorcu”.
+   Wzorzec jednak nie przesadza: na `/pitching-home` FAQ jest na srodku, ale
+   TAM na srodku sa WSZYSTKIE naglowki sekcji. Na /pitching-decoded wszystkie
+   `.pdk-h2` stoja do lewej na 224 px i wysrodkowane FAQ bylo jedyna sekcja,
+   ktora z tego wypadala. Spojnosc w obrebie strony wygrywa z analogia miedzy
+   stronami przy naglowku sekcji. */
 html body .ak-book .pdk-section:has(.pdk-faq) .pdk-h2,
-html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { text-align: center !important; }
+html body .ak-book .pdk-section:has(.pdk-faq) .pdk-eyebrow { text-align: left !important; }
 /* `text-align:center` centruje tekst w pudelku elementu — eyebrow bywa
    `inline-block` i wtedy pudelko stoi przy lewej krawedzi. Ten sam blad
    co przy etykiecie nad marquee na /about. */
@@ -3785,12 +3791,4 @@ html body .ak-book .pdk-spec b {
    wzgledem terakotowej liczby. */
 html body .ak-book .pdk-spec span {
   color: rgba(249, 247, 241, .8) !important;
-}
-/* ⚠️ FAQ BYLO JEDYNA WYSRODKOWANA SEKCJA NA CALEJ STRONIE. Zmierzone:
-   wszystkie `.pdk-h2` stoja do lewej na 224 px, a „QUESTIONS" i „Before you
-   ask." na srodku. Sekcja FAQ nie ma wlasnego ID ani klasy modyfikujacej,
-   wiec rozpoznajemy ja po tym, co ja definiuje: jako jedyna ma `<details>`. */
-html body .ak-book .pdk-section:has(details) .pdk-eyebrow,
-html body .ak-book .pdk-section:has(details) .pdk-h2 {
-  text-align: left !important;
 }
