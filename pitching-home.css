@@ -365,7 +365,23 @@
 
 /* --- opinie --------------------------------------------------------------- */
 .ak-pitch .akp-tgrid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 48px; }
-.ak-pitch .akp-tcard { display: flex; flex-direction: column; height: 100%; }
+/* ⚠️ OPINIE NIE SA KARTA — ani tu, ani nigdzie w serwisie.
+   Zmierzone 22.09 na `/` i `/cultural-communication`: opinia to przezroczysty
+   blok bez ramki, bez cienia i bez paddingu, z awatarem 44 px i cytatem
+   21/serif. Blok /pitching-home mial poczatkowo `akp-card akp-tcard`, czyli
+   kremowa karte z ramka i cieniem, i dlatego nie czytal sie jak na stronie
+   glownej. Klasa `akp-card` zostala zdjeta w bloku; te trzy `none` sa tu po to,
+   zeby powrot do niej niczego nie zepsul, gdyby ktos ja kiedys dopisal. */
+.ak-pitch .akp-tcard {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 0;
+}
+.ak-pitch .akp-tcard:hover { box-shadow: none; transform: none; border: 0; }
 .ak-pitch .akp-tcard__quote {
   font-family: var(--p-serif);
   font-size: 21px;
