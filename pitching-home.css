@@ -373,7 +373,23 @@
   color: var(--p-ink);
   margin: 0;
 }
-.ak-pitch .akp-tcard__by { margin-top: auto; padding-top: 24px; }
+/* Podpis: awatar 44 px + nazwisko z rola, wysrodkowane w pionie — ten sam
+   ksztalt co opinie na `/`, /about i /cultural-communication. */
+.ak-pitch .akp-tcard__by {
+  margin-top: auto;
+  padding-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.ak-pitch .akp-tcard__avatar {
+  display: block;
+  width: 44px;
+  height: 44px;
+  flex: 0 0 44px;
+  border-radius: 999px;
+  object-fit: cover;
+}
 .ak-pitch .akp-tcard__name { font-size: 14px; font-weight: 500; color: var(--p-ink); margin: 0; }
 .ak-pitch .akp-tcard__role { font-size: 14px; color: var(--p-ink-72); margin: 2px 0 0; }
 
