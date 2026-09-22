@@ -1685,6 +1685,18 @@
     for (i = 0; i < l.length; i++) {
       var h = l[i];
       if (pomijamy(h) || h.getBoundingClientRect().height < 10) continue;
+      /* ⚠️ CYTAT Z OPINII TO NIE NAGLOWEK SEKCJI.
+         Opinia jest skladana w kanonie jako 21/serif, czyli dokladnie tak jak
+         najnizszy stopien naglowkowy, wiec klasyfikator nadaje jej `akt-h21`
+         i ta petla traktowala ja jak naglowek: brala wyrownanie z eyebrow
+         sekcji („WHAT PARTICIPANTS SAY" stoi na srodku) i wysrodkowywala tekst
+         cytatu. Zmierzone 22.09 na /pitching-home: TRZY z pieciu cytatow
+         dostaly `text-align: center !important` inline, dwa zostaly do lewej,
+         bo o reszcie decydowal przypadkowy ksztalt lamania. Na `/` opinie sa
+         do lewej i tak ma byc wszedzie.
+         Wczesniej problem nie wychodzil tylko dlatego, ze opinie na
+         /pitching-home byly karta i wypadaly z tej petli inna droga. */
+      if (h.closest('[class*="tcard"], blockquote, figure[class*="quote"]')) continue;
       var Rh = skala(h);
       /* ⚠️ Naglowek na NAJNIZSZYCH stopniach szeryfowych (21/24) nie otwiera
          sekcji — jest podpisem wewnatrz kompozycji. „Entrepreneurship.
