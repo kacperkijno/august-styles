@@ -520,10 +520,62 @@
 
 .ak-pitch { --p-sage: #D7DDD8; }
 
-/* Rusztowanie: szerokosc daje wiersz systeme, my tylko domykamy max 1120.
-   Bez wlasnego paddingu poziomego — sekcja systeme juz go ma (40 px), a drugi
-   zwezilby blok do 1072 i rozjechal go z wierszem formularza pod spodem. */
-.ak-pitch .akp-mwrap { max-width: 1120px; margin: 0 auto; padding: 0; }
+/* --- RUSZTOWANIE: JEDNA RYNNA DLA OBU BLOKOW -------------------------------
+   ⚠️ 22.09 wieczorem Kacper przebudowal obie strony w edytorze i geometria
+   sie ZMIENILA: oba widgety (gorny i dolny) siedza teraz we wlasnych sekcjach
+   PELNEJ SZEROKOSCI, a formularz w trzeciej sekcji miedzy nimi. Wczesniej blok
+   gorny byl w sekcji z wlasnym marginesem 40 px i mial `padding: 0` — ta wersja
+   jest juz nieaktualna, oba bloki musza teraz robic rynne same.
+
+   ⚠️ LICZBY PONIZEJ TO RYNNY SYSTEME, NIE KANON — i tak ma byc. Celem jest
+   zgodnosc z wierszem formularza, ktory stoi miedzy blokami; rozjazd lewej
+   krawedzi to dokladnie to, co czyta sie jako niechlujstwo. Zmierzone na zywej
+   stronie, gdzie zaczyna sie widget i gdzie formularz:
+
+     >1168 px  : widget   0, formularz  40  -> max 1120 + padding 0
+     811-1168  : widget   0, formularz  40  -> padding 40
+     <=810     : widget  10, formularz  21  -> padding 11  (21 - 10)
+
+   Punkt przelamania systeme lezy miedzy 800 a 820 px (zmierzone: przy 820
+   widget zaczyna sie na 0, przy 800 na 10). Bierzemy 810. Gdyby systeme
+   kiedys zmienil swoje rynny, te trzy liczby sa jedynym miejscem do poprawki.
+
+   ⚠️ Formularz nie ma wlasnego max-width — po przebudowie rozciaga sie na
+   `szerokosc okna minus 80`, czyli przy 1440 px ma 1360 i wychodzi poza kanon
+   1120, ktory trzyma nawigacja i stopka. Dokladamy mu go nizej po ID. */
+.ak-pitch .akp-mwrap,
+.ak-pitch .akp-mout .akp-wrap {
+  max-width: 1120px;
+  margin: 0 auto;
+  padding-left: 0;
+  padding-right: 0;
+}
+@media (max-width: 1168px) {
+  .ak-pitch .akp-mwrap,
+  .ak-pitch .akp-mout .akp-wrap { padding-left: 40px; padding-right: 40px; }
+}
+@media (max-width: 810px) {
+  .ak-pitch .akp-mwrap,
+  .ak-pitch .akp-mout .akp-wrap { padding-left: 11px; padding-right: 11px; }
+}
+
+/* ⚠️ FORMULARZ OPT-IN — JEDYNA REGULA W CALYM ARKUSZU, KTORA GO DOTYKA,
+   i celowo tylko szerokosc. Nie zmienia ani tla, ani odstepow, ani niczego
+   w srodku; pola `input` i przycisk zostaja takie, jakie sa. Po przebudowie
+   wiersz nie ma max-width i przy szerokim oknie rozjezdza sie z nawigacja,
+   stopka i oboma blokami. `#row-74af0acf` wystepuje TYLKO na /blueprint
+   i /pitch-diagnostic, wiec celowanie po ID jest tu bezpieczne
+   (ten sam chwyt co `#row-4332dc25` w bloku kursow).
+   ⚠️ `justify-self` jest potrzebny obok `margin`, bo rodzic to grid.
+   ⚠️ To JEDYNA regula w tym arkuszu bez scope'u `.ak-pitch` — musi taka byc,
+   bo formularz nie jest naszym blokiem i tej klasy nie ma. Bezpieczenstwo daje
+   tu unikalnosc ID, nie scope. Nie dokladac tu niczego wiecej. */
+#row-74af0acf {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-self: center;
+}
 
 /* --- HERO magnetu: wstawiony boks Sage ------------------------------------ */
 .ak-pitch .akp-mag-hero {
@@ -584,28 +636,8 @@
    /pitch-diagnostic). Ta sekcja JEST pelnej szerokosci i nie ma tla, wiec
    tutaj wlasny wrap z paddingiem jest potrzebny. */
 .ak-pitch .akp-mout { padding: 128px 0; background: var(--p-cream); }
-/* ⚠️ RYNNA MUSI SIE ZGADZAC Z BLOKIEM GORNYM, A LICZY SIE INACZEJ.
-   Blok gorny siedzi w sekcji systeme, ktora sama daje 40 px z boku, wiec ma
-   `padding: 0`. Blok dolny siedzi w sekcji PELNEJ SZEROKOSCI, wiec rynne musi
-   zrobic sam. Zmierzone: przy zwyklym `.akp-wrap` (padding 24) tresc dolnego
-   bloku startowala na 184 px, a wszystko nad nim na 160 — widoczne przesuniecie
-   o 24 px na calej sekcji.
-
-   ⚠️ LICZBY PONIZEJ TO RYNNY SYSTEME, NIE KANON — i tak ma byc. Kanonowe 24
-   dawalo 16 px rozjazdu przy 900-1100 px. Zmierzone na zywej stronie, ile
-   z boku zostawia sekcja z formularzem i ile sekcja z widgetem:
-     >1168 px : formularz 160, widget 0   -> max 1120, padding 0
-     641-1168 : formularz  40, widget 0   -> padding 40
-     <=640    : formularz  32, widget 10  -> padding 22 (32 - 10)
-   Gdyby systeme kiedys zmienil swoje rynny, te trzy liczby sa jedynym
-   miejscem do poprawienia. */
-.ak-pitch .akp-mout .akp-wrap { max-width: 1120px; padding-left: 0; padding-right: 0; }
-@media (max-width: 1168px) {
-  .ak-pitch .akp-mout .akp-wrap { padding-left: 40px; padding-right: 40px; }
-}
-@media (max-width: 640px) {
-  .ak-pitch .akp-mout .akp-wrap { padding-left: 22px; padding-right: 22px; }
-}
+/* Rynna tego bloku jest wspolna z blokiem gornym — patrz sekcja
+   RUSZTOWANIE na gorze tego rozdzialu. */
 
 @media (max-width: 1024px) {
   .ak-pitch .akp-mag-hero { padding: 56px 40px; }
