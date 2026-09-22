@@ -575,6 +575,17 @@
   margin-left: auto;
   margin-right: auto;
   justify-self: center;
+  /* ⚠️ POWIERZCHNIA, KTORA WIERSZ ZGUBIL PRZY PRZEBUDOWIE.
+     Do 22.09 mial tlo kremowo-miekkie i `homepage-live.js` nadawal mu klasy
+     `aks aks-panel aks-bg-soft`, czyli czytal sie jako panel. Po przeniesieniu
+     do nowej sekcji tlo wrocilo do kremowego, identycznego z tlem strony,
+     wiec pola formularza wisza w powietrzu zamiast siedziec w boksie.
+     Wzorzec /cross-cultural-playbook trzyma formularz na osobnej powierzchni
+     i to jest moment konwersji tej strony, wiec ja przywracamy.
+     ⚠️ Wartosci wprost, nie zmienne — ta regula stoi POZA scope'em
+     `.ak-pitch`, wiec `var(--p-cream-soft)` by sie tu nie rozwinal. */
+  background: #F3F0E7;
+  border-radius: 4px;
 }
 
 /* --- HERO magnetu: wstawiony boks Sage ------------------------------------ */
