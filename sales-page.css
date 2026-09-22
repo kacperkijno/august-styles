@@ -2919,6 +2919,27 @@ html body .ak-book .pdk-numcard b, html body .ak-book .pdk-wrap blockquote {
 }
 html body .ak-book .pdk-spec b {
   font-size: 36px !important;
+  /* kanon: 8 pod eyebrow. Arkusz bloku mial 9, JS podbijal do 64 — patrz
+     wyjatek `.pdk-spec` w homepage-live.js. */
+  margin-bottom: 8px !important;
+}
+/* ⚠️ ETYKIETA PASKA MUSI BYC W PALECIE, INACZEJ MAPA KOLOROW JA PRZEMALUJE.
+   Arkusz bloku dawal jej `rgba(249,247,241,.62)`, czego w kanonie nie ma, wiec
+   mapa podmieniala na najblizszy kolor — terakote. Zmierzone: liczba i podpis
+   wychodzily TYM SAMYM kolorem i pasek tracil hierarchie. Kremowy 80 jest
+   w kanonie, wiec zostaje nietkniety i podpis czyta sie jako podrzedny. */
+html body .ak-book .pdk-spec span {
+  color: rgba(249, 247, 241, .8) !important;
+}
+
+/* ⚠️ FAQ NA /pitching-decoded BYLO JEDYNA WYSRODKOWANA SEKCJA NA STRONIE.
+   Zmierzone: wszystkie `.pdk-h2` stoja do lewej na 224 px, a eyebrow
+   „QUESTIONS" i naglowek „Before you ask." byly na srodku. Sekcja FAQ nie ma
+   wlasnego ID ani klasy modyfikujacej, wiec rozpoznajemy ja po tym, co ja
+   definiuje: jako jedyna zawiera `<details>`. */
+html body .ak-book .pdk-section:has(details) .pdk-eyebrow,
+html body .ak-book .pdk-section:has(details) .pdk-h2 {
+  text-align: left !important;
 }
 html body .ak-book .pdk-numcard h3,
 html body .ak-book .pdk-case h3,

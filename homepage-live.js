@@ -1697,6 +1697,15 @@
          Wczesniej problem nie wychodzil tylko dlatego, ze opinie na
          /pitching-home byly karta i wypadaly z tej petli inna droga. */
       if (h.closest('[class*="tcard"], blockquote, figure[class*="quote"]')) continue;
+      /* ⚠️ LICZBA W PASKU STATYSTYK TO NIE NAGLOWEK SEKCJI.
+         `.pdk-spec` na /pitching-decoded to `<b>14</b><span>Chapters</span>` —
+         jedna kompozycja. Klasyfikator widzi 36/serif i robi z tego naglowek,
+         a `<span>` jest wersalikowym eyebrow, wiec petla uznawala, ze zaczyna
+         sie NOWY BLOK i wstawiala `nadBlok`. Zmierzone: miedzy „14" a „CHAPTERS"
+         bylo **64 px** zamiast 9, ktore ustawia arkusz bloku. Caly pasek
+         rozjezdzal sie na pol ekranu i liczby przestawaly sie wiazac
+         z podpisami. Rytm tej kompozycji nalezy do jej wlasnego arkusza. */
+      if (h.closest('.pdk-spec, [class*="-spec"], [class*="-stat"]')) continue;
       var Rh = skala(h);
       /* ⚠️ Naglowek na NAJNIZSZYCH stopniach szeryfowych (21/24) nie otwiera
          sekcji — jest podpisem wewnatrz kompozycji. „Entrepreneurship.
