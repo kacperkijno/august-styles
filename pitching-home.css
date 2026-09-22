@@ -484,3 +484,138 @@
   .ak-pitch * { transition-duration: 0s !important; animation-duration: 0s !important; }
   .ak-pitch .akp-card:hover { transform: none; }
 }
+
+/* ============================================================================
+   MAGNETY PITCHINGOWE — /blueprint i /pitch-diagnostic (2026-09-22)
+   ----------------------------------------------------------------------------
+   Bloki: redesign/magnet-blueprint-gora.html + magnet-blueprint-dol.html
+          redesign/magnet-diagnostic-gora.html + magnet-diagnostic-dol.html
+
+   ⚠️ TO NIE JEST TEN SAM PRZYPADEK CO /pitching-home.
+   Tam skasowalismy piec sekcji i wkleili jeden blok. TUTAJ FORMULARZ OPT-IN
+   SIEDZI W SEKCJI, KTORA PRZERABIAMY (`#section-9ce01a60`, wiersz
+   `#row-74af0acf`, dwa pola `input`). Skasowanie tej sekcji zabiera zapis na
+   liste, czyli caly sens strony magnetowej, i nikt tego nie zauwazy od razu.
+   Dlatego bloki dobudowuja sie WOKOL formularza: wiersz z formularzem zostaje
+   nietkniety i nie ma tu ani jednej reguly, ktora go dotyka.
+
+   ⚠️ OBIE STRONY MAJA TE SAME ID WIERSZY (zmierzone 22.09):
+   `row-03b9932f` nawigacja, `row-6575f16c` hero, `row-41b211d8` karty,
+   `row-785e6d19` > `row-74af0acf` FORMULARZ. Jeden uklad zalatwia dwie strony.
+
+   ⚠️ BLOK GORNY NIE JEST FULL-BLEED, i tak ma byc.
+   `#section-9ce01a60` ma wlasne `padding: 0 40px` i kremowe tlo, wiec widget
+   wewnatrz niej nie siega krawedzi. Sprawdzone, ze wzorzec tez nie siega:
+   hero na `/cross-cultural-playbook` to WSTAWIONY BOKS 1120 px w kolorze Sage
+   (`row-6cb22575`, radius 4), a nie ciemny pas na cala szerokosc jak
+   w `/pitching-home`. Zadnych sztuczek z `100vw` — kazda z nich dorzuca
+   szerokosc paska przewijania i konczy sie pozioma belka.
+
+   ⚠️ DLATEGO OSOBNA KLASA `.akp-mag-hero`, NIE `.akp-hero`.
+   `.akp-hero` jest CIEMNY (Forest) i ma reguly, ktore rozjasniaja tekst
+   (`.akp-hero .akp-fine`, `.akp-hero .akp-eyebrow`). Hero magnetu jest JASNY,
+   wiec dziedziczenie po `.akp-hero` daloby kremowy tekst na Sage, czyli
+   dokladnie ten blad kontrastu, ktory kosztowal runde poprawek 21.09.
+   ============================================================================ */
+
+.ak-pitch { --p-sage: #D7DDD8; }
+
+/* Rusztowanie: szerokosc daje wiersz systeme, my tylko domykamy max 1120.
+   Bez wlasnego paddingu poziomego — sekcja systeme juz go ma (40 px), a drugi
+   zwezilby blok do 1072 i rozjechal go z wierszem formularza pod spodem. */
+.ak-pitch .akp-mwrap { max-width: 1120px; margin: 0 auto; padding: 0; }
+
+/* --- HERO magnetu: wstawiony boks Sage ------------------------------------ */
+.ak-pitch .akp-mag-hero {
+  background: var(--p-sage);
+  color: var(--p-ink);
+  border-radius: 4px;
+  padding: 80px 60px;
+  margin: 24px 0 0;
+}
+.ak-pitch .akp-mag-hero__grid {
+  display: grid;
+  grid-template-columns: 1fr 420px;
+  gap: 48px;                   /* kanon: 48 w siatce */
+  align-items: center;
+}
+.ak-pitch .akp-mag-hero .akp-h1 { color: var(--p-ink); }
+.ak-pitch .akp-mag-hero .akp-h1 em { color: var(--p-terra-dark); }
+.ak-pitch .akp-mag-hero__sub {
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--p-ink-72);
+  margin: 48px 0 32px;         /* kanon: 48 pod naglowkiem, 32 lead -> CTA */
+  max-width: 58ch;
+}
+.ak-pitch .akp-mag-hero .akp-fine { color: var(--p-ink-62); }
+.ak-pitch .akp-mag-hero__media { margin: 0; }
+.ak-pitch .akp-mag-hero__media img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  box-shadow: var(--p-sh-md);
+}
+
+/* --- sekcja tresci wewnatrz sekcji systeme -------------------------------- */
+/* Wzorzec ma `padding: 128px 0` na sekcji „What's inside" — zmierzone. */
+.ak-pitch .akp-msec { padding: 128px 0 0; }
+/* ⚠️ TYLKO WYROWNANIE, ZERO ODSTEPOW. Odstep pod naglowkiem sekcji nalezy do
+   kanonu (`.akp-h2` ma 48) i `homepage-live.js` i tak go przelicza optycznie —
+   zmierzone: nadpisuje `margin-bottom` na 48 przy szerokim ekranie i 64 przy
+   waskim. Wlasny `margin` na tym kontenerze bylby wiec albo martwy, albo
+   doliczylby sie do tamtego. Ta sama lekcja co przy /pitching-home: wartosci
+   prosto z kanonu, nie wlasne. */
+.ak-pitch .akp-msec__head { text-align: center; }
+
+/* Karta z samym nadpisem i tekstem (WHO IT'S FOR / AUGUST KJERLAND).
+   Wzorzec stawia obok siebie jedna kremowa i jedna kremowo-miekka. */
+.ak-pitch .akp-card--soft { background: var(--p-cream-soft); }
+
+/* Odstep od formularza, ktory idzie zaraz pod blokiem. 128 px to ten sam
+   stopien co padding sekcji wzorca — dzieki temu boks formularza czyta sie
+   jak osobna sekcja, mimo ze technicznie siedzi w tej samej sekcji systeme. */
+.ak-pitch .akp-msec--do-formularza { padding-bottom: 128px; }
+
+/* --- blok dolny: „Get the full course" ------------------------------------ */
+/* Ten idzie w widget, ktory JUZ jest na stronie, w osobnej sekcji pod
+   formularzem (`#section-5960047c` na /blueprint, `#section-a8258e72` na
+   /pitch-diagnostic). Ta sekcja JEST pelnej szerokosci i nie ma tla, wiec
+   tutaj wlasny wrap z paddingiem jest potrzebny. */
+.ak-pitch .akp-mout { padding: 128px 0; background: var(--p-cream); }
+/* ⚠️ RYNNA MUSI SIE ZGADZAC Z BLOKIEM GORNYM, A LICZY SIE INACZEJ.
+   Blok gorny siedzi w sekcji systeme, ktora sama daje 40 px z boku, wiec ma
+   `padding: 0`. Blok dolny siedzi w sekcji PELNEJ SZEROKOSCI, wiec rynne musi
+   zrobic sam. Zmierzone: przy zwyklym `.akp-wrap` (padding 24) tresc dolnego
+   bloku startowala na 184 px, a wszystko nad nim na 160 — widoczne przesuniecie
+   o 24 px na calej sekcji.
+
+   ⚠️ LICZBY PONIZEJ TO RYNNY SYSTEME, NIE KANON — i tak ma byc. Kanonowe 24
+   dawalo 16 px rozjazdu przy 900-1100 px. Zmierzone na zywej stronie, ile
+   z boku zostawia sekcja z formularzem i ile sekcja z widgetem:
+     >1168 px : formularz 160, widget 0   -> max 1120, padding 0
+     641-1168 : formularz  40, widget 0   -> padding 40
+     <=640    : formularz  32, widget 10  -> padding 22 (32 - 10)
+   Gdyby systeme kiedys zmienil swoje rynny, te trzy liczby sa jedynym
+   miejscem do poprawienia. */
+.ak-pitch .akp-mout .akp-wrap { max-width: 1120px; padding-left: 0; padding-right: 0; }
+@media (max-width: 1168px) {
+  .ak-pitch .akp-mout .akp-wrap { padding-left: 40px; padding-right: 40px; }
+}
+@media (max-width: 640px) {
+  .ak-pitch .akp-mout .akp-wrap { padding-left: 22px; padding-right: 22px; }
+}
+
+@media (max-width: 1024px) {
+  .ak-pitch .akp-mag-hero { padding: 56px 40px; }
+  .ak-pitch .akp-mag-hero__grid { grid-template-columns: 1fr; gap: 48px; }
+  .ak-pitch .akp-mag-hero__media { max-width: 420px; }
+  .ak-pitch .akp-msec { padding-top: 80px; }
+  .ak-pitch .akp-msec--do-formularza { padding-bottom: 80px; }
+  .ak-pitch .akp-mout { padding: 80px 0; }
+}
+@media (max-width: 640px) {
+  .ak-pitch .akp-mag-hero { padding: 40px 24px; margin-top: 16px; }
+  .ak-pitch .akp-mag-hero__sub { margin-top: 32px; }
+}
