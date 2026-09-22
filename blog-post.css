@@ -1,0 +1,98 @@
+/* ============================================================================
+   WPIS BLOGOWY — paleta marki na szablonie systeme (2026-09-22)
+   ----------------------------------------------------------------------------
+   Stan przed: 102 naruszenia kanonu na szesciu wpisach, z czego 96 to byl
+   sam kolor tekstu. Szablon bloga jest jedynym miejscem w serwisie, ktore
+   nigdy nie dostalo palety marki:
+     tresc         rgb(31, 35, 38)   domyslna czern systeme
+     srodtytuly    rgb(2, 0, 0) i rgb(10, 10, 10)   ten drugi stylem INLINE
+     tytul wpisu   rgb(30, 48, 48)
+     data i linki  rgb(26, 73, 79)
+   Kanon dopuszcza rgb(45, 45, 45) i szesc innych wartosci — zadna z powyzszych
+   sie w nim nie miesci. Zmierzone _SOCIAL/_boks/kontrola.cjs, 2026-09-22.
+
+   HAK: `body.ak-blogpost` — klase dopina homepage-live.js dla sciezek
+   `/blog/<cokolwiek>`. Celujemy w TYPY blokow systeme (`blog-post_title-`,
+   `blog-post_date-`) i w nasze wlasne klasy `.akt`, nigdy w klasy
+   styled-components (`.sc-*`) — te sie przegenerowuja.
+
+   ⚠️ `!important` nie jest tu ozdoba: czesc srodtytulow ma kolor wpisany
+   w atrybucie `style`, a inline przegrywa wylacznie z `!important`.
+
+   Caly arkusz siedzi pod `body.ak-blogpost`, wiec mimo ze laduje sie
+   globalnie (przez @import w homepage-live.css), nie dotyka zadnej innej
+   strony — nieuzyte reguly po prostu nie pasuja.
+   ============================================================================ */
+
+/* ---- 1. Tresc wpisu -------------------------------------------------------
+   Wszystko, co nasz JS oznaczyl jako tekst WEWNATRZ sekcji tresci, idzie na Ink.
+
+   ⚠️ Zakres `#section-09d8892d` nie jest ostroznoscia na zapas. Pierwsza wersja
+   tej reguly obejmowala cala strone i przemalowala na Ink takze 15 elementow
+   kremowego tekstu w stopce (ciemny pas #2D2D2D) — tekst zniknalby z tla.
+   Kontrola tego NIE zlapie, bo Ink jest w palecie: to blad kontrastu, nie
+   palety. Stopka lezy poza `#section-09d8892d` i tu jej nie ruszamy. */
+body.ak-blogpost #section-09d8892d .akt,
+body.ak-blogpost #section-09d8892d .akt * {
+  color: var(--ak-ink) !important;
+}
+
+/* ---- 1b. Wyjatek: naglowek tabeli porownawczej ----------------------------
+   `.ak-cheat__table thead th` stoi na Forest — tekst w nim ma zostac kremowy.
+   To jedyny ciemny pas W SRODKU tresci wpisu (zmierzone na szesciu wpisach). */
+body.ak-blogpost #section-09d8892d thead .akt,
+body.ak-blogpost #section-09d8892d thead .akt * {
+  color: var(--ak-cream) !important;
+}
+
+/* ---- 2. Tytul wpisu -------------------------------------------------------
+   Forest, ten sam co naglowek listy `/blog` (`.ak-blog-h1`), zeby wpis i lista
+   otwieraly sie tym samym kolorem. Tytul siedzi w sekcji hero, nie w tresci. */
+body.ak-blogpost [id^="blog-post_title-"],
+body.ak-blogpost [id^="blog-post_title-"] * {
+  color: var(--ak-forest) !important;
+}
+
+/* ---- 3. Data --------------------------------------------------------------
+   Linia metryczna pod tytulem: 62% inku, jak podpisy w reszcie serwisu. */
+body.ak-blogpost [id^="blog-post_date-"],
+body.ak-blogpost [id^="blog-post_date-"] * {
+  color: var(--ak-ink-62) !important;
+}
+
+/* ---- 4. Linki w tresci ----------------------------------------------------
+   Terakota ciemna — 5.05:1 na kremie, ta sama wartosc co hover w nawigacji.
+   Tylko w tresci: linki stopki i paska nawigacji maja wlasne reguly i zostaja.
+   Specyficznosc bije regule 1, wiec linki wychodza z Inku. */
+body.ak-blogpost #section-09d8892d .akt a,
+body.ak-blogpost #section-09d8892d a.akt,
+body.ak-blogpost #section-09d8892d .akt a * {
+  color: var(--ak-terracotta-dark) !important;
+}
+body.ak-blogpost #section-09d8892d .akt a:hover,
+body.ak-blogpost #section-09d8892d a.akt:hover {
+  color: var(--ak-terracotta) !important;
+}
+
+/* ---- 5. Kontener tresci ---------------------------------------------------
+   Szablon wpisu ustawia wierszowi tresci `width: 1180px`, choc jego rodzic ma
+   1100 (sekcja 1120 minus 10 px paddingu z kazdej strony). Wiersz wystawal
+   po 40 px na obie strony i nie trafial w kanoniczne 1120. Ustawienie 1120
+   zamyka go rowno z krawedziami sekcji.
+
+   ⚠️ DWA ostrzezenia, oba wyjscia z realnych bledow przy tej regule:
+
+   1. `#section-09d8892d [id^="row-"]` (dowolny potomek) lapie TAKZE wiersze
+      zagniezdzone w kolumnach — te maja rodzicow po ~560 px, wiec 1120
+      wypychalo strone o 90 px w bok na kazdym wpisie. Dlatego scisla sciezka
+      `> * > * >`: wiersz zewnetrzny i tylko on.
+   2. Tylko od 1200 px. Ponizej systeme ma wlasna siatke responsywna,
+      a sztywne 1120 na telefonie zrobiloby to samo przewijanie.
+
+   Sciezka strukturalna, nie hash: gdyby systeme przebudowal szablon, regula
+   przestanie pasowac i wiersz wroci do 1180 — zamiast rozjechac uklad. */
+@media (min-width: 1200px) {
+  body.ak-blogpost #section-09d8892d > * > * > [id^="row-"] {
+    width: 1120px !important;
+  }
+}

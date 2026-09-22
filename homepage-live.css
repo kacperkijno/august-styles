@@ -11,6 +11,7 @@
 @import url("consulting.css");
 @import url("contact.css");
 @import url("pitching-home.css");
+@import url("blog-post.css");
 /* ⚠️ marquee.css bylo dotad wpinane osobnym <link> tylko na stronach,
    ktore maja pasek logotypow (/cultural-communication). Blok
    /pitching-home tez go ma, a ta strona laduje WYLACZNIE
@@ -128,6 +129,7 @@ body.ak-home {
   --ak-ink:         #2D2D2D;
   --ak-ink-10:      rgba(45, 45, 45, 0.10);
   --ak-ink-72:      rgba(45, 45, 45, 0.72);
+  --ak-ink-62:      rgba(45, 45, 45, 0.62);   /* podpisy, daty */
   --ak-ease:        cubic-bezier(0.2, 0.6, 0.2, 1);
   --ak-serif:       "AKCaslon", "AdobeCaslonPro42448745", Georgia, "Times New Roman", serif;
   --ak-sans:        "neue-haas-grotesk-display", "AKHaas", "NeueHaasDisplay-Roman42448762", "Helvetica Neue", system-ui, sans-serif;

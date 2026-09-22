@@ -16,6 +16,15 @@
     }
   }
 
+  /* Wpisy blogowe dostaja wlasny zakres: caly blog-post.css siedzi pod
+     `body.ak-blogpost`. Sciezka, nie zgadywanie po DOM — szablon wpisu jest
+     renderowany przez Reacta i w chwili startu skryptu bywa jeszcze pusty. */
+  function applyBlogPostClass() {
+    if (!document.body) return;
+    if (location.pathname.indexOf('/blog/') !== 0) return;
+    document.body.classList.add('ak-blogpost');
+  }
+
   /* --- 2. Course cards entrance reveal -------------------- */
   function initCardReveal() {
     var cards = document.querySelectorAll('#row-4332dc25 > div[size="4"] > div');
@@ -378,6 +387,7 @@
   /* --- Boot ---------------------------------------------- */
   function init() {
     applyHomeClass();
+    applyBlogPostClass();
     initCardReveal();
     initReveal();
     initHeaderScroll();
@@ -389,6 +399,7 @@
   }
 
   applyHomeClass(); // earliest possible, before paint where we can
+  applyBlogPostClass();
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
   } else {
@@ -1576,6 +1587,16 @@
         && odstepDoListy >= 0 && odstepDoListy <= 48
         && sekE && sekE.contains(n);
       if (!h && !listaPod) continue;
+      /* ⚠️ ETYKIETA NIE JEST LINKIEM. Warunek nizej przepuszcza wszystko,
+         co jest terakotowe — a od 2026-09-22 terakote maja takze linki
+         w tresci wpisow blogowych (blog-post.css, regula 4). Bez tego
+         wykluczenia link „ask about advisory work" na
+         /blog/high-context-vs-low-context-culture dostawal `akt-eyebrow`:
+         11 px wersalikami w srodku zdania, a kontrola mierzyla mu potem
+         rytm eyebrow i zglaszala 52 px zamiast 16. Klasyfikator ma nie
+         reagowac na kolor, ktory sami nalozylismy — sciezka `listaPod`
+         ma to samo wykluczenie od poczatku. */
+      if (e.closest('a')) continue;
       /* ⚠️ Kremowy kolor dopuszczamy WYLACZNIE dla etykiety kolumny. Inaczej
          podpisy pod liczbami na ciemnym pasie /about („companies & institutions
          engaged") tez staja sie wersalikami 11/500 — a to podpisy, nie etykiety. */
