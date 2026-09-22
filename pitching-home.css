@@ -600,9 +600,22 @@
      i to jest moment konwersji tej strony, wiec ja przywracamy.
      ⚠️ Wartosci wprost, nie zmienne — ta regula stoi POZA scope'em
      `.ak-pitch`, wiec `var(--p-cream-soft)` by sie tu nie rozwinal. */
-  background: #F3F0E7;
+  background: #F9F7F1;
   border-radius: 4px;
 }
+
+/* ⚠️ PAS POD FORMULARZ — UKLAD ODWROTNY NIZ SIE WYDAJE.
+   Na /cross-cultural-playbook sekcja formularza (`section-6a6c0d52`) jest
+   pasem KREMOWO-MIEKKIM na cala szerokosc, a karta w srodku jest KREMOWA.
+   Strony magnetowe mialy to na odwrot: kremowa strona i kremowo-miekki boks,
+   przez co formularz czytal sie jak jeden z wielu boksow, a nie jak osobna
+   scena. Dlatego wyzej karta dostaje krem, a sekcja tutaj krem miekki.
+   ⚠️ ID sekcji sa MLODE — powstaly 22.09, gdy formularz zostal przeniesiony
+   do wlasnej sekcji. Gdyby ktos przeniosl go jeszcze raz, te dwa selektory
+   trzeba bedzie zaktualizowac; `#row-74af0acf` przetrwalo przenosiny, ID
+   sekcji nie musi. */
+#section-c5efb47f,
+#section-c101c4fb { background: #F3F0E7; }
 
 /* ⚠️ KONTENER SEKCJI FORMULARZA — kanon to 1120, a po przebudowie wyszlo 1360.
    Kontroler bierze PIERWSZY `[id^="row-"]` w sekcji i porownuje z 1120
