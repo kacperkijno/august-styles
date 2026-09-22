@@ -1753,7 +1753,26 @@
                                                         leaders” to jeden naglowek w dwoch
                                                         wierszach — 48 rozrywalo go na dwa */
       var kart = nast.querySelectorAll ? nast.querySelectorAll('.aks-card').length : 0;
-      ustawOdstep(h, kart >= 2 ? Rh.siatka : Rh.tresc);
+      /* ⚠️ GDY PO NAGLOWKU ZACZYNA SIE NOWY BLOK, rozstrzyga „nad blokiem",
+         nie „pod naglowkiem". Kontroler mial te regule od poczatku
+         (`nowyBlok` w kontrola.cjs), pętla naglowkow w JS jej NIE miala
+         i bezwarunkowo ustawiala `tresc` — czyli nadpisywala to, co chwile
+         wczesniej ustawil `ustawOdstepNad` od strony eyebrowa. Dwie reguly
+         o ten sam odstep, wygrywala ta wykonana pozniej.
+         Ujawnilo sie na kartach metody w bloku /pitching-home: „01" i podpis
+         „STRUCTURED" mialy 12 px zamiast 24 na trzech stronach naraz. */
+      var nowyBlok = (nast.classList && nast.classList.contains('akt-eyebrow')) ||
+        (nast.querySelector && !!nast.querySelector('.akt-eyebrow'));
+      /* ⚠️ Sprawdzone OBA podejscia, kontrola 22 stron rozstrzygnela:
+         ustawienie `nadBlok` tutaj daje 82 naruszenia, samo POMINIECIE tego
+         odstepu (zostawienie go regule „nad blokiem") daje 98, a stan
+         wyjsciowy z bezwarunkowym `tresc` dawal 109. Wlasciwe jest wiec
+         ustawienie celu, nie zejscie z drogi.
+         ⚠️ Cena: na trzech stronach z wlasnymi arkuszami (/about `.akb-h2`,
+         /consulting `.akc-`, /pitching-decoded `.pdk-h2`) odstep urosl o ok.
+         16 px (70 -> 86), bo JS i kontroler mierza tam od roznych elementow
+         i zostaje staly offset ~22 px. Do osobnego podejscia. */
+      ustawOdstep(h, nowyBlok ? Rh.nadBlok : (kart >= 2 ? Rh.siatka : Rh.tresc));
     }
     /* Eyebrow dziedziczy wyrownanie po naglowku, ktory zapowiada — przebieg
        osobny i na koncu, bo naglowki dostaja swoje wyrownanie dopiero w petli

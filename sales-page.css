@@ -3342,8 +3342,25 @@ html body .akt-list.akt-list.akt-list > li strong, html body .akt-list.akt-list.
   color: var(--ak-ink, #2D2D2D) !important; font-weight:500 !important;
 }
 /* na ciemnym tle */
-html body .akt-list.akt-list--dark > li { color: rgba(249,247,241,.80) !important; }
-html body .akt-list.akt-list--dark > li strong { color:#F9F7F1 !important; }
+/* ⚠️ WARIANT NA CIEMNYM MUSI MIEC CO NAJMNIEJ TYLE SAMO KLAS CO BAZA.
+   Regula bazowa wyzej to `.akt-list.akt-list.akt-list > li` — trzy klasy,
+   specyficznosc (0,3,3). Wariant mial `.akt-list.akt-list--dark > li`, czyli
+   (0,2,3), wiec przy obu `!important` baza wygrywala specyficznoscia
+   i `--dark` NIGDY nie dzialal: lista na Forest dostawala Ink 72%, czyli
+   ciemny tekst na ciemnym tle. Wyszlo dopiero 22.09, gdy blok
+   /thanks stal sie pierwsza w serwisie lista na ciemnym tle.
+   Czwarta klasa zostawia zapas i zdejmuje zaleznosc od kolejnosci w pliku. */
+html body .akt-list.akt-list.akt-list.akt-list--dark > li { color: rgba(249,247,241,.80) !important; }
+html body .akt-list.akt-list.akt-list.akt-list--dark > li strong,
+html body .akt-list.akt-list.akt-list.akt-list--dark > li b { color:#F9F7F1 !important; }
+/* Punktor na ciemnym tez idzie na jasniejsza terakote — #9A5832 jest kolorem
+   tekstu na JASNYM tle, na Forest ma za maly kontrast. */
+html body .akt-list.akt-list.akt-list--dark.akt-list--check > li::before {
+  border-left-color: #D9A47A !important; border-bottom-color: #D9A47A !important;
+}
+html body .akt-list.akt-list.akt-list--dark.akt-list--x > li::before {
+  color: rgba(249,247,241,.62) !important;
+}
 /* ptaszek — korzysc */
 html body .akt-list.akt-list--check > li::before {
   content:"" !important; position:absolute !important; left:2px !important; top:8px !important;
