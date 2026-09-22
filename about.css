@@ -88,10 +88,10 @@
 .akb-hero__eyebrow{font-family:var(--sans);font-weight:400;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 20px;}
 .akb-hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,54px);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;margin:0 0 22px;}
 .akb-hero h1 em{font-style:italic;color:var(--terracotta-deco);}
-.akb-hero__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:rgba(249,247,241,.88);max-width:52ch;margin:0 0 30px;}
+.akb-hero__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:rgba(249,247,241,.8);max-width:52ch;margin:0 0 30px;}
 
 /* ---------- LOGO MARQUEE ---------- */
-.akb-marquee-sec{padding:60px 0 54px;background:var(--cream);overflow:hidden;}
+.akb-marquee-sec{padding:80px 0;background:var(--cream);overflow:hidden;}
 .akb-marquee-sec__label{display:block;text-align:center;font-family:var(--sans);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);margin:0 auto 36px;max-width:56ch;line-height:1.6;}
 .akb-mq{position:relative;width:100%;max-width:var(--container);margin-inline:auto;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);mask-image:linear-gradient(90deg,transparent 0,#000 6%,#000 94%,transparent 100%);}
 .akb-mq + .akb-mq{margin-top:22px;}
@@ -141,17 +141,25 @@
 
 /* ---------- MANIFESTO ---------- */
 .akb-manifesto{background:var(--cream-soft);text-align:center;padding-block:clamp(72px,11vw,128px);}
-.akb-manifesto blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.4vw,48px);line-height:1.16;color:var(--forest);margin:0 auto;max-width:30ch;}
+.akb-manifesto blockquote{font-family:var(--serif);font-style:italic;font-size:clamp(28px,4.4vw,40px);line-height:1.16;color:var(--forest);margin:0 auto;max-width:30ch;}
 .akb-manifesto blockquote em{color:var(--terracotta-dark);font-style:italic;}
 .akb-manifesto__sub{margin:26px auto 0;max-width:50ch;font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.6vw,18px);line-height:1.6;color:var(--ink-70);}
 .akb-manifesto__by{margin-top:30px;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-50);}
 
 /* ---------- SECTION HEAD ---------- */
-.akb-shead{max-width:60ch;margin-bottom:44px;}
+/* 24, nie 44: odstep pod naglowkiem sekcji wychodzil o 22 px za duzy
+   w OBU miejscach, gdzie ten wrapper stoi — „Who it's for" 86 zamiast 64
+   i „From founders" 70 zamiast 48. Zmierzone kontrola.cjs 22.09. */
+.akb-shead{max-width:60ch;margin-bottom:24px;}
 .akb-shead .akb-h2{max-width:24ch;}
 
 /* ---------- FOCUS AREAS ---------- */
-.akb-focus{display:grid;grid-template-columns:repeat(2,1fr);gap: 1px;background:var(--ink-10);border:1px solid var(--ink-10);border-radius:var(--radius-card);overflow:hidden;}
+/* Kreska siatki rysowana ramkami pozycji, nie tlem kontenera: ink-10 jest
+   w kanonie kolorem RAMKI, nie TLA, wiec `background:var(--ink-10)`
+   wypadalo z palety. Wyglad bez zmiany — ta sama kreska 1 px. */
+.akb-focus{display:grid;grid-template-columns:repeat(2,1fr);gap: 0;background:var(--cream);border:1px solid var(--ink-10);border-radius:var(--radius-card);overflow:hidden;}
+.akb-focus__item:nth-child(odd){border-right:1px solid var(--ink-10);}
+.akb-focus__item:not(:nth-last-child(-n+2)){border-bottom:1px solid var(--ink-10);}
 .akb-focus__item{background:var(--cream);padding:34px 32px;display:flex;gap: 24px;transition: background var(--ak-t-color) var(--ak-ease);}
 .akb-focus__item:hover{background:var(--cream-soft);}
 .akb-focus__num{font-family:var(--serif);font-size:40px;line-height:1;color:var(--terracotta-dark);font-style:italic;flex-shrink:0;min-width:1.4em;}
@@ -165,7 +173,9 @@
 .akb-engage__item:last-child{border-bottom:0;}
 .akb-engage__mark{flex-shrink:0;width:38px;height:38px;border-radius:50%;background:rgba(26,60,47,.06);color:var(--forest);display:flex;align-items:center;justify-content:center;}
 .akb-engage__item h3{font-family:var(--serif);font-size:19px;margin:4px 0 6px;color:var(--ink);}
-.akb-engage__item h3 span{color:var(--ink-50);font-style:italic;font-size:15px;}
+/* Podpis, nie naglowek: szeryfowy 15 px nie istnieje w skali (…24/21).
+   Bezszeryfowy 14 px to stopien podpisu w calym serwisie. */
+.akb-engage__item h3 span{color:var(--ink-50);font-family:var(--sans);font-style:normal;font-size:14px;}
 .akb-engage__item p{margin:0;color:var(--ink-70);line-height:1.5;max-width:54ch;}
 
 /* ---------- WHO IT'S FOR ---------- */
@@ -196,18 +206,18 @@
 .akb-start-card:hover{box-shadow: var(--ak-sh-lg);border-color:var(--forest-30);transform:translateY(-4px);}
 .akb-start-card__step{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--terracotta-dark);}
 .akb-start-card h3{font-family:var(--serif);font-size:24px;line-height:1.2;color:var(--ink);}
-.akb-start-card h3 span{color:var(--ink-50);font-size:15px;}
+.akb-start-card h3 span{color:var(--ink-50);font-family:var(--sans);font-size:14px;}
 .akb-start-card p{color:var(--ink-70);line-height:1.55;font-size:15px;}
 .akb-start-card__go{margin-top:auto;padding-top:6px;font-family:var(--sans);font-weight:500;font-size:13px;letter-spacing:.04em;color:var(--forest);display:inline-flex;align-items:center;gap: 8px;}
 .akb-start-card__go .akb-arrow{transition: transform var(--ak-t-move) var(--ak-ease);}
 .akb-start-card:hover .akb-start-card__go .akb-arrow{transform:translateX(4px);}
 
 /* ---------- NEWSLETTER (same systeme form as the footer) ---------- */
-.akb-news{background:var(--forest);color:var(--cream);padding-block:clamp(56px,8vw,84px);}
+.akb-news{background:var(--forest);color:var(--cream);padding-block:clamp(40px,8vw,80px);}
 .akb-news__grid{display:grid;grid-template-columns:1.05fr 1fr;gap: clamp(24px,5vw,48px);align-items:center;}
 .akb-news__eyebrow{display:inline-block;font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 16px;}
 .akb-news h2{font-family:var(--serif);font-style:italic;font-size:clamp(28px,3.4vw,40px);line-height:1.1;color:var(--cream);margin:0 0 14px;}
-.akb-news__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.55;color:rgba(249,247,241,.78);max-width:44ch;margin:0;}
+.akb-news__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.55;color:rgba(249,247,241,.8);max-width:44ch;margin:0;}
 .akb-news__form{width:100%;}
 .akb-news__form iframe{display:block;width:100%;height:74px;border:0;background:transparent;}
 

@@ -1938,6 +1938,20 @@
       var docs = dokumenty();
       for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); kropki(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
       for (i = 0; i < docs.length; i++) { kolory(docs[i]); rytm(docs[i]); }   /* na koncu: rytm potrzebuje ulozonego ukladu */
+      /* ⚠️ RYTM MUSI SIE ZBIEC, JEDEN PRZEBIEG NIE WYSTARCZY. Korekty w obrebie
+         jednego przebiegu unieważniają się nawzajem: `ustawOdstepNad` poprawia
+         odstep NAD naglowkiem, przez co naglowek jedzie w gore — a odstep POD
+         nim zostal policzony z prostokatow sprzed tego przesuniecia i zapisany
+         jako margines na stale. Zmierzone 22.09 na /about: „Who it's for"
+         jechalo w gore o 22 px, wiec margines 86 px dawal odstep 86 zamiast 64.
+         Ten sam mechanizm dawal na / 80 zamiast 64 i 60 zamiast 48, a na
+         /about 70 zamiast 48 — zawsze WIECEJ niz kanon, nigdy mniej, bo
+         korekta nad blokiem zawsze skraca to, co nad nim.
+         `ustawOdstep` wychodzi przy roznicy < 3 px, wiec kolejne przebiegi sa
+         bezpieczne i same sie zatrzymuja. */
+      for (var powt = 0; powt < 2; powt++) {
+        for (i = 0; i < docs.length; i++) rytm(docs[i]);
+      }
       sekcje();
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');
