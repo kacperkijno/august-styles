@@ -588,6 +588,26 @@
   border-radius: 4px;
 }
 
+/* ⚠️ KONTENER SEKCJI FORMULARZA — kanon to 1120, a po przebudowie wyszlo 1360.
+   Kontroler bierze PIERWSZY `[id^="row-"]` w sekcji i porownuje z 1120
+   (`_boks/kontrola.cjs`, regula „kontener"). Wiersz nadrzedny formularza nie
+   ma wlasnego max-width i rozciaga sie na `okno minus 80`, wiec przy 1440 px
+   ma 1360 i lamie kanon, ktory trzyma nawigacja, stopka i oba nasze bloki.
+   `#row-785e6d19` jest tym wierszem na /blueprint, `#row-79845572` na
+   /pitch-diagnostic — po przebudowie kazda strona ma swoj.
+   ⚠️ Padding zdejmujemy TYLKO na /pitch-diagnostic: tam wiersz nadrzedny ma
+   10 px z boku, przez co formularz wychodzil 1100 zamiast 1120. Na /blueprint
+   tego paddingu nie ma, a przy waskim oknie odpowiada on za rowna rynne
+   z blokami, wiec go nie ruszamy. */
+#row-785e6d19,
+#row-79845572 {
+  max-width: 1120px;
+  margin-left: auto;
+  margin-right: auto;
+  justify-self: center;
+}
+#row-79845572 { padding-left: 0; padding-right: 0; }
+
 /* --- HERO magnetu: wstawiony boks Sage ------------------------------------ */
 .ak-pitch .akp-mag-hero {
   background: var(--p-sage);
