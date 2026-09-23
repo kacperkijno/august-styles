@@ -1408,6 +1408,14 @@
     }
     return null;
   }
+  /* Wiersz zawierajacy duza cyfre porzadkowa (112/88 px, sama liczba) jest
+     kompozycja dwukolumnowa — rytm nalezy do niej, nie do sekcji. */
+  function wRamceKompozycji(e) {
+    var w = e.closest ? e.closest('[id^="row-"]') : null; if (!w) return false;
+    var l = w.querySelectorAll('[class*="akt-h112"], [class*="akt-h88"]');
+    for (var i = 0; i < l.length; i++) if (/^\d{1,2}$/.test((l[i].textContent || '').trim())) return true;
+    return false;
+  }
   function przytulony(e) {          /* najwyzszy przodek oplywajacy element co do piksela */
     var r = e.getBoundingClientRect(), w = e, i = 0;
     while (w.parentElement && i++ < 4) {
@@ -1453,7 +1461,35 @@
       return;
     }
     var maja = parseFloat(gcs(nosnik).marginBottom) || 0;
-    nosnik.style.setProperty('margin-bottom', Math.max(0, Math.round(maja + roznica)) + 'px', 'important');
+    var chciane = Math.round(maja + roznica);
+    nosnik.style.setProperty('margin-bottom', Math.max(0, chciane) + 'px', 'important');
+    /* ⚠️ MARGINES NIE SCHODZI PONIZEJ ZERA. Gdy odstep trzeba SKROCIC bardziej,
+       niz wynosi wlasny margines nosnika, zapis przycina sie do zera i reszta
+       zostaje — a nastepny przebieg liczy dokladnie to samo i znow przycina.
+       Zmierzone 22.09 na `/`: „for serious leaders" chcialo -16 px, a „From
+       founders" -12 px, w kolko, przy marginesie juz rownym 0. Reszta
+       odstepu siedzi po DRUGIEJ stronie — w gornym marginesie nastepnego
+       bloku — i stamtad trzeba ja zdjac. */
+    if (chciane < 0 && gcs(nast).display !== 'inline') {
+      var majaG = parseFloat(gcs(nast).marginTop) || 0;
+      nast.style.setProperty('margin-top', Math.max(0, Math.round(majaG + chciane)) + 'px', 'important');
+    }
+    /* ⚠️ SPRAWDZ, CZY ZAPIS ZADZIALAL. Margines nie zawsze przeklada sie
+       na odstep 1:1 — miedzy naglowkiem a nastepnym blokiem stoi zwykle
+       owijka sekcji, wiec marginesy sie SKLEJAJA i wygrywa wiekszy z nich.
+       Zdarza sie tez, ze uklad w ogole nie reaguje. Zmierzone 22.09:
+       „Who it's for" na /about, „Seven parts…" na /pitching-decoded
+       i „for serious leaders" na / mialy odstep wiekszy od kanonu
+       o 12-26 px MIMO poprawnie policzonej korekty, bo zapis opieral sie
+       o prostokaty sprzed przesuniecia zrobionego wczesniej w tym samym
+       przebiegu. Jedno domkniecie wystarcza; gdy i ono nie pomoze,
+       odstepu nie da sie ustawic marginesem i probowanie dalej tylko
+       rozchwialoby uklad. */
+    var teraz = nast.getBoundingClientRect().top - od.getBoundingClientRect().bottom;
+    var zostalo = docelowy - teraz;
+    if (Math.abs(zostalo) < 3 || Math.abs(zostalo) > 200) return;
+    var poprawiony = parseFloat(gcs(nosnik).marginBottom) || 0;
+    nosnik.style.setProperty('margin-bottom', Math.max(0, Math.round(poprawiony + zostalo)) + 'px', 'important');
   }
 
   /* Odstep NAD elementem ustawiamy przez margines elementu POPRZEDNIEGO —
@@ -1696,6 +1732,16 @@
               dziesiec rownorzednych napisow zamiast pieciu par.
          Rytm i kolor tej kompozycji naleza do jej wlasnego arkusza. */
       if (e.closest('.pdk-spec, [class*="-spec"], [class*="-stat"]')) continue;
+      /* ⚠️ WIERSZ Z DUZA CYFRA PORZADKOWA TO ZAMKNIETA KOMPOZYCJA. Sekcja
+         Framework na `/`: po lewej „01" w 112 px i naglowek, po prawej
+         etykieta przypieta do gory wiersza oraz akapit wyrownany do tego
+         naglowka. Odstep etykieta->akapit (212 px, w trzecim wierszu 174)
+         jest wynikiem WYROWNANIA KOLUMN, nie rytmu. Silnik probowal go
+         sciagnac do 16 px, czyli wpisac margines -196 px; `ustawOdstep`
+         przycina do zera, wiec efektem byl margines 0 na elemencie, ktory
+         wczesniej mial swoj wlasny. ⭐ Decyzja Kacpra 22.09: uklad zostaje.
+         Ta sama regula siedzi w kontrola.cjs (`wRamce`). */
+      if (wRamceKompozycji(e)) continue;
       var wlasne = gcs(e).backgroundColor;
       var pod = przezr(wlasne) ? tloPod(e.parentElement || e) : wlasne;
       var m = (pod || '').match(/\d+/g);
@@ -1938,6 +1984,20 @@
       var docs = dokumenty();
       for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); kropki(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
       for (i = 0; i < docs.length; i++) { kolory(docs[i]); rytm(docs[i]); }   /* na koncu: rytm potrzebuje ulozonego ukladu */
+      /* ⚠️ RYTM MUSI SIE ZBIEC, JEDEN PRZEBIEG NIE WYSTARCZY. Korekty w obrebie
+         jednego przebiegu unieważniają się nawzajem: `ustawOdstepNad` poprawia
+         odstep NAD naglowkiem, przez co naglowek jedzie w gore — a odstep POD
+         nim zostal policzony z prostokatow sprzed tego przesuniecia i zapisany
+         jako margines na stale. Zmierzone 22.09 na /about: „Who it's for"
+         jechalo w gore o 22 px, wiec margines 86 px dawal odstep 86 zamiast 64.
+         Ten sam mechanizm dawal na / 80 zamiast 64 i 60 zamiast 48, a na
+         /about 70 zamiast 48 — zawsze WIECEJ niz kanon, nigdy mniej, bo
+         korekta nad blokiem zawsze skraca to, co nad nim.
+         `ustawOdstep` wychodzi przy roznicy < 3 px, wiec kolejne przebiegi sa
+         bezpieczne i same sie zatrzymuja. */
+      for (var powt = 0; powt < 2; powt++) {
+        for (i = 0; i < docs.length; i++) rytm(docs[i]);
+      }
       sekcje();
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');
@@ -1955,6 +2015,13 @@
     if (document.readyState !== 'complete') window.addEventListener('load', function () { setTimeout(przebieg, 200); });
     setTimeout(przebieg, 900);
     setTimeout(przebieg, 2600);
+    /* ⚠️ PRZEBIEG PO USTANIU PRZEJSC. Zapis marginesu nie zmienia ukladu
+       natychmiast: elementy maja przejscia (0.18-0.6 s), wiec prostokaty
+       ustawiaja sie dopiero po nich. Przebieg o 2600 ms konczyl sie z
+       roznica 0, a odstep dojezdzal do koncowej wartosci ~400 ms pozniej
+       i nikt juz tego nie mierzyl. Zmierzone 22.09 na /about: „Who it's for"
+       rosloo z 64 do 86 px miedzy 1,8 a 2,7 s. Czwarty przebieg domyka. */
+    setTimeout(przebieg, 4200);
     /* siatka bezpieczenstwa: nic nie zostaje niewidoczne, nawet gdy scroll nie padnie */
     setTimeout(function () { while (czekaja.length) odsloniec(czekaja.pop()); }, 5000);
   }

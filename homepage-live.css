@@ -246,7 +246,8 @@ html body.ak-home .ak-reveal.ak-in {
 /* Subhead (Ink → cream) */
 #section-e8a2d9b7 #text-0ba2b9c9,
 #section-e8a2d9b7 #text-0ba2b9c9 * {
-  color: rgba(249, 247, 241, 0.88) !important;
+  /* 0.8, nie 0.88: paleta ma krem pelny i krem 80%, nic pomiedzy */
+  color: rgba(249, 247, 241, 0.8) !important;
 }
 
 /* CTA cluster: tighten the gap between the two hero buttons.
@@ -268,8 +269,10 @@ body.ak-home #row-e6badb36 > div[size] {
    styled like index .hero__tertiary (arrow + subtle underline). */
 #section-e8a2d9b7 #text-3f555439,
 #section-e8a2d9b7 #text-3f555439 * {
-  color: rgba(249, 247, 241, 0.82) !important;
+  /* 0.8, nie 0.82 — jak wyzej */
+  color: rgba(249, 247, 241, 0.8) !important;
 }
+
 #section-e8a2d9b7 #text-3f555439 a {
   display: inline-flex !important;
   align-items: center !important;
@@ -302,7 +305,8 @@ body.ak-home #row-e6badb36 > div[size] {
   color: #F9F7F1 !important;
 }
 #section-e8a2d9b7 #text-f5bd235c span {
-  color: rgba(249, 247, 241, 0.70) !important;
+  /* 0.8, nie 0.70: paleta ma krem pelny i krem 80%, nic pomiedzy */
+  color: rgba(249, 247, 241, 0.8) !important;
 }
 
 /* --- 6. Mobile: shift focus + vertical gradient ------------ */
