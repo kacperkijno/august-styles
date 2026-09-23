@@ -2268,3 +2268,31 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* ============================================================================
+   KOTWICE POD PRZYKLEJONYM MENU (2026-09-23)
+   Linki „terms and conditions" z checkoutow prowadza na /legal-pages#terms,
+   a przyciski sekcji ksiazki na /pitching-decoded#look-inside. Zmierzone po
+   wejsciu: naglowek celu stal 0, -54 i 12 px od gory, czyli POD menu —
+   `scroll-margin-top` z bloku nie dzialal, bo przewija inny kontener
+   i uklad jeszcze sie ustawia. Dosuwamy cel na 96 px od gory, ale tylko gdy
+   naprawde siedzi pod menu, i tylko tuz po wejsciu albo zmianie kotwicy —
+   nie walczymy z przewijaniem czytelnika.
+   ============================================================================ */
+(function () {
+  var ODSTEP = 96;
+  function dosun() {
+    var h = '';
+    try { h = decodeURIComponent((location.hash || '').slice(1)); } catch (e) { return; }
+    if (!h) return;
+    var t = document.getElementById(h); if (!t) return;
+    var top = t.getBoundingClientRect().top;
+    if (top >= ODSTEP - 16 && top <= window.innerHeight * 0.6) return;
+    try { window.scrollTo({ top: window.pageYOffset + top - ODSTEP, behavior: 'instant' }); }
+    catch (e) { window.scrollTo(0, window.pageYOffset + top - ODSTEP); }
+  }
+  function start() { setTimeout(dosun, 400); setTimeout(dosun, 1500); }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
+  window.addEventListener('hashchange', function () { setTimeout(dosun, 60); });
+})();
