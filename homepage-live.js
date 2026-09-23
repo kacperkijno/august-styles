@@ -1558,6 +1558,14 @@
       if (pomijamy(e)) continue;
       var t = (e.textContent || '').trim();
       if (!t || /[.!?:]$/.test(t)) continue;
+      /* ⚠️ WYROZNIENIE W SRODKU ZDANIA NIE JEST ETYKIETA. Na glownej, w sekcji
+         ksiazki (23.09), ostatni punkt listy „How to pitch <b>across
+         cultures</b>, with…" ma pod soba dwa przyciski — sciezka `listaPod`
+         (ciemne tlo + >=2 linki ponizej) robila z pogrubienia eyebrow 11 px
+         wersalikami i dokladala 64 px nad nim. Etykieta stoi SAMA: jesli
+         rodzic ma poza nia jeszcze tekst, to jest fragment zdania. */
+      var rodzicT = e.parentElement ? (e.parentElement.textContent || '').trim() : '';
+      if (rodzicT.length > t.length + 1 && gcs(e).display === 'inline') continue;
       /* ⚠️ Linia META nad H1 tez jest eyebrowem hero, choc jest dluzsza niz
          etykieta sekcji. Na /cultural-communication „A practical course ·
          Japan & U.S. negotiation · 40 years in practice" ma 72 znaki
