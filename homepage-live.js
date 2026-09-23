@@ -1891,6 +1891,57 @@
         try { eb.style.setProperty('text-align', an, 'important'); } catch (err) { }
     }
 
+    /* ⚠️ KARTY W JEDNYM RZEDZIE DECYDUJA WSPOLNIE. Wyrownanie wyzej pyta
+       KAZDY naglowek osobno o jego wlasna geometrie, a w karcie geometria
+       zalezy od dlugosci tekstu: „Mindset" miesci sie w jednym wierszu
+       i wychodzi na lewa krawedz, „Preparation" lamie sie inaczej i
+       wygladalo na wysrodkowane. Efekt: w jednym rzedzie kart czesc
+       tytulow do lewej, czesc na srodku. Zgloszone 23.09 na
+       /pitching-decoded (.pdk-part, .pdk-case) — i wystepowalo tam
+       ZANIM dolozylismy domykanie rytmu, wiec to blad heurystyki,
+       nie przebiegow.
+       Karty to jeden obiekt powtorzony, wiec decyzje podejmujemy raz na
+       rzad i narzucamy wszystkim: wygrywa wariant czestszy, a przy remisie
+       lewa, bo tak stoi tresc pod spodem. */
+    (function ujednolicKarty() {
+      /* ⚠️ W KARCIE ETYKIETA, TYTUL I TRESC TO JEDNA KOMPOZYCJA — maja stac
+         na jednej osi. Wyrownanie wyzej pyta KAZDY element osobno o jego
+         wlasna geometrie, a ta w karcie zalezy od dlugosci tekstu: w jednym
+         rzedzie `.pdk-part` „Part one" i „Part four" wychodzily do lewej,
+         a „Part two" i „Part three" na srodek — razem z tytulami pod nimi.
+         Zgloszone 23.09 na /pitching-decoded; wystepowalo tam ZANIM
+         dolozylismy domykanie rytmu, wiec to blad heurystyki, nie przebiegow.
+
+         ⚠️ Punktem odniesienia jest AKAPIT, nie etykieta. Etykieta bywa sama
+         przestawiona przez te sama heurystyke (zmierzone: `.akt-eyebrow`
+         dostawal inline `text-align: center`), wiec isc za nia znaczy
+         powielic blad. Akapitu silnik nie rusza, a karta i tak ma
+         `text-align: left`. */
+      var karty = root.querySelectorAll('.aks-card, .pdk-part, .pdk-case, .pdk-numcard');
+      for (var k = 0; k < karty.length; k++) {
+        var c = karty[k];
+        var h = c.querySelector('h3, [class*="akt-h"], .akt-serif');
+        var eb = c.querySelector('.akt-eyebrow');
+        if (!h && !eb) continue;
+        var ref = null, pp = c.querySelectorAll('p, .akt-sans');
+        for (var q = 0; q < pp.length; q++) {
+          var kand = pp[q];
+          if (kand === h || kand === eb) continue;
+          if (h && h.contains(kand)) continue;
+          if (eb && eb.contains(kand)) continue;
+          if ((kand.textContent || '').trim().length < 12) continue;
+          ref = kand; break;
+        }
+        var cel = gcs(ref || c).textAlign;
+        if (cel === 'start' || cel === 'justify' || !cel) cel = 'left';
+        if (cel !== 'left' && cel !== 'center' && cel !== 'right') continue;
+        [h, eb].forEach(function (el) {
+          if (!el || gcs(el).textAlign === cel) return;
+          try { el.style.setProperty('text-align', cel, 'important'); } catch (e2) { }
+        });
+      }
+    })();
+
     /* akapit wprowadzajacy -> przycisk: w hero mierzylo sie od 30 do 1036 px */
     l = root.querySelectorAll('.akt.akt-t20');
     for (i = 0; i < l.length; i++) {
@@ -1979,7 +2030,16 @@
     for (var i = 0; i < l.length; i++) { try { if (l[i].contentDocument && l[i].contentDocument.body) d.push(l[i].contentDocument); } catch (e) { } }
     return d;
   }
-  function przebieg() {
+  /* ⚠️ `pozno` = przebieg domykajacy, 4 s po wejsciu. Robi wszystko poza
+     jedna rzecza, ktorej o tej porze robic NIE WOLNO: nie zbiera od nowa
+     wejsc. Czytelnik juz patrzy na strone, a ponowne zebranie dawalo
+     „animacje raz sa, raz nie" — zgloszone 23.09.
+     Reszte (powierzchnie, rytm sekcji, odstepy, wyrownanie) robi normalnie
+     i wlasnie po nia ten przebieg istnieje: bez niego /about wracalo
+     z 0 na 4 naruszenia, a /pitching-home z 0 na 3. Wyrownanie MUSI sie
+     powtarzac razem z odstepami — zmienia lamanie tekstu, a wiec wysokosci,
+     a wiec odstepy. */
+  function przebieg(pozno) {
     try {
       var docs = dokumenty();
       for (var i = 0; i < docs.length; i++) { klasyfikuj(docs[i]); tla(docs[i]); kropki(docs[i]); rzedy(docs[i]); ruch(docs[i]); }
@@ -2002,7 +2062,7 @@
       if (reduce) {
         var l = document.querySelectorAll('.aks-rise');
         for (i = 0; i < l.length; i++) { l[i].classList.remove('aks-rise'); l[i].classList.add('aks-done'); }
-      } else {
+      } else if (!pozno) {
         for (i = 0; i < docs.length; i++) zbierzWejscia(docs[i]);
         odsloniecWidoczne();
       }
@@ -2015,13 +2075,17 @@
     if (document.readyState !== 'complete') window.addEventListener('load', function () { setTimeout(przebieg, 200); });
     setTimeout(przebieg, 900);
     setTimeout(przebieg, 2600);
-    /* ⚠️ PRZEBIEG PO USTANIU PRZEJSC. Zapis marginesu nie zmienia ukladu
-       natychmiast: elementy maja przejscia (0.18-0.6 s), wiec prostokaty
-       ustawiaja sie dopiero po nich. Przebieg o 2600 ms konczyl sie z
-       roznica 0, a odstep dojezdzal do koncowej wartosci ~400 ms pozniej
-       i nikt juz tego nie mierzyl. Zmierzone 22.09 na /about: „Who it's for"
-       rosloo z 64 do 86 px miedzy 1,8 a 2,7 s. Czwarty przebieg domyka. */
-    setTimeout(przebieg, 4200);
+    /* ⚠️ DOMKNIECIE PO USTANIU PRZEJSC — SAME ODSTEPY, nic wiecej.
+       Zapis marginesu nie zmienia ukladu natychmiast: elementy maja
+       przejscia (0.18-0.6 s), wiec prostokaty ustawiaja sie dopiero po
+       nich. Przebieg o 2600 ms konczyl sie z roznica 0, a odstep dojezdzal
+       ~400 ms pozniej i nikt juz tego nie mierzyl (/about „Who it's for"
+       rosl z 64 do 86 px miedzy 1,8 a 2,7 s).
+       ⚠️ To NIE moze byc pelny `przebieg`. Pelny przebieg zbiera od nowa
+       wejscia i przelicza wyrownania, a 4 s po wejsciu czytelnik juz patrzy
+       na strone: zgloszone 23.09 jako „animacje raz sa, raz nie" i tytuly
+       kart raz do lewej, raz na srodku. */
+    setTimeout(function () { przebieg(true); }, 4200);
     /* siatka bezpieczenstwa: nic nie zostaje niewidoczne, nawet gdy scroll nie padnie */
     setTimeout(function () { while (czekaja.length) odsloniec(czekaja.pop()); }, 5000);
   }
