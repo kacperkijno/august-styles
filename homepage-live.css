@@ -3879,5 +3879,10 @@ html body .ak-book .pdk-spec {
    (pasek przewijania = pozioma belka, patrz pitching-home.css).
    `:has()` zamiast ID sekcji: ID nadaje systeme przy kopiowaniu.
    ============================================================================ */
-[id^="section-"]:has(> * #book),
 [id^="section-"]:has(#book) { background: rgb(26, 60, 47) !important; }
+/* Kontener tresci systeme (1120 px) ma wlasne kremowe tlo, a wiersz 10 px
+   paddingu — razem dawaly dwa jasne paski po bokach ciemnego pasa. */
+[id^="section-"]:has(#book) [class*="sc-"],
+[id^="section-"]:has(#book) [id^="row-"],
+[id^="section-"]:has(#book) #book { background: transparent !important; }
+[id^="section-"]:has(#book) [id^="row-"] { padding: 0 !important; }
