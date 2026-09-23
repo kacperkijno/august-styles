@@ -1150,7 +1150,9 @@ html body.ak-sales-page #text-946dd6f9 {
 }
 html body.ak-sales-page #text-946dd6f9 p {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
-  font-size: clamp(32px, 4vw, 48px) !important;
+  /* 40, nie 48: skala szeryfowa ma 54 i 40, nic pomiedzy. To naglowek
+     sekcji na stronie podziekowania, wiec stopien H2. */
+  font-size: clamp(32px, 4vw, 40px) !important;
   line-height: 1.12 !important;
   letter-spacing: -0.01em !important;
   color: var(--ak-forest) !important;
@@ -1670,7 +1672,8 @@ html body.ak-sales-page #section-89f347ed input:focus {
 
 /* ----- Form consent fine print ----- */
 html body.ak-sales-page #text-c51f54be * {
-  font-size: 12.5px !important;
+  /* 12, nie 12.5: skala bezszeryfowa to 20/16/14/12 */
+  font-size: 12px !important;
   color: var(--ak-ink-62) !important;
 }
 
@@ -1684,7 +1687,8 @@ html body.ak-sales-page #text-2c00acfc * {
   letter-spacing: 0.18em !important;
   text-transform: uppercase !important;
   font-weight: 500 !important;
-  font-size: 12px !important;
+  /* 11, nie 12: kanon eyebrow to 11 px / waga 500 / swiatlo 0.18em */
+  font-size: 11px !important;
 }
 
 /* ----- /cultural-communication section eyebrows (rebuilt page, new IDs).
@@ -1944,7 +1948,9 @@ html body.ak-sales-page #text-0eeae616 {
 }
 html body.ak-sales-page #text-0eeae616 p {
   font-family: "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
-  font-size: clamp(32px, 4vw, 48px) !important;
+  /* 40, nie 48: skala szeryfowa ma 54 i 40, nic pomiedzy. To naglowek
+     sekcji na stronie podziekowania, wiec stopien H2. */
+  font-size: clamp(32px, 4vw, 40px) !important;
   line-height: 1.12 !important;
   letter-spacing: -0.01em !important;
   color: var(--ak-forest) !important;

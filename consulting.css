@@ -84,8 +84,8 @@ src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regula
 .akc-hero__eyebrow{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--terracotta-deco);margin:0 0 20px;}
 .akc-hero h1{font-family:var(--serif);font-size:clamp(36px,5vw,54px);line-height:1.05;letter-spacing:-.015em;text-wrap:balance;margin:0 0 22px;}
 .akc-hero h1 em{font-style:italic;color:var(--terracotta-deco);}
-.akc-hero__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:rgba(249,247,241,.88);max-width:54ch;margin:0 0 30px;}
-.akc-hero__note{margin:18px 0 0;font-size:13px;color:rgba(249,247,241,.62);max-width:44ch;}
+.akc-hero__sub{font-family:var(--sans);font-weight:400;font-size:clamp(15px,1.5vw,17px);line-height:1.6;color:rgba(249,247,241,.8);max-width:54ch;margin:0 0 30px;}
+.akc-hero__note{margin:18px 0 0;font-size:13px;color:rgba(249,247,241,.8);max-width:44ch;}
 
 /* ---------- WHO THIS IS FOR ---------- */
 .akc-who-grid{display:grid;grid-template-columns:5fr 7fr;gap: clamp(32px,5vw,64px);align-items:start;}
@@ -98,7 +98,11 @@ src:url("https://kacperkijno.github.io/august-styles/fonts/AdobeCaslonPro-Regula
 .akc-card__kicker{font-family:var(--sans);font-weight:500;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--forest);margin:0 0 24px;}
 
 /* ---------- WHAT YOU GET (numbered grid) ---------- */
-.akc-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap: 1px;background:var(--ink-10);border:1px solid var(--ink-10);border-radius:var(--radius-card);overflow:hidden;}
+/* Kreska siatki rysowana ramkami komorek, nie tlem kontenera: ink-10 jest
+   w kanonie kolorem RAMKI, nie TLA. Ta sama zmiana co w .akb-focus. */
+.akc-grid2{display:grid;grid-template-columns:repeat(2,1fr);gap: 0;background:var(--cream);border:1px solid var(--ink-10);border-radius:var(--radius-card);overflow:hidden;}
+.akc-cell:nth-child(odd){border-right:1px solid var(--ink-10);}
+.akc-cell:not(:nth-last-child(-n+2)){border-bottom:1px solid var(--ink-10);}
 .akc-cell{background:var(--cream);padding:34px 32px;display:flex;gap: 24px;transition: background var(--ak-t-color) var(--ak-ease);}
 .akc-cell:hover{background:var(--cream-soft);}
 .akc-cell__num{font-family:var(--serif);font-size:40px;line-height:1;color:var(--terracotta-dark);font-style:italic;flex-shrink:0;min-width:1.6em;}

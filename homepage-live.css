@@ -1736,10 +1736,10 @@ html body.ak-home #text-60486913#text-60486913, html body.ak-home #text-60486913
 #section-ba1fb6ee .ak-price{font-family:var(--akx-serif) !important; font-size:54px !important; line-height:1 !important; font-weight:400 !important; color:var(--akx-terra-dark) !important; text-align:center !important; margin:0 0 8px !important;}
 #section-ba1fb6ee .ak-meta{font-family:var(--akx-sans) !important; font-size:14px !important; line-height:1.45 !important; font-weight:400 !important; color:var(--akx-forest) !important; text-align:center !important; margin:0 0 24px !important;}
 #section-ba1fb6ee .ak-meta .sep{color:rgba(45,45,45,.5);}
-#section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; font-weight:400 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:0 0 32px !important;}
+#section-ba1fb6ee .ak-desc{font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; font-weight:400 !important; color:rgba(45,45,45,.72) !important; text-align:left !important; margin:0 0 32px !important;}
 #section-ba1fb6ee .ak-hr{border:0; border-top:1px solid var(--akx-hr); margin:0; height:0;}
 #section-ba1fb6ee .ak-list{list-style:none; margin:32px 0 32px !important; padding:0; text-align:left !important;}
-#section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; color:rgba(45,45,45,.7) !important; text-align:left !important; margin:0 0 16px;}
+#section-ba1fb6ee .ak-list li{display:flex; align-items:flex-start; font-family:var(--akx-sans) !important; font-size:16px !important; line-height:1.55 !important; color:rgba(45,45,45,.72) !important; text-align:left !important; margin:0 0 16px;}
 #section-ba1fb6ee .ak-list li:last-child{margin-bottom:0;}
 #section-ba1fb6ee .ak-check{flex:0 0 auto; width:14px; height:20px; margin-right:10px; display:inline-flex; align-items:center; color:var(--akx-terra-dark);}
 #section-ba1fb6ee .ak-check svg{width:13px; height:13px; display:block;}
@@ -1866,7 +1866,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
 
 /* excerpt → muted ink, 3-line clamp */
 .carousel-ui div:has(> a > img) p{
-  font-size:16px !important; line-height:1.65 !important; color:rgba(45,45,45,.7) !important; margin-top:12px !important;
+  font-size:16px !important; line-height:1.65 !important; color:rgba(45,45,45,.72) !important; margin-top:12px !important;
   display:-webkit-box !important; -webkit-line-clamp:3 !important; -webkit-box-orient:vertical !important; overflow:hidden !important;
 }
 
@@ -2808,6 +2808,19 @@ html body .ak-book .pdk-h2, html body .ak-book .pdk-h2 * {
   font-size: 40px !important;
   line-height: 1.2 !important;
 }
+/* pas cytatu 150/150 -> 128/128; kanon rytmu sekcji to 128/80/40 */
+html body .ak-book .pdk-band {
+  padding-top: 128px !important;
+  padding-bottom: 128px !important;
+}
+/* krem 84% i 60% -> 80%; paleta zna krem pelny i krem 80%, nic pomiedzy */
+html body .ak-book .pdk-hero__sub,
+html body .ak-book .pdk-hero__sub *,
+html body .ak-book .pdk-sticky__txt,
+html body .ak-book .pdk-sticky__txt * {
+  color: rgba(249, 247, 241, 0.8) !important;
+}
+
 /* liczby w kartach 44 -> 40, podtytuly 26/27/22 -> 24, spec 38 -> 36 */
 html body .ak-book .pdk-numcard b, html body .ak-book .pdk-wrap blockquote {
   font-size: 40px !important;
