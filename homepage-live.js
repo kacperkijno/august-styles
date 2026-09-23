@@ -2172,3 +2172,59 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* ============================================================================
+   DANE STRUKTURALNE — FAQPage (2026-09-23)
+   Pozycja #5 z audytu spojnosci (_REPORTS/11-AUDYT-SPOJNOSCI.html).
+
+   ⚠️ Pozycji #11 („szesc ikon bez opisu") NIE naprawiamy, bo nie istnieje.
+   Zrodlo strony mowi `<img class="akp-inc__icon" alt="" …>` — pusty `alt`
+   to WLASCIWY zapis obrazka dekoracyjnego, czytnik ekranu go pomija.
+   Detektor audytu (i moj pierwszy) sprawdzal `!el.getAttribute('alt')`,
+   a pusty lancuch jest falsy — stad sześć falszywych trafien.
+   Sprawdzone curlem na zywej stronie 23.09.
+   ============================================================================ */
+(function () {
+  /* --- #5. FAQPage z sekcji FAQ, ktora juz na stronie stoi -----------------
+     /pitching-home i /pitching-decoded maja po szesc pytan w `<details>`,
+     ale bez oznaczenia. Budujemy `FAQPage` z tego, co widzi czytelnik —
+     nigdy z tekstu wpisanego osobno, bo wtedy dane i strona moglyby sie
+     rozjechac.
+     ⚠️ /cultural-communication audyt wymienial jako trzecia strone z FAQ;
+     pomiar 23.09 pokazuje tam ZERO `<details>`. Sekcji FAQ na niej nie ma,
+     wiec nie ma czego oznaczac.
+     ⚠️ Nie dokladamy drugiego `FAQPage`, jesli strona juz go ma. */
+  function faq() {
+    if (document.querySelector('script[data-ak-faq]')) return;
+    var juz = document.querySelectorAll('script[type="application/ld+json"]');
+    for (var j = 0; j < juz.length; j++) {
+      if ((juz[j].textContent || '').indexOf('FAQPage') > -1) return;
+    }
+    var det = document.querySelectorAll('.akp-faq details, .pdk-faq details, details');
+    var pyt = [];
+    for (var i = 0; i < det.length; i++) {
+      var s = det[i].querySelector('summary'); if (!s) continue;
+      var q = (s.textContent || '').trim();
+      var kop = det[i].cloneNode(true);
+      var sk = kop.querySelector('summary'); if (sk) sk.parentNode.removeChild(sk);
+      var a = (kop.textContent || '').replace(/\s+/g, ' ').trim();
+      if (q.length < 3 || a.length < 3) continue;
+      pyt.push({ '@type': 'Question', name: q, acceptedAnswer: { '@type': 'Answer', text: a } });
+    }
+    if (pyt.length < 2) return;
+    var sc = document.createElement('script');
+    sc.type = 'application/ld+json';
+    sc.setAttribute('data-ak-faq', '1');
+    sc.textContent = JSON.stringify({ '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: pyt });
+    document.head.appendChild(sc);
+  }
+
+  function start() {
+    try { faq(); } catch (e) { }
+    /* bloki systeme bywaja dorenderowane po pierwszym paincie */
+    setTimeout(function () { try { faq(); } catch (e) { } }, 1200);
+    setTimeout(function () { try { faq(); } catch (e) { } }, 3000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
