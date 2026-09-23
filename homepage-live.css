@@ -3870,3 +3870,14 @@ html body .ak-book .pdk-spec {
 @media (max-width: 640px) {
   html body .ak-book .pdk-specs { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 32px 24px !important; }
 }
+
+/* ============================================================================
+   GLOWNA — sekcja KSIAZKI „Pitching Decoded" (2026-09-23)
+   Blok: redesign/home-book-block.html (`<div class="ak-pitch" id="book">`),
+   w sekcji systeme pod Kursami. Raw HTML siedzi w kontenerze 1100 px, wiec
+   ciemne tlo dostaje CALA sekcja systeme, nie sam blok — bez `100vw`
+   (pasek przewijania = pozioma belka, patrz pitching-home.css).
+   `:has()` zamiast ID sekcji: ID nadaje systeme przy kopiowaniu.
+   ============================================================================ */
+[id^="section-"]:has(> * #book),
+[id^="section-"]:has(#book) { background: rgb(26, 60, 47) !important; }
