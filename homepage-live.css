@@ -1385,8 +1385,8 @@ html body.ak-home #section-d54243f0 img {
 .material-card:hover .material-play { background:#1A3C2F; transform: translate(-50%,-50%) scale(1.08); }
 
 /* ---- Section eyebrows (top-right labels) — uppercase, smaller, tracked ---- */
-#text-4f9f3a78, #text-1c72f0d2 { text-transform: uppercase !important; }
-#text-4f9f3a78 *, #text-1c72f0d2 * {
+#text-4f9f3a78, #text-1c72f0d2, #text-580a2174 { text-transform: uppercase !important; }
+#text-4f9f3a78 *, #text-1c72f0d2 *, #text-580a2174 * {
   font-size: 11px !important;
   letter-spacing: .18em !important;
   text-transform: uppercase !important;
@@ -1412,9 +1412,9 @@ html body.ak-home #section-d54243f0 img {
 }
 
 /* ---- Video boxes: gap below thumbnail + uppercase meta ---- */
-#text-fcd73a25, #text-bc603af7 { margin-top: 18px !important; }
-#text-4cb2d43a, #text-583aa39b { margin-top: 6px !important; }
-#text-4cb2d43a *, #text-583aa39b * {
+#text-fcd73a25, #text-7f56213f, #text-bc603af7, #text-bc17437b { margin-top: 18px !important; }
+#text-4cb2d43a, #text-d88b6198, #text-583aa39b, #text-cc82b577 { margin-top: 6px !important; }
+#text-4cb2d43a *, #text-d88b6198 *, #text-583aa39b *, #text-cc82b577 * {
   text-transform: uppercase !important;
   letter-spacing: .12em !important;
 }
@@ -1776,7 +1776,7 @@ html body.ak-home #text-318b9ac6#text-318b9ac6, html body.ak-home #text-318b9ac6
    colour. 664b6c2c=FREE RESOURCES (hero), 4563619c=PDFs section, bf3803a9=Videos. */
 #text-664b6c2c, #text-664b6c2c *,
 #text-4563619c, #text-4563619c *,
-#text-bf3803a9, #text-bf3803a9 * {
+#text-bf3803a9, #text-ac2fc635, #text-bf3803a9 *, #text-ac2fc635 * {
   font-size: 11px !important;
   font-weight:400 !important;
   letter-spacing: 0.18em !important;
@@ -1808,7 +1808,7 @@ html body.ak-home #headline-5baa8f2c, html body.ak-home #headline-5baa8f2c * {
    (light vs forest) must be confirmed first. */
 #headline-cbb3c700, #headline-cbb3c700 *,
 #headline-dac7fe56, #headline-dac7fe56 *,
-#headline-d87b6dff, #headline-d87b6dff *,
+#headline-d87b6dff, #headline-01cc0fb4, #headline-d87b6dff *, #headline-01cc0fb4 *,
 #headline-5aa93be6, #headline-5aa93be6 * {
   color: #1A3C2F !important;
 }
@@ -2300,8 +2300,8 @@ html body #text-664b6c2c,
 html body #text-664b6c2c *,
 html body #text-4563619c,
 html body #text-4563619c *,
-html body #text-bf3803a9,
-html body #text-bf3803a9 *,
+html body #text-bf3803a9, html body #text-ac2fc635,
+html body #text-bf3803a9 *, html body #text-ac2fc635 *,
 html body #text-5f8c6011,
 html body #text-5f8c6011 *,
 html body #text-7bb86b2e,
@@ -2358,8 +2358,8 @@ html body #text-d29bc4ef,
 html body #text-d29bc4ef *,
 html body #text-4f9f3a78,
 html body #text-4f9f3a78 *,
-html body #text-1c72f0d2,
-html body #text-1c72f0d2 *,
+html body #text-1c72f0d2, html body #text-580a2174,
+html body #text-1c72f0d2 *, html body #text-580a2174 *,
 html body #text-93cebdcb,
 html body #text-93cebdcb *,
 html body #text-8fe757de,
@@ -2372,10 +2372,10 @@ html body #text-7ba0e3f6,
 html body #text-7ba0e3f6 *,
 html body #text-522a5bd4,
 html body #text-522a5bd4 *,
-html body #text-4cb2d43a,
-html body #text-4cb2d43a *,
-html body #text-583aa39b,
-html body #text-583aa39b *,
+html body #text-4cb2d43a, html body #text-d88b6198,
+html body #text-4cb2d43a *, html body #text-d88b6198 *,
+html body #text-583aa39b, html body #text-cc82b577,
+html body #text-583aa39b *, html body #text-cc82b577 *,
 html body #text-28a7c5a0,
 html body #text-28a7c5a0 *,
 html body #text-e3a655b3,
@@ -2695,7 +2695,7 @@ html body #headline-219cddeb, html body #headline-219cddeb *,
 html body #headline-0ebe6c35, html body #headline-0ebe6c35 *,
 html body #headline-5aa93be6, html body #headline-5aa93be6 *,
 html body #headline-dac7fe56, html body #headline-dac7fe56 *,
-html body #headline-d87b6dff, html body #headline-d87b6dff *,
+html body #headline-d87b6dff, html body #headline-01cc0fb4, html body #headline-d87b6dff *, html body #headline-01cc0fb4 *,
 html body #headline-c4be2943, html body #headline-c4be2943 * {
   font-size: 54px !important;
 }
@@ -2751,7 +2751,7 @@ html body #headline-219cddeb, html body #headline-219cddeb *,
 html body #headline-0ebe6c35, html body #headline-0ebe6c35 *,
 html body #headline-5aa93be6, html body #headline-5aa93be6 *,
 html body #headline-dac7fe56, html body #headline-dac7fe56 *,
-html body #headline-d87b6dff, html body #headline-d87b6dff *,
+html body #headline-d87b6dff, html body #headline-01cc0fb4, html body #headline-d87b6dff *, html body #headline-01cc0fb4 *,
 html body #headline-c4be2943, html body #headline-c4be2943 *,
 html body #headline-009aa5b4, html body #headline-009aa5b4 *,
 html body #headline-bf4b852d, html body #headline-bf4b852d *,
