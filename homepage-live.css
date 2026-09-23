@@ -1412,9 +1412,10 @@ html body.ak-home #section-d54243f0 img {
 }
 
 /* ---- Video boxes: gap below thumbnail + uppercase meta ---- */
-#text-fcd73a25, #text-7f56213f, #text-bc603af7, #text-bc17437b { margin-top: 18px !important; }
-#text-4cb2d43a, #text-d88b6198, #text-583aa39b, #text-cc82b577 { margin-top: 6px !important; }
-#text-4cb2d43a *, #text-d88b6198 *, #text-583aa39b *, #text-cc82b577 * {
+#text-fcd73a25, #text-7f56213f, #text-bc603af7, #text-bc17437b, #text-d4531039 { margin-top: 18px !important; }
+#text-4cb2d43a, #text-d88b6198, #text-583aa39b, #text-cc82b577, #text-c9c25ce6 { margin-top: 6px !important; }
+/* #text-d4531039 / #text-c9c25ce6 = kopia wiersza wywiadow (23.09, nowy wywiad o ksiazce w gornym wierszu) */
+#text-4cb2d43a *, #text-d88b6198 *, #text-583aa39b *, #text-cc82b577 *, #text-c9c25ce6 * {
   text-transform: uppercase !important;
   letter-spacing: .12em !important;
 }
@@ -2385,6 +2386,7 @@ html body #text-4cb2d43a, html body #text-d88b6198,
 html body #text-4cb2d43a *, html body #text-d88b6198 *,
 html body #text-583aa39b, html body #text-cc82b577,
 html body #text-583aa39b *, html body #text-cc82b577 *,
+html body #text-c9c25ce6, html body #text-c9c25ce6 *,
 html body #text-28a7c5a0,
 html body #text-28a7c5a0 *,
 html body #text-e3a655b3,
