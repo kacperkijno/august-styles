@@ -8,6 +8,21 @@
      2. Reveals course cards on scroll (.is-visible).
      3. Toggles .is-scrolled on the systeme.io header after 40px.
    ============================================================ */
+
+/* --- 0. Baner zgody na cookies (consent.js) ------------------
+   Dociagany z tego samego miejsca co ten plik (GitHub Pages lub jsDelivr).
+   Tresc i logika w consent.js; linijka consent-default w HEAD strony
+   musi stac PRZED GA4, inaczej _ga powstaje przed kliknieciem. */
+(function () {
+  if (window.akConsent || document.querySelector('script[src*="/consent.js"]')) return;
+  var me = document.currentScript && document.currentScript.src;
+  var base = me ? me.replace(/homepage-live\.js.*$/, '') : 'https://kacperkijno.github.io/august-styles/';
+  var s = document.createElement('script');
+  s.src = base + 'consent.js';
+  s.defer = true;
+  (document.head || document.documentElement).appendChild(s);
+})();
+
 (function () {
   /* --- 1. Body scope class -------------------------------- */
   function applyHomeClass() {
