@@ -1422,6 +1422,11 @@ html body.ak-home #section-d54243f0 img {
    wewnetrzny span z kolorem, wiec kolor oryginalu (Ink 50% / 70%) idzie z arkusza. */
 #text-d88b6198, #text-d88b6198 *, #text-cc82b577, #text-cc82b577 * { color: rgba(45,45,45,.5) !important; }
 #text-580a2174, #text-580a2174 * { color: rgba(45,45,45,.7) !important; }
+/* Interviews + Live sessions stoja na tym samym tle: jeden odstep miedzy nimi,
+   nie 128 + 128. */
+html body #section-1cd074c2 { padding-bottom: 0 !important; }
+html body #section-7268f2c1 { padding-top: 96px !important; }
+@media (max-width: 768px) { html body #section-7268f2c1 { padding-top: 64px !important; } }
 
 /* ---- PDF cards: equal full height, 4px top bar, logo→text gap ---- */
 /* Equalize the three card boxes via grid stretch + height:100% down the chain */
