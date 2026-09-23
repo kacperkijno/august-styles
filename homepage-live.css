@@ -1418,6 +1418,10 @@ html body.ak-home #section-d54243f0 img {
   text-transform: uppercase !important;
   letter-spacing: .12em !important;
 }
+/* Live sessions (kopia sekcji wywiadow): tekst przepisany w edytorze zgubil
+   wewnetrzny span z kolorem, wiec kolor oryginalu (Ink 50% / 70%) idzie z arkusza. */
+#text-d88b6198, #text-d88b6198 *, #text-cc82b577, #text-cc82b577 * { color: rgba(45,45,45,.5) !important; }
+#text-580a2174, #text-580a2174 * { color: rgba(45,45,45,.7) !important; }
 
 /* ---- PDF cards: equal full height, 4px top bar, logo→text gap ---- */
 /* Equalize the three card boxes via grid stretch + height:100% down the chain */
