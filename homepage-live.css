@@ -2826,7 +2826,10 @@ html body .ak-book .pdk-numcard b, html body .ak-book .pdk-wrap blockquote {
   font-size: 40px !important;
 }
 html body .ak-book .pdk-spec b {
-  font-size: 36px !important;
+  /* 54 px w kremie — ten sam stopien i kolor co `.akb-stat__num` na /about */
+  font-size: 54px !important;
+  color: var(--ak-cream) !important;
+  font-variant-numeric: tabular-nums;
 }
 html body .ak-book .pdk-numcard h3,
 html body .ak-book .pdk-case h3,
@@ -3800,14 +3803,61 @@ html body a { color: inherit; }
    Scope `.ak-book` istnieje tylko na tej stronie, wiec sa bezpieczne.
    ============================================================================ */
 html body .ak-book .pdk-spec b {
-  /* kanon: 8 pod eyebrow. Arkusz bloku mial 9, JS podbijal do 56 inline —
-     patrz wyjatek `.pdk-spec` w homepage-live.js, bez niego to nie wystarczy. */
-  margin-bottom: 8px !important;
+  /* 12 px, jak miedzy liczba a podpisem na /about. Arkusz bloku mial 9,
+     a JS podbijal do 56 inline — patrz wyjatek `.pdk-spec`
+     w homepage-live.js, bez niego to nie wystarczy. */
+  display: block !important;
+  margin-bottom: 12px !important;
 }
 /* ⚠️ ETYKIETA PASKA MUSI BYC W PALECIE, INACZEJ MAPA KOLOROW JA PRZEMALUJE.
    Arkusz bloku dawal jej `rgba(249,247,241,.62)`, czego w kanonie nie ma.
    Kremowy 80 jest, wiec zostaje nietkniety i podpis czyta sie jako podrzedny
    wzgledem terakotowej liczby. */
 html body .ak-book .pdk-spec span {
+  /* Podpis jak `.akb-stat__label` na /about: 14 px bezszeryfowy, krem 80%,
+     bez wersalikow. Arkusz bloku dawal `rgba(249,247,241,.62)`, czego
+     w kanonie nie ma; krem 80 jest, wiec mapa kolorow go nie rusza.
+     ⚠️ `!important` na kazdej wlasnosci, bo podpis nosi klase `akt-eyebrow`
+     (11 px / waga 500 / wersaliki / swiatlo .18em) i bez tego wygra ona. */
+  display: block !important;
+  font-family: var(--ak-sans) !important;
+  font-size: 14px !important;
+  font-weight: 400 !important;
+  line-height: 1.45 !important;
+  letter-spacing: .02em !important;
+  text-transform: none !important;
   color: rgba(249, 247, 241, .8) !important;
+  max-width: 22ch;
+  margin: 0 auto !important;
+}
+
+/* ============================================================================
+   PAS LICZB JAK NA /about (2026-09-23)
+   ----------------------------------------------------------------------------
+   Wzorzec: `.akb-stats` w about.css — siatka rownych kolumn z odstepem 48,
+   pozycje wysrodkowane, liczba 54 px w kremie, 12 px nizej podpis 14 px
+   w kremie 80%. Pas ma tez ODLICZANIE od zera przy wejsciu w kadr; ta czesc
+   siedzi w homepage-live.js (`liczniki()`), bo /about ma swoj wlasny licznik
+   w bloku strony i nie wolno ich uruchomic dwoch na jednym elemencie.
+
+   Stan przed: pozycje lezaly w rzedzie jako bloki do lewej, kazda z wlasna
+   kreska u gory i paddingiem 26/26, liczba 36 px terakotowa.
+   ============================================================================ */
+html body .ak-book .pdk-specs {
+  display: grid !important;
+  grid-template-columns: repeat(5, minmax(0, 1fr)) !important;
+  gap: 48px !important;
+  align-items: start !important;
+}
+html body .ak-book .pdk-spec {
+  display: block !important;
+  text-align: center !important;
+  padding: 0 !important;
+  border-top: 0 !important;
+}
+@media (max-width: 1000px) {
+  html body .ak-book .pdk-specs { grid-template-columns: repeat(3, minmax(0, 1fr)) !important; gap: 40px 24px !important; }
+}
+@media (max-width: 640px) {
+  html body .ak-book .pdk-specs { grid-template-columns: repeat(2, minmax(0, 1fr)) !important; gap: 32px 24px !important; }
 }

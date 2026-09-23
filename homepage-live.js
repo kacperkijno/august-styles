@@ -2093,3 +2093,82 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* ============================================================================
+   ODLICZANIE LICZB W PASIE (2026-09-23)
+   ----------------------------------------------------------------------------
+   Wzorzec: pas `.akb-stats` na /about liczy od zera, gdy wjedzie w kadr
+   (zmierzone: 0 → 23 → 34 → 39 → 40). Ten sam ruch dostaje pas
+   `.pdk-spec` na /pitching-decoded.
+
+   ⚠️ ZAKRES CELOWO WASKI: tylko `.ak-book .pdk-spec b`. /about ma wlasny
+   licznik w bloku strony, a dwa liczniki na jednym elemencie nadpisywalyby
+   sobie nawzajem tresc w trakcie animacji.
+
+   ⚠️ Koncowy napis wraca 1:1 do postaci z bloku — liczba jest tylko
+   odtwarzana po drodze, nie przepisywana. Dzieki temu „200+" czy „4.9"
+   zachowuja swoj zapis, a strona bez JS pokazuje od razu wartosc docelowa.
+   ============================================================================ */
+(function () {
+  var ruchWylaczony = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  function rozbierz(txt) {
+    var m = String(txt).match(/^(\D*)(\d+(?:[.,]\d+)?)(.*)$/);
+    if (!m) return null;
+    var surowa = m[2].replace(',', '.');
+    var kropka = m[2].indexOf(',') > -1 ? ',' : '.';
+    var miejsca = surowa.indexOf('.') > -1 ? surowa.split('.')[1].length : 0;
+    return { przed: m[1], cel: parseFloat(surowa), po: m[3], miejsca: miejsca, kropka: kropka, tekst: String(txt) };
+  }
+
+  function zapisz(el, d, v) {
+    var s = v.toFixed(d.miejsca);
+    if (d.kropka === ',') s = s.replace('.', ',');
+    el.textContent = d.przed + s + d.po;
+  }
+
+  function odlicz(el) {
+    if (el.getAttribute('data-ak-liczy')) return;
+    var d = rozbierz((el.textContent || '').trim());
+    if (!d || !isFinite(d.cel)) return;
+    el.setAttribute('data-ak-liczy', '1');
+    if (ruchWylaczony) return;                 /* wartosc docelowa juz tam stoi */
+
+    var czas = 900, start = null;
+    zapisz(el, d, 0);
+    function klatka(t) {
+      if (start === null) start = t;
+      var p = Math.min(1, (t - start) / czas);
+      var e = 1 - Math.pow(1 - p, 3);          /* wyhamowanie, jak reszta ruchu */
+      if (p < 1) { zapisz(el, d, d.cel * e); window.requestAnimationFrame(klatka); }
+      else el.textContent = d.tekst;           /* koncowy napis 1:1 z bloku */
+    }
+    window.requestAnimationFrame(klatka);
+  }
+
+  function liczniki() {
+    var l = document.querySelectorAll('.ak-book .pdk-spec b');
+    if (!l.length) return;
+    if (!window.IntersectionObserver) {
+      for (var i = 0; i < l.length; i++) odlicz(l[i]);
+      return;
+    }
+    var io = new IntersectionObserver(function (wpisy) {
+      for (var j = 0; j < wpisy.length; j++) {
+        if (!wpisy[j].isIntersecting) continue;
+        odlicz(wpisy[j].target);
+        io.unobserve(wpisy[j].target);
+      }
+    }, { threshold: 0.35 });
+    for (var k = 0; k < l.length; k++) if (!l[k].getAttribute('data-ak-liczy')) io.observe(l[k]);
+  }
+
+  function start() {
+    liczniki();
+    /* blok bywa dorenderowany po pierwszym paincie */
+    setTimeout(liczniki, 900);
+    setTimeout(liczniki, 2600);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
