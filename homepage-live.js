@@ -2362,3 +2362,38 @@
   if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
   else start();
 })();
+
+/* ============================================================================
+   H1 NA STRONACH BEZ H1 (2026-09-24)
+   /webinar po przebudowie na replay (23.09) stracil H1: naglowek
+   „How to Pitch So People Say Yes." siedzi w widzecie systeme jako <p>.
+   Przestawienie tagu w edytorze (pasek H1) NIE utrwala sie w tym widzecie,
+   za to zapisuje preset rozmiaru 40/48 zamiast 54/65 — sprawdzone 24.09,
+   rozmiar przywrocony recznie. Dlatego podmieniamy tag tutaj.
+   Wyglad sie nie zmienia: `[id^="headline-"] h1` dziedziczy rozmiar,
+   interlinie i wage z panelu (regula „H1 STRONY" w homepage-live.css).
+   Dziala tylko, gdy na stronie nie ma zadnego H1.
+   ============================================================================ */
+(function () {
+  var MAPA = { '/webinar': 'headline-e5bc6f8e' };
+  var id = MAPA[location.pathname.replace(/\/$/, '')];
+  if (!id) return;
+  function h1() {
+    if (document.querySelector('h1')) return true;
+    var box = document.getElementById(id); if (!box) return false;
+    var p = box.querySelector('p'); if (!p) return false;
+    var h = document.createElement('h1');
+    for (var i = 0; i < p.attributes.length; i++) h.setAttribute(p.attributes[i].name, p.attributes[i].value);
+    while (p.firstChild) h.appendChild(p.firstChild);
+    p.parentNode.replaceChild(h, p);
+    return true;
+  }
+  /* po hydratacji Reacta — wczesniejsza podmiana to blad #418 i React
+     odtwarza <p>; h1() jest idempotentne, wiec druga proba nic nie psuje */
+  function start() {
+    setTimeout(function () { try { h1(); } catch (e) { } }, 1500);
+    setTimeout(function () { try { h1(); } catch (e) { } }, 4000);
+  }
+  if (document.readyState === 'complete') start();
+  else window.addEventListener('load', start);
+})();
