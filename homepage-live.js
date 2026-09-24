@@ -2296,3 +2296,69 @@
   else window.addEventListener('load', start);
   window.addEventListener('hashchange', function () { setTimeout(dosun, 60); });
 })();
+
+/* ============================================================================
+   WPISY BLOGA — BlogPosting i opis obrazka wpisu (2026-09-24)
+   Audyt 24.09: starsze wpisy maja `BlogPosting` wklejony recznie w kod head
+   wpisu, a cztery nowsze (free-webinar…, how-to-pitch-so-people-say-yes,
+   how-to-prepare-for-a-pitch, pitching-is-not-a-soft-skill) nie maja go
+   wcale. Budujemy go z tego, co strona juz mowi o sobie: og:title,
+   description, og:image, canonical i data z bloku daty wpisu.
+   ⚠️ Nie dokladamy drugiego, jesli wpis ma wlasny (tak jak przy FAQPage).
+
+   Obrazek wyrozniajacy wpisu (ten sam plik co og:image) systeme renderuje
+   BEZ atrybutu alt na wszystkich 10 wpisach. To nie jest ozdoba, tylko
+   ilustracja tytulu, wiec dostaje og:image:alt albo tytul wpisu.
+   Obrazki, ktore maja jakikolwiek alt (takze pusty), zostawiamy.
+   ============================================================================ */
+(function () {
+  if (!/^\/blog\/[^\/]+/.test(location.pathname) || /^\/blog\/search/.test(location.pathname)) return;
+  function meta(n) {
+    var m = document.querySelector('meta[property="' + n + '"]') || document.querySelector('meta[name="' + n + '"]');
+    return m ? (m.getAttribute('content') || '').trim() : '';
+  }
+  function plik(u) { return (u || '').split('?')[0].split('/').pop(); }
+  function alt() {
+    var og = plik(meta('og:image')); if (!og) return;
+    var opis = meta('og:image:alt') || meta('og:title') || document.title;
+    var im = document.querySelectorAll('img');
+    for (var i = 0; i < im.length; i++) {
+      if (im[i].hasAttribute('alt')) continue;
+      if (plik(im[i].currentSrc || im[i].src) === og || (im[i].src || '').indexOf(og) > -1) im[i].setAttribute('alt', opis);
+    }
+  }
+  function schema() {
+    if (document.querySelector('script[data-ak-blogposting]')) return;
+    var juz = document.querySelectorAll('script[type="application/ld+json"]');
+    for (var j = 0; j < juz.length; j++) {
+      if ((juz[j].textContent || '').indexOf('BlogPosting') > -1) return;
+    }
+    var tytul = meta('og:title') || document.title; if (!tytul) return;
+    var can = document.querySelector('link[rel="canonical"]');
+    var url = can ? can.href : location.origin + location.pathname;
+    var d = { '@context': 'https://schema.org', '@type': 'BlogPosting',
+      headline: tytul, description: meta('description') || meta('og:description'),
+      url: url, mainEntityOfPage: url,
+      author: { '@type': 'Person', name: 'August Kjerland', url: 'https://www.augustkjerland.com/about' },
+      publisher: { '@type': 'Person', name: 'August Kjerland', url: 'https://www.augustkjerland.com/' } };
+    if (meta('og:image')) d.image = meta('og:image');
+    var dt = document.querySelector('[id^="blog-post_date-"]');
+    var t = dt ? Date.parse((dt.textContent || '').trim()) : NaN;
+    /* ⚠️ nie toISOString(): polnoc czasu lokalnego to poprzedni dzien w UTC */
+    if (!isNaN(t)) { var x = new Date(t), z = function (n) { return (n < 10 ? '0' : '') + n; };
+      d.datePublished = x.getFullYear() + '-' + z(x.getMonth() + 1) + '-' + z(x.getDate()); }
+    var sc = document.createElement('script');
+    sc.type = 'application/ld+json';
+    sc.setAttribute('data-ak-blogposting', '1');
+    sc.textContent = JSON.stringify(d);
+    document.head.appendChild(sc);
+  }
+  function start() {
+    try { alt(); } catch (e) { }
+    /* data wpisu dorenderowuje sie po hydratacji — schema dopiero wtedy */
+    setTimeout(function () { try { alt(); schema(); } catch (e) { } }, 1200);
+    setTimeout(function () { try { alt(); } catch (e) { } }, 3000);
+  }
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();

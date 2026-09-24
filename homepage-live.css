@@ -1426,7 +1426,9 @@ html body.ak-home #section-d54243f0 img {
 /* Interviews + Live sessions stoja na tym samym tle: jeden odstep miedzy nimi,
    nie 128 + 128. */
 html body #section-1cd074c2 { padding-bottom: 0 !important; }
-html body #section-7268f2c1 { padding-top: 96px !important; }
+/* 24.09: 96 -> 80, stopien z kanonu rytmu sekcji (128/80/40). 96 bylo jedyna
+   wartoscia spoza skali na calej stronie (kontrola 24.09). */
+html body #section-7268f2c1 { padding-top: 80px !important; }
 @media (max-width: 768px) { html body #section-7268f2c1 { padding-top: 64px !important; } }
 
 /* ---- PDF cards: equal full height, 4px top bar, logo→text gap ---- */

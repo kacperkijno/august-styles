@@ -96,3 +96,15 @@ body.ak-blogpost #section-09d8892d a.akt:hover {
     width: 1120px !important;
   }
 }
+
+
+/* ---- 8. Tresc prawna /legal-pages (2026-09-24) ------------------------------
+   Blok raw HTML strony prawnej uzywa tej samej klasy `.akbp` co tresc wpisow,
+   ale z wlasnym stylem w bloku: `color: rgba(45,45,45,.86)`. Takiej wartosci
+   nie ma w kanonie (Ink, 72%, 62%) — kontrola 24.09: 52 naruszenia, jedyne
+   na tej stronie. Ustawiamy kolor KONTENERA, nie dzieci: akapity, listy
+   i komorki tabel dziedzicza, a wszystko, co ma wlasny kolor (linki, data,
+   spis tresci na 62%), zostaje nietkniete. Specyficznosc html body > blok. */
+html body .akbp {
+  color: var(--ak-ink, #2D2D2D);
+}
