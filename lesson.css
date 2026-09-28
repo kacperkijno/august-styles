@@ -129,8 +129,8 @@ body.ak-lesson [size="4"] > div > [id^="row-"]:hover [font-family^="AdobeCaslonP
    BULLET LISTS (norms + references)
    ============================================================ */
 /* Circle-outlined check — stronger visibility */
-body.ak-lesson .sc-jGKxIN i.fas.fa-check,
-body.ak-lesson .sc-jGKxIN i.fas {
+body.ak-lesson [id^="bulletlist-"] i.fas.fa-check,
+body.ak-lesson [id^="bulletlist-"] i.fas {
   width: 24px !important;
   height: 24px !important;
   min-width: 24px !important;
@@ -152,17 +152,17 @@ body.ak-lesson .sc-jGKxIN i.fas {
   transition: background var(--ak-t-color) var(--ak-ease), color var(--ak-t-color) var(--ak-ease), transform var(--ak-t-move) var(--ak-ease);
 }
 /* Make FontAwesome glyph render properly inside our circle */
-body.ak-lesson .sc-jGKxIN i.fas.fa-check::before {
+body.ak-lesson [id^="bulletlist-"] i.fas.fa-check::before {
   font-size: 11px !important;
 }
-body.ak-lesson .sc-jGKxIN ul li:hover > i.fas.fa-check {
+body.ak-lesson [id^="bulletlist-"] ul li:hover > i.fas.fa-check {
   background: var(--ak-terracotta) !important;
   color: var(--ak-cream) !important;
   transform: scale(1.08);
 }
 
 /* Norms list — bold heading on top, body sentence-case */
-body.ak-lesson .sc-jGKxIN ul li strong {
+body.ak-lesson [id^="bulletlist-"] ul li strong {
   display: block;
   font-family: "NeueHaasDisplay-Roman42448762", "Neue Haas", sans-serif;
   font-weight: 500 !important;
@@ -173,25 +173,27 @@ body.ak-lesson .sc-jGKxIN ul li strong {
   text-transform: none !important;
 }
 /* Body text under bold — ensure sentence case + readable color */
-body.ak-lesson .sc-jGKxIN ul li p {
+body.ak-lesson [id^="bulletlist-"] ul li p {
   text-transform: none !important;
   letter-spacing: normal !important;
   color: var(--ak-ink-70) !important;
 }
 
 /* Hairline divider between norms — each norm is a separate BulletList widget
-   wrapped in .gmDSrH (emotion class). Border-bottom on the wrapper, not on li. */
-body.ak-lesson .gmDSrH {
+   wrapped in .gmDSrH (emotion class). Border-bottom on the wrapper, not on li.
+   28.09.2026: hashe klas zmieniaja sie przy kazdym buildzie systeme (swiezo zapisana
+   strona ma inne), wiec obok starego hasha stoi selektor strukturalny :has(). */
+body.ak-lesson :is(.gmDSrH, div:has(> div > [id^="bulletlist-"][font-family^="NeueHaasDisplay"])) {
   padding-bottom: 20px !important;
   margin-bottom: 4px !important;
   border-bottom: 1px solid var(--ak-ink-10);
 }
-body.ak-lesson .gmDSrH:last-child {
+body.ak-lesson :is(.gmDSrH, div:has(> div > [id^="bulletlist-"][font-family^="NeueHaasDisplay"])):last-child {
   border-bottom: 0 !important;
   padding-bottom: 0 !important;
 }
 /* Tighten the bullet list inside norms */
-body.ak-lesson .gmDSrH [id^="bulletlist-"] {
+body.ak-lesson :is(.gmDSrH, div:has(> div > [id^="bulletlist-"][font-family^="NeueHaasDisplay"])) [id^="bulletlist-"] {
   padding: 0 !important;
 }
 
@@ -369,7 +371,7 @@ body.ak-lesson .hcMeGz {
 }
 
 /* Iceberg cards — equal min-height so all 3 align */
-body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
+body.ak-lesson :is(.diUswR > [size="4"] > div > [id^="row-"], :is([size="4"],[size="6"]) > div > [id^="row-"]:has([font-family^="AdobeCaslonPro"][font-size="22"])) {
   min-height: 0;
   display: flex !important;
   flex-direction: column;
@@ -401,7 +403,7 @@ body.ak-lesson [font-family^="AdobeCaslonPro"][font-size="54"] {
 }
 
 /* Deeper rest-state shadow on iceberg cards */
-body.ak-lesson .diUswR > [size="4"] > div > [id^="row-"] {
+body.ak-lesson :is(.diUswR > [size="4"] > div > [id^="row-"], :is([size="4"],[size="6"]) > div > [id^="row-"]:has([font-family^="AdobeCaslonPro"][font-size="22"])) {
   box-shadow: var(--ak-sh-sm);
 }
 
