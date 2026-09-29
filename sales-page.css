@@ -4003,10 +4003,10 @@ html body.ak-sales-page #row-72f32b22 {
    ============================================================ */
 html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
   background-image: url('https://d1yei2z3i6k35z.cloudfront.net/16369512/6abbb077e8cab8.55402390_bmc-hero-bookshelf.jpg');
-  background-position: 40% 30%;
+  background-position: 45% 12%;
 }
 @media (max-width: 760px) {
   html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
-    background-position: 60% 30%;
+    background-position: 62% 12%;
   }
 }
