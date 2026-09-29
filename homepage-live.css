@@ -3892,3 +3892,68 @@ html body .ak-book .pdk-spec {
 [id^="section-"]:has(#book) [id^="row-"],
 [id^="section-"]:has(#book) #book { background: transparent !important; }
 [id^="section-"]:has(#book) [id^="row-"] { padding: 0 !important; }
+
+
+/* ====== /materials: karta Before the Canvas (29.09.2026) = kopia regul karty Playbooka CC z nowymi ID ====== */
+#row-5e6d52be {
+  aspect-ratio: 4 / 3 !important;
+  min-height: 0 !important;
+  height: auto !important;
+}
+#text-e8258e67 * {
+  text-transform: uppercase !important;
+  letter-spacing: .18em !important;
+}
+#text-89634903 * {
+  text-transform: uppercase !important;
+  letter-spacing: .18em !important;
+}
+#row-936cdeae { align-items: stretch !important; }
+#row-936cdeae > div[size="4"],
+#row-936cdeae > div[size="4"] > div,
+#row-936cdeae > div[size="4"] > div > div { height: 100% !important; }
+#row-ef5bf15d { height: 100% !important; }
+#row-5e6d52be { border-top: 4px solid #B46A3C !important; }
+#row-5e6d52be > div {
+  justify-content: space-between !important;
+  height: 100% !important;
+}
+#row-ef5bf15d {
+  transition: transform var(--ak-t-move) var(--ak-ease), box-shadow var(--ak-t-move) var(--ak-ease), border-color var(--ak-t-color) var(--ak-ease) !important;
+}
+#row-ef5bf15d:hover {
+  border-color: rgba(26, 60, 47, 0.30) !important;
+  box-shadow: var(--ak-sh-lg);
+  transform: translateY(-4px) !important;
+}
+#row-ef5bf15d { position: relative !important; }
+#row-ef5bf15d > div > div:last-child { position: static !important; }
+#row-62c2e72b { position: static !important; }
+#row-62c2e72b > div > *:last-child { position: static !important; }
+#row-62c2e72b > div > *:nth-child(3) { margin-bottom: 64px !important; }
+#button-42f616f6 {
+  position: absolute !important;
+  bottom: 26px !important;
+  right: 26px !important;
+}
+html body #text-89634903, html body #text-89634903 * {
+  color: #9A5832 !important;
+}
+html body #text-e8258e67,
+html body #text-e8258e67 *,
+html body #text-89634903,
+html body #text-89634903 * {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+html body #button-42f616f6 {
+  background-color: #9A5832 !important;
+}
+html body #button-42f616f6:hover {
+  background-color: #8B4E2C !important;
+}
+html body #text-85804151, html body #text-85804151 * {
+  font-size: 24px !important;
+}

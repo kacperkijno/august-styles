@@ -4012,3 +4012,27 @@ html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
     background-position: 62% 12%;
   }
 }
+
+
+/* ====== /materials: karta Before the Canvas (29.09.2026) = kopia regul karty Playbooka CC z nowymi ID ====== */
+html body #text-89634903, html body #text-89634903 * {
+  color: #9A5832 !important;
+}
+html body #text-e8258e67,
+html body #text-e8258e67 *,
+html body #text-89634903,
+html body #text-89634903 * {
+  font-size: 11px !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.18em !important;
+  text-transform: uppercase !important;
+}
+html body #button-42f616f6 {
+  background-color: #9A5832 !important;
+}
+html body #button-42f616f6:hover {
+  background-color: #8B4E2C !important;
+}
+html body #text-85804151, html body #text-85804151 * {
+  font-size: 24px !important;
+}
