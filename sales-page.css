@@ -4005,39 +4005,27 @@ html body.ak-sales-page #row-72f32b22 {
    ============================================================ */
 html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
   background-image: url('https://d1yei2z3i6k35z.cloudfront.net/16369512/6abbb077e8cab8.55402390_bmc-hero-bookshelf.jpg');
-  /* webcam frame 16:9 in a ~3.5:1 hero: show the full height, pinned right.
-     Mirrored (scaleX(-1) from rule 19), so "0%" = right edge on screen. */
-  background-size: auto 100%;
+  /* webcam frame 16:9 in a ~3.5:1 hero: the pseudo-element takes the frame's
+     own proportions, pinned right, with a soft fade into the forest on the text side.
+     It is mirrored (scaleX(-1), rule 19), so the element's right edge = screen left. */
+  left: auto;
+  right: 0;
+  width: auto;
+  max-width: 100%;
+  aspect-ratio: 16 / 9;
+  background-size: cover;
   background-repeat: no-repeat;
-  background-position: 0% 50%;
+  background-position: 50% 40%;
+  -webkit-mask-image: linear-gradient(to right, #000 62%, transparent 100%);
+          mask-image: linear-gradient(to right, #000 62%, transparent 100%);
 }
 @media (max-width: 760px) {
   html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
-    background-size: cover;
+    left: 0;
+    width: auto;
+    aspect-ratio: auto;
+    -webkit-mask-image: none;
+            mask-image: none;
     background-position: 62% 20%;
   }
-}
-
-
-/* ====== /materials: karta Before the Canvas (29.09.2026) = kopia regul karty Playbooka CC z nowymi ID ====== */
-html body #text-89634903, html body #text-89634903 * {
-  color: #9A5832 !important;
-}
-html body #text-e8258e67,
-html body #text-e8258e67 *,
-html body #text-89634903,
-html body #text-89634903 * {
-  font-size: 11px !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.18em !important;
-  text-transform: uppercase !important;
-}
-html body #button-42f616f6 {
-  background-color: #9A5832 !important;
-}
-html body #button-42f616f6:hover {
-  background-color: #8B4E2C !important;
-}
-html body #text-85804151, html body #text-85804151 * {
-  font-size: 24px !important;
 }
