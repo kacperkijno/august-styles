@@ -4005,11 +4005,16 @@ html body.ak-sales-page #row-72f32b22 {
    ============================================================ */
 html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
   background-image: url('https://d1yei2z3i6k35z.cloudfront.net/16369512/6abbb077e8cab8.55402390_bmc-hero-bookshelf.jpg');
-  background-position: 45% 12%;
+  /* webcam frame 16:9 in a ~3.5:1 hero: show the full height, pinned right.
+     Mirrored (scaleX(-1) from rule 19), so "0%" = right edge on screen. */
+  background-size: auto 100%;
+  background-repeat: no-repeat;
+  background-position: 0% 50%;
 }
 @media (max-width: 760px) {
   html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
-    background-position: 62% 12%;
+    background-size: cover;
+    background-position: 62% 20%;
   }
 }
 
