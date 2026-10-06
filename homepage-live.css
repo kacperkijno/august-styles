@@ -4502,3 +4502,35 @@ html body .ak-mnav-foot { display: none !important; }
     border: 0 !important;
   }
 }
+
+/* ============================================================================
+   PELNOEKRANOWE MENU: zawsze miesci sie w ekranie, bez przewijania (06.10.2026)
+   Na iPhonie w Safari widoczna wysokosc (100dvh) jest mniejsza niz 812, wiec
+   7 pozycji po 64 px + przycisk + social wychodzilo poza ekran i menu sie
+   przewijalo. Wysokosc pozycji liczymy z wysokosci ekranu:
+   (100dvh - 88 gora - 132 dol - 28 dolny padding - 6 linii) / 7,
+   w granicach 40 do 64 px. Font idzie razem z wysokoscia (20 do 26 px).
+   ============================================================================ */
+@media (max-width: 767px) {
+  html.ak-mnav-open body :is([id^="side-menu-"], #ak-mnav-spec#ak-mnav-spec) {
+    --ak-mi: clamp(40px, calc((100vh - 254px) / 7), 64px);
+    --ak-mi: clamp(40px, calc((100dvh - 254px) / 7), 64px);
+    overflow: hidden !important;
+  }
+  html.ak-mnav-open body :is([id^="side-menu-"], #ak-mnav-spec#ak-mnav-spec) > ul > li a {
+    height: var(--ak-mi) !important;
+    min-height: 0 !important;
+    font-size: clamp(20px, calc(var(--ak-mi) * 0.41), 26px) !important;
+  }
+}
+@media (max-width: 767px) and (max-height: 560px) {
+  /* bardzo niskie ekrany (poziomo, SE z paskami): mniejsze odstepy przy przycisku */
+  html.ak-mnav-open body :is([id^="side-menu-"], #ak-mnav-spec#ak-mnav-spec) {
+    --ak-mi: clamp(36px, calc((100dvh - 210px) / 7), 64px);
+    padding-top: 76px !important;
+    padding-bottom: 12px !important;
+  }
+  html.ak-mnav-open body :is(.ak-mnav-foot, #ak-mnav-spec#ak-mnav-spec) { padding-top: 12px !important; }
+  html.ak-mnav-open body :is(.ak-mnav-foot, #ak-mnav-spec#ak-mnav-spec) .ak-mnav-cta { height: 44px !important; }
+  html.ak-mnav-open body :is(.ak-mnav-foot, #ak-mnav-spec#ak-mnav-spec) .ak-mnav-social { margin-top: 4px !important; }
+}
