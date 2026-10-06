@@ -4039,3 +4039,12 @@ html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
 [id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]){width:100%!important;justify-content:flex-end!important;}
 [id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]) > div{padding:11px 6px!important;margin:-11px -6px!important;box-sizing:content-box!important;}
 }
+
+/* Checkouty: etykiety "Company name" / "Tax number" to osobne widgety Text
+   (systeme nie chowa ich razem z polami). Przy "Individual" pol nie ma, wiec
+   wisialy same etykiety. Chowamy je, gdy zaznaczone jest Individual
+   (audyt mobilny 06.10.2026). /pitching-buy + ksiazka: c1a78084, 30731b2e;
+   /cc-checkout + /bmc-checkout: 658377f8, 855c50f0. */
+body:has(#customer-type-personal:checked) div:has(> :is(#text-c1a78084, #text-30731b2e, #text-658377f8, #text-855c50f0)) {
+  display: none !important;
+}
