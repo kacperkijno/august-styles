@@ -3957,3 +3957,24 @@ html body #button-42f616f6:hover {
 html body #text-85804151, html body #text-85804151 * {
   font-size: 24px !important;
 }
+
+/* MOBILE: menu lejkow (audyt mobilny 06.10.2026). Pasek z backdrop-filter jest
+   containing blockiem dla fixed szuflady systeme -> 62 px wysokosci. Przypinamy do
+   viewportu, hamburger do prawej, strefa dotyku 45x44. Website nie ma wiersza z menu-. */
+@media (max-width: 767px){
+[id^="row-"]:has([id^="menu-"]) [id^="side-menu-"]{height:100vh!important;height:100dvh!important;}
+[id^="row-"]:has([id^="menu-"]) div:has(> [id^="menu-"]){width:100%!important;}
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]){width:100%!important;justify-content:flex-end!important;}
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]) > div{padding:11px 6px!important;margin:-11px -6px!important;box-sizing:content-box!important;}
+}
+
+/* /materials @mobile: przyciski absolute z szer. 363 px wystawaly 20 px w lewo (audyt 06.10.2026). */
+@media (max-width: 767px){
+#button-2d7e1ca4, #button-1ad0ffce, #button-bfcfeb26, #button-42f616f6 {
+  left: 10px !important;
+  right: 10px !important;
+  width: auto !important;
+  max-width: none !important;
+  box-sizing: border-box !important;
+}
+}

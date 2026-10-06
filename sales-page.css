@@ -4029,3 +4029,13 @@ html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
     background-position: 62% 20%;
   }
 }
+
+/* MOBILE: menu lejkow (audyt mobilny 06.10.2026). Pasek z backdrop-filter jest
+   containing blockiem dla fixed szuflady systeme -> 62 px wysokosci. Przypinamy do
+   viewportu, hamburger do prawej, strefa dotyku 45x44. Website nie ma wiersza z menu-. */
+@media (max-width: 767px){
+[id^="row-"]:has([id^="menu-"]) [id^="side-menu-"]{height:100vh!important;height:100dvh!important;}
+[id^="row-"]:has([id^="menu-"]) div:has(> [id^="menu-"]){width:100%!important;}
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]){width:100%!important;justify-content:flex-end!important;}
+[id^="row-"]:has([id^="menu-"]) [id^="menu-"] ~ div:not([id]) > div{padding:11px 6px!important;margin:-11px -6px!important;box-sizing:content-box!important;}
+}
