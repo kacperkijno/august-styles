@@ -4048,3 +4048,263 @@ html.ak-bmc body.ak-sales-page #section-d43d68a1::after {
 body:has(#customer-type-personal:checked) div:has(> :is(#text-c1a78084, #text-30731b2e, #text-658377f8, #text-855c50f0)) {
   display: none !important;
 }
+
+/* ============================================================================
+   POPRAWKI MOBILNE, druga runda (06.10.2026)
+   ----------------------------------------------------------------------------
+   Plik do doklejenia NA KONIEC homepage-live.css ORAZ sales-page.css.
+   Wszystkie reguly celuja w ID blokow systeme, w nasze wlasne klasy
+   (.akb-, .akc-, .pdk-, .akt) albo w strukture wzgledem [id^="menu-"].
+   Zadnych klas emotion (.sc-xxxx), bo przegenerowuja sie przy przebudowie.
+   Zmiany mobilne siedza w @media (max-width: 767px), desktop zostaje nietkniety.
+
+   Punkt 1 (baner cookies) NIE jest w tym pliku: baner zyje w Shadow DOM
+   (consent.js), arkusz strony do niego nie siega. Poprawka CSS siedzi
+   w tablicy CSS w consent.js, patrz consent-banner-mobile.css obok.
+   Punkt 10 chowa wiersz formularza tylko wtedy, gdy formularz sie nie wyrenderowal.
+   Punkt 11 (eyebrowy 12 px) jest na koncu, ale WYLACZONY komentarzem, patrz opis.
+   ============================================================================ */
+
+
+/* ---- 2. H1 54 px na /cultural-communication i /business-model-canvas -------
+   06.10.2026. Klasyfikator typografii daje tytulowi hero akt-h54 takze na
+   telefonie. Na 375 px BMC lamal sie na 5 linii, a przy line-height 1.15
+   span i em nachodzily na siebie. Oba lejki maja ten sam blok #headline-48beb1b2
+   (lejek BMC to kopia CC). clamp trzyma 54 px od ok. 560 px szerokosci w gore.
+   [id][font-size] podbija specyficznosc ponad regule „SKALA NAGLOWKOW" z sales-page.css
+   (html body.ak-sales-page #headline-48beb1b2 h1 * {54px}). Sam h1 tez musi
+   zmalec, inaczej jego strut trzyma linie na 55 px przy 36 px tekstu. */
+@media (max-width: 767px) {
+  html body #headline-48beb1b2[id][font-size] h1,
+  html body #headline-48beb1b2[id][font-size] h1 * {
+    font-size: clamp(34px, 9.6vw, 54px) !important;
+    line-height: 1.1 !important;
+  }
+}
+
+
+/* ---- 3. Hamburger nad ciemnym hero ------------------------------------------
+   06.10.2026. Stare reguly celowaly w klasy emotion (.sc-gEkIjA, .sc-fLvQuE),
+   ktore systeme juz podmienil, wiec kreski wrocily do szarosci #4A4A4A na
+   zdjeciu (/, /about, /consulting) i czerni #060606 na Forest (/pitching-decoded,
+   /cultural-communication). Hamburger to zawsze div z trzema pustymi spanami
+   w bracie [id^="menu-"], wiec celujemy strukturalnie.
+   Website: kremowe, dopoki header nie ma .is-scrolled (JS po 40 px; strony bez
+   ciemnego hero maja ja od startu, wiec tam nic sie nie zmienia).
+   Lejki: kremowe, dopoki wiersz ma .ak-nav-over-hero.
+   ⚠️ Obwodka 1 px Forest nie jest ozdoba. Po otwarciu szuflady (kremowy panel)
+   kreski robia sie X nad panelem, a stan otwarcia da sie rozpoznac tylko po
+   klasach emotion. Bez obwodki kremowy X na kremowym panelu znika. Na ciemnym
+   zdjeciu obwodki prawie nie widac, za to dodaje kontrastu w jasnych miejscach.
+   Sprawdzone i odrzucone: mix-blend-mode (szuflada lezy w innej warstwie). */
+body.ak-home header[type="WebsiteHeader"]:not(.is-scrolled) [id^="menu-"] ~ div:not([id]) > div > span,
+[id^="row-"]:has([id^="menu-"]).ak-nav-over-hero [id^="menu-"] ~ div:not([id]) > div > span {
+  background-color: #F9F7F1 !important;
+  box-shadow: 0 0 0 1px rgba(26, 60, 47, 0.55), 0 1px 3px rgba(13, 32, 24, 0.35) !important;
+}
+body.ak-home header[type="WebsiteHeader"].is-scrolled [id^="menu-"] ~ div:not([id]) > div > span {
+  background-color: #2D2D2D !important;
+  box-shadow: none !important;
+}
+
+
+/* ---- 4. /pitching-decoded: okladka zjadala pierwszy ekran -------------------
+   06.10.2026. Na 375 px okladka miala 300x425, H1 startowal na y 640,
+   a przycisk Order the book na 969, czyli poza pierwszym ekranem. Okladka
+   do 26vh (contain, bez przycinania), tytul w jednej linii zamiast dwoch,
+   mniejsza przerwa w siatce hero (48 -> 24) i nad przyciskami (32 -> 24).
+   ⚠️ Odstepy pod eyebrow (64) i nad podtytulem (37) wpisuje INLINE z !important
+   silnik rytmu z homepage-live.js, arkusz ich nie przebije. Dlatego oszczednosc
+   bierzemy z okladki i z tytulu.
+   Klasy .pdk- sa nasze (blok #rawhtml-154fe4be). */
+@media (max-width: 767px) {
+  html body .ak-book .pdk-hero__grid { gap: 24px !important; }
+  html body .ak-book .pdk-hero__art img.pdk-shot {
+    max-height: 26vh !important;
+    width: auto !important;
+    max-width: 100% !important;
+    object-fit: contain !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+  html body .ak-book .pdk-hero h1,
+  html body .ak-book .pdk-hero h1 .akt {
+    font-size: clamp(34px, 10.4vw, 50px) !important;
+    line-height: 1.1 !important;
+  }
+  html body .ak-book .pdk-hero .pdk-btns { margin-top: 24px !important; }
+}
+
+
+/* ---- 5a. /about: cudzyslow w „What this is about" ---------------------------
+   06.10.2026. Znak „ ma 120 px i top -24 px, wiec wystawal nad blok cytatu
+   i wchodzil na ostatnia linie akapitu nad nim. Na telefonie siatka jest
+   w jednej kolumnie, cytat stoi bezposrednio pod akapitem. Zsuwamy znak
+   do srodka bloku i dajemy mu miejsce paddingiem. */
+@media (max-width: 767px) {
+  html body .ak-about .akb-quote { padding-top: 48px !important; }
+  html body .ak-about .akb-quote::before { top: -2px !important; }
+}
+
+/* ---- 5b. /about: logotypy w pasku rozciagniete ------------------------------
+   06.10.2026. samarbeidsradet-sunnhordland.png (5.10 -> 4.47) i nera-networks.svg
+   (6.82 -> 5.67) dostawaly obcieta szerokosc przy stalej wysokosci. contain
+   zachowuje proporcje w tym samym pudelku, wiec pasek sie nie przesuwa.
+   Dotyczy wszystkich szerokosci, na desktopie nie zmienia nic, co nie bylo
+   znieksztalcone. */
+html body #rawhtml-c06b3fdb .akb-marquee-sec img {
+  object-fit: contain !important;
+}
+
+/* ---- 5c. /about i /consulting: wyrownanie w kartach -------------------------
+   06.10.2026. W kartach 01 do 05 numer stal do lewej, a tytul karty byl
+   wysrodkowany (dziedziczy center z kontenera raw HTML systeme na mobile,
+   tylko pierwsza karta miala inline left). To samo w „How it works".
+   Na telefonie wszystko do lewej. */
+@media (max-width: 767px) {
+  html body .ak-about .akb-focus__body :is(h3, p),
+  html body .ak-consult .akc-cell__body :is(h3, p),
+  html body .ak-consult .akc-step :is(h3, p),
+  html body .ak-consult .akc-how-grid :is(h2, h2 *, .akc-lead) {
+    text-align: left !important;
+  }
+}
+
+
+/* ---- 6. Stopka: strefa dotyku linkow ----------------------------------------
+   06.10.2026. Linki w stopce mialy 16 do 19 px wysokosci co 20 do 25 px.
+   Robimy z nich inline-flex o min. 40 px wysokosci i zerujemy marginesy
+   akapitow, wiec odstep miedzy tekstami wynika z samej strefy dotyku.
+   Website: ecdb6d8d, 138a5fa8, d9b5336a, 3ab46b2d, 3a6abe60.
+   Lejki i blog: 1a19e369, 0ea6ec56, 464aabfd, 0d8695f4, daffb632. */
+@media (max-width: 767px) {
+  html body :is(#text-ecdb6d8d, #text-138a5fa8, #text-d9b5336a, #text-3ab46b2d, #text-3a6abe60,
+                #text-1a19e369, #text-0ea6ec56, #text-464aabfd, #text-0d8695f4, #text-daffb632) p {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+  html body :is(#text-ecdb6d8d, #text-138a5fa8, #text-d9b5336a, #text-3ab46b2d, #text-3a6abe60,
+                #text-1a19e369, #text-0ea6ec56, #text-464aabfd, #text-0d8695f4, #text-daffb632) a {
+    display: inline-flex !important;
+    align-items: center !important;
+    min-height: 40px !important;
+    vertical-align: middle !important;
+  }
+}
+
+
+/* ---- 7. Linie meta w hero: 12 px i zle lamanie ------------------------------
+   06.10.2026. /cultural-communication i /business-model-canvas (#text-860201be):
+   „14-day" konczylo linie, a „refund" spadalo samo nizej. Strona glowna
+   (#text-f5bd235c): linia z gwiazdka 4.9/5. Na telefonie 13 px. Na lejkach
+   wartosci (strong) i ostatni fragment nie lamia sie w srodku, wiec linia
+   peka przy separatorze, a „14-day refund" zostaje w calosci.
+   Na glownej bez nowrap: tam strong „UiA | " niesie separator w srodku
+   i nowrap wypychal „UiA" do drugiej linii. Pomiar 375 px: przy 13 px
+   „...participants | Taught" ma 232 px, a cala druga polowa „Taught at BI & UiA |
+   Advised 200+ founders" 236 px, wiec zadna szerokosc ani balance nie dadza
+   pekniecia dokladnie na separatorze. Linia lamie sie po „BI &". Pelna poprawka
+   to twarde spacje w edytorze (patrz raport). */
+@media (max-width: 767px) {
+  html body #text-860201be p, html body #text-860201be p *,
+  html body #text-f5bd235c p, html body #text-f5bd235c p * {
+    font-size: 13px !important;
+  }
+  html body #text-860201be strong,
+  html body #text-860201be p > span:last-child {
+    white-space: nowrap !important;
+  }
+}
+
+
+/* ---- 8. Checkouty ksiazki ---------------------------------------------------
+   06.10.2026. /pitching-decoded-order i -order-eu.
+   a) Przyciski minus i plus ilosci mialy 21x21 px. Strefa 40x40, znak zostaje
+      na srodku. Celujemy po strukturze w wierszu #row-4e4ddd7e: rodzic z trzema
+      dziecmi, z ktorych skrajne sa oznaczone przez klasyfikator (.akt), a srodkowe
+      (liczba) nie.
+   b) Logo Multibanco (127x150) wciskane w 103x60, proporcje 0.85 -> 1.72.
+      contain dla wszystkich logo metod platnosci (Klarna ma juz 1.72, nie drgnie).
+   c) Link „Contact Us." mial 14 do 16 px wysokosci. Na tych stronach blok to
+      #text-67ab3864, #text-cae3e787 zostaje na wypadek drugiego checkoutu. */
+@media (max-width: 767px) {
+  html body #row-4e4ddd7e div:has(> .akt + div:not(.akt) + .akt:last-child) > .akt {
+    min-width: 40px !important;
+    min-height: 40px !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    box-sizing: border-box !important;
+  }
+  html body :is(#text-67ab3864, #text-cae3e787) a {
+    display: inline-block !important;
+    padding-top: 12px !important;
+    padding-bottom: 12px !important;
+    margin-top: -12px !important;
+    margin-bottom: -12px !important;
+  }
+}
+html body [id^="payment-method-"] img {
+  object-fit: contain !important;
+}
+
+
+/* ---- 9. Wpis blogowy: tytul w Caslonie, mniej pustki pod data ---------------
+   06.10.2026. Na telefonie szablon pokazuje osobna sekcje tytulu
+   (#blog-post_title-ed5d229b), ktora klasyfikator oznaczyl jako sans 500,
+   a srodtytuly w tresci sa w Caslonie. Desktopowy tytul juz jest w Caslonie
+   (akt-serif akt-h54). Pod data bylo 140 px pustego miejsca: 50 px paddingu
+   wiersza z data, 20 px sekcji tytulu i 40 px gornego paddingu sekcji tresci
+   (#section-09d8892d), reszta to odstep szablonu. Zostaje ok. 55 px. */
+@media (max-width: 767px) {
+  html body.ak-blogpost h1[id^="blog-post_title-"],
+  html body.ak-blogpost h1[id^="blog-post_title-"] * {
+    font-family: "adobe-caslon-pro", "AKCaslon", "AdobeCaslonPro42448745", Georgia, serif !important;
+    font-weight: 400 !important;
+    font-size: 34px !important;
+    line-height: 1.12 !important;
+    letter-spacing: 0 !important;
+  }
+  html body.ak-blogpost [id^="row-"]:has([id^="blog-post_date-"]) {
+    padding-bottom: 8px !important;
+  }
+  html body.ak-blogpost [id^="section-"]:has([id^="blog-post_date-"]) {
+    padding-bottom: 0 !important;
+  }
+  html body.ak-blogpost #section-09d8892d {
+    padding-top: 16px !important;
+  }
+}
+
+
+/* ---- 10. Wpis blogowy: pusty wiersz formularza -----------------------------
+   06.10.2026. #row-e4fcca67 to wiersz z osadzonym formularzem zapisu systeme
+   (#rawhtml-da7e9df5 > #form-container-2, skrypt wstawia iframe). Na
+   /blog/10-20-30-rule iframe jest i ma 211 px, wiec wiersz NIE jest pusty
+   z definicji. Na /blog/high-context-vs-low-context-culture skrypt nie wstawia
+   iframe (na tej stronie sa bledy React #418/#425), zostaje 68 px pustki
+   (24 + 20 + 24). Chowamy wiersz tylko wtedy, gdy w srodku nie ma ani iframe,
+   ani formularza. Gdy skrypt jednak zadziala, iframe pojawia sie w DOM
+   i :has() od razu pokazuje wiersz z powrotem. */
+html body.ak-blogpost #row-e4fcca67:not(:has(iframe, form, input, img, video)) {
+  display: none !important;
+}
+
+
+/* ---- 11. Eyebrowy 11 -> 12 px na telefonie: WYLACZONE ------------------------
+   06.10.2026. Sprawdzone na zywo i odlozone. Regula na .akt-eyebrow obejmuje
+   tylko czesc eyebrowow, bo wiele ma mocniejsze reguly sekcji (np. #section-ba1fb6ee
+   .ak-tag na glownej, regula sales-page.css na lejkach). Wynik na 375 px:
+   glowna 7 z 25 na 12 px, /cultural-communication 4 z 18, /academy 0 z 8,
+   /about 24 z 27, /consulting 15 z 18, /pitching-decoded 36 z 36 (+2 nowe
+   zawiniecia: „Part two", „Part three"). Na jednej stronie mieszaja sie 11 i 12 px,
+   czyli gorzej niz rowne 11. Jesli 12 px, to w kanonie (--eyebrow w tokens.css
+   i regula „eyebrow: jeden kanon"), nie lata na koncu pliku.
+
+@media (max-width: 767px) {
+  html body .akt.akt-eyebrow.akt-eyebrow,
+  html body .akt.akt-eyebrow.akt-eyebrow * {
+    font-size: 12px !important;
+  }
+}
+*/

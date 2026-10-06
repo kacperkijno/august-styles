@@ -86,6 +86,10 @@
     '.n:hover{background:rgba(26,60,47,.06);border-color:#1A3C2F}',
     'button:focus-visible,a:focus-visible{outline:2px solid #B46A3C;outline-offset:2px}',
     '@media(max-width:600px){.b{left:16px;right:16px;bottom:16px;width:auto;max-width:none;padding:20px}}',
+    /* Kompaktowy baner na telefonie (06.10.2026): bylo 241 z 812 px wysokosci, jest 127.
+       Tytul ukryty wizualnie (zostaje dla czytnika ekranu przez aria-labelledby), tekst 13 px
+       w 3 liniach, przyciski 40 px w jednym rzedzie, link Cookie policy zostaje. */
+    '@media(max-width:600px){.b{left:12px;right:12px;bottom:12px;padding:10px 14px}h2{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0 0 0 0);clip-path:inset(50%);white-space:nowrap;border:0}p{font-size:13px;line-height:1.4;margin:0 0 10px}button{min-height:40px;padding:6px 16px;font-size:14px}}',
     '@media(prefers-reduced-motion:reduce){.b{transition:none}}'
   ].join('\n');
 
