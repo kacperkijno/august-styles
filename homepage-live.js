@@ -2397,3 +2397,136 @@
   if (document.readyState === 'complete') start();
   else window.addEventListener('load', start);
 })();
+
+/* ============================================================================
+   PELNOEKRANOWE MENU MOBILNE (06.10.2026)
+   ----------------------------------------------------------------------------
+   Para z sekcja „PELNOEKRANOWE MENU MOBILNE" na koncu homepage-live.css
+   i sales-page.css. Robi dwie rzeczy:
+   1. Ustawia html.ak-mnav-open, gdy szuflada systeme jest otwarta.
+      Stan czytamy z hamburgera: systeme daje mu position:fixed tylko przy
+      otwartym menu (zamkniety ma relative). CSS position nie rusza, wiec
+      odczyt jest zawsze stanem systeme, nie naszym. Klasy emotion (.sc-xxxx)
+      sie przegenerowuja, wiec ich nie uzywamy.
+   2. Wstawia raz do szuflady blok .ak-mnav-foot: przycisk
+      „Explore the courses" i rzad linkow social. Blok jest ukryty w CSS,
+      dopoki menu nie jest otwarte na ekranie do 767 px.
+   ⚠️ Blok wstawiamy dopiero przy PIERWSZYM OTWARCIU, nie przy starcie.
+   Szuflada jest wezlem Reacta, a obcy wezel dodany przed hydratacja to blad
+   #418 i przebudowa calej strony (patrz podmiana H1 na /webinar nizej).
+   Klik w hamburger dziala dopiero po hydratacji, wiec otwarcie = bezpiecznie.
+   Website (header[type="WebsiteHeader"]) i lejki/blog (wiersz z [id^="menu-"])
+   maja ten sam uklad: [id^="menu-"], obok div bez id z hamburgerem,
+   obok [id^="side-menu-"]. Dlatego jedna funkcja obsluguje oba.
+   ============================================================================ */
+(function () {
+  var ACADEMY = 'https://www.augustkjerland.com/academy';
+  var SOCIAL = [
+    ['LinkedIn', 'https://www.linkedin.com/company/111967770'],
+    ['Instagram', 'https://www.instagram.com/august.kjerland'],
+    ['YouTube', 'https://www.youtube.com/@augustkjerland']
+  ];
+  var poHydratacji = false;
+
+  function burgerOf(side) {
+    var box = side.parentElement;
+    if (!box) return null;
+    var wrap = box.querySelector(':scope > [id^="menu-"] ~ div:not([id])');
+    return wrap ? wrap.firstElementChild : null;
+  }
+
+  function addFoot(side) {
+    if (side.querySelector(':scope > .ak-mnav-foot')) return;
+    var foot = document.createElement('div');
+    foot.className = 'ak-mnav-foot';
+    var cta = document.createElement('a');
+    cta.className = 'ak-mnav-cta';
+    cta.href = ACADEMY;
+    cta.textContent = 'Explore the courses';
+    foot.appendChild(cta);
+    var row = document.createElement('div');
+    row.className = 'ak-mnav-social';
+    SOCIAL.forEach(function (s) {
+      var a = document.createElement('a');
+      a.href = s[1];
+      a.target = '_blank';
+      a.rel = 'noopener noreferrer';
+      a.textContent = s[0];
+      row.appendChild(a);
+    });
+    foot.appendChild(row);
+    side.appendChild(foot);
+  }
+
+  function sync() {
+    var open = false;
+    var sides = document.querySelectorAll('[id^="side-menu-"]');
+    for (var i = 0; i < sides.length; i++) {
+      var side = sides[i];
+      var b = burgerOf(side);
+      if (!b) continue;
+      var isOpen = getComputedStyle(b).position === 'fixed';
+      if (isOpen) { open = true; addFoot(side); }
+      if (isOpen || poHydratacji) {
+        /* dostepnosc: hamburger to goly div, czytnik ekranu go nie widzi */
+        if (b.getAttribute('role') !== 'button') { b.setAttribute('role', 'button'); b.setAttribute('tabindex', '0'); }
+        var label = isOpen ? 'Close menu' : 'Open menu';
+        if (b.getAttribute('aria-label') !== label) b.setAttribute('aria-label', label);
+        if (b.getAttribute('aria-expanded') !== String(isOpen)) b.setAttribute('aria-expanded', String(isOpen));
+      }
+    }
+    document.documentElement.classList.toggle('ak-mnav-open', open);
+  }
+
+  var queued = false;
+  function schedule() {
+    if (queued) return;
+    queued = true;
+    (window.requestAnimationFrame || setTimeout)(function () { queued = false; sync(); });
+  }
+
+  function start() {
+    sync();
+    if (window.MutationObserver) {
+      /* systeme przelacza klasy szuflady i hamburgera; React moze tez
+         przebudowac pasek (childList). Filtrujemy do paska, reszta strony
+         (odslanianie kart, klasy typografii) nie wywoluje sync. */
+      new MutationObserver(function (list) {
+        for (var i = 0; i < list.length; i++) {
+          var t = list[i].target;
+          if (t.nodeType !== 1 || !t.closest) continue;
+          if (t.closest('[id^="side-menu-"], [id^="menu-"] ~ div:not([id])') ||
+              (list[i].type === 'childList' && t.querySelector && t.querySelector('[id^="side-menu-"]'))) {
+            schedule();
+            return;
+          }
+        }
+      }).observe(document.body, { attributes: true, attributeFilter: ['class'], childList: true, subtree: true });
+    }
+    /* klawiatura: Enter/Spacja na hamburgerze dziala jak klik, Escape zamyka */
+    document.addEventListener('keydown', function (e) {
+      var b = e.target;
+      if ((e.key === 'Enter' || e.key === ' ') && b && b.getAttribute && b.getAttribute('role') === 'button' &&
+          b.parentElement && b.parentElement.matches && b.parentElement.matches('[id^="menu-"] ~ div:not([id])')) {
+        e.preventDefault();
+        b.click();
+      }
+      if (e.key === 'Escape' && document.documentElement.classList.contains('ak-mnav-open')) {
+        var sides = document.querySelectorAll('[id^="side-menu-"]');
+        for (var i = 0; i < sides.length; i++) {
+          var bb = burgerOf(sides[i]);
+          if (bb && getComputedStyle(bb).position === 'fixed') bb.click();
+        }
+      }
+    });
+    /* powrot z bfcache: stan moze byc nieaktualny */
+    window.addEventListener('pageshow', sync);
+    /* atrybuty dostepnosci dopiero po hydratacji (jak podmiana H1 nizej) */
+    function poLoad() { setTimeout(function () { poHydratacji = true; sync(); }, 1500); }
+    if (document.readyState === 'complete') poLoad();
+    else window.addEventListener('load', poLoad);
+  }
+
+  if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', start);
+  else start();
+})();
