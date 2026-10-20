@@ -3096,6 +3096,23 @@ html body [id^="payment-button-"]:focus-visible {
   outline-offset: 2px !important;
 }
 
+/* 4b. Kolor obrysu zalezy od tla pod przyciskiem, nie od tekstu. currentColor
+   dawal kremowy obrys przy forest i terakocie, czyli krem na kremie (~1:1,
+   ponizej WCAG 1.4.11). Na jasnym tle obrys Forest (11,3:1 do kremu),
+   na ciemnym Cream. Warianty .akb--* nadaje JS, wiec regula lapie tez nowe
+   przyciski z edytora. */
+html body .akb.akb--forest:focus-visible,
+html body .akb.akb--terra:focus-visible,
+html body .akb.akb--ghost:focus-visible {
+  outline: 2px solid var(--ak-forest, #1A3C2F) !important;
+  outline-offset: 2px !important;
+}
+html body .akb.akb--ghost-light:focus-visible,
+html body .akb.akb--light:focus-visible {
+  outline: 2px solid var(--ak-cream, #F9F7F1) !important;
+  outline-offset: 2px !important;
+}
+
 /* --- 5. nieaktywny --------------------------------------------------------- */
 html body [id^="button-"][aria-disabled="true"],
 html body button[id^="submit-button-"]:disabled {
