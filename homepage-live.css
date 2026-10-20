@@ -3689,6 +3689,21 @@ html body .akb.akb--light:hover {
   color: #1A3C2F !important;
 }
 
+/* Hero "Inquire about consulting" (#button-2803e813) to ghost na ciemnym
+   zdjeciu. JS czyta jego tlo z systeme jako jasne i nadaje .akb--light, a
+   regula ID (sekcja przyciskow na ciemnym) wymusza kremowy tekst, wiec
+   wychodzil krem na kremie. ID + klasa wygrywa z .akb--light; reguly mobilne
+   z #section-e8a2d9b7 (dwa ID) dalej nadpisuja to swoja szyba. */
+html body #button-2803e813.akb {
+  background: transparent !important;
+  color: var(--ak-cream, #F9F7F1) !important;
+  border: 1px solid rgba(249, 247, 241, .55) !important;
+}
+html body #button-2803e813.akb:hover {
+  background: rgba(249, 247, 241, .10) !important;
+  border-color: var(--ak-cream, #F9F7F1) !important;
+}
+
 html body .aks-grow {
   flex: 1 1 auto !important; min-height: 0 !important;
   display: flex !important; flex-direction: column !important;
